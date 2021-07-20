@@ -13,4 +13,11 @@ class ActivityController extends Controller
             'title'
         ));
     }
+
+    public function markAsRead(){
+        foreach (auth()->user()->unreadNotifications as $notification) {
+            $notification->markAsRead();
+        }
+        return back()->with('success',"Notifications has been cleared");
+    }
 }
