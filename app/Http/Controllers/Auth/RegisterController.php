@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
+use App\Notifications\NewUserNotification;
 
 class RegisterController extends Controller
 {
@@ -22,13 +23,14 @@ class RegisterController extends Controller
             $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('avatars'), $imageName);
         }
-        User::create([
+        $user = User::create([
             'name'=>$request->name,
             'username'=>$request->username,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'avatar'=>$imageName,
-        ]);  
+        ]); 
+        notify(new NewUserNotification($user)); 
         auth()->attempt($request->only('username','password'));
         return redirect()->route('dashboard');
             
