@@ -42,7 +42,7 @@
 					<tr>
 						<td>
 							<h2 class="table-avatar">
-								<a href="profile.html" class="avatar"><img src="assets/img/profiles/avatar-21.jpg" alt=""></a>
+								<a href="javascript:void(0)" class="avatar"><img src="assets/img/profiles/avatar-21.jpg" alt="user"></a>
 								{{$user->name}}
 							</h2>
 						</td>
@@ -52,10 +52,10 @@
 						
 						<td class="text-right">
 							<div class="dropdown dropdown-action">
-								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+								<a href="javascript:void(0)" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_user"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-									<a data-id="{{$user->id}}" class="dropdown-item deletebtn" href="#" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+									<a data-id="{{$user->id}}" data-name="{{$user->name}}" data-username="{{$user->username}}" data-email="{{$user->email}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+									<a data-id="{{$user->id}}" class="dropdown-item deletebtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 								</div>
 							</div>
 						</td>
@@ -78,7 +78,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="{{route('users')}}">
+				<form enctype="multipart/form-data" method="post" action="{{route('users')}}">
 					@csrf
 					<div class="row">
 						<div class="col-sm-6">
@@ -140,179 +140,51 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form method="post" enctype="multipart/form-data" action="{{route('users')}}">
+					@csrf
+					@method("PUT")
 					<div class="row">
+						<input type="hidden" name="id" id="edit_id">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>First Name <span class="text-danger">*</span></label>
-								<input class="form-control" value="John" type="text">
+								<label>Full Name <span class="text-danger">*</span></label>
+								<input class="form-control edit_name" name="name" type="text">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>Last Name</label>
-								<input class="form-control" value="Doe" type="text">
+								<label>Avatar</label>
+								<input class="form-control edit_avatar" name="avatar" type="file">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Username <span class="text-danger">*</span></label>
-								<input class="form-control" value="johndoe" type="text">
+								<input class="form-control edit_username" name="username" type="text">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Email <span class="text-danger">*</span></label>
-								<input class="form-control" value="johndoe@example.com" type="email">
+								<input class="form-control edit_email" name="email" type="email">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Password</label>
-								<input class="form-control" type="password">
+								<input class="form-control edit_password" name="password" type="password">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Confirm Password</label>
-								<input class="form-control" type="password">
+								<input class="form-control edit_password" name="password_confirmation" type="password">
 							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Phone </label>
-								<input class="form-control" value="9876543210" type="text">
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Role</label>
-								<select class="select">
-									<option>Admin</option>
-									<option>Client</option>
-									<option selected>Employee</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label>Company</label>
-								<select class="select">
-									<option>Global Technologies</option>
-									<option>Delta Infotech</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-sm-6">  
-							<div class="form-group">
-								<label>Employee ID <span class="text-danger">*</span></label>
-								<input type="text" value="FT-0001" class="form-control floating">
-							</div>
-					   </div>
+						</div>					
 					</div>
-					<div class="table-responsive m-t-15">
-						<table class="table table-striped custom-table">
-							<thead>
-								<tr>
-									<th>Module Permission</th>
-									<th class="text-center">Read</th>
-									<th class="text-center">Write</th>
-									<th class="text-center">Create</th>
-									<th class="text-center">Delete</th>
-									<th class="text-center">Import</th>
-									<th class="text-center">Export</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Employee</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-								</tr>
-								<tr>
-									<td>Holidays</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-								</tr>
-								<tr>
-									<td>Leaves</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-								</tr>
-								<tr>
-									<td>Events</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-									<td class="text-center">
-										<input checked="" type="checkbox">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					
 					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Save</button>
+						<button class="btn btn-primary submit-btn">Submit</button>
 					</div>
 				</form>
 			</div>
@@ -328,7 +200,22 @@
 	<!-- Datatable JS -->
 	<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
+	<script>
+		$(document).ready(function(){
+			$('.table').on('click','.editbtn',function(){
+				$('#edit_user').modal('show');
+				var id = $(this).data('id');
+				var name = $(this).data('name');
+				var username = $(this).data('username');
+				var email = $(this).data('email');
+				$('#edit_id').val(id);
+				$('.edit_name').val(name);
+				$('.edit_username').val(username);
+				$('.edit_email').val(email);
 
+			});
+		});
+	</script>
 @endsection	
 
 
