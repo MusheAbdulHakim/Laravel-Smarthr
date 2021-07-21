@@ -30,7 +30,7 @@ class RegisterController extends Controller
             'password'=>Hash::make($request->password),
             'avatar'=>$imageName,
         ]); 
-        notify(new NewUserNotification($user)); 
+        $user->notify(new NewUserNotification($user)); 
         auth()->attempt($request->only('username','password'));
         return redirect()->route('dashboard');
             
