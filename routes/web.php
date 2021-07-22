@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\GoalController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Backend\AssetController;
 use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\PolicyController;
 use App\Http\Controllers\Backend\ContactController;
@@ -79,6 +80,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::delete('departments',[DepartmentController::class,'destroy'])->name('department.destroy');
 
     Route::get('designations',[DesignationController::class,'index'])->name('designations');
+    Route::put('designations',[DesignationController::class,'update']);
     Route::post('designations',[DesignationController::class,'store']);
     Route::delete('designations',[DesignationController::class,'destroy'])->name('designation.destroy');
 
@@ -128,6 +130,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::put('goal-tracking',[GoalController::class,'update']);
     Route::delete('goal-tracking',[GoalController::class,'destroy']);
 
+    Route::get('asset',[AssetController::class,'index'])->name('assets');
+    Route::post('asset',[AssetController::class,'store']);
+    Route::put('asset',[AssetController::class,'update']);
+    Route::delete('asset',[AssetController::class,'destroy']);
+
     Route::get('users',[UserController::class,'index'])->name("users");
     Route::post('users',[UserController::class,'store']);
     Route::put('users',[UserController::class,'update']);
@@ -137,6 +144,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('profile',[UserProfileController::class,'update']);
 
     Route::get('activity',[ActivityController::class,'index'])->name('activity');
+    Route::get('clear-activity',[ActivityController::class,'markAsRead'])->name('clear-all');
 
 });
 
