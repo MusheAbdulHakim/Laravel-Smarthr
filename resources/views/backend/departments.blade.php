@@ -114,11 +114,11 @@
 
 @section('scripts')
 <!-- Datatable JS -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
     $(document).ready(function (){
-        $('.editbtn').on('click',function (){
+        $('.table').on('click','.editbtn',function (){
             $('#edit_department').modal('show');
             var id = $(this).data('id');
             var name = $(this).data('name');
