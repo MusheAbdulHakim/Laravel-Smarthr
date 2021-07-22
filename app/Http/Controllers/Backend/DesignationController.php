@@ -56,12 +56,21 @@ class DesignationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request,[
+            'designation'=>'required|max:200',
+            'department'=>'required',
+        ]);
+        $designation = Designation::findOrFail($request->id);
+        $designation->update([
+            'name'=>$request->designation,
+            'department_id'=>$request->department,
+        ]);
+        return back()->with('success',"designation has been updated");
     }
 
     /**
@@ -72,7 +81,7 @@ class DesignationController extends Controller
      */
     public function destroy(Request $request)
     {
-        $designation = Designation::find($request->id);
+        $designation = Designation::findOrFail($request->id);
         $designation->delete();
         return back()->with('success',"Designation has been deleted successfully!!");
     }

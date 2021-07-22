@@ -2,7 +2,7 @@
 
 @section('styles')	
 <!-- Datatable CSS -->
-<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('page-header')
@@ -44,7 +44,7 @@
                             <div class="dropdown dropdown-action">
                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a data-id="{{$designation->id}}" data-name="{{$designation->name}}" class="dropdown-item editbtn" href="#" data-toggle="modal" data-target="#edit_designation"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                    <a data-id="{{$designation->id}}" data-name="{{$designation->name}}" data-department="{{$designation->department->name}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                     <a data-id="{{$designation->id}}" class="dropdown-item deletebtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                 </div>
                                 </div>
@@ -107,14 +107,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="post" action="{{route('designations')}}">
+                    @csrf
+                    @method("PUT")
+                    <input type="hidden" name="id" id="edit_id">
                     <div class="form-group">
                         <label>Designation Name <span class="text-danger">*</span></label>
-                        <input class="form-control" name="designation" type="text">
+                        <input class="form-control edit_designation" name="designation" type="text">
                     </div>
                     <div class="form-group">
                         <label>Department <span class="text-danger">*</span></label>
-                        <select class="select" title="Select Department">
+                        <select class="select" id="department_select" name="department" selected="selected">
                             @if(!empty($departments->count()))
                             @foreach($departments as $department)
                                 <option value="{{$department->id}}">{{$department->name}}</option>
@@ -135,6 +138,19 @@
 
 @section('scripts')
 <!-- Datatable JS -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('.table').on('click','.editbtn',function(){
+            $('#edit_designation').modal('show');
+            var id = $(this).data('id');
+            var designation = $(this).data('name');
+            var department = $(this).data('department');
+            $('#edit_id').val(id);
+            $('.edit_designation').val(designation);
+            $('#department_select').val(department);
+        })
+    });
+</script>
 @endsection
