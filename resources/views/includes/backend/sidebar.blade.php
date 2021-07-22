@@ -36,14 +36,7 @@
                 <li class="{{ Request::routeIs('clients') ? 'active' : '' }}">
                     <a href="{{route('clients')}}"><i class="la la-users"></i> <span>Clients</span></a>
                 </li>
-                <li class="submenu">
-                    <a href="#"><i class="la la-rocket"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="tasks.html">Tasks</a></li>
-                        <li><a href="task-board.html">Task Board</a></li>
-                    </ul>
-                </li>
+                
                 
                 
                 <li class="{{ Request::routeIs('policies') ? 'active' : '' }}">
@@ -63,6 +56,9 @@
                         <li><a class="{{ Request::routeIs('goal-tracking') ? 'active' : '' }}" href="{{route('goal-tracking')}}"> Goal List </a></li>
                         <li><a class="{{ Request::routeIs('goal-type') ? 'active' : '' }}" href="{{route('goal-type')}}"> Goal Type </a></li>
                     </ul>
+                </li>
+                <li class="{{ Request::routeIs('assets') ? 'active' : '' }}"> 
+                    <a href="{{route('assets')}}"><i class="la la-object-ungroup"></i> <span>Assets</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::routeIs('activity') ? 'active' : '' }}" href="{{route('activity')}}"><i class="la la-bell"></i> <span>Activities</span></a>
