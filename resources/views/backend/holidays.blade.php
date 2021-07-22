@@ -143,7 +143,6 @@
             var id = $(this).data('id');
             var name = $(this).data('name');
             var date = $(this).data('date');
-            console.log(name);
             $('#edit_id').val(id);
             $('#edit_name').val(name);
             $('#edit_date').val(date);
