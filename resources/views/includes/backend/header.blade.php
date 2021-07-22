@@ -42,7 +42,7 @@
                     <ul class="notification-list">
                         @foreach (auth()->user()->unreadNotifications as $notification)
                             <li class="notification-message">
-                                <a href="{{route('activities')}}">
+                                <a href="{{route('activity')}}">
                                     <div class="media">
                                         <span class="avatar">
                                             <img alt="user" src="{{asset('storage/users/'.auth()->user()->avatar)}}">
@@ -50,7 +50,7 @@
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">{{auth()->user()->name}}</span> {{$notification->type}}
                                                  <span class="noti-title">This is the notification body</span></p>
-                                            <p class="noti-time"><span class="notification-time">{{$notification->created_at->diffForHuman()}}</span></p>
+                                            <p class="noti-time"><span class="notification-time">{{$notification->created_at->diffForHumans()}}</span></p>
                                         </div>
                                     </div>
                                 </a>
@@ -59,7 +59,7 @@
                     </ul>
                 </div>
                 <div class="topnav-dropdown-footer">
-                    <a href="{{route('activities')}}">View all Notifications</a>
+                    <a href="{{route('activity')}}">View all Notifications</a>
                 </div>
             </div>
         </li>
