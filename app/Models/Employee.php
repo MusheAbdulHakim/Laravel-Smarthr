@@ -26,11 +26,11 @@ class Employee extends Model
         return $this->belongsTo(Designation::class);
     }
 
-    public static function boot()
-{
-    parent::boot();
-    self::creating(function ($model) {
-        $model->uuid = IdGenerator::generate(['table' => $this->table, 'length' => 7, 'prefix' =>date('EM-')]);
-    });
-}
+    public static function boot(){
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = IdGenerator::generate(['table' => $this->table, 'length' => 7, 'prefix' =>date('EM-')]);
+        });
+    }
+
 }
