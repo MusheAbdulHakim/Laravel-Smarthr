@@ -1,6 +1,7 @@
 # Installation
  Follow these steps to install the application.
 1. Clone the Repository
+
 ```
 git clone https://github.com/MusheAbdulHakim/Laravel-Smarthr.git
 
@@ -40,7 +41,7 @@ php artisand key:generate
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=doccure
+DB_DATABASE=smarthr
 DB_USERNAME=root
 DB_PASSWORD=
 
