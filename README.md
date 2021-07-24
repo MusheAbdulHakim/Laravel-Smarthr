@@ -1,5 +1,32 @@
+https://img.shields.io/github/issues/MusheAbdulHakim/Laravel-Smarthr
+https://img.shields.io/github/forks/MusheAbdulHakim/Laravel-Smarthr
+https://img.shields.io/github/stars/MusheAbdulHakim/Laravel-Smarthr
+
+# Features
+- Admin Backend
+	1. Contact App
+	2. Filemanager app
+	3. Employees
+	4. Holidays
+	5. Employee 
+	6. Departments
+	7. Designations
+	8. Clients
+	9. Policies
+	10. Jobs
+	11. Job Applicants
+	12. Assets
+	13. Users
+	14. Application Settings
+
+- Frontend
+	1. Jobs List
+	2. View Job
+	3. Apply for job
+
 # Installation
  Follow these steps to install the application.
+
 1. Clone the Repository
 
 ```
