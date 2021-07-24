@@ -1,7 +1,5 @@
 ![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/Laravel-Smarthr)
-
 ![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/Laravel-Smarthr)
-
 ![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/Laravel-Smarthr)
 
 # Features
