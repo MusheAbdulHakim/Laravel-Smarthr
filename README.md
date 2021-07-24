@@ -1,7 +1,6 @@
-https://img.shields.io/github/issues/MusheAbdulHakim/Laravel-Smarthr
-https://img.shields.io/github/forks/MusheAbdulHakim/Laravel-Smarthr
-https://img.shields.io/github/stars/MusheAbdulHakim/Laravel-Smarthr
-
+[![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/Laravel-Smarthr)
+[![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/Laravel-Smarthr)
+[![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/Laravel-Smarthr)
 # Features
 - Admin Backend
 	1. Contact App
