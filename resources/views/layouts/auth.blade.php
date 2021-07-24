@@ -7,7 +7,7 @@
         <title>{{ucfirst(config('app.name'))}} - {{ucfirst($title)}}</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('favicon'))}} @else{{asset('assets/img/favicon.png')}} @endif">
 		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
@@ -34,7 +34,7 @@
 				
 					<!-- Account Logo -->
 					<div class="account-logo">
-						<a href=""><img src="{{asset('assets/img/logo2.png')}}" alt="logo"></a>
+						<a href=""><img src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" alt="logo"></a>
 					</div>
 					<!-- /Account Logo -->
 					
