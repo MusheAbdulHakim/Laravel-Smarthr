@@ -57,7 +57,7 @@ Route::post('apply',[JobApplicationController::class,'store'])->name('apply-job'
 Route::group(['middleware'=>['auth']], function (){
     
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
-    Route::get('logout',[LogoutController::class,'index'])->name('logout');
+    Route::post('logout',[LogoutController::class,'index'])->name('logout');
 
     //apps routes
     
