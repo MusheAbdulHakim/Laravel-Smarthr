@@ -4,7 +4,7 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="{{route('dashboard')}}" class="logo">
-            <img src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" width="40" height="40" alt="">
+            <img src="{{!empty(AppSettings::get('logo')) ? asset('storage/'.AppSettings::get('logo')) : asset('assets/img/logo.png')}}" alt="logo" width="40" height="40">
         </a>
     </div>
     <!-- /Logo -->
@@ -19,7 +19,7 @@
     
     <!-- Header Title -->
     <div class="page-title-box">
-        <h3>{{ucfirst(AppSettings::get('company', 'Smarthr'))}}</h3>
+        <h3>{{ucwords(AppSettings::get('company', 'Smarthr'))}}</h3>
     </div>
     <!-- /Header Title -->
     
@@ -91,7 +91,6 @@
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
             <a class="dropdown-item" href="{{route('settings')}}">Settings</a>
-            {{-- <a class="dropdown-item" href="{{route('logout')}}">Logout</a> --}}
             <form action="{{route('logout')}}" method="post">
                 @csrf
                 <button type="submit" class="dropdown-item">Logout</button>
