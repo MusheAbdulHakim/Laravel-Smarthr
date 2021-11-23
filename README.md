@@ -58,7 +58,7 @@ cp .env.example ./.env
 ```
 6. Generate app key with this command
 ```
-php artisand key:generate
+php artisan key:generate
 
 ```
 
@@ -73,8 +73,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 
 ```
-8. Import full database sql file in the database folder, or run migrations
-Use this command to run migrations
+8. Import sql file in the db folder, or run migrations
+Use this command to run migrations and seeders
 
 ```
 php artisan migrate --seed
