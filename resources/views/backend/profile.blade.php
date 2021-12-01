@@ -25,7 +25,7 @@
 				<div class="profile-view">
 					<div class="profile-img-wrap">
 						<div class="profile-img">
-							<a href="#"><img alt="avatar" src="{{asset('storage/users/'.auth()->user()->avatar)}}"></a>
+							<a href="#"><img alt="avatar" src="{{!empty(auth()->user()->avatar) ? asset('storage/users/'.auth()->user()->avatar) : asset('assets/img/user.jpg') }}"></a>
 						</div>
 					</div>
 					<div class="profile-basic">
@@ -73,7 +73,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="profile-img-wrap edit-img">
-								<img class="inline-block" src="{{asset('storage/users/'.auth()->user()->avatar)}}" alt="user">
+								<img class="inline-block" src="{{!empty(auth()->user()->avatar) ? asset('storage/users/'.auth()->user()->avatar) : asset('assets/img/user.jpg') }}" alt="user">
 								<div class="fileupload btn">
 									<span class="btn-text">edit</span>
 									<input name="avatar" class="upload" type="file">

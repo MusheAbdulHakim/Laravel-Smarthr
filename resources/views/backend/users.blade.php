@@ -42,7 +42,7 @@
 					<tr>
 						<td>
 							<h2 class="table-avatar">
-								<a href="javascript:void(0)" class="avatar"><img src="assets/img/profiles/avatar-21.jpg" alt="user"></a>
+								<a href="javascript:void(0)" class="avatar"><img src="{{!empty(auth()->user()->avatar) ? asset('storage/users/'.$user->avatar) : asset('assets/img/user.jpg') }}" alt="user"></a>
 								{{$user->name}}
 							</h2>
 						</td>
