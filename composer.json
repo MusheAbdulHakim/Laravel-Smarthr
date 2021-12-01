@@ -14,8 +14,7 @@
         "haruncpi/laravel-id-generator": "^1.0",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "qcod/laravel-app-settings": "^1.4",
-        "unisharp/laravel-filemanager": "^2.2"
+        "qcod/laravel-app-settings": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
