@@ -14,7 +14,6 @@
                     <ul style="display: none;">
                         
                         <li><a class="{{ route_is('contacts') ? 'active' : '' }}" href="{{route('contacts')}}">Contacts</a></li>
-                        <li><a class="{{ route_is('filemanager') ? 'active' : '' }}" href="{{route('filemanager')}}">File Manager</a></li>
                     </ul>
                 </li>
                 <li class="menu-title">
