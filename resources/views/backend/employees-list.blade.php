@@ -51,7 +51,7 @@
 								<a href="javascript:void(0)">{{$employee->firstname}} {{$employee->lastname}}</a>
 							</h2>
 						</td>
-						<td>FT-{{$employee->id}}</td>
+						<td>{{$employee->uuid}}</td>
 						<td>{{$employee->email}}</td>
 						<td>{{$employee->phone}}</td>
 						<td>{{date_format(date_create($employee->date_created),"d M,Y")}}</td>
