@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Designation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class EmployeeController extends Controller
 {
@@ -63,7 +64,9 @@ class EmployeeController extends Controller
             $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/employees'), $imageName);
         }
+        $uuid = IdGenerator::generate(['table' => 'employees','field'=>'uuid', 'length' => 7, 'prefix' =>'EMP-']);
         Employee::create([
+            'uuid' =>$uuid,
             'firstname'=>$request->firstname,
             'lastname'=>$request->lastname,
             'email'=>$request->email,
@@ -115,6 +118,7 @@ class EmployeeController extends Controller
         
         $employee = Employee::find($request->id);
         $employee->update([
+            'uuid' => $employee->uuid,
             'firstname'=>$request->firstname,
             'lastname'=>$request->lastname,
             'email'=>$request->email,
