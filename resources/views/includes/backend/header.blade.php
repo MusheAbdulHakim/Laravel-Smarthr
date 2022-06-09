@@ -4,7 +4,7 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="{{route('dashboard')}}" class="logo">
-            <img src="{{!empty(AppSettings::get('logo')) ? asset('storage/'.AppSettings::get('logo')) : asset('assets/img/logo.png')}}" alt="logo" width="40" height="40">
+            <img src="{{!empty(app(App\Settings\ThemeSettings::class)->logo) ? asset('storage/settings/'.app(App\Settings\ThemeSettings::class)->logo):asset('assets/img/logo.png')}}" alt="logo" width="40" height="40">
         </a>
     </div>
     <!-- /Logo -->
@@ -19,7 +19,7 @@
     
     <!-- Header Title -->
     <div class="page-title-box">
-        <h3>{{ucwords(AppSettings::get('company', 'Smarthr'))}}</h3>
+        <h3>{{ucwords(app(App\Settings\CompanySettings::class)->company_name ?? 'Smart HR')}}</h3>
     </div>
     <!-- /Header Title -->
     
@@ -75,7 +75,7 @@
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
-                <a class="dropdown-item" href="{{route('settings')}}">Settings</a>
+                <a class="dropdown-item" href="{{route('settings.theme')}}">Settings</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit" class="dropdown-item">Logout</button>
@@ -90,7 +90,7 @@
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
-            <a class="dropdown-item" href="{{route('settings')}}">Settings</a>
+            <a class="dropdown-item" href="{{route('settings.theme')}}">Settings</a>
             <form action="{{route('logout')}}" method="post">
                 @csrf
                 <button type="submit" class="dropdown-item">Logout</button>
