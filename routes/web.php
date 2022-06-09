@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Backend\AssetController;
 use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\PolicyController;
+use App\Http\Controllers\Backend\BackupsController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\HolidayController;
 use App\Http\Controllers\Backend\ActivityController;
@@ -85,7 +86,14 @@ Route::group(['middleware'=>['auth']], function (){
     Route::delete('designations',[DesignationController::class,'destroy'])->name('designation.destroy');
 
     // settings routes 
-    Route::get('settings',[SettingsController::class,'index'])->name('settings');
+    Route::get('settings/theme',[SettingsController::class,'index'])->name('settings.theme');
+    Route::post('settings/theme',[SettingsController::class,'updateTheme']);
+    Route::get('settings/company',[SettingsController::class,'company'])->name('settings.company');
+    Route::post('settings/company',[SettingsController::class,'updateCompany']);
+    Route::get('settings/invoice',[SettingsController::class,'invoice'])->name('settings.invoice');
+    Route::post('settings/invoice',[SettingsController::class,'updateInvoice']);
+    Route::get('settings/attendance',[SettingsController::class,'attendance'])->name('settings.attendance');
+    Route::post('settings/attendance',[SettingsController::class,'updateAttendance']);
     Route::get('change-password',[ChangePasswordController::class,'index'])->name('change-password');
     Route::post('change-password',[ChangePasswordController::class,'update']);
 
@@ -145,6 +153,9 @@ Route::group(['middleware'=>['auth']], function (){
 
     Route::get('activity',[ActivityController::class,'index'])->name('activity');
     Route::get('clear-activity',[ActivityController::class,'markAsRead'])->name('clear-all');
+
+    Route::get('backups',[BackupsController::class,'index'])->name('backups');
+
 
 });
 
