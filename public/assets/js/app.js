@@ -148,11 +148,7 @@ $(document).ready(function() {
 	
 	// Datatable
 
-	if($('.datatable').length > 0) {
-		$('.datatable').DataTable({
-			"bFilter": true,
-		});
-	}
+	
 	
 	// Tooltip
 
