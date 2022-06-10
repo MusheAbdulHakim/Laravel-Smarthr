@@ -1,10 +1,22 @@
-/*
-Author       : Dreamguys
-Template Name: SmartHR - Bootstrap Admin Template
-Version      : 3.4
-*/
-
 $(document).ready(function() {
+	// Datatables initialization
+	if ($('.datatable').length > 0) {
+        $('.datatable').DataTable({
+            "bFilter": true,
+        });
+    }
+
+	// Select2 Initialization
+	if($('.select2').length > 0){
+		$(".select2").each((_i, e) => {
+			var $e = $(e);
+			$e.select2({
+			minimumResultsForSearch: 1,
+			width: '100%',
+			dropdownParent: $e.parent(),
+			});
+		});
+	}
 	
 	// Variables declarations
 	
