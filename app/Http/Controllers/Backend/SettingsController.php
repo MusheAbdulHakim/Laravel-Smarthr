@@ -13,7 +13,7 @@ class SettingsController extends Controller
 {
     
     public function index(ThemeSettings $settings){
-        $title = 'general settings';
+        $title = 'theme settings';
         return view('backend.settings.theme',compact(
             'title','settings'
         ));
