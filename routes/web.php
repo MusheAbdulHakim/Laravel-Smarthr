@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Backend\AssetController;
+use App\Http\Controllers\Backend\TaxesController;
 use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\PolicyController;
 use App\Http\Controllers\Backend\BackupsController;
@@ -105,6 +106,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('policies',[PolicyController::class,'index'])->name('policies');
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
+
+    Route::get('taxes',[TaxesController::class,'index'])->name('taxes');
+    Route::post('taxes',[TaxesController::class,'store']);
+    Route::put('taxes',[TaxesController::class,'update']);
+    Route::delete('taxes',[TaxesController::class,'destroy']);
 
     Route::get('clients',[ClientController::class,'index'])->name('clients');
     Route::post('clients',[ClientController::class,'store'])->name('client.add');
