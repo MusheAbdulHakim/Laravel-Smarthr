@@ -36,7 +36,16 @@
                     <a href="{{route('clients')}}"><i class="la la-users"></i> <span>Clients</span></a>
                 </li>
                 
-                
+                <li class="menu-title"> 
+                    <span>HR</span>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="la la-files-o"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{route('provident-fund')}}">Provident Fund</a></li>
+                        <li><a class="{{ route_is('taxes') ? 'active' : '' }}" href="{{route('taxes')}}">Taxes</a></li>
+                    </ul>
+                </li>
                 
                 <li class="{{ route_is('policies') ? 'active' : '' }}">
                     <a href="{{route('policies')}}"><i class="la la-file-pdf-o"></i> <span>Policies</span></a>
