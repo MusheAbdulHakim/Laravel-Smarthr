@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\DesignationController;
 use App\Http\Controllers\Backend\FileManagerController;
 use App\Http\Controllers\Backend\UserProfileController;
 use App\Http\Controllers\Backend\EmployeeLeaveController;
+use App\Http\Controllers\Backend\ProvidentFundController;
 use App\Http\Controllers\Backend\ChangePasswordController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Backend\JobController as BackendJobController;
@@ -106,6 +107,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('policies',[PolicyController::class,'index'])->name('policies');
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
+
+    Route::get('provident-fund',[ProvidentFundController::class,'index'])->name('provident-fund');
+    Route::post('provident-fund',[ProvidentFundController::class,'store']);
+    Route::put('provident-fund',[ProvidentFundController::class,'update']);
+    Route::delete('provident-fund',[ProvidentFundController::class,'destroy']);
 
     Route::get('taxes',[TaxesController::class,'index'])->name('taxes');
     Route::post('taxes',[TaxesController::class,'store']);
