@@ -34,7 +34,7 @@
 				
 					<!-- Account Logo -->
 					<div class="account-logo">
-						<a href=""><img src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" alt="logo"></a>
+						<a href=""><img src="{{!empty(app(App\Settings\ThemeSettings::class)->logo) ? asset('storage/settings/'.app(App\Settings\ThemeSettings::class)->logo):asset('assets/img/logo.png')}}" alt="logo"></a>
 					</div>
 					<!-- /Account Logo -->
 					

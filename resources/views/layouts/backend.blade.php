@@ -20,10 +20,7 @@
 		
 		<!-- Lineawesome CSS -->
         <link rel="stylesheet" href="{{asset('assets/css/line-awesome.min.css')}}">
-		
-		<!-- Select2 CSS -->
-		<link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
-
+	
 		<!-- Datetimepicker CSS -->
 		<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
 
@@ -90,39 +87,36 @@
         </div>
 		<!-- /Main Wrapper -->
 		
-		<!-- jQuery -->
-        <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
 		
-		<!-- Bootstrap Core JS -->
-        <script src="{{asset('assets/js/popper.min.js')}}"></script>
-        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-		
-		<!-- Slimscroll JS -->
-		<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
-		
-		<!-- Custom JS -->
-		<script src="{{asset('assets/js/app.js')}}"></script>
-
-		<!-- Datetimepicker JS -->
-		<script src="{{asset('assets/js/moment.min.js')}}"></script>
-		<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-
-		<!-- Select2 JS -->
-		<script src="{{asset('assets/js/select2.min.js')}}"></script>
-
-		<!-- Ck Editor -->
-		<script src="{{asset('assets/plugins/ckeditor/ckeditor.js')}}"></script>
-
-        @yield('scripts')
-		<script>
-			$(document).ready(function (){
-				$('.deletebtn').on('click',function (){
-					$('#delete_modal').modal('show');
-					var id = $(this).data('id');
-					console.log(id);
-					$('#delete_id').val(id);
-				})
-			});
-		</script>
     </body>
+	<!-- jQuery -->
+	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+		
+	<!-- Bootstrap Core JS -->
+	<script src="{{asset('assets/js/popper.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+	
+	<!-- Slimscroll JS -->
+	<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+	
+	<!-- Custom JS -->
+	<script src="{{asset('assets/js/app.js')}}"></script>
+
+	<!-- Datetimepicker JS -->
+	<script src="{{asset('assets/js/moment.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+
+	<!-- Ck Editor -->
+	<script src="{{asset('assets/plugins/ckeditor/ckeditor.js')}}"></script>
+	
+	<script>
+		$(document).ready(function (){
+			$('.deletebtn').on('click',function (){
+				$('#delete_modal').modal('show');
+				var id = $(this).data('id');
+				$('#delete_id').val(id);
+			})
+		});
+	</script>
+	@yield('scripts')
 </html>

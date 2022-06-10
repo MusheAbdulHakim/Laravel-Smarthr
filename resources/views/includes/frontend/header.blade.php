@@ -3,14 +3,14 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="" class="logo">
-            <img src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" width="40" height="40" alt="logo">
+            <img src="{{!empty(app(App\Settings\ThemeSettings::class)->logo) ? asset('storage/settings/'.app(App\Settings\ThemeSettings::class)->logo):asset('assets/img/logo.png')}}" width="40" height="40" alt="logo">
         </a>
     </div>
     <!-- /Logo -->
     
     <!-- Header Title -->
     <div class="page-title-box float-left">
-        <h3>{{ucfirst(AppSettings::get('company', 'Smarthr'))}}</h3>
+        <h3>{{ucfirst(app(App\Settings\CompanySettings::class)->company_name ?? config('app.name'))}}</h3>
     </div>
     <!-- /Header Title -->
     
