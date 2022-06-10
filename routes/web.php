@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\PolicyController;
 use App\Http\Controllers\Backend\BackupsController;
 use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\HolidayController;
 use App\Http\Controllers\Backend\ActivityController;
 use App\Http\Controllers\Backend\EmployeeController;
@@ -107,6 +108,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('policies',[PolicyController::class,'index'])->name('policies');
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
+
+    Route::get('expenses',[ExpenseController::class,'index'])->name('expenses');
+            Route::post('expenses',[ExpenseController::class,'store']);
+            Route::put('expenses',[ExpenseController::class,'update']);
+            Route::delete('expenses',[ExpenseController::class,'destroy']);
 
     Route::get('provident-fund',[ProvidentFundController::class,'index'])->name('provident-fund');
     Route::post('provident-fund',[ProvidentFundController::class,'store']);

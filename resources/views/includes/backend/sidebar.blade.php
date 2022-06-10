@@ -42,6 +42,7 @@
                 <li class="submenu">
                     <a href="#"><i class="la la-files-o"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
+                        <li><a href="{{route('expenses')}}">Expenses</a></li>
                         <li><a href="{{route('provident-fund')}}">Provident Fund</a></li>
                         <li><a class="{{ route_is('taxes') ? 'active' : '' }}" href="{{route('taxes')}}">Taxes</a></li>
                     </ul>
