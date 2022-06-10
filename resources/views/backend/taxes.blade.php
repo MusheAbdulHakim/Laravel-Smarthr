@@ -1,7 +1,9 @@
 @extends('layouts.backend')
 
 @section('styles')
-  <!-- Datatable CSS -->
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
+<!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
@@ -150,8 +152,9 @@
 
 
 @section('scripts')
+<!-- Select2 JS -->
+<script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 <!-- Datatable JS -->
-<script src="{{asset('assets/js/select2.init.js')}}"></script>
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
