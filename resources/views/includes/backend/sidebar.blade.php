@@ -20,7 +20,7 @@
                     <span>Employees</span>
                 </li>
                 <li class="submenu">
-                    <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+                    <a href="#" class="{{ route_is(['employees','employees-list']) ? 'active' : '' }} noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a class="{{ route_is('employees') ? 'active' : '' }}" href="{{route('employees')}}">All Employees</a></li>
                         <li><a class="{{ route_is('holidays') ? 'active' : '' }}" href="{{route('holidays')}}">Holidays</a></li>
@@ -32,10 +32,24 @@
                         <li><a class="{{ route_is('overtime') ? 'active' : '' }}" href="{{route('overtime')}}">Overtime</a></li>
                     </ul>
                 </li>
+                
                 <li class="{{ route_is('clients') ? 'active' : '' }}">
                     <a href="{{route('clients')}}"><i class="la la-users"></i> <span>Clients</span></a>
                 </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="la la-rocket"></i> <span> Projects </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: non;">
+                        <li>
+                            <a class="{{ route_is(['projects','project-list']) ? 'active' : '' }}" href="{{route('projects')}}">Projects</a>
+                        </li>
+                    </ul>
+                </li>
                 
+                <li class="{{route_is('leads') ? 'active' : '' }}"> 
+                    <a href="{{route('leads')}}"><i class="la la-user-secret"></i> <span>Leads</span></a>
+                </li>
+
                 <li class="menu-title"> 
                     <span>HR</span>
                 </li>

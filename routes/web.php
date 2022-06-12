@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\BackupsController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\HolidayController;
+use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\ActivityController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\GoalTypeController;
@@ -141,6 +142,14 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('overtime',[OvertimeController::class,'store']);
     Route::put('overtime',[OvertimeController::class,'update']);
     Route::delete('overtime',[OvertimeController::class,'destroy']);
+
+    Route::get('projects',[ProjectController::class,'index'])->name('projects');
+    Route::get('projects/show/{name}',[ProjectController::class,'show'])->name('project.show');
+    Route::post('projects',[ProjectController::class,'store']);
+    Route::put('projects',[ProjectController::class,'update']);
+    Route::delete('projects',[ProjectController::class,'destroy']);
+    Route::get('project-list',[ProjectController::class,'list'])->name('project-list');
+    Route::get('leads',[ProjectController::class,'leads'])->name('leads');
     
     Route::get('employee-leave',[EmployeeLeaveController::class,'index'])->name('employee-leave');
     Route::post('employee-leave',[EmployeeLeaveController::class,'store']);
