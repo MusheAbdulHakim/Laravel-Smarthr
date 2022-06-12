@@ -47,21 +47,13 @@ class EmployeeLeaveController extends Controller
             'from'=>$request->from,
             'to'=>$request->to,
             'reason'=>$request->reason,
+            'status' =>$request->status,
         ]);
-        return back()->with('success',"Employee leave has been added");
+        $notification = notify("Employee leave has been added");
+        return back()->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -73,12 +65,15 @@ class EmployeeLeaveController extends Controller
     {
         $leave = Leave::find($request->id);
         $leave->update([
+            'employee_id'=>$request->employee,
             'leave_type_id'=>$request->leave_type,
             'from'=>$request->from,
             'to'=>$request->to,
             'reason'=>$request->reason,
+            'status' => $request->status,
         ]);
-        return back()->with('success',"Employee leave has been updated");
+        $notification = notify("Employee leave has been updated");;
+        return back()->with($notification);
     }
 
     /**
@@ -91,6 +86,7 @@ class EmployeeLeaveController extends Controller
     {
         $leave = Leave::find($request->id);
         $leave->delete();
-        return back()->with('success',"Employee leave has been deleted");
+        $notification = notify('Employee leave has been deleted');
+        return back()->with($notification);
     }
 }
