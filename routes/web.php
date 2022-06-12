@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OvertimeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Backend\GoalController;
@@ -136,6 +137,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::put('employees',[EmployeeController::class,'update'])->name('employee.update');
     Route::delete('employees',[EmployeeController::class,'destroy'])->name('employee.destroy');
 
+    Route::get('overtime',[OvertimeController::class,'index'])->name('overtime');
+    Route::post('overtime',[OvertimeController::class,'store']);
+    Route::put('overtime',[OvertimeController::class,'update']);
+    Route::delete('overtime',[OvertimeController::class,'destroy']);
+    
     Route::get('employee-leave',[EmployeeLeaveController::class,'index'])->name('employee-leave');
     Route::post('employee-leave',[EmployeeLeaveController::class,'store']);
     Route::put('employee-leave',[EmployeeLeaveController::class,'update']);

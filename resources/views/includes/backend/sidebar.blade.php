@@ -29,7 +29,7 @@
                         <li><a class="{{ route_is('employee-leave') ? 'active' : '' }}" href="{{route('employee-leave')}}">Leaves (Employee)</a></li>
                         <li><a class="{{ route_is('departments') ? 'active' : '' }}" href="{{route('departments')}}">Departments</a></li>
                         <li><a class="{{ route_is('designations') ? 'active' : '' }}" href="{{route('designations')}}">Designations</a></li>
-                        
+                        <li><a class="{{ route_is('overtime') ? 'active' : '' }}" href="{{route('overtime')}}">Overtime</a></li>
                     </ul>
                 </li>
                 <li class="{{ route_is('clients') ? 'active' : '' }}">
