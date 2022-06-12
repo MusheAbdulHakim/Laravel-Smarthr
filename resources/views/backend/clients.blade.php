@@ -16,8 +16,8 @@
 	<div class="col-auto float-right ml-auto">
 		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_client"><i class="fa fa-plus"></i> Add Client</a>
 		<div class="view-icons">
-			<a href="{{route('clients')}}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-			<a href="{{route('clients-list')}}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+			<a href="{{route('clients')}}" class="grid-view btn btn-link {{route_is('clients') ? 'active' : '' }}"><i class="fa fa-th"></i></a>
+			<a href="{{route('clients-list')}}" class="list-view btn btn-link {{route_is('clients-list') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
 		</div>
 	</div>
 </div>
