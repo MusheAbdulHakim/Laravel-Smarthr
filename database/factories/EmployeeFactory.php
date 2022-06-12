@@ -17,6 +17,7 @@ class EmployeeFactory extends Factory
      */
     public function definition()
     {
+        $uuid = IdGenerator::generate(['table' => 'employees','field'=>'uuid', 'length' => 7, 'prefix' =>'EMP-']);
         return [
             'company' => $this->faker->company(),
             'firstname' => $this->faker->firstName(),
@@ -25,7 +26,7 @@ class EmployeeFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'department_id' => Department::factory(),
             'designation_id' => Designation::factory(),
-            'uuid' => IdGenerator::generate(['table' => 'employees','field'=>'uuid', 'length' => 7, 'prefix' =>'EMP-'])
+            'uuid' => $uuid,
         ];
     }
 }
