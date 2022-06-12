@@ -11,7 +11,7 @@ class CompanySettings extends Settings{
 
     public static function group(): string
     {
-        return 'general';
+        return 'company';
     }
 
 }
