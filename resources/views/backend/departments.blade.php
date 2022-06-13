@@ -2,7 +2,7 @@
 
 @section('styles')
 <!-- Datatable CSS -->
-<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 @section('page-header')
 <div class="row align-items-center">

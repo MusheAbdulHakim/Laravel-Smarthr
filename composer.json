@@ -14,7 +14,9 @@
         "haruncpi/laravel-id-generator": "^1.0",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "qcod/laravel-app-settings": "^1.4"
+        "pavel-mironchik/laravel-backup-panel": "^2.2",
+        "spatie/laravel-permission": "^5.4",
+        "spatie/laravel-settings": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

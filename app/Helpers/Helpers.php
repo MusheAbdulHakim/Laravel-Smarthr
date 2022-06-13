@@ -31,3 +31,12 @@ if(!function_exists('notify')){
     }
 }
 
+
+if(!function_exists('alert')){
+    function alert($message , $type='success'){
+        return array(
+            'alert'=> $message,
+            'alert-type' => $type,
+        );
+    }
+}

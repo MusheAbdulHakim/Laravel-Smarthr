@@ -73,7 +73,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 
 ```
-8. Import sql file in the db folder, or run migrations
+8. Import smarthr.sql file in the database folder, or run migrations
 Use this command to run migrations and seeders
 
 ```

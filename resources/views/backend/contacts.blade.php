@@ -23,7 +23,7 @@
 <div class="row">
     <div class="col-md-12">
         <div>
-            <table class="table table-striped custom-table mb-0 datatable">
+            <table id="datatable" class="table table-striped custom-table mb-0 datatable">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -34,25 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(!empty($contacts->count()))
-						@foreach ($contacts as $contact)
-                            <tr>
-                                <td>{{$contact->name}}</td>
-                                <td>{{$contact->number}}</td>
-                                <td>{{$contact->email}}</td>
-                                <td>{{!empty($contact->status) ? $contact->status: 'off'}}</td>
-                                <td class="text-right">
-                                    <div class="dropdown dropdown-action">
-                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a data-id="{{$contact->id}}" data-name="{{$contact->name}}" data-phone="{{$contact->number}}" data-status="{{$contact->status}}" data-email="{{$contact->email}}" class="dropdown-item editbtn" href="javascript:void(0);" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                            <a data-id="{{$contact->id}}" class="dropdown-item deletebtn" href="javascript:void(0);" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
+                    
                 </tbody>
             </table>
         </div>
@@ -155,6 +137,18 @@
 
     <script>
         $(document).ready(function(){
+            var table = $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{route('contacts')}}",
+                columns: [
+                    {data: 'name', name: 'name'},
+                    {data: 'phone', name: 'phone'},
+                    {data: 'email', name: 'email'},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
             $('.editbtn').on('click',function(){
                 $('#edit_contact').modal('show');
                 var id = $(this).data('id');

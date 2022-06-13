@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OvertimeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Backend\GoalController;
@@ -8,10 +9,14 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Backend\AssetController;
+use App\Http\Controllers\Backend\TaxesController;
 use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\PolicyController;
+use App\Http\Controllers\Backend\BackupsController;
 use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\HolidayController;
+use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\ActivityController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\GoalTypeController;
@@ -24,6 +29,7 @@ use App\Http\Controllers\Backend\DesignationController;
 use App\Http\Controllers\Backend\FileManagerController;
 use App\Http\Controllers\Backend\UserProfileController;
 use App\Http\Controllers\Backend\EmployeeLeaveController;
+use App\Http\Controllers\Backend\ProvidentFundController;
 use App\Http\Controllers\Backend\ChangePasswordController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Backend\JobController as BackendJobController;
@@ -85,7 +91,14 @@ Route::group(['middleware'=>['auth']], function (){
     Route::delete('designations',[DesignationController::class,'destroy'])->name('designation.destroy');
 
     // settings routes 
-    Route::get('settings',[SettingsController::class,'index'])->name('settings');
+    Route::get('settings/theme',[SettingsController::class,'index'])->name('settings.theme');
+    Route::post('settings/theme',[SettingsController::class,'updateTheme']);
+    Route::get('settings/company',[SettingsController::class,'company'])->name('settings.company');
+    Route::post('settings/company',[SettingsController::class,'updateCompany']);
+    Route::get('settings/invoice',[SettingsController::class,'invoice'])->name('settings.invoice');
+    Route::post('settings/invoice',[SettingsController::class,'updateInvoice']);
+    Route::get('settings/attendance',[SettingsController::class,'attendance'])->name('settings.attendance');
+    Route::post('settings/attendance',[SettingsController::class,'updateAttendance']);
     Route::get('change-password',[ChangePasswordController::class,'index'])->name('change-password');
     Route::post('change-password',[ChangePasswordController::class,'update']);
 
@@ -97,6 +110,21 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('policies',[PolicyController::class,'index'])->name('policies');
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
+
+    Route::get('expenses',[ExpenseController::class,'index'])->name('expenses');
+            Route::post('expenses',[ExpenseController::class,'store']);
+            Route::put('expenses',[ExpenseController::class,'update']);
+            Route::delete('expenses',[ExpenseController::class,'destroy']);
+
+    Route::get('provident-fund',[ProvidentFundController::class,'index'])->name('provident-fund');
+    Route::post('provident-fund',[ProvidentFundController::class,'store']);
+    Route::put('provident-fund',[ProvidentFundController::class,'update']);
+    Route::delete('provident-fund',[ProvidentFundController::class,'destroy']);
+
+    Route::get('taxes',[TaxesController::class,'index'])->name('taxes');
+    Route::post('taxes',[TaxesController::class,'store']);
+    Route::put('taxes',[TaxesController::class,'update']);
+    Route::delete('taxes',[TaxesController::class,'destroy']);
 
     Route::get('clients',[ClientController::class,'index'])->name('clients');
     Route::post('clients',[ClientController::class,'store'])->name('client.add');
@@ -110,6 +138,19 @@ Route::group(['middleware'=>['auth']], function (){
     Route::put('employees',[EmployeeController::class,'update'])->name('employee.update');
     Route::delete('employees',[EmployeeController::class,'destroy'])->name('employee.destroy');
 
+    Route::get('overtime',[OvertimeController::class,'index'])->name('overtime');
+    Route::post('overtime',[OvertimeController::class,'store']);
+    Route::put('overtime',[OvertimeController::class,'update']);
+    Route::delete('overtime',[OvertimeController::class,'destroy']);
+
+    Route::get('projects',[ProjectController::class,'index'])->name('projects');
+    Route::get('projects/show/{name}',[ProjectController::class,'show'])->name('project.show');
+    Route::post('projects',[ProjectController::class,'store']);
+    Route::put('projects',[ProjectController::class,'update']);
+    Route::delete('projects',[ProjectController::class,'destroy']);
+    Route::get('project-list',[ProjectController::class,'list'])->name('project-list');
+    Route::get('leads',[ProjectController::class,'leads'])->name('leads');
+    
     Route::get('employee-leave',[EmployeeLeaveController::class,'index'])->name('employee-leave');
     Route::post('employee-leave',[EmployeeLeaveController::class,'store']);
     Route::put('employee-leave',[EmployeeLeaveController::class,'update']);
@@ -145,6 +186,9 @@ Route::group(['middleware'=>['auth']], function (){
 
     Route::get('activity',[ActivityController::class,'index'])->name('activity');
     Route::get('clear-activity',[ActivityController::class,'markAsRead'])->name('clear-all');
+
+    Route::get('backups',[BackupsController::class,'index'])->name('backups');
+
 
 });
 

@@ -2,9 +2,9 @@
 
 @section('styles')
     <!-- Datatable CSS -->
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
-<!-- Select2 CSS -->
-<link rel="stylesheet" href="assets/css/select2.min.css">
+    <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
 
 @endsection
 
@@ -163,8 +163,8 @@
 
 @section('scripts')
     <!-- Select2 JS -->
-    <script src="assets/js/select2.min.js"></script>
+    <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
     <!-- Datatable JS -->
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 @endsection
