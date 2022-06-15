@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "pavel-mironchik/laravel-backup-panel": "^2.2",
         "spatie/laravel-permission": "^5.4",
-        "spatie/laravel-settings": "^2.4"
+        "spatie/laravel-settings": "^2.4",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
