@@ -2,7 +2,7 @@
 
 @section('styles')	
 <!-- Datatable CSS -->
-<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('page-header')
@@ -17,8 +17,8 @@
 	<div class="col-auto float-right ml-auto">
 		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_client"><i class="fa fa-plus"></i> Add Client</a>
 		<div class="view-icons">
-			<a href="{{route('clients')}}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
-			<a href="{{route('clients-list')}}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
+			<a href="{{route('clients')}}" class="grid-view btn btn-link {{route_is('clients') ? 'active' : '' }}"><i class="fa fa-th"></i></a>
+			<a href="{{route('clients-list')}}" class="list-view btn btn-link {{route_is('clients-list') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
 		</div>
 	</div>
 </div>
@@ -205,8 +205,8 @@
 
 @section('scripts')
 <!-- Datatable JS -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
 	$(document).ready(function (){
 		$('.editbtn').on('click',function (){
