@@ -48,7 +48,7 @@ class TicketController extends Controller
         if($request->hasFile('files')){
             $files = array();
             foreach($request->files as $file){
-                $fileName = time().'.'.$file->extension();
+                $fileName = time().'.'.$file->getClientOriginalExtension();
                 $file->move(public_path('storage/tickets/'.$request->subject), $fileName);
                 array_push($files,$fileName);
             }
@@ -78,7 +78,7 @@ class TicketController extends Controller
      */
     public function show($ticket)
     {
-        $title = 'view ticket';
+        $title = 'view ticket';        
         $ticket = Ticket::where('subject','=',$ticket)->firstOrFail();
         return view('backend.tickets.show',compact(
             'title','ticket'
@@ -110,12 +110,14 @@ class TicketController extends Controller
         ]);
         $ticket = Ticket::findOrFail($request->id);
         $files = $ticket->files;
-        if($request->hasFile('files')){
+        if(!empty($request->files)){
             $files = array();
+            $index = 0;
             foreach($request->files as $file){
-                $fileName = time().'.'.$file->extension();
-                $file->move(public_path('storage/tickets/'.$request->subject), $fileName);
+                $fileName = time().$index.'.'.$file[$index]->getClientOriginalExtension();
+                $file[$index]->move(public_path('storage/tickets/'.$request->subject), $fileName);
                 array_push($files,$fileName);
+                $index++;
             }
         }
         $ticket->update([
