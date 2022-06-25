@@ -50,6 +50,10 @@
                     <a href="{{route('leads')}}"><i class="la la-user-secret"></i> <span>Leads</span></a>
                 </li>
 
+                <li class="{{route_is('tickets') ? 'active' : '' }}"> 
+                    <a href="{{route('tickets')}}"><i class="la la-ticket"></i> <span>Tickets</span></a>
+                </li>
+
                 <li class="menu-title"> 
                     <span>HR</span>
                 </li>
