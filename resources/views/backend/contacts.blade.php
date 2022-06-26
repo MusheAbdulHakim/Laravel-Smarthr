@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('styles')
 <!-- Datatable CSS -->
-<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('page-header')
@@ -132,8 +132,8 @@
 
 @section('scripts')
 <!-- Datatable JS -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 
     <script>
         $(document).ready(function(){

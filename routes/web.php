@@ -2,21 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OvertimeController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Frontend\JobController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\TaxesController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\PolicyController;
+use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Admin\BackupsController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\GoalTypeController;
@@ -24,15 +25,16 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LeaveTypeController;
 use App\Http\Controllers\Admin\DepartmentController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\FileManagerController;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\EmployeeLeaveController;
 use App\Http\Controllers\Admin\ProvidentFundController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Admin\EmployeeAttendanceController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\JobController as BackendJobController;
 
 /*
@@ -112,6 +114,9 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
 
+    Route::resource('invoices',InvoiceController::class)->except('destroy');
+    Route::delete('invoices',[InvoiceController::class,'destroy'])->name('invoices.destroy');
+
     Route::get('expenses',[ExpenseController::class,'index'])->name('expenses');
     Route::post('expenses',[ExpenseController::class,'store']);
     Route::put('expenses',[ExpenseController::class,'update']);
@@ -143,6 +148,12 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('employees/attendance',[EmployeeAttendanceController::class,'store']);
     Route::put('employees/attendance',[EmployeeAttendanceController::class,'update']);
     Route::delete('employees/attendance',[EmployeeAttendanceController::class,'destroy']);
+
+    Route::get('tickets',[TicketController::class,'index'])->name('tickets');
+    Route::get('tickets/show/{subject}',[TicketController::class,'show'])->name('ticket-view');
+    Route::post('tickets',[TicketController::class,'store']);
+    Route::put('tickets',[TicketController::class,'update']);
+    Route::delete('tickets',[TicketController::class,'destroy']);
 
     Route::get('overtime',[OvertimeController::class,'index'])->name('overtime');
     Route::post('overtime',[OvertimeController::class,'store']);

@@ -50,14 +50,19 @@
                     <a href="{{route('leads')}}"><i class="la la-user-secret"></i> <span>Leads</span></a>
                 </li>
 
+                <li class="{{route_is('tickets') ? 'active' : '' }}"> 
+                    <a href="{{route('tickets')}}"><i class="la la-ticket"></i> <span>Tickets</span></a>
+                </li>
+
                 <li class="menu-title"> 
                     <span>HR</span>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="la la-files-o"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="{{route('expenses')}}">Expenses</a></li>
-                        <li><a href="{{route('provident-fund')}}">Provident Fund</a></li>
+                        <li><a class="{{ route_is('invoices.*') ? 'active' : '' }}" href="{{route('invoices.index')}}">Invoices</a></li>
+                        <li><a class="{{ route_is('expenses') ? 'active' : '' }}" href="{{route('expenses')}}">Expenses</a></li>
+                        <li><a class="{{ route_is('provident-fund') ? 'active' : '' }}" href="{{route('provident-fund')}}">Provident Fund</a></li>
                         <li><a class="{{ route_is('taxes') ? 'active' : '' }}" href="{{route('taxes')}}">Taxes</a></li>
                     </ul>
                 </li>
