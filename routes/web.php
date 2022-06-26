@@ -34,6 +34,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Admin\EmployeeAttendanceController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\JobController as BackendJobController;
 
 /*
@@ -112,6 +113,9 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('policies',[PolicyController::class,'index'])->name('policies');
     Route::post('policies',[PolicyController::class,'store']);
     Route::delete('policies',[PolicyController::class,'destroy'])->name('policy.destroy');
+
+    Route::resource('invoices',InvoiceController::class)->except('destroy');
+    Route::delete('invoices',[InvoiceController::class,'destroy'])->name('invoices.destroy');
 
     Route::get('expenses',[ExpenseController::class,'index'])->name('expenses');
     Route::post('expenses',[ExpenseController::class,'store']);
