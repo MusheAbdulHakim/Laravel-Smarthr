@@ -202,7 +202,7 @@
 				amount.val(item_amount);
 				
 				index++;
-				id.val(index)
+				id.val(index).trigger('change');
 				$(this).slideDown();
             },
 			
