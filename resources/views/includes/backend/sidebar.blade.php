@@ -88,9 +88,9 @@
                 <li class="{{ route_is('assets') ? 'active' : '' }}"> 
                     <a href="{{route('assets')}}"><i class="la la-object-ungroup"></i> <span>Assets</span></a>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="{{ route_is('activity') ? 'active' : '' }}" href="{{route('activity')}}"><i class="la la-bell"></i> <span>Activities</span></a>
-                </li>
+                </li> --}}
                 <li class="{{ route_is('users') ? 'active' : '' }}">
                     <a href="{{route('users')}}"><i class="la la-user-plus"></i> <span>Users</span></a>
                 </li>

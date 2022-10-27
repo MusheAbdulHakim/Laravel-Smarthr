@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.min.css')}}">
 		<!-- Toastify css -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/toastify/src/toastify.css')}}">
-		
+		<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 		<!-- Page Css -->
@@ -105,6 +105,7 @@
 	<script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>
 	<!-- Toastify JS -->
 	<script src="{{asset('assets/plugins/toastify/src/toastify.js')}}"></script>
+	<script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/app.js')}}"></script>
 	<script>

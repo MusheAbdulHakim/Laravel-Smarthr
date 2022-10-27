@@ -140,6 +140,7 @@
             var table = $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                destroy: true,
                 ajax: "{{route('contacts')}}",
                 columns: [
                     {data: 'name', name: 'name'},
