@@ -211,6 +211,7 @@ Route::group(['middleware'=>['auth']], function (){
 
     //Salarie Scales 
     Route::resource('salary_scale',PayrollController::class);
+    Route::delete('salary_scale',[PayrollController::class,'delete'])->name('salary_scale.delete');
 
     
 });

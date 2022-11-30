@@ -11,7 +11,8 @@ class SalaryGrades extends Model
 
     protected $fillable = [
         'salary_scale',
-        'salary_amount'
+        'salary_amount',
+        'salary_currency'
        
     ];
 }

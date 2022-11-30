@@ -28,7 +28,7 @@
 
 <div class="row staff-grid-row">
 	@if (!empty($salaries->count()))
-		@foreach ($salaries as $salarie)
+		@forelse ($salaries as $salarie)
 			<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
 				<div class="profile-widget">
 					<div class="profile-img">
@@ -42,12 +42,14 @@
 					</div>
 					</div>
 					<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">{{$salarie->salary_scale}}</a></h4>
-					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">{{$salarie->salary_amount}}</a></h5>
+					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">{{$salarie->salary_currency}} {{$salarie->salary_amount}}</a></h5>
 					
 				</div>
 			</div>
-		@endforeach
-		<x-modals.delete :route="'salarie_scale.destroy',encrypt($salarie->id)" :title="'salarie'" />
+			@empty
+			No Salary Added
+		@endforelse
+		<x-modals.delete :route="'salary_scale.delete'" :title="'salarie'" />
 
 		<!-- Edit salarie Modal -->
 		<div id="edit_salarie" class="modal custom-modal fade" role="dialog">
@@ -60,21 +62,27 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" enctype="multipart/form-data" action="{{route('salarie_scale.update')}}">
+						<form method="POST" enctype="multipart/form-data" action="{{route('salary_scale.update',encrypt($salarie->id))}}">
 							@csrf
 							@method("PUT")
                             <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary Scale</label>
 								<input name="salary_scale" class="form-control" placeholder="e.g pay grade 1" type="number">
 							</div>
 						</div>
 						
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary amount</label>
 								<input name="salary_amount" class="form-control" placeholder="e.g $4500" type="number">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-form-label">Salary Currency</label>
+								<input name="salary_currency" class="form-control" placeholder="e.g ZMW" type="text">
 							</div>
 						</div>
                     </div>
@@ -107,19 +115,28 @@
 				<form method="POST" enctype="multipart/form-data" action="{{route('salary_scale.store')}}">
 					@csrf
 					<div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary Scale</label>
 								<input name="salary_scale" class="form-control" placeholder="e.g pay grade 1" type="text">
 							</div>
 						</div>
 						
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Corresponding Salary amount</label>
 								<input name="salary_amount" class="form-control" placeholder="e.g $4500" type="number">
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-form-label">Salary Currency</label>
+								<input name="salary_currency" class="form-control" placeholder="e.g ZMW" type="text">
+							</div>
+						</div>
+
+
                     </div>
 						
 					<div class="submit-section">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Salaries,SalaryGrades};
+use App\Models\SalaryGrades;
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -17,8 +17,8 @@ class PayrollController extends Controller
     {
         //
         $title="Salary Scales";
-        $salaries = Salaries::get();
-        return view('backend.salaries.add_salary',compact('salaries','title'));
+        $salaries = SalaryGrades::get();
+        return view('backend.salaries.add_salary_scale',compact('salaries','title'));
     }
 
     /**
@@ -43,12 +43,14 @@ class PayrollController extends Controller
         //
         $this->validate($request,[
             'salary_scale'=>'required|string|max:255',
-            'salary_amount'=>'required|numeric'            
+            'salary_amount'=>'required|numeric',
+            'salary_currency'=>'required|string'             
         ]);
 
         SalaryGrades::create([
             'salary_scale'=>$request->salary_scale,
-            'salary_amount'=>$request->salary_amount
+            'salary_amount'=>$request->salary_amount,
+            'salary_currency'=>$request->salary_currency
             
         ]);
         return back()->with('success',"Salary Scale has been added successfully!!");
@@ -94,8 +96,11 @@ class PayrollController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
         //
+        $client=SalaryGrades::findOrFail($request->id);
+        $client->delete();
+        return back()->with('success',"Salary Grade has been deleted successfully!!");
     }
 }
