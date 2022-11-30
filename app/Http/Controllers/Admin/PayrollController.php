@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Salaries;
+use App\Models\{Salaries,SalaryGrades};
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -29,6 +29,7 @@ class PayrollController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -40,6 +41,17 @@ class PayrollController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'salary_scale'=>'required|string|max:255',
+            'salary_amount'=>'required|numeric'            
+        ]);
+
+        SalaryGrades::create([
+            'salary_scale'=>$request->salary_scale,
+            'salary_amount'=>$request->salary_amount
+            
+        ]);
+        return back()->with('success',"Salary Scale has been added successfully!!");
     }
 
     /**

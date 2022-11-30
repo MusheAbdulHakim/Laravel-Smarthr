@@ -10,7 +10,7 @@
 		<h3 class="page-title">Salaries</h3>
 		<ul class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-			<li class="breadcrumb-item active">Employees</li>
+			<li class="breadcrumb-item active">Salary Scales</li>
 		</ul>
 	</div>
 	<div class="col-auto float-right ml-auto">
@@ -110,13 +110,13 @@
                     <div class="col-md-6">
 							<div class="form-group">
 								<label class="col-form-label">Salary Scale</label>
-								<input name="salary_scale" class="form-control" placeholder="e.g pay grade 1" type="number">
+								<input name="salary_scale" class="form-control" placeholder="e.g pay grade 1" type="text">
 							</div>
 						</div>
 						
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="col-form-label">Salary amount</label>
+								<label class="col-form-label">Corresponding Salary amount</label>
 								<input name="salary_amount" class="form-control" placeholder="e.g $4500" type="number">
 							</div>
 						</div>
