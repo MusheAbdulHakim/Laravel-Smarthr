@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Employee;
-use App\Models\Department;
-use App\Models\Designation;
+use App\Models\{Employee,Department,Designation,SalaryGrades,Salaries};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -19,11 +17,12 @@ class EmployeeController extends Controller
     public function index()
     {
         $title="employees";
+        $salary_scales = SalaryGrades::get();
         $designations = Designation::get();
         $departments = Department::get();
         $employees = Employee::with('department','designation')->get();
         return view('backend.employees',
-        compact('title','designations','departments','employees'));
+        compact('title','designations','departments','employees','salary_scales'));
     }
 
     /**
@@ -58,6 +57,10 @@ class EmployeeController extends Controller
             'avatar'=>'file|image|mimes:jpg,jpeg,png,gif',
             'department'=>'required',
             'designation'=>'required',
+            'salary_scale'=>'required|string',
+            'housing_allowance'=>'nullable|numeric',
+            'transport_allowance'=>'nullable|numeric',
+            'lunch_allowance'=>'nullable|numeric',
         ]);
         $imageName = Null;
         if ($request->hasFile('avatar')){
@@ -76,6 +79,20 @@ class EmployeeController extends Controller
             'designation_id'=>$request->designation,
             'avatar'=>$imageName,
         ]);
+
+        // Salary Data
+        $created_employee = Employee::where('email',"=",$request->email)->firstOrFail();
+        $salary_data = SalaryGrades::findOrFail($request->salary_scale);
+        Salaries::create([
+            'employee_id' =>$created_employee->id,
+            'salary_scale'=>$salary_data->salary_scale,
+            'salary_amount'=>$salary_data->salary_amount,
+            'housing_allowance'=>is_null($request->housing_allowance) ? 0 : $request->housing_allowance,
+            'transport_allowance'=>is_null($request->transport_allowance) ? 0 : $request->transport_allowance,
+            'lunch_allowance'=>is_null($request->lunch_allowance) ? 0 : $request->lunch_allowance           
+        ]);
+
+
         return back()->with('success',"Employee has been added");
     }
 

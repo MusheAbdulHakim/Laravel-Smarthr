@@ -100,10 +100,56 @@
 								<input type="text" class="form-control" name="company">
 							</div>
 						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Salary Scale</label>
+								<select name="salary_scale" class="form-control select">
+									<option>Select 	Salary Grade</option>
+									@foreach ($salary_scales as $salary_scale)
+										<option value="{{$salary_scale->id}}">{{$salary_scale->salary_scale}} - {{$salary_scale->salary_currency}} {{$salary_scale->salary_amount}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Housing Allowance</label>
+								<input type="number" name="housing_allowance" class="form-control">
+							</div>
+						</div>
+
+
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Transport Allowance</label>
+								<input class="form-control" name="transport_allowance" type="number">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Lunch Allowance</label>
+								<input type="number" class="form-control" name="lunch_allowance">
+							</div>
+						</div>
+
+<!--
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label class="col-form-label">Bonus</label>
+								<input type="text" class="form-control" name="bonus">
+							</div>
+						</div>
+-->
+
+
+
+						
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Department <span class="text-danger">*</span></label>
-								<select name="department" class="select">
+								<select name="department" class="form-control select">
 									<option>Select Department</option>
 									@foreach ($departments as $department)
 										<option value="{{$department->id}}">{{$department->name}}</option>
@@ -114,7 +160,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Designation <span class="text-danger">*</span></label>
-								<select name="designation" class="select">
+								<select name="designation" class="form-control select">
 									<option>Select Designation</option>
 									@foreach ($designations as $designation)
 										<option value="{{$designation->id}}">{{$designation->name}}</option>
@@ -188,10 +234,58 @@
 								<input type="text" class="form-control edit_company" name="company">
 							</div>
 						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Salary Scale</label>
+								<select name="salary_scale" selected="selected" id="edit_salary_scale" class="form-control select">
+									<option>Select Department</option>
+									@foreach ($salary_scales as $salary_scale)
+										<option value="{{$salary_scale->id}}">{{$salary_scale->salary_scale}} - {{$salary_scale->salary_currency}} {{$salary_scale->salary_amount}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Housing Allowance</label>
+								<input type="number" name="housing_allowance" class="form-control edit_housing_allowance " >
+							</div>
+						</div>
+
+
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Transport Allowance</label>
+								<input class="form-control edit_transport_allowance" name="transport_allowance" type="number">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="col-form-label">Lunch Allowance</label>
+								<input type="number" class="form-control edit_lunch_allowance" name="lunch_allowance">
+							</div>
+						</div>
+
+<!--
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label class="col-form-label">Bonus</label>
+								<input type="text" class="form-control edit_bonus" name="bonus">
+							</div>
+						</div>
+-->
+
+
+
+
+
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Department <span class="text-danger">*</span></label>
-								<select name="department" selected="selected" id="edit_department" class="select">
+								<select name="department" selected="selected" id="edit_department" class="form-control select">
 									<option>Select Department</option>
 									@foreach ($departments as $department)
 										<option>{{$department->name}}</option>
@@ -202,7 +296,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Designation <span class="text-danger">*</span></label>
-								<select name="designation" selected="selected" class="select edit_designation">
+								<select name="designation" selected="selected" class="form-control select edit_designation">
 									<option>Select Designation</option>
 									@foreach ($designations as $designation)
 										<option>{{$designation->name}}</option>
@@ -243,12 +337,22 @@
 			var company = $(this).data('company');
 			var designation = $(this).data('designation');
 			var department = $(this).data('department');
+			var salary_scale = $(this).data('salary_scale');
+			var housing_allowance = $(this).data('housing_allowance');
+			var transport_allowance = $(this).data('transport_allowance');
+			var lunch_allowance = $(this).data('lunch_allowance');
+
+
 			$('#edit_id').val(id);
 			$('.edit_firstname').val(firstname);
 			$('.edit_lastname').val(lastname);
 			$('.edit_email').val(email);
 			$('.edit_phone').val(phone);
 			$('.edit_company').val(company);
+			$('.edit_salary_scale').val(salary_scale).attr('selected');
+			$('.edit_housing_allowance').val(housing_allowance);
+			$('.edit_transport_allowance').val(transport_allowance);
+			$('.edit_lunch_allowance').val(lunch_allowance); 
 			$('.edit_designation').val(designation);
 			$('#edit_department').val(department).attr('selected');
 			$('.edit_avatar').attr('src',avatar);

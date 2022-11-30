@@ -14,6 +14,7 @@ class Salaries extends Model
         'housing_allowance',
         'transport_allowance',
         'lunch_allowance',
+        'employee_id',
          'bonus'
     ];
 
