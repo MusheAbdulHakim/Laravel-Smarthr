@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Admin\EmployeeAttendanceController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\PayrollController;
 use App\Http\Controllers\Admin\JobController as BackendJobController;
 
 /*
@@ -207,6 +208,11 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('backups',[BackupsController::class,'index'])->name('backups');
 
 
+
+    //Salarie Scales 
+    Route::resource('salary_scale',PayrollController::class);
+
+    
 });
 
 Route::get('',function (){

@@ -16,6 +16,28 @@
                         <li><a class="{{ route_is('contacts') ? 'active' : '' }}" href="{{route('contacts')}}">Contacts</a></li>
                     </ul>
                 </li>
+
+
+
+                <li class="menu-title">
+                    <span>Payroll</span>
+                </li>
+                <li class="submenu">
+                    <a href="#" class="{{ route_is(['employees','employees-list']) ? 'active' : '' }} noti-dot"><i class="la la-user"></i> <span> Payroll Setup</span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a class="{{ route_is('salary_scale') ? 'active' : '' }}" href="{{route('salary_scale.index')}}">Salary Scale</a></li>
+                        <li><a class="{{ route_is('holidays') ? 'active' : '' }}" href="{{route('holidays')}}">Run Payroll</a></li>
+                        <li><a class="{{ route_is('employees.attendance') ? 'active' : '' }}" href="{{route('employees.attendance')}}">Payroll Summary</a></li>
+                        <li><a class="{{ route_is('employees.attendance') ? 'active' : '' }}" href="{{route('employees.attendance')}}">Download Payslips</a></li>
+                        
+                    </ul>
+                </li>
+
+
+
+
+
+
                 <li class="menu-title">
                     <span>Employees</span>
                 </li>
