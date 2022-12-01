@@ -214,6 +214,9 @@ Route::group(['middleware'=>['auth']], function (){
     Route::delete('salary_scale',[PayrollController::class,'delete'])->name('salary_scale.delete');
     Route::get('payroll',[PayrollController::class,'run_payroll'])->name('salary_scale.run_payroll');
     Route::get('compile_payroll',[PayrollController::class,'compile_payroll'])->name('compile_payroll');
+    Route::get('download_payslips_zip',[PayrollController::class,'download_payslips_show'])->name('download_payslips_show');
+    Route::post('download_payslips_compressed',[PayrollController::class,'download_payslips_compressed'])->name('download_payslips_compressed');
+    Route::get('payroll_summary_report',[PayrollController::class,'payroll_summary_report'])->name('payroll_summary_report');
     
 
     

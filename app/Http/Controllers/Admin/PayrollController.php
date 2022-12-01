@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
-use App\Models\{Salaries,SalaryGrades,Leave, Overtime, ProvidentFund,EmployeeAttendance};
+use App\Models\{Salaries,SalaryGrades,Leave, Overtime, ProvidentFund,EmployeeAttendance, PayrollHistory};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
@@ -11,6 +11,7 @@ use DataTables;
 use File;
 use PDF;
 use Auth;
+use Session;
 
 class PayrollController extends Controller
 {
@@ -109,8 +110,7 @@ foreach ($payslips as $payslip) {
 
     $fileName = $payslip->uuid.'.pdf';
     $monthYear = date('F-Y', strtotime($end_date));
-    $company = $payslip->company;
-    Storage::disk("payslips")->put("$company/$monthYear/".$fileName, $pdf->output());
+    Storage::disk("payslips")->put("$monthYear/".$fileName, $pdf->output());
     //return \json_encode('Payslips Compiled Successfully');
 }
         return response()->json([
@@ -145,6 +145,75 @@ foreach ($payslips as $payslip) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+
+
+
+
+     // Downloading compiled slips in ZIP Now 
+
+    public function download_payslips_show(Request $request){
+        return View("backend.salaries.download_payslips",[
+            'title' => 'DOwnloading Payslips'
+        ]);
+}
+
+
+
+
+    public function download_payslips_compressed(Request $request){
+    $month = $request->month;
+    $year = $request->year;
+    //$requesDt = date('F-Y');
+    $requestDt = $month."-".$year;
+    $zip = new ZipArchive();
+
+    $fileName = "$requestDt.zip";
+    try {
+        if ($zip->open(public_path("PAYSLIPS/$fileName"), ZipArchive::CREATE) === true) {
+            $files = File::files(public_path("PAYSLIPS/$requestDt"));
+
+
+            foreach ($files as $key => $value) {
+                $relativeNameInZipFile = basename($value);
+                $zip->addFile($value, $relativeNameInZipFile);
+            }
+
+            $zip->close();
+        }
+
+        return response()->download(public_path("PAYSLIPS/$fileName"));
+    } catch(\Throwable $e) {
+        Session::flash('warning_no_payslips', 'No Payslip found for the Month and Year Selected');
+        return redirect()->back();
+    }
+}
+
+
+
+// Payroll Summary Report IN PDF 
+public function payroll_summary_report(){
+         
+    $pdf = PDF::loadView("backend.salaries.payroll_summary_report",
+    [
+     'payroll_summary_report' => PayrollHistory::get()
+
+]);
+    
+    $fileName = "payroll-".date("d-M-Y")."-".time().'.pdf';
+    return $pdf->download($fileName);
+}
+
+
+
+
+
+
+
+
+
+
     public function show($id)
     {
         //
