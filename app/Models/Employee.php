@@ -27,5 +27,10 @@ class Employee extends Model
         return $this->belongsTo(Designation::class);
     }
 
+    public function salary()
+    {
+        return $this->hasMany(Salaries::class, 'employee_id', 'id');
+    }
+
     
 }

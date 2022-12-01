@@ -6,8 +6,41 @@
         <meta name="robots" content="noindex, nofollow">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ucfirst(config('app.name'))}} - {{ucfirst($title)}}</title>
+		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{!empty(app(App\Settings\ThemeSettings::class)->favicon) ? asset('storage/settings/'.app(App\Settings\ThemeSettings::class)->favicon):asset('assets/img/favicon.png')}}">
+		
+		<!--Moment Js-->  
+
+       
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="{{ asset('assets/plugins/plugins2/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/select2/dist/js/select2.min.js') }}" ></script>
+        <script src="{{ asset('assets/plugins/plugins2/summernote/dist/summernote-bs4.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/ckeditor5/build/ckeditor.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/screenfull/dist/screenfull.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/moment/moment.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/jquery-minicolors/jquery.minicolors.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/d3/dist/d3.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/c3/c3.min.js') }}"></script>
+        <script src="{{ asset('assets/js/table/s.js') }}"></script>
+        <script src="{{ asset('assets/js/widge/ts.js') }}"></script>
+        <script src="{{ asset('assets/js/chart/s.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/mohithg-switchery/dist/switchery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/JQuery-mask-plugin/jquery.mask.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/owl.carousel/dist/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/json-viewer/jquery.json-viewer.js')}}"></script>
+        <script src="{{ asset('assets/plugins/plugins2/jquery.repeater/jquery.form-repeater.min.js')}}"></script>
+
+		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 		<!-- Fontawesome CSS -->

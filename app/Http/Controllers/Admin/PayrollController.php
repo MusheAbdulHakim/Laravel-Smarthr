@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Models\Employee;
 use App\Http\Controllers\Controller;
+use App\Models\Salaries;
 use App\Models\SalaryGrades;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,13 @@ class PayrollController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function run_payroll()
     {
         //
+        return view('backend.salaries.run_payroll',[
+            'title' => 'Employee Salary',
+            'employees' => Salaries::get()
+        ]);
 
     }
 
