@@ -136,8 +136,10 @@
     <h2 class="text-center border-top-bootom-1 py-4">{{app(App\Settings\CompanySettings::class)->company_name}} - EMPLOYEE PAYMENT SLIPS</h2>
     <h3 class="text-center border-top-bootom-1 py-4">{{app(App\Settings\CompanySettings::class)->address}}</h3>
     <center>
+        <!--
     <img src="{{!empty(app(App\Settings\InvoiceSettings::class)->logo) ? asset('storage/settings/'.app(App\Settings\InvoiceSettings::class)->logo):asset('assets/img/logo2.png')}}" class="inv-logo" alt="logo">
-  </center>
+-->
+</center>
     <h2 class="text-center border-top-bootom-1 py-4">{{ $payDay }}</h2>
     </div>
     <div class="card-body border">

@@ -35,11 +35,11 @@
 <!--data here-->
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade active show" id="live" role="tabpanel" aria-labelledby="pills-timeline-tab">
-
+<center>
     <!--Live Overtime Data-->
     <div class="card-header">
       <div class="col-md-3 d-block">
-        <button class="btn btn-sm btn-dark float-left"  id="pdfBtnPrintpayroll"><i class="ik ik-printer"></i> PAYROLL</button>
+        <button class="btn btn-sm btn-dark float-left" onclick="loading();" id="pdfBtnPrintpayroll"><i class="ik ik-printer"></i>RUN PAYROLL</button>
         
       </div>
 
@@ -57,12 +57,29 @@
           </span>
         </div>
       </div>
-
-
-
-
     </div>
     
+
+
+
+  <!--Loading gif while sending the payroll--> 
+<div class="modal-body">
+      <!--LOADING MODAL https://i.gifer.com/7pld.gif--> 
+     
+      <div id="loadings" style="display:none">
+   
+   
+    <h5 style="font-weight:bold; color:royalblue">Loading...</h5> 
+    <br>
+  <img src="https://i.gifer.com/VAyR.gif" />
+
+</div>
+<!--End Loading gifs while sending payments reports-->
+</center>
+
+
+
+
 
 <div id="payroll_response"></div>
 
@@ -191,6 +208,24 @@ $(document).ready(function() {
 
   
 });
+
+
+
+//Triger Loading Modal here
+
+
+
+function loading() {
+document.getElementById("loadings").style.display = "block";
+window.setTimeout("closeModalDiv();", 3000);
+}
+
+function closeModalDiv(){
+document.getElementById("loadings").style.display=" none";
+}
+    
+
+//Triger Loading Modal ends here
 
 </script>
 
