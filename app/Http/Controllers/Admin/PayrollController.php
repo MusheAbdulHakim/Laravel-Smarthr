@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Employee;
 use App\Http\Controllers\Controller;
-use App\Models\Salaries;
-use App\Models\SalaryGrades;
+use App\Models\{Salaries,SalaryGrades,Leave, Overtime, ProvidentFund,EmployeeAttendance};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use ZipArchive;
+use DataTables;
+use File;
+use PDF;
+use Auth;
 
 class PayrollController extends Controller
 {
@@ -60,6 +65,79 @@ class PayrollController extends Controller
         ]);
         return back()->with('success',"Salary Scale has been added successfully!!");
     }
+
+
+
+
+
+
+/**
+     * Compile Payroll.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function compile_payroll(Request $request){
+    
+
+    $date = explode(' - ', $request->date);
+    $start_date = date("Y-m-d",strtotime($date[0]));
+    $end_date = date("Y-m-d", strtotime($date[1]));
+    $monthYear = date('F-Y', strtotime($end_date));
+
+
+    $payslips = $this->payroll($request);
+
+   
+
+
+foreach ($payslips as $payslip) {
+    set_time_limit(180);
+
+    
+    $pdf = PDF::loadView("backend.salaries.export_toPDF", [
+
+        'payslip'=> $payslip,
+        'date'=> $request->date,
+        'salarie'=> Salaries::where('employee_id', "=", $payslip->id)->first(),
+        "overtimes" => Overtime::whereBetween("overtime_date",[$start_date,$end_date])->get(),
+        'monthYear' => date('F-Y', strtotime($end_date)),
+        'payDay' => date('d F Y', strtotime($end_date))
+    ]);
+    $password = str_replace('-', '', $payslip->uuid);
+    $pdf->setEncryption($password);
+
+    $fileName = $payslip->uuid.'.pdf';
+    $monthYear = date('F-Y', strtotime($end_date));
+    $company = $payslip->company;
+    Storage::disk("payslips")->put("$company/$monthYear/".$fileName, $pdf->output());
+    //return \json_encode('Payslips Compiled Successfully');
+}
+        return response()->json([
+            'status'=>true,
+            "message"=>"You have successfully! Compiled the PAYROLL For $monthYear, You can now download the payslips"
+
+            ]);
+    
+}
+
+
+
+    private function payroll(Request $request){
+         
+        $date = explode(' - ', $request->date);
+       
+        $start_date = date("Y-m-d",strtotime($date[0]));
+        $end_date = date("Y-m-d",strtotime($date[1]));
+
+        $attendances = EmployeeAttendance::whereBetween("created_at",[$start_date,$end_date])->pluck('employee_id')->toArray();
+        $empIds = array_unique($attendances);
+
+        $payslips = Employee::whereIn("id",$empIds)->get();
+
+        return $payslips;
+    }
+
 
     /**
      * Display the specified resource.

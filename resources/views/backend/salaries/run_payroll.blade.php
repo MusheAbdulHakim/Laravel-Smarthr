@@ -39,7 +39,7 @@
     <!--Live Overtime Data-->
     <div class="card-header">
       <div class="col-md-3 d-block">
-        <button class="btn btn-sm btn-dark float-left" onclick="loading();" id="pdfBtnPrintpayroll"><i class="ik ik-printer"></i> PAYROLL</button>
+        <button class="btn btn-sm btn-dark float-left"  id="pdfBtnPrintpayroll"><i class="ik ik-printer"></i> PAYROLL</button>
         
       </div>
 
@@ -126,24 +126,6 @@
 <script type="text/javascript">
 
 
-// get data from serve ajax
-
-function printForm(formId,btn){
-  
-  $.ajax({
-    url: $(formId),//.data('action'),
-    type: "GET",
-   // data : new FormData($(formId)[0]),
-    processData: false,
-    contentType: false,
-    beforeSend:function(){
-      btn.prop("disabled",true);
-    },
-    complete : function(){
-           btn.prop('disabled',false);
-    }
-  });
-}
 
 $(document).ready(function() {
   

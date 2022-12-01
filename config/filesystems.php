@@ -35,6 +35,12 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'payslips' => [
+            'driver' => 'local',
+            'root' => public_path('PAYSLIPS'),
+        ],
+
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
