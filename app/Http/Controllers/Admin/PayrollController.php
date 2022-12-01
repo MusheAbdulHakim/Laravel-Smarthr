@@ -129,7 +129,7 @@ class PayrollController extends Controller
         $attendances = EmployeeAttendance::whereBetween("created_at", [$start_date,$end_date])->pluck('employee_id')->toArray();
         $empIds = array_unique($attendances);
 
-        $payslips = Employee::whereIn("id", $empIds)->get();
+        $payslips = Employee::get();
 
         return $payslips;
     }

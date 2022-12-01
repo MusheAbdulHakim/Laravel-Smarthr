@@ -39,6 +39,7 @@
 						<th>Mobile</th>
 						<th class="text-nowrap">Join Date</th>
 						<th>Designation</th>
+						<th>Salary</th>
 						<th class="text-right no-sort">Action</th>
 					</tr>
 				</thead>
@@ -57,6 +58,9 @@
 						<td>{{date_format(date_create($employee->date_created),"d M,Y")}}</td>
 						<td>
 							{{$employee->designation->name}}
+						</td>
+						<td>
+						{{\App\Models\Salaries::where('employee_id',"=",$employee->id)->first()->salary_amount}}
 						</td>
 						<td class="text-right">
 							<div class="dropdown dropdown-action">
