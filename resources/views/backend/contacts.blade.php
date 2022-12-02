@@ -140,13 +140,14 @@
             var table = $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                bDestroy:true,
                 ajax: "{{route('contacts')}}",
                 columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'phone', name: 'phone'},
-                    {data: 'email', name: 'email'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                    {"data":"name"},
+                    {"data":"number"},
+                    {"data":"email"},
+                    {"data":"status"},
+                    {"data":"action" },
                 ]
             });
             $('.editbtn').on('click',function(){
