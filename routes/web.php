@@ -36,6 +36,7 @@ use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Admin\EmployeeAttendanceController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\PayrollController;
+use App\Http\Controllers\Admin\SalaryAdvance;
 use App\Http\Controllers\Admin\JobController as BackendJobController;
 
 /*
@@ -219,7 +220,12 @@ Route::group(['middleware'=>['auth']], function (){
     Route::get('payroll_summary_report',[PayrollController::class,'payroll_summary_report'])->name('payroll_summary_report');
     
 
-    
+
+    // Advances
+    Route::resource('salary_advance',SalaryAdvance::class);  
+
+
+
 });
 
 Route::get('',function (){

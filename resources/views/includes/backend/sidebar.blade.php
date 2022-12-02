@@ -52,6 +52,7 @@
                         <li><a class="{{ route_is('departments') ? 'active' : '' }}" href="{{route('departments')}}">Departments</a></li>
                         <li><a class="{{ route_is('designations') ? 'active' : '' }}" href="{{route('designations')}}">Designations</a></li>
                         <li><a class="{{ route_is('overtime') ? 'active' : '' }}" href="{{route('overtime')}}">Overtime</a></li>
+                        <li><a class="{{ route_is('salary_advance.*') ? 'active' : '' }}" href="{{route('salary_advance.index')}}">Salary Advance</a></li>
                     </ul>
                 </li>
                 
