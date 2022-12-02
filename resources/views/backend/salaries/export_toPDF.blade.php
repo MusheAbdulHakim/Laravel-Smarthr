@@ -216,7 +216,7 @@
               <td></td>
               <td></td>
              
-              <td width="25%" align="right"><b>Total:</b> {{ number_format($salarie->salary_amount,2) }} </td>
+              <td width="25%" align="right"><b>Total:</b> 0.00 </td>
               <td width="25%" align="right"><b>Gross Pay:</b> K{{ number_format($salarie->salary_amount+$salarie->housing_allowance + $salarie->transport_allowance+$total_overtime_amount+$salarie->lunch_allowance,2) }}</td>
           
            
