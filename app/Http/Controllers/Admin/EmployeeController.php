@@ -116,6 +116,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request)
     {
+        
         $this->validate($request,[
             'firstname'=>'required',
             'lastname'=>'required',
@@ -125,6 +126,10 @@ class EmployeeController extends Controller
             'avatar'=>'file|image|mimes:jpg,jpeg,png,gif',
             'department'=>'required',
             'designation'=>'required',
+            'salary_scale'=>'required|string',
+            'housing_allowance'=>'nullable|numeric',
+            'transport_allowance'=>'nullable|numeric',
+            'lunch_allowance'=>'nullable|numeric',
         ]);
         if ($request->hasFile('avatar')){
             $imageName = time().'.'.$request->avatar->extension();
@@ -133,7 +138,7 @@ class EmployeeController extends Controller
             $imageName = Null;
         }
         
-        $employee = Employee::find($request->id);
+        $employee = Employee::findOrFail($request->id);
         $employee->update([
             'uuid' => $employee->uuid,
             'firstname'=>$request->firstname,
@@ -144,8 +149,24 @@ class EmployeeController extends Controller
             'department_id'=>$request->department,
             'designation_id'=>$request->designation,
             'avatar'=>$imageName,
+            
         ]);
-        return back()->with('success',"Employee details has been updated");
+
+
+ // Salary Data
+  // Salary Data
+  
+  $salary_data = Salaries::findOrFail($request->salary_scale);
+  $salary_data->update([
+      'employee_id' => $employee->id,
+      'salary_scale'=>$salary_data->salary_scale,
+      'salary_amount'=>$salary_data->salary_amount,
+      'housing_allowance'=>is_null($request->housing_allowance) ? 0 : $request->housing_allowance,
+      'transport_allowance'=>is_null($request->transport_allowance) ? 0 : $request->transport_allowance,
+      'lunch_allowance'=>is_null($request->lunch_allowance) ? 0 : $request->lunch_allowance           
+  ]);
+
+         return back()->with('success',"Employee details has been updated");
     }
 
     /**

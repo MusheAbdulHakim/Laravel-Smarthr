@@ -222,7 +222,8 @@ Route::group(['middleware'=>['auth']], function (){
 
 
     // Advances
-    Route::resource('salary_advance',SalaryAdvance::class);  
+    Route::resource('salary_advance',SalaryAdvance::class); 
+    Route::delete('salary_advance',[SalaryAdvance::class,'delete'])->name('salary_advance.delete');  
 
 
 

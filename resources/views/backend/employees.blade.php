@@ -37,7 +37,7 @@
 					<div class="dropdown profile-action">
 						<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 					<div class="dropdown-menu dropdown-menu-right" >
-						<a data-id="{{$employee->id}}" data-firstname="{{$employee->firstname}}" data-lastname="{{$employee->lastname}}" data-email="{{$employee->email}}" data-phone="{{$employee->phone}}" data-avatar="{{$employee->avatar}}" data-company="{{$employee->company}}" data-designation="{{$employee->designation->id}}" data-department="{{$employee->department->id}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+						<a data-id="{{$employee->id}}" data-firstname="{{$employee->firstname}}" data-lastname="{{$employee->lastname}}" data-email="{{$employee->email}}" data-phone="{{$employee->phone}}" data-avatar="{{$employee->avatar}}" data-company="{{$employee->company}}" data-designation="{{$employee->designation->id}}" data-department="{{$employee->department->id}}" data-housing_allowance="{{\App\Models\Salaries::where('employee_id',$employee->id)->first()->housing_allowance}}" data-transport_allowance="{{\App\Models\Salaries::where('employee_id',$employee->id)->first()->transport_allowance}}" data-lunch_allowance="{{\App\Models\Salaries::where('employee_id',$employee->id)->first()->lunch_allowance}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 						<a data-id="{{$employee->id}}" class="dropdown-item deletebtn" href="javascript:void(0)" data-toggle="modal" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 					</div>
 					</div>
@@ -76,7 +76,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label class="col-form-label">Last Name</label>
+								<label class="col-form-label">Last Name <span class="text-danger">*</span></label>
 								<input class="form-control" name="lastname" type="text">
 							</div>
 						</div>
@@ -210,7 +210,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label class="col-form-label">Last Name</label>
+								<label class="col-form-label">Last Name <span class="text-danger">*</span></label>
 								<input class="form-control edit_lastname" name="lastname" type="text">
 							</div>
 						</div>
@@ -288,7 +288,7 @@
 								<select name="department" selected="selected" id="edit_department" class="form-control select">
 									<option>Select Department</option>
 									@foreach ($departments as $department)
-										<option>{{$department->name}}</option>
+										<option value="{{$department->id}}">{{$department->name}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -299,7 +299,7 @@
 								<select name="designation" selected="selected" class="form-control select edit_designation">
 									<option>Select Designation</option>
 									@foreach ($designations as $designation)
-										<option>{{$designation->name}}</option>
+										<option value="{{$designation->id}}">{{$designation->name}}</option>
 									@endforeach
 								</select>
 							</div>

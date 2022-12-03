@@ -10,6 +10,7 @@ class Salaries extends Model
     use HasFactory;
     protected $fillable = [
         'salary_scale','type',
+        'employee_id',
         'salary_amount',
         'housing_allowance',
         'transport_allowance',

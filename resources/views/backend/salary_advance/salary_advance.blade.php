@@ -51,7 +51,7 @@
 			@empty
 			No Salary Salary Advance for Your Employee
 		@endforelse
-		<x-modals.delete :route="'salary_scale.delete'" :title="'salary_advance'" />
+		<x-modals.delete :route="'salary_advance.delete'" :title="'salary_advance'" />
 
 		<!-- Edit salary_advance Modal -->
 		<div id="edit_salary_advance" class="modal custom-modal fade" role="dialog">
