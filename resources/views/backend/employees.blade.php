@@ -240,7 +240,7 @@
 							<div class="form-group">
 								<label class="col-form-label">Salary Scale</label>
 								<select name="salary_scale" selected="selected" id="edit_salary_scale" class="form-control select">
-									<option>Select Department</option>
+									<option>Select Salary Scale</option>
 									@foreach ($salary_scales as $salary_scale)
 										<option value="{{$salary_scale->id}}">{{$salary_scale->salary_scale}} - {{$salary_scale->salary_currency}} {{$salary_scale->salary_amount}}</option>
 									@endforeach
@@ -349,7 +349,7 @@
 			$('.edit_email').val(email);
 			$('.edit_phone').val(phone);
 			$('.edit_company').val(company);
-			$('.edit_salary_scale').val(salary_scale).attr('selected');
+			$('#edit_salary_scale').val(salary_scale).attr('selected');
 			$('.edit_housing_allowance').val(housing_allowance);
 			$('.edit_transport_allowance').val(transport_allowance);
 			$('.edit_lunch_allowance').val(lunch_allowance); 

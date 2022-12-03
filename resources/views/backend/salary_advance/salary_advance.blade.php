@@ -7,14 +7,14 @@
 @section('page-header')
 <div class="row align-items-center">
 	<div class="col">
-		<h3 class="page-title">salary_advances</h3>
+		<h3 class="page-title">Salary Advances</h3>
 		<ul class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
 			<li class="breadcrumb-item active">Salary Advance</li>
 		</ul>
 	</div>
 	<div class="col-auto float-right ml-auto">
-		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary_advance"><i class="fa fa-plus"></i> Add salary_advance Advance</a>
+		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary_advance"><i class="fa fa-plus"></i> Add Salary Advance</a>
 		<div class="view-icons">
 			<a href="{{route('salary_advance.index')}}" class="grid-view btn btn-link {{route_is('salary_scale.index') ? 'active' : '' }}"><i class="fa fa-th"></i></a>
 			<a href="{{route('salary_advance.index')}}" class="list-view btn btn-link {{route_is('salary_scale.show') ? 'active' : '' }}"><i class="fa fa-bars"></i></a>
@@ -41,10 +41,10 @@
 						<a data-id="{{$salary_advance->id}}" class="dropdown-item deletebtn" href="javascript:void(0)" data-toggle="modal" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 					</div>
 					</div>
-					<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)"><strong>Amount: </strong>{{$salary_advance->rate_amount}}</a></h4>
-					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)"><strong>Total Paid: </strong>{{$salary_advance->total_repayments}}</a></h5>
-          <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)"><strong>Remaining Installments: </strong>{{$salary_advance->duration}}</a></h5>
-          <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)"><strong>Loan Status: </strong>{{$salary_advance->loan_status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</a></h5>
+					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">LOAN AMOUNT(S): {{$salary_advance->rate_amount}}</a></h5>
+					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">REPAYMENTS:{{$salary_advance->total_repayments}}</a></h5>
+          <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">REMAINING INSTALLMENTS:{{$salary_advance->duration}}</a></h5>
+          <h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">LOAN/STATUS: {{$salary_advance->loan_status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</a></h5>
 					
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Edit salary_advance</h5>
+						<h5 class="modal-title">Edit Salary Advance</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -71,14 +71,14 @@
                       <div class="col-md-8 col-lg-8 col-sm-12">
                        <div class="form-group">
                         <label for="title">Title</label><small class="text-danger">*</small>
-                        <input type="text" name="title" placeholder="Some reason for a loan" class="form-control" id="title" autocomplete="off">
+                        <input type="text" name="title" placeholder="Some reason for a loan" class="form-control edit_title" id="title" autocomplete="off">
                         <small class="text-danger err" id="title-err"></small>
                       </div>
                       </div>
                       <div class="col-md-4 col-lg-4 col-sm-12">
                         <div class="form-group">
                           <label for="date">Loan Amount</label><small class="text-danger">*</small>
-                          <input type="number" name="rate_amount" onkeyup="calculateEMI()" value="{{ old('employee_loan_amount') }}"  class="form-control"  id="amount" required>
+                          <input type="number" name="rate_amount" onkeyup="calculateEMI()" value="{{ old('rate_amount') }}"  class="form-control edit_rate_amount"  id="amount" required>
                           <small class="text-danger err" id="date-err">This is the employee requested loan amount</small>
                         </div>
                       </div>
@@ -100,7 +100,7 @@
                       <div class="col-md-12 col-lg-12 col-sm-12">
                        <div class="form-group">
                         <label for="rate_amount">Duration</label><small class="text-danger">*</small>
-                        <input type="number"  onkeyup="calculateEMI()" name="duration" value="{{ old('employee_duration') }}" class="form-control"  id="installments" required>
+                        <input type="number"  onkeyup="calculateEMI()" name="duration" value="{{ old('employee_duration') }}" class="form-control edit_duration"  id="installments" required>
                         <small class="text-danger err" id="rate_amount-err">This is the loan duration.</small>
                       </div>
                       </div>
@@ -110,7 +110,7 @@
                       <div class="col-md-12 col-lg-12 col-sm-12">
                        <div class="form-group">
                         <label for="rate_amount">Total Repayments</label><small class="text-danger">*</small>
-                        <input type="text" class="form-control" name="total_repayments" value="{{ old('employee_total_repayment') }}"  id="total" readonly>
+                        <input type="text" class="form-control edit_total_repayments" name="total_repayments" value="{{ old('total_repayments') }}"  id="total" readonly>
                         <small class="text-danger err" id="rate_amount-err">This is the total repayment amount.</small>
                       </div>
                       </div>
@@ -121,7 +121,7 @@
                       <div class="col-md-12 col-lg-12 col-sm-12">
                        <div class="form-group">
                         <label for="rate_amount">EMI</label><small class="text-danger">*</small>
-                        <input type="text" name="emi" class="form-control" value="{{ old('employee_monthly') }}" name id="monthly" readonly>
+                        <input type="text" name="emi" class="form-control edit_emi" value="{{ old('emi') }}" name id="monthly" readonly>
                         <small class="text-danger err" id="rate_amount-err">Equated Monthly Installment</small>
                       </div>
                       </div>
@@ -131,8 +131,8 @@
                     <div class="row">
                       <div class="col-md-12 col-lg-12 col-sm-12">
                        <div class="form-group">
-                        <label for="rate_amount">Date</label><small class="text-danger">*</small>
-                        <input type="date" name="date" class="form-control" >
+                        <label for="loandate">Date</label><small class="text-danger">*</small>
+                        <input type="text" class="form-control datetimepicker-input edit_date" name="date" id="loandate" data-toggle="datetimepicker" data-target="#loandate" >
                       </div>
                       </div>
                     </div>
@@ -145,7 +145,7 @@
                         <label for="employee_id">Salary Advance Status</label><small class="text-danger">*</small>
                         <select class="form-control" name="status">                          
                             <option value="1">GRANT</option>
-                            <option value="0">PENDING MODE</option>
+                            <option value="0">APPROVE LATER</option>
                           
                         </select>
                         <small class="text-danger err" id="employee_id-err"></small>
@@ -176,7 +176,7 @@
 	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Add Employee salary_advance</h5>
+				<h5 class="modal-title">Add Employee Salary Advance</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -250,7 +250,7 @@
                       <div class="col-md-12 col-lg-12 col-sm-12">
                        <div class="form-group">
                         <label for="rate_amount">Date</label><small class="text-danger">*</small>
-                        <input type="date" name="date" class="form-control" >
+                        <input type="text" class="form-control datetimepicker-input" name="date" id="loandate" data-toggle="datetimepicker" data-target="#loandate" >
                       </div>
                       </div>
                     </div>
@@ -263,7 +263,7 @@
                         <label for="employee_id">Salary Advance Status</label><small class="text-danger">*</small>
                         <select class="form-control" name="status">                          
                             <option value="1">GRANT</option>
-                            <option value="0">PENDING MODE</option>
+                            <option value="0">APPROVE LATER</option>
                           
                         </select>
                         <small class="text-danger err" id="employee_id-err"></small>
@@ -289,33 +289,7 @@
 
 @section('scripts')
 <script>
-	$(document).ready(function (){
-		$('.editbtn').on('click',function (){
-			$('#edit_salary_advance').modal('show');
-			var id = $(this).data('id');
-            var title = $(this).data('title');
-			var rate_amount = $(this).data('rate_amount');
-			var date = $(this).data('date');
-            var duration = $(this).data('duration');
-            var total_repayments = $(this).data('total_repayments');
-			var employee_id = $(this).data('employee_id');
-			
-			
-
-			$('#edit_id').val(id);
-			$('.edit_title').val(title);
-			$('.edit_rate_amount').val(rate_amount);
-            $('#edit_date').val(date);
-			$('.edit_duration').val(duration);
-			$('.edit_total_repayments').val(total_repayments);
-            $('.edit_employee_id').val(employee_id);
-		
-		});
-
-
-
-
- function calculateEMI() {
+function calculateEMI() {
 
 
    
@@ -350,6 +324,45 @@ document.getElementById('monthly').value = parseFloat((total/installments)).toFi
 
 
 }
+
+
+
+
+
+	$(document).ready(function (){
+		$('.editbtn').on('click',function (){
+			$('#edit_salary_advance').modal('show');
+			var id = $(this).data('id');
+      var title = $(this).data('title');
+			var rate_amount = $(this).data('rate_amount');
+			var date = $(this).data('date');
+      var duration = $(this).data('duration');
+      var total_repayments = $(this).data('total_repayments');
+			var employee_id = $(this).data('employee_id');
+			
+			
+
+			$('#edit_id').val(id);
+			$('.edit_title').val(title);
+			$('.edit_rate_amount').val(rate_amount);
+      $('#edit_date').val(date);
+			$('.edit_duration').val(duration);
+			$('.edit_total_repayments').val(total_repayments);
+      $('.edit_employee_id').val(employee_id);
+		
+		});
+
+
+
+
+ 
+
+
+
+
+  $('#loandate').datetimepicker({
+   format: 'LL'
+  });
 	})
 </script>
 @endsection

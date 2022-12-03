@@ -37,9 +37,10 @@
 					<div class="dropdown profile-action">
 						<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a data-id="{{$salarie->id}}" data-salary_scale="{{$salarie->salary_scale}}" data-salary_amount="{{$salarie->salary_amount}}" data-avatar="{{$salarie->avatar}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+						<a data-id="{{$salarie->id}}" data-salary_scale="{{$salarie->salary_scale}}" data-salary_amount="{{$salarie->salary_amount}}" data-salary_currency="{{$salarie->salary_currency}}" data-avatar="{{$salarie->avatar}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 						<a data-id="{{$salarie->id}}" class="dropdown-item deletebtn" href="javascript:void(0)" data-toggle="modal" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 					</div>
+					
 					</div>
 					<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">{{$salarie->salary_scale}}</a></h4>
 					<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="javascript:void(0)">{{$salarie->salary_currency}} {{$salarie->salary_amount}}</a></h5>
@@ -62,27 +63,27 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" enctype="multipart/form-data" action="{{route('salary_scale.update',encrypt($salarie->id))}}">
+						<form method="POST" action="{{route('salary_scale.update',encrypt($salarie->id))}}">
 							@csrf
 							@method("PUT")
                             <div class="row">
                     <div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary Scale</label>
-								<input name="salary_scale" class="form-control" placeholder="e.g pay grade 1" type="number">
+								<input name="salary_scale" class="form-control edit_salary_scale" placeholder="e.g pay grade 1" type="number">
 							</div>
 						</div>
 						
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary amount</label>
-								<input name="salary_amount" class="form-control" placeholder="e.g $4500" type="number">
+								<input name="salary_amount" class="form-control edit_salary_amount" placeholder="e.g $4500" type="number">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="col-form-label">Salary Currency</label>
-								<input name="salary_currency" class="form-control" placeholder="e.g ZMW" type="text">
+								<input name="salary_currency" class="form-control edit_salary_currency" placeholder="e.g ZMW" type="text">
 							</div>
 						</div>
                     </div>
@@ -112,7 +113,7 @@
 			</div>
             
 			<div class="modal-body">
-				<form method="POST" enctype="multipart/form-data" action="{{route('salary_scale.store')}}">
+				<form method="POST" action="{{route('salary_scale.store')}}">
 					@csrf
 					<div class="row">
                     <div class="col-md-12">
@@ -156,13 +157,17 @@
 		$('.editbtn').on('click',function (){
 			$('#edit_salarie').modal('show');
 			var id = $(this).data('id');
+			var salary_scale = $(this).data('salary_scale');
 			var salary_amount = $(this).data('salary_amount');
 			var salary_grade = $(this).data('salary_grade');
+			var salary_currency = $(this).data('salary_currency');
 			
 
 			$('#edit_id').val(id);
+			$('.edit_salary_scale').val(salary_scale);
 			$('.edit_salary_amount').val(salary_amount);
 			$('.edit_salary_grade').val(salary_grade);
+			$('.edit_salary_currency').val(salary_currency);
 		
 		})
 	})

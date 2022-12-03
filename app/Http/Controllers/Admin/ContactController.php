@@ -24,7 +24,7 @@ class ContactController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action',function($row){
                        
-                        $editbtn = '<a data-id="'.$row->id.'" data-name="'.$row->name.'" data-phone="'.$row->number.'" data-status="'.$row->status.'" data-email="'.$row->email.'" class="dropdown-item editbtn" href="javascript:void(0);" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>';
+                        $editbtn = '<a data-id="'.$row->id.'" data-name="'.$row->name.'" data-phone="'.$row->number.'" data-status="'.$row->status.'" data-email="'.$row->email.'" class="dropdown-item editbtn"  href="javascript:void(0);" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>';
                         $deletebtn= '<a data-id="'.$row->id.'" class="dropdown-item deletebtn" href="javascript:void(0);" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>';
                         return $editbtn.''.$deletebtn;
                     })
