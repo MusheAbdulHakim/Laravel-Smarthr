@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
@@ -41,7 +41,7 @@
 					@foreach ($jobs as $job)
 					<tr>
 						<td><a target="_blank" href="{{route('job-view',$job)}}">{{$job->title}}</a></td>
-						<td>{{$job->department->name}}</td>
+						<td>{{$job->department->name ?? ''}}</td>
 						<td>{{date_format(date_create($job->start_date),"d M, Y")}}</td>
 						<td>{{date_format(date_create($job->end_date),"d M, Y")}}</td>
 						<td class="text-center">
@@ -60,7 +60,7 @@
 							</div>
 						</td>
 					</tr>
-					@endforeach					
+					@endforeach
 				</tbody>
 			</table>
 		</div>
@@ -350,7 +350,7 @@
 	CKEDITOR.replace('my-editor', options);
 	</script>
 	<script>
-	
+
 	</script>
 	<script>
 		$(document).ready(function (){
@@ -373,7 +373,7 @@
 				$('.edit_expire_date').val(expiryDate);
 				$('.edit_status').val(status);
 				$('.edit_type').val(type);
-				$('.edit_description').val(description); 
+				$('.edit_description').val(description);
 
 			});
 		})
