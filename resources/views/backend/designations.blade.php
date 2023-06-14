@@ -1,8 +1,10 @@
 @extends('layouts.backend')
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
+
 @endsection
 
 @section('page-header')
@@ -52,7 +54,7 @@
                         </tr>
                        @endforeach
                        <x-modals.delete :route="'designation.destroy'" :title="'designation'"/>
-                   @endif                    
+                   @endif
                 </tbody>
             </table>
         </div>
@@ -140,6 +142,8 @@
 <!-- Datatable JS -->
 <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
+
 <script>
     $(document).ready(function(){
         $('.table').on('click','.editbtn',function(){
