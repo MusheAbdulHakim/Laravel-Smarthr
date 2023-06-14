@@ -1,8 +1,9 @@
 @extends('layouts.backend')
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
 @endsection
 
 @section('page-header')
@@ -102,14 +103,14 @@
 								<input class="form-control" name="lastname" type="text">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label class="col-form-label">Email <span class="text-danger">*</span></label>
 								<input class="form-control" name="email" type="email">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label class="col-form-label">Phone </label>
@@ -151,7 +152,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="submit-section">
 						<button class="btn btn-primary submit-btn">Submit</button>
 					</div>
@@ -190,14 +191,14 @@
 								<input class="form-control edit_lastname" name="lastname" type="text">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label class="col-form-label">Email <span class="text-danger">*</span></label>
 								<input class="form-control edit_email" name="email" type="email">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label class="col-form-label">Phone </label>
@@ -237,7 +238,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="submit-section">
 						<button class="btn btn-primary submit-btn">Submit</button>
 					</div>
@@ -253,6 +254,7 @@
 <!-- Datatable JS -->
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 <script>
 	$(document).ready(function (){
 		$('.editbtn').on('click',function (){

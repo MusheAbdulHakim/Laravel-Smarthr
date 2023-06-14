@@ -1,8 +1,10 @@
 @extends('layouts.backend')
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
+
 @endsection
 
 @section('page-header')
@@ -55,9 +57,9 @@
 								<div class="dropdown dropdown-action">
 									<a href="javascript:void(0)" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 									<div class="dropdown-menu dropdown-menu-right">
-										<a data-id="{{$asset->id}}" data-name="{{$asset->name}}" 
+										<a data-id="{{$asset->id}}" data-name="{{$asset->name}}"
 											data-uuid="{{$asset->uuid}}" data-pdate="{{$asset->purchase_date}}"
-											 data-pfrom="{{$asset->purchase_from}}" 
+											 data-pfrom="{{$asset->purchase_from}}"
 											 data-manufacturer="{{$asset->manufacturer}}"
 											 data-model="{{$asset->model}}" data-sn="{{$asset->serial_number}}" data-supplier="{{$asset->supplier}}" data-condition="{{$asset->condition}}" data-warranty="{{$asset->warranty}}" data-value="{{$asset->value}}"
 											 data-status="{{$asset->status}}" data-description="{{$asset->description}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -66,7 +68,7 @@
 								</div>
 							</td>
 						</tr>
-					@endforeach					
+					@endforeach
 				</tbody>
 			</table>
 		</div>
@@ -92,7 +94,7 @@
 								<input class="form-control" name="name" type="text">
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="row">
 						<div class="col-md-6">
@@ -305,6 +307,8 @@
 	<!-- Datatable JS -->
 	<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
+
 	<script>
 		$(document).ready(function(){
 			$('.table').on('click','.editbtn',function(){

@@ -83,9 +83,40 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'department'=>'required',
+            'location'=>'required',
+            'vacancies'=>'required',
+            'experience'=>'required',
+            'age'=>'nullable',
+            'salary_from'=>'nullable',
+            'salary_to'=>'nullable',
+            'type'=>'required',
+            'status'=>'required',
+            'start_date'=>'required',
+            'expire_date'=>'required',
+            'description'=>'required',
+        ]);
+        $job = Job::findOrFail($request->id);
+        $job->update([
+            'title' => $request->title ?? $job->title,
+            'department_id' => $request->department ?? $job->department_id,
+            'location' => $request->location ?? $job->location,
+            'vacancies' => $request->vacancies ?? $job->vacancies,
+            'experience' => $request->experience ?? $job->experience,
+            'age' => $request->age ?? $job->age,
+            'salary_from' => $request->salary_from ?? $job->salary_from,
+            'salary_to' => $request->salary_to ?? $job->salary_to,
+            'type' => $request->type ?? $job->type,
+            'status' => $request->status ?? $job->status,
+            'start_date' => $request->start_date ?? $job->start_date,
+            'expire_date' => $request->expire_date ?? $job->expire_date,
+            'description' => $request->description ?? $job->description,
+        ]);
+        return back()->with('success',"Job has been updated successfully!!");
     }
 
     /**
@@ -94,8 +125,9 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Job::findOrFail($request->id)->delete();
+        return back()->with('success',"Job has been deleted successfully!!");
     }
 }

@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -73,7 +73,7 @@
 							<label for="contact_status" class="checktoggle">checkbox</label>
 						</div>
 					</div>
-					
+
 					<div class="submit-section">
 						<button type="submit" class="btn btn-primary submit-btn">Submit</button>
 					</div>
@@ -83,8 +83,8 @@
 	</div>
 </div>
 <!-- /Add Contact Modal -->
-   
-<x-modals.delete :route="'contact.destroy'"  :title="'contact'"  /> 
+
+<x-modals.delete :route="'contact.destroy'"  :title="'contact'"  />
 <!-- Edit Contact Modal -->
 <div class="modal custom-modal fade" id="edit_contact" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -127,7 +127,7 @@
         </div>
     </div>
 </div>
-<!-- /Edit Contact Modal -->  
+<!-- /Edit Contact Modal -->
 @endsection
 
 @section('scripts')

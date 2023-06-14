@@ -1,9 +1,11 @@
 @extends('layouts.backend')
 
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
+
 @endsection
 
 
@@ -62,12 +64,12 @@
 										<div class="progress-bar bg-primary progress-sm" style="width: {{$goal->progress}}%;height:10px;"></div>
 									</div>
 								</td>
-								
+
 								<td class="text-right">
 									<div class="dropdown dropdown-action">
 										<a href="javascript:void(0)" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 										<div class="dropdown-menu dropdown-menu-right">
-											<a data-id="{{$goal->id}}" data-subject="{{$goal->subject}}" data-type="{{$goal->goal_type->id}}" 
+											<a data-id="{{$goal->id}}" data-subject="{{$goal->subject}}" data-type="{{$goal->goal_type->id}}"
 												data-target="{{$goal->target}}" data-start="{{$goal->start_date}}"
 												 data-end="{{$goal->end_date}}" data-status="{{$goal->status}}"
 												  data-progress="{{$goal->progress}}" data-description="{{$goal->description}}" class="dropdown-item editbtn" href="javascript:void(0)" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -76,7 +78,7 @@
 									</div>
 								</td>
 							</tr>
-						@endif						
+						@endif
 					@endforeach
 				</tbody>
 			</table>
@@ -120,7 +122,7 @@
 								<input name="target" class="form-control" type="text">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Start Date <span class="text-danger">*</span></label>
@@ -133,7 +135,7 @@
 								<div class="cal-icon"><input name="end_date" class="form-control datetimepicker" type="text"></div>
 							</div>
 						</div>
-						
+
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>Description <span class="text-danger">*</span></label>
@@ -198,7 +200,7 @@
 								<input class="form-control edit_target" name="target" type="text">
 							</div>
 						</div>
-						
+
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Start Date <span class="text-danger">*</span></label>
@@ -252,6 +254,7 @@
 	<!-- Datatable JS -->
 	<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function(){
 			$('.table').on('click','.editbtn',function(){
@@ -278,9 +281,9 @@
 				$('#edit_status').val(status).change();
 				$('.edit_description').val(description);
 				$('#customRange').val(progress);
-				
+
 			});
-			
+
 			// Read value on change
 			$("#customRange").change(function(){
 				$("#result b").html($(this).val());
