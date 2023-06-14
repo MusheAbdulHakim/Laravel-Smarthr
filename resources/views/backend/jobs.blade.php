@@ -3,6 +3,7 @@
 @section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
 @endsection
 
 
@@ -43,7 +44,7 @@
 						<td><a target="_blank" href="{{route('job-view',$job)}}">{{$job->title}}</a></td>
 						<td>{{$job->department->name ?? ''}}</td>
 						<td>{{date_format(date_create($job->start_date),"d M, Y")}}</td>
-						<td>{{date_format(date_create($job->end_date),"d M, Y")}}</td>
+						<td>{{date_format(date_create($job->expire_date),"d M, Y")}}</td>
 						<td class="text-center">
 							{{$job->type}}
 						</td>
@@ -54,7 +55,20 @@
 							<div class="dropdown dropdown-action">
 								<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 								<div class="dropdown-menu dropdown-menu-right">
-									<a data-title="{{$job->title}}" data-department="{{$job->department->id}}" data-startDate="{{$job->start_date}}" data-expiryDate="{{$job->end_date}}" data-type="{{$job->type}}" href="javscript:void(0)" class="dropdown-item editbtn" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+									<a  data-id="{{$job->id}}"
+                                        data-title="{{$job->title}}"
+                                        data-department="{{$job->department->id}}"
+                                        data-startdate="{{$job->start_date}}"
+                                        data-expirydate="{{$job->expire_date}}"
+                                        data-experience="{{$job->experience}}"
+                                        data-type="{{$job->type}}"
+                                        data-description="{{$job->description}}"
+                                        data-age="{{$job->age}}"
+                                        data-salaryfrom="{{$job->salary_from}}"
+                                        data-salaryto="{{$job->salary_to}}"
+                                        data-vacancies="{{$job->vacancies}}"
+                                        data-location="{{$job->location}}"
+                                        data-status="{{$job->status}}" href="javscript:void(0)" class="dropdown-item editbtn" data-toggle="modal"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 									<a data-id="{{$job->id}}" href="javascript:void(0)" class="dropdown-item deletebtn" data-toggle="modal"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 								</div>
 							</div>
@@ -185,7 +199,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Description</label>
-								<textarea id="my-editor" name="description" class="form-control">{!! old('description', '') !!}</textarea>
+								<textarea id="description" name="description" class="form-control">{!! old('description', '') !!}</textarea>
 							</div>
 						</div>
 					</div>
@@ -319,7 +333,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Description</label>
-								<textarea class="form-control edit_description" name="description"></textarea>
+								<textarea id="e_description" class="form-control edit_description" name="description"></textarea>
 							</div>
 						</div>
 					</div>
@@ -340,41 +354,47 @@
 	<!-- Datatable JS -->
 	<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
-	<script>
-	var options = {
-		filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-		filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-		filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-		filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
-	};
-	CKEDITOR.replace('my-editor', options);
-	</script>
-	<script>
-
-	</script>
+    <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function (){
+            var options = {
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+            };
+            CKEDITOR.replace('description', options);
+            var editDesc = CKEDITOR.replace('e_description', options);
 			$('.datatable').on('click','.editbtn',function (){
 				$('#edit_job').modal('show');
 				var id = $(this).data('id');
 				var title = $(this).data('title');
 				var department = $(this).data('department');
-				var startDate = $(this).data('startDate');
-				var endDate = $(this).data('endDate');
+				var startDate = $(this).data('startdate');
+				var expiryDate = $(this).data('expirydate');
 				var experience = $(this).data('experience');
 				var status = $(this).data('status');
 				var type = $(this).data('type');
+                var age = $(this).data('age');
+                var salary_from = $(this).data('salaryfrom');
+                var salary_to = $(this).data('salaryto');
+                var vacancies = $(this).data('vacancies');
+                var location = $(this).data('location');
 				var description = $(this).data('description');
-
-				$('#edit_it').val(id);
-				$('.edit_title').val(title);
-				$('.edit_department').val(department);
-				$('.edit_start_date').val(startDate);
-				$('.edit_expire_date').val(expiryDate);
-				$('.edit_status').val(status);
-				$('.edit_type').val(type);
-				$('.edit_description').val(description);
-
+				$('#edit_id').val(id);
+				$('#edit_job .edit_title').val(title);
+				$('#edit_job .edit_department').val(department).trigger('change');
+                $('#edit_job .edit_start_date').data("DateTimePicker").date(startDate);
+				$('#edit_job .edit_expire_date').data("DateTimePicker").date(expiryDate);
+                $('#edit_job .edit_experience').val(experience);
+                $('#edit_job .edit_age').val(age);
+                $('#edit_job .edit_salary_from').val(salary_from);
+                $('#edit_job .edit_salary_to').val(salary_to);
+                $('#edit_job .edit_vacancies').val(vacancies);
+                $('#edit_job .edit_location').val(location);
+				$('#edit_job .edit_status').val(status).trigger('change');
+				$('#edit_job .edit_type').val(type).trigger('change');
+                editDesc.setData(description)
 			});
 		})
 	</script>

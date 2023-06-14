@@ -64,12 +64,12 @@ Route::post('apply',[JobApplicationController::class,'store'])->name('apply-job'
 
 
 Route::group(['middleware'=>['auth']], function (){
-    
+
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::post('logout',[LogoutController::class,'index'])->name('logout');
 
     //apps routes
-    
+
     Route::get('contacts',[ContactController::class,'index'])->name('contacts');
     Route::post('contacts',[ContactController::class,'store']);
     Route::put('contacts',[ContactController::class,'update']);
@@ -93,7 +93,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('designations',[DesignationController::class,'store']);
     Route::delete('designations',[DesignationController::class,'destroy'])->name('designation.destroy');
 
-    // settings routes 
+    // settings routes
     Route::get('settings/theme',[SettingsController::class,'index'])->name('settings.theme');
     Route::post('settings/theme',[SettingsController::class,'updateTheme']);
     Route::get('settings/company',[SettingsController::class,'company'])->name('settings.company');
@@ -167,7 +167,7 @@ Route::group(['middleware'=>['auth']], function (){
     Route::delete('projects',[ProjectController::class,'destroy']);
     Route::get('project-list',[ProjectController::class,'list'])->name('project-list');
     Route::get('leads',[ProjectController::class,'leads'])->name('leads');
-    
+
     Route::get('employee-leave',[EmployeeLeaveController::class,'index'])->name('employee-leave');
     Route::post('employee-leave',[EmployeeLeaveController::class,'store']);
     Route::put('employee-leave',[EmployeeLeaveController::class,'update']);
@@ -175,6 +175,8 @@ Route::group(['middleware'=>['auth']], function (){
 
     Route::get('jobs',[BackendJobController::class,'index'])->name('jobs');
     Route::post('jobs',[BackendJobController::class,'store']);
+    Route::put('jobs', [BackendJobController::class, 'update']);
+    Route::delete('jobs', [BackendJobController::class, 'destroy'])->name('jobs.destroy');
     Route::get('job-applicants',[BackendJobController::class,'applicants'])->name('job-applicants');
     Route::post('download-cv',[BackendJobController::class,'downloadCv'])->name('download-cv');
 
