@@ -12,7 +12,7 @@
                 <li class="submenu">
                     <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        
+
                         <li><a class="{{ route_is('contacts') ? 'active' : '' }}" href="{{route('contacts')}}">Contacts</a></li>
                     </ul>
                 </li>
@@ -32,7 +32,7 @@
                         <li><a class="{{ route_is('overtime') ? 'active' : '' }}" href="{{route('overtime')}}">Overtime</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="{{ route_is('clients') ? 'active' : '' }}">
                     <a href="{{route('clients')}}"><i class="la la-users"></i> <span>Clients</span></a>
                 </li>
@@ -45,16 +45,16 @@
                         </li>
                     </ul>
                 </li>
-                
-                <li class="{{route_is('leads') ? 'active' : '' }}"> 
+
+                <li class="{{route_is('leads') ? 'active' : '' }}">
                     <a href="{{route('leads')}}"><i class="la la-user-secret"></i> <span>Leads</span></a>
                 </li>
 
-                <li class="{{route_is('tickets') ? 'active' : '' }}"> 
+                <li class="{{route_is('tickets') ? 'active' : '' }}">
                     <a href="{{route('tickets')}}"><i class="la la-ticket"></i> <span>Tickets</span></a>
                 </li>
 
-                <li class="menu-title"> 
+                <li class="menu-title">
                     <span>HR</span>
                 </li>
                 <li class="submenu">
@@ -66,11 +66,11 @@
                         <li><a class="{{ route_is('taxes') ? 'active' : '' }}" href="{{route('taxes')}}">Taxes</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="{{ route_is('policies') ? 'active' : '' }}">
                     <a href="{{route('policies')}}"><i class="la la-file-pdf-o"></i> <span>Policies</span></a>
                 </li>
-                
+
                 <li class="submenu">
                     <a href="#"><i class="la la-briefcase"></i> <span> Jobs </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
@@ -85,16 +85,16 @@
                         <li><a class="{{ route_is('goal-type') ? 'active' : '' }}" href="{{route('goal-type')}}"> Goal Type </a></li>
                     </ul>
                 </li>
-                <li class="{{ route_is('assets') ? 'active' : '' }}"> 
+                <li class="{{ route_is('assets') ? 'active' : '' }}">
                     <a href="{{route('assets')}}"><i class="la la-object-ungroup"></i> <span>Assets</span></a>
                 </li>
-                {{-- <li>
+                <li>
                     <a class="{{ route_is('activity') ? 'active' : '' }}" href="{{route('activity')}}"><i class="la la-bell"></i> <span>Activities</span></a>
-                </li> --}}
+                </li>
                 <li class="{{ route_is('users') ? 'active' : '' }}">
                     <a href="{{route('users')}}"><i class="la la-user-plus"></i> <span>Users</span></a>
                 </li>
-              
+
                 <li>
                     <a class="{{ route_is('settings.theme') ? 'active' : '' }}" href="{{route('settings.theme')}}"><i class="la la-cog"></i> <span>Settings</span></a>
                 </li>
@@ -103,7 +103,7 @@
                         ><i class="la la-cloud-upload"></i> <span>Backups </span>
                     </a>
                 </li>
-                
+
             </ul>
         </div>
     </div>
