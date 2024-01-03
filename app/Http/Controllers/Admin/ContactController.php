@@ -22,6 +22,9 @@ class ContactController extends Controller
             $contacts =Contact::get();
             return DataTables::of($contacts)
                     ->addIndexColumn()
+                    ->addColumn('phone', function($row){
+                        return $row->number ?? '';
+                    })
                     ->addColumn('action',function($row){
                         $openDiv = '<div class="dropdown dropdown-action">
                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -50,7 +53,7 @@ class ContactController extends Controller
             'email'=>'nullable|email',
             'number'=>'required|max:20',
         ]);
-        
+
         Contact::create([
             'name'=>$request->name,
             'email'=>$request->email,
