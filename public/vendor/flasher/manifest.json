@@ -1,4 +1,8 @@
 {
     "/vendor/flasher/flasher.min.css": "/vendor/flasher/flasher.min.css?id=edd6a85a799ab17530dea278ab8f4337",
-    "/vendor/flasher/flasher.min.js": "/vendor/flasher/flasher.min.js?id=f710e711ba04506eb4d82fa27cd5ec3d"
+    "/vendor/flasher/flasher.min.js": "/vendor/flasher/flasher.min.js?id=f710e711ba04506eb4d82fa27cd5ec3d",
+    "/vendor/flasher/flasher-toastr.min.js": "/vendor/flasher/flasher-toastr.min.js?id=e0d38991a82d544068555ff7c2a2339b",
+    "/vendor/flasher/jquery.min.js": "/vendor/flasher/jquery.min.js?id=2c872dbe60f4ba70fb85356113d8b35e",
+    "/vendor/flasher/toastr.min.css": "/vendor/flasher/toastr.min.css?id=f284028c678041d687c6f1be6968f68a",
+    "/vendor/flasher/toastr.min.js": "/vendor/flasher/toastr.min.js?id=8ee1218b09fb02d43fcf0b84e30637ad"
 }
