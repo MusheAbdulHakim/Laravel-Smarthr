@@ -3,14 +3,17 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use App\Enums\UserType;
+use Spatie\Menu\Laravel\Html;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\SearchPane;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UsersDataTable extends DataTable
 {
@@ -22,10 +25,24 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->filter(function ($query) {
+                if (request()->has('name')) {
+                    $name = request('fullname');
+                    $query->where(['firstname','middlename','lastname'], 'like', "%" . $name . "%");
+                }
+                if (request()->has('email')) {
+                    $query->where('email', 'like', "%" . request('email') . "%");
+                }
+                if (request()->has('username')) {
+                    $query->where('username', 'like', "%" . request('username') . "%");
+                }
+            })
+
             ->setRowId('id')
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                return $row->fullname;
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('assets/img/user.jpg');
+                return Html::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
@@ -40,7 +57,7 @@ class UsersDataTable extends DataTable
                 return view('pages.users.action', compact(
                     'id'
                 ));
-            });
+            })->rawColumns(['fullname']);
     }
 
     /**
@@ -48,7 +65,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('type',UserType::SUPERADMIN)->newQuery();
     }
 
     /**
@@ -59,9 +76,10 @@ class UsersDataTable extends DataTable
         return $this->builder()
             ->setTableId('users-table')
             ->columns($this->getColumns())
-            // ->dom('')
+            ->parameters([
+                'dom'          => 'Bftip',
+            ])
             ->minifiedAjax()
-            ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -79,11 +97,12 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')->title('#'),
             Column::make('fullname'),
-            Column::make('username'),
-            Column::make('email'),
-            Column::make('phone'),
-            Column::make('created_at'),
+            Column::make('username')->searchable(),
+            Column::make('email')->searchable(),
+            Column::make('phone')->searchable(),
+            Column::make('created_at')->searchable(),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
