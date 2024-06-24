@@ -6,7 +6,7 @@ namespace Flasher\Laravel\Resources;
 
 return [
     // Default notification library (e.g., 'flasher', 'toastr', 'noty', etc.)
-    'default' => 'flasher',
+    'default' => 'toastr',
 
     // Path to the main JavaScript file of PHPFlasher
     'main_script' => '/vendor/flasher/flasher.min.js',
