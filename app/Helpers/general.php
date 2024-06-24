@@ -74,14 +74,17 @@ function random_str(
 
 if (!function_exists('format_date')) {
     /**
-     * Format Date
+     * Custom Date Formatter
      *
      * @param string|date $date
      * @param string $format
      * @return void
      */
-    function format_date($date, $format = 'Y-m-d')
+    function format_date($date, $format = '')
     {
+        if($format === ''){
+            $format = LocaleSettings('date_format') ?? 'Y-m-d';
+        }
         return date_format(date_create($date), $format);
     }
 }
@@ -96,6 +99,10 @@ if (!function_exists('renderAppMenu')) {
     }
 }
 
+/**
+ * Get App Settings by providing the Settings Class
+ */
+
 if (!function_exists('getSetting')) {
     function getSetting($class)
     {
@@ -103,7 +110,9 @@ if (!function_exists('getSetting')) {
     }
 }
 
-
+/**
+ * Get App Theme Settings
+ */
 if (!function_exists('Theme')) {
     function Theme($property = null)
     {
@@ -111,6 +120,10 @@ if (!function_exists('Theme')) {
     }
 }
 
+
+/**
+ * Get App Locale Settings
+ */
 if (!function_exists('LocaleSettings')) {
     function LocaleSettings($property = null)
     {
@@ -133,4 +146,9 @@ if (!function_exists('renderAppSettingsMenu')) {
         event(new AppSettingsMenuEvent($appMenu));
         return $appMenu->settingsMenu->render();
     }
+}
+
+
+function pad_zeros($number, $total_zeros){
+    return sprintf("%0{$total_zeros}d", $number);
 }

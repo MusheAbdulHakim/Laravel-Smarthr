@@ -13,6 +13,16 @@
     <!-- /Sidebar -->
     <!-- Page Wrapper -->
     <div class="page-wrapper">
+        <div id="loader-wrapper">
+            <div id="loader">
+              <div class="loader-ellips">
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+              </div>
+            </div>
+          </div>
         <!-- Page Content -->
         @yield('page-content')
         <!-- /Page Content -->

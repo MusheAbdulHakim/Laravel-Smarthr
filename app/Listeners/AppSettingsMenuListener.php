@@ -25,7 +25,7 @@ class AppSettingsMenuListener
         $menu = $event->menu;
         $menu
             ->add(
-                Link::toRoute('dashboard', '<i class="la la-home"></i> <span>' . __("Back to Home") . '</span>')->setActive(route_is('dashboard'))
+                Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span>' . __("Back to Dashboard") . '</span>')->setActive(route_is('dashboard'))
             )->add(
                 Link::toRoute('settings.index', '<i class="la la-building"></i> <span>' . ("Company Settings") . '</span>')->setActive(route_is('settings.index'))
             )

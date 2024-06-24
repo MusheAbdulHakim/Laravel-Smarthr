@@ -39,22 +39,22 @@ class AppMenuListener
                         Link::to('apps/chatify', 'Chat')->addClass(route_is(['apps/chatify']) ? 'active' : '')
                     )->addParentClass('submenu')
             );
+        $activeClass = route_is(['departments.index','designations.index']) ? "active" : "";
+        $menu
+            ->submenu(
+                Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
+                Menu::new()
+                    ->addParentClass('submenu')
+                    ->add(Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
+                    ->add(Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
+            );
         $menu->add(
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))
         );
         $menu->add(
             Link::toRoute('settings.index', '<i class="la la-cog"></i> <span>' . __('Settings') . '</span>')->setActive(route_is('settings.index'))
         );
-        // $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
-        // $menu
-        //     ->submenu(
-        //         Html::raw('<a href="javascript:void(0)" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span>
-        //         <span class="menu-arrow"></span></a>')
-        //             ->addParentClass('submenu'),
-        //         Menu::new()
-        //             ->addClass('submenu')
-        //             ->link('/about', 'About')
-        //             ->link('/contact', 'Contact')
-        //     );
+        $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
+
     }
 }

@@ -2,7 +2,17 @@ import "./bootstrap";
 import "jquery-ujs";
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
+import jszip from 'jszip';
+import pdfmake from 'pdfmake';
+import DataTable from "datatables.net-bs5";
+import 'datatables.net-buttons-bs5';
+import 'datatables.net-buttons/js/buttons.colVis.mjs';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-buttons/js/buttons.print.mjs';
+import 'datatables.net-colreorder-bs5';
 
+
+window.DataTable = DataTable;
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
 
@@ -20,7 +30,13 @@ $(document).on("click", ".deleteBtn", function () {
     }
 });
 
+$(document).on('ajax:before', function(){
+    $('#loader-wrapper').addClass('d-block')
+    return true;
+})
+
 $(document).on("ajax:success", function (e, data) {
+    $('#loader-wrapper').removeClass('d-block')
     let title = $(e.target).data("title");
     let style = $(e.target).data("style");
     let size = $(e.target).data("size");
