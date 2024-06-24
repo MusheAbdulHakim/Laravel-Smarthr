@@ -1,0 +1,215 @@
+.profile-view {
+    position: $__relative;
+    .profile-img-wrap {
+        height: 120px;
+        width: 120px;
+        position: $__absolute;
+        @include respond-below(custom575) {
+            position: $__relative;
+            margin: 0 $__auto;
+        }
+        img {
+           @include rounded(50%);
+            height: 120px;
+            width: 120px;
+        }
+    }
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+    .profile-basic {
+        margin-left: 140px;
+        padding-right: 50px;
+        @include respond-below(custom575) {
+            margin-left: 0;
+            padding-right: 0;
+        }
+        .profile-info-left {
+            border-right: 2px dashed $__goose-gray;
+            @include respond-below(custom575) {
+                text-align: $__center;
+                @include margin-padding(null,15px 0);
+            }
+            @include respond-below(custom768) {
+                border-right: $__none;
+                border-bottom: 2px dashed $__goose-gray;
+                @include margin-padding(0 0 20px, 0 0 20px);
+            }
+            .user-name {
+                color: $__gray;
+            }
+            .staff-id {
+                font-size: $__font__size__14;
+                font-weight: $__medium;
+                margin-top: 5px;
+            }
+            .staff-msg {
+                margin-top: 30px;
+                .btn-custom {
+                    background: $__primarycolor;
+                    background: linear-gradient(to right, $__primarycolor 0%, $__light__chilli__pepper 100%);
+                    color: $__white;
+                    &:hover {
+                        border-color: $__primarycolor;
+                    }
+                }
+            }
+        }
+    }
+    .pro-edit {
+        @include position($__absolute,0,0,null,null);
+    }
+}
+.profile-action{
+    .dropdown-toggle{
+        &:after{
+            display: $__none;
+        }
+    }
+}
+.edit-icon {
+    background-color: $__cloud__gray;
+    border: 1px solid $__metallic-silver;
+    color: $__metalic__gray;
+    float: $__right;
+    font-size: $__font__size__12;
+    line-height: 24px;
+    min-height: 26px;
+    text-align: $__center;
+    width: 26px;
+    @include rounded(24px);
+}
+.personal-info {
+    @extend %ul_reset;
+    li {
+        @extend %display-flex;
+        @include respond-below(custom991) {
+            width:100%;
+        }
+        margin-bottom: 10px;
+        .title {
+            color: $__gray;
+            float: $__left;
+            font-weight: $__medium;
+            width: 30%;
+            @include respond-below(custom575) {
+                width: $__half__width;
+                margin: 0;
+            }
+        }
+        .text {
+            color: $__dark__gray;
+            display: $__block;
+            overflow: $__hidden;
+            width: 70%;
+            float:left;
+            .avatar-box {
+                float: $__left;
+                position: $__relative;
+                .avatar-xs {
+                    line-height: normal;
+                }
+            }
+        }
+    }
+}
+.delete-icon {
+    color: $__fire__red;
+    float: $__right;
+    font-size: $__font__size__18;
+}
+.experience-box {
+    position: $__relative;
+    .experience-list {
+        @extend %ul_reset;
+        position: $__relative;
+        &::before {
+            background: $__light__goose;
+            bottom: 0;
+            content: "";
+            width: 2px;
+            @include position($__absolute,8px,null,null,8px);
+        }
+        li {
+            position: $__relative;
+            .experience-user {
+                background: $__white;
+                height: 10px;
+                width: 10px;
+                @include margin-padding(0, 0);
+                @include position($__absolute,4px,null,null,4px);
+                .before-circle {
+                    background-color: $__light__goose;
+                   @include rounded(50%);
+                    height: 10px;
+                    width: 10px;
+                }
+            }
+            .experience-content {
+                background-color: $__white;
+                @include margin-padding(0 0 20px 40px, 0);
+                position: $__relative;
+                .timeline-content {
+                    color: $__light__battle__garys;
+                    a.name {
+                        color: $__taupe__black;
+                        font-weight: $__bold;
+                    }
+                }
+                .time {
+                    color: $__sandstone;
+                    display: $__block;
+                    font-size: $__font__size__12;
+                    line-height: 1.35;
+                }
+            }
+        }
+    }
+}
+.submit-btn {
+    font-size: $__font__size__18;
+    font-weight: $__semibold;
+    min-width: 200px;
+    @include margin-padding(null, 10px 20px);
+    @include rounded(50px);
+}
+.profile-img-wrap {
+    height: 120px;
+    position: $__absolute;
+    width: 120px;
+    background: $__white;
+    overflow: $__hidden;
+    @include respond-below(custom575) {
+        position: $__relative;
+        @include margin-padding(0 auto, null);
+    }
+    &.edit-img {
+       @include rounded(50%);
+        margin: 0 auto 30px;
+        position: $__relative;
+    }
+    img {
+       @include rounded(50%);
+        height: 120px;
+        width: 120px;
+    }
+    .fileupload {
+        background: rgba(33, 33, 33, 0.5);
+        border: $__none;
+        @include margin-padding(null, 3px 10px);
+        @include rounded(0);
+        @include position($__absolute,null,0,0,0);
+        .btn-text {
+            color: $__white;
+        }
+        .upload {
+            cursor: $__pointer;
+            filter: alpha(opacity=0);
+            font-size: $__font__size__20;
+            opacity: 0;
+            @include margin-padding(0, 5px);
+            @include position($__absolute,-3px,-3px,null,null);
+        }
+    }
+}

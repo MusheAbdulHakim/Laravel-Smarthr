@@ -1,0 +1,32 @@
+@extends('layouts.app')
+
+@push('page-styles')
+    <!-- Page Css -->
+    <!-- /Page Css -->
+@endpush
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <x-breadcrumb>
+        <x-slot name="title">{!! config('$LOWER_NAME$.name') !!}</x-slot>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="#">{!! config('$LOWER_NAME$.name') !!}</a>
+            </li>
+        </ul>
+    </x-breadcrumb>
+    <!-- /Page Header -->
+
+    <h5>{!! config('$LOWER_NAME$.name') !!}</h5>
+</div>
+@endsection
+
+
+@push('page-scripts')
+<!-- Page Js -->
+<!-- /Page Js -->
+@endpush

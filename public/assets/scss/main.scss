@@ -1,0 +1,52 @@
+/****** UTILS ******/
+@import "utils/variables";
+@import "utils/mixins";
+
+/******* BASE *******/
+@import "base/typography";
+@import "base/colors"; 
+@import "base/base";
+@import "base/grid";
+
+/******* COMPONENTS ******/
+@import "components/button";
+
+/****** LAYOUT ******/
+@import "layout/avatar";
+@import "layout/bootstrap-classes";
+@import "layout/breadcrumb";
+@import "layout/content";
+@import "layout/footer";
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/select2";
+@import "layout/nav-tab";
+@import "layout/popup";
+@import "layout/table";
+@import "layout/theme-settings";
+
+/****** PAGES ******/
+@import "pages/activites";
+@import "pages/assets";
+@import "pages/attendance";
+@import "pages/chat";
+@import "pages/call";
+@import "pages/calendar";
+@import "pages/contact";
+@import "pages/components";
+@import "pages/email";
+@import "pages/error";
+@import "pages/dashboard";
+@import "pages/filemanager";
+@import "pages/login";
+@import "pages/loader";
+@import "pages/faq";
+@import "pages/employee";
+@import "pages/project";
+@import "pages/task";
+@import "pages/page";
+@import "pages/profile";
+@import "pages/payroll";
+@import "pages/knowledge";
+@import "pages/subscriptions";
+@import "pages/notification";

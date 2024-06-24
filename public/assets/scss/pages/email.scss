@@ -1,0 +1,70 @@
+.mailview-header {
+    border-bottom: 1px solid $__light__goose;
+    @include margin-padding(0 0 20px, 0 0 15px);
+    .mail-view-title {
+        font-weight:$__medium;
+        font-size: $__font__size__24;
+    }
+    .mail-view-action {
+        float: $__right;
+    }
+    .clearfix {
+        margin-top: 10px;
+    }
+}
+.sender-info{
+    .sender-img {
+        float: $__left;
+        margin-right: 10px;
+        width: 40px;
+    }
+    .sender-name {
+        display: $__block;
+    }
+    .mail-sent-time {
+        float: $__right;
+    }
+}
+.attachments {
+    @extend %ul_reset;
+    li {
+        border: 1px solid $__cloud__gray;
+        float: $__left;
+        width: 200px;
+        @include margin-padding(0 0 10px 10px, null);
+        .attach-file {
+            color: $__dark__battle__gary;
+            font-size: $__font__size__70;
+            text-align: $__center;
+            min-height: 153px;
+            @include margin-padding(null, 10px);
+            i {
+                line-height: 133px;
+            }
+        }
+        .attach-info {
+            background-color: $__alicegray;
+            @include margin-padding(null, 10px);
+            .attach-filename {
+                color: $__dark__battle__gary;
+                font-weight: $__bold;
+            }
+        }
+    }
+}
+.mailview-footer {
+    border-top: 1px solid $__light__goose;
+    @include margin-padding(20px 0 0, 15px 0 0);
+    @include respond-below(custom575) {
+        .left-action {
+            text-align: $__center;
+            margin-bottom: 15px;
+        }
+    }
+    .right-action {
+        text-align: $__right;
+        @include respond-below(custom575) {
+            text-align: $__center;
+        }
+    }
+}

@@ -1,0 +1,188 @@
+.apply-btn {
+    background: #00c5fb;
+    background: linear-gradient(to right, #ff9b44 0%, #fc6075 100%);
+    border-color: transparent;
+    box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
+    color: #fff;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.btn:hover {
+    border-color: #cccccc;
+}
+.form-control:focus {
+    border-color: #ff9b44;
+    box-shadow: $__none;
+}
+.btn:first-child:active, :not(.btn-check)+.btn:active {
+    border-color: #cccccc;
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    border-color: #cccccc;
+}
+.input-group>.form-control:focus, .input-group>.form-floating:focus-within, .input-group>.form-select:focus {
+    z-index: 3;
+}
+.page-item.disabled .page-link {
+    background-color: $__white;
+}
+.personal-info li .text .avatar-box {
+    position: relative;
+    top: 0;
+}
+.chat-footer .message-bar .message-area .btn:hover {
+    border-color: $__transparent;
+}
+.chat-footer .message-bar .message-area .btn i {
+    color: $__white;
+}
+.btn.btn-assign:hover,.btn.btn-assign:active {
+    border-color: #ff9b44;
+}
+.btn.btn-assign:active {
+    background-color: #ff9b44;
+}
+[data-layout-mode="orange"] .top-nav-search .form-control::-moz-placeholder {
+    color: $__cloud__gray !important;
+}
+.btn.add-btn:active {
+    background: $__primarycolor;
+    color: $__white
+}
+.header .has-arrow .dropdown-toggle.job-view-flag:after {
+    border-bottom: 2px solid $__gray;
+    border-right: 2px solid $__gray;
+}
+.top-nav-search .form-control.job-view-search::-moz-placeholder {
+    color: $__gray !important;
+}
+[data-layout-mode="light"] .top-nav-search .form-control::-moz-placeholder {
+    color: $__gray !important;
+}
+table {
+    td {
+        a {
+            &.download-offer {
+                // color: $__white;
+                &:hover {
+                    color: $__white;
+                }
+            }
+        }
+        .dropdown {
+            &.action-label {
+                a {
+                    &.btn-rounded {
+                        &.dropdown-toggle {
+                            display: $__inline__flex;
+                            align-items:$__center;
+                            gap: 5px;
+                            &::after {
+                                margin-left: 0;
+                            }
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
+.comp-section {
+    .card-title {
+        margin-bottom: 0.5rem;
+    }
+    .pagination {
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+}
+.setting-pref-btn {
+    height:44px;
+    font-size: 16px;
+    padding:10px 15px;
+}
+.offcanvas-footer {
+    button {
+        &.btn-light {
+            &:hover {
+                color: #000;
+                background-color: #f9fafb;
+            }
+        }
+    }
+}
+.files-cont {
+    .files-action {
+        .dropdown-action {
+            a {
+                &:hover {
+                    border-color:$__transparent;
+                }
+            }
+        }
+    }
+}
+.form-check-input:focus {
+    box-shadow: $__none;
+    border-color: #dee2e6;
+}
+.custom_check {
+    display: inline-block;
+    position: relative;
+    font-size: 14px !important;
+    margin-bottom: 15px;
+    padding-left: 0;
+    cursor: pointer;
+    font-weight: 400 !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 18px;
+}
+.custom_check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.custom_check input:checked ~ .checkmark {
+    background-color: #ff9b44;
+    border-color: #ff9b44;
+}
+.custom_check .checkmark {
+    position: absolute;
+    top: 3px;
+    left: -6px;
+    height: 18px;
+    width: 18px;
+    border: 1px solid #E4E4E8;
+    background-color: #fff;
+    border-radius: 5px;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.custom_check input:checked ~ .checkmark:after {
+    display: block;
+}
+.custom_check .checkmark::after {
+    content: "\f00c";
+    font-family: 'fontawesome' !important;
+    font-weight: 900;
+    position: absolute;
+    display: none;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 11px;
+}
+.continue-btn:focus, .cancel-btn:focus {
+    color: $__white !important;
+}
+.btn-info.download-offer,.btn.btn-info {
+    color: $__white;
+}

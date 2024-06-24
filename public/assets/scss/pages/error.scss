@@ -1,0 +1,42 @@
+.error-page {
+    background-color: rgba(255, 155, 68, 0.2);
+    color: $__plum__black;
+    @extend %align-items-center;
+    @extend %display-flex;
+    .main-wrapper {
+        flex-wrap: $__wrap;
+        width: $__full__width;
+        height: $__full_height_window;
+        @extend %align-items-center;
+        @extend %justify-content-center;
+        @extend %display-flex;
+        .error-box {
+            max-width: 480px;
+            text-align: $__center;
+            width: $__full__width;
+            @include margin-padding(0 auto, 40px 0);
+            h1 {
+                color:$__primarycolor;
+                font-size: 10em;
+            }
+            p {
+                margin-bottom: 30px;
+            }
+            .btn-custom {
+                background: $__primarycolor;
+                background: linear-gradient(to $__right, $__primarycolor 0%, $__light__chilli__pepper 100%);
+                color: $__white;
+                &:hover {
+                    border-color: $__transparent;
+                }
+            }
+            .btn {
+                font-size: $__font__size__18;
+                font-weight: $__semibold;
+                min-width: 200px;
+                @include margin-padding(null, 10px 20px);
+                @include rounded(50px);
+            }
+        }
+    }
+}

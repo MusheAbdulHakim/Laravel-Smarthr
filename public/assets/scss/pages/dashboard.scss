@@ -1,0 +1,228 @@
+.dash-widget {
+    .card-body {
+        flex-flow: $__wrap;
+        @extend %display-flex;
+        .dash-widget-icon {
+            background-color:rgba(255, 155, 68, 0.2);
+            color: $__primarycolor;
+            font-size: $__font__size__30;
+            height: 60px;
+            line-height: 60px;
+            margin-right: 10px;
+            text-align: $__center;
+            width: 60px;
+            @include rounded(100%);
+            @extend %align-items-center;
+            @extend %display-flex;
+            @extend %justify-content-center;
+        }
+        .dash-widget-info {
+            text-align: $__right;
+            width: calc(100% - 70px);
+            @extend %jusflex-end;
+            @extend %flex-column;
+            @extend %display-flex;
+            h3 {
+                font-size: $__font__size__30;
+                font-weight: $__semibold;
+                margin-bottom: 8px;
+            }
+            span {
+                font-size: $__font__size__16;
+            }
+        }
+    }
+}
+.dash-statistics {
+    .stats-list {
+        height: $__auto;
+    }
+    .stats-info {
+        margin-bottom: 5px;
+        background-color: $__white;
+        border: 1px solid $__light__cloud;
+        text-align: $__center;
+        @include margin-padding(null, 15px);
+        @include rounded(4px);
+        p {
+            font-size: $__font__size__12;
+            margin-bottom: 5px;
+            @extend %display-flex;
+            @extend %justify-content-between;
+        }
+    }
+    .progress {
+        height: 4px;
+    }
+}
+.punch-status {
+    .stats-box {
+        margin-bottom: 0;
+    }
+}
+.stats-box {
+    background-color: $__platinum;
+    border: 1px solid $__metallic-silver;
+    @include margin-padding(0 0 15px, 5px);
+    p {
+        margin: 0;
+        font-size: $__font__size__12;
+    }
+}
+.leave-info-box {
+    border: 1px solid $__light__cloud;
+    @include margin-padding(0 0 15px, 15px);
+}
+.welcome-box {
+    background-color: $__white;
+    border-bottom: 1px solid $__light__clouds;
+    position: $__relative;
+    @include margin-padding(-30px -30px 30px, 20px);
+    @extend %display-flex;
+    .welcome-img {
+        margin-right: 15px;
+        img {
+            width: 60px;
+            @include rounded(8px);
+        }
+    }
+    .welcome-det {
+        h3 {
+            margin-bottom: 10px;
+        }
+        p{
+            color: $__dark__battle__gary;
+            font-size: $__font__size__18;
+            margin-bottom: 0;
+        }
+    }
+}
+.dash-section {
+    margin-bottom: 30px;
+    .dash-sec-title {
+        font-size: $__font__size__18;
+        font-weight: $__bold;
+        margin-bottom: 20px;
+        text-transform: $__uppercase;
+    }
+    .dash-info-list{
+        .dash-card {
+            background-color: $__white;
+            border: 1px solid $__mild___gray;
+            color: $__blackdark;
+            flex-grow: 1;
+            height: $__auto;
+            @extend %flex-column;
+            @extend %display-flex;
+            @include rounded(8px);
+            @include margin-padding(null, 15px);
+        }
+        .dash-card-container {
+            flex-direction: $__row;
+            flex-grow: 1;
+            @extend %display-flex;
+            .dash-card-icon {
+                flex-direction: $__row;
+                font-size: $__font__size__26;
+                padding-right: 15px;
+                @extend %align-items-center;
+                @extend %display-flex;
+                i {
+                    width: 30px;
+                }
+            }
+            .dash-card-content {
+                flex-direction: $__row;
+                @extend %align-items-center;
+                @extend %display-flex;
+                p {
+                    font-size: $__font__size__22;
+                    margin-bottom: 0;
+                    @include respond-below(custom768) {
+                        font-size: $__font__size__16;
+                    }
+                }
+            }
+            .dash-card-avatars {
+                flex-grow: 1;
+                @include margin-padding(null, 0 15px);
+                @extend %jusflex-end;
+                @extend %align-items-center;
+                @extend %display-flex;
+                .e-avatar {
+                    background-color: $__white;
+                    border: 3px solid $__sea__gray;
+                    height: 45px;
+                    position: $__relative;
+                    width: 45px;
+                    margin-left: -20px;
+                    @include rounded(50%);
+                    &:first-of-type {
+                        margin-left: 0 !important;
+                    }
+                    img{
+                        @include rounded(50%);
+                        width: $__full__width;
+                    }
+                }
+            }
+        }
+        + .dash-info-list {
+            margin-top: 15px;
+        }
+    }
+}
+.time-list {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    @extend %display-flex;
+    .dash-stats-list {
+        flex-flow: $__column $__wrap;
+        flex-grow: 1;
+        @include margin-padding(null, 0 15px);
+        @extend %align-items-center;
+        @extend %display-flex;
+        h4 {
+            color: $__plum__black;
+            font-size: $__font__size__21;
+            font-weight: $__bold;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        p {
+            color: $__dark__battle__gary;
+            font-size: $__font__size__13;
+            font-weight: $__semibold;
+            line-height: 1.5;
+            margin-bottom: 0;
+           text-transform: $__uppercase;
+        }
+        + .dash-stats-list {
+            border-left: 1px solid $__mild___gray;
+        }
+    }
+}
+.request-btn {
+    text-align: $__center;
+}
+.dash-sidebar{
+    h5 {
+        color: $__inherit;
+        font-size: $__font__size__13;
+        font-weight: $__bold;
+        line-height: 1.5;
+        margin-bottom: 15px;
+       text-transform: $__uppercase;
+    }
+}
+.load-more {
+    a {
+        background-color: $__white;
+        border: 1px solid $__mild___gray;
+        display: $__inline__block;
+        font-size: $__font__size__14;
+        @include margin-padding(null,  5px 15px);
+        @include box-shadow(null, 0, 1px, 2px, null, rgba(0, 0, 0, .05));
+        @include rounded(3px);
+    }
+}

@@ -1,0 +1,150 @@
+.contact-box {
+    display: $__inline__table;
+    height: $__full__height;
+    position: $__relative;
+    width: $__full__width;
+    @include margin-padding(null, 30px 15px);
+}
+.contact-list {
+    list-style: $__none;
+    width: 96%;
+    @include margin-padding(0, 0);
+    >  li {
+        background-color: $__white;
+        border-bottom: 1px solid $__mild___gray;
+        border-radius: $__inherit;
+        padding: 10px;
+        .contact-cont {
+            position: $__relative;
+            .user-img {
+                display: $__inline__block;
+                position: $__relative;
+                .status {
+                    background-color: $__default__blues;
+                    display: $__inline__block;
+                    border: 2px solid $__white;
+                    height: 10px;
+                    margin: 0;
+                    width: 10px; 
+                    @include rounded(50%);
+                    @include position($__absolute,null,0,0,null);
+                }               
+            }
+            .contact-info {
+                @include margin-padding(null, 0 30px 0 50px);
+                .text-ellipsis {
+                    display: $__block;
+                    max-width: $__full__width;
+                    overflow: $__hidden;
+                    text-overflow: $__ellipsis;
+                    white-space: $__nowrap;
+                }
+                .contact-date {
+                    color: $__dark__gray;
+                    font-size: $__font__size__12;
+                }
+            }
+            .contact-action {
+                height: 30px;
+                list-style: $__none;
+                padding-left: 0;
+                text-align: $__right;
+                width: 30px;
+                @include position($__absolute,10px,0,null,null);
+                .action-icon {
+                    color: $__dark__battle__gary;
+                    font-size: $__font__size__18;
+                    display: $__inline__block;
+                }
+            }
+        }
+    }
+}
+.bg-soft-dark{
+    background-color: rgba(64,81,137,.18) !important;
+}
+
+.bg-soft-light{
+    background-color: rgba(243,246,249,.18) !important;
+}
+.contact-alphapets {
+    background-color: $__white;
+    border-left: 1px solid $__light__goose;
+    height:$__full__height;
+    overflow: $__hidden;
+    padding-bottom: 114px;
+    width: 50px;
+    @include position($__fixed,114px,0,0,null);
+    .alphapets-inner {
+        height: $__full__height;
+        overflow: $__auto;
+        a {
+            display: $__block;
+            text-align: $__center;
+            @include margin-padding(null, 2px);
+            color: $__gray;
+        }
+    }
+}
+@include respond-below(custom991) {
+    .top-action-left{
+        .btn-group {
+            margin-bottom: 15px;
+        }
+    }
+}
+.bg-maroon{
+    background-color: #f43b48 !important;
+}
+.bg-blue{
+    background-color: #00c5fb !important;
+}
+.bg-orange{
+    background-color: #ff9b44 !important;
+}
+.card-radio .form-check-input {
+    display: none;
+}
+.form-check .form-check-input {
+    cursor: pointer;
+}
+.form-check-input:checked {
+    background-color: #405189;
+    border-color: #405189;
+}
+.card-radio .form-check-input:checked+.form-check-label {
+    border-color: #3BB800!important;
+}
+.card-radio .form-check-label {
+    background-color: var(--vz-card-bg);
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    padding-right: 32px;
+    padding: 10px;
+}
+.form-check label {
+    cursor: pointer;
+}
+.card-radio .form-check-input:checked+.form-check-label:before {
+    content: "✓";
+    font-family: "Line Awesome Free";
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-size: 10px;
+    background: #3BB800;
+    font-weight: 900;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    color: #F4F4F9;
+    transform: translate(0%);
+}

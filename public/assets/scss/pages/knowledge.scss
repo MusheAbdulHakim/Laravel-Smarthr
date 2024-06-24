@@ -1,0 +1,48 @@
+.topics {
+    background-color: $__white;
+    border: 1px solid $__light__clouds;
+    @include rounded(4px);
+    @include box-shadow(null, 0, 1px, 1px, null, rgba(0, 0, 0, .20));
+    @include margin-padding(0 0 30px, 20px);
+    .topic-title {
+        color: $__gray;
+        @include margin-padding(0 0 20px, 0 25px 0 0);
+        position: $__relative;
+        a {
+            color: $__gray;
+            font-size: $__font__size__20;
+            font-weight: $__medium;
+            text-decoration: $__none;
+            i {
+                color: $__primarycolor;
+                margin-right: 5px;
+            }
+            span {
+                color: $__primarycolor;
+            }
+        }
+    }
+    .topics-list {
+        @include margin-padding(0, 0);
+        li {
+            position: $__relative;
+            list-style: $__none;
+            line-height: 2;
+            &:before {
+                font-family: FontAwesome;
+                content: "\f016";
+                color: $__dark__ash__gray;
+                font-size: $__font__size__15;
+                @include position($__absolute,0,null,null,0)
+            }
+            a {
+                padding-left: 25px;
+                color: $__dark__ash__gray;
+                font-size: $__font__size__14;
+                font-weight: $__regular;
+                text-decoration: $__none;
+                outline: 0 $__none;
+            }
+        }
+    }
+}

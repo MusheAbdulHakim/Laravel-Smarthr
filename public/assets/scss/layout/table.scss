@@ -1,0 +1,173 @@
+.table {
+    padding: 0;
+    background: $__white;
+    .table>:not(:first-child) {
+        border-top: 0;
+    }
+    th{
+        white-space: $__nowrap;
+        border-top: 1px solid $__sea__gray;
+        @include margin-padding(null, 1rem 0.75rem);
+    }
+    td{
+        border-top: 1px solid $__sea__gray;
+        white-space: $__nowrap;
+        vertical-align: $__middle;
+        @include margin-padding(null, .5rem);
+        a {
+            color: $__gray;
+        }
+        .pro-avatar {
+            height: 1.65rem;
+            margin-right: 5px;
+            width: $__auto;
+            @include rounded(0.25rem);
+        }  
+        h2 {
+            display: $__inline__block;
+            font-size: $__font__size__14;
+            font-weight: $__regular;
+            @include margin-padding(0, 0);
+            vertical-align: $__middle;
+            a {
+                color: $__gray;
+            }
+        }  
+        a {
+            color: $__gray;
+        }       
+    }
+    >:not(:first-child) {
+        border-top:0;
+      }
+}
+.user-add-shedule-list {
+    h2{
+        a{
+            @include margin-padding(null, 10px);
+            display: $__inline__block;
+            span {
+                color: $__dark__gray;
+                display: $__block;
+                font-size: $__font__size__12;
+                margin-top: 3px;
+            }
+        }
+    }
+    a{
+        border: 1px dashed $__light__battle__gary;
+        color: $__light__battle__gary;
+        border-radius: 5px;
+        display: $__inline__block;
+        padding: 10px;
+    }
+}
+.table-bordered{
+    td{
+        border: 1px solid $__light__gary;
+    }
+     th {
+        border: 1px solid $__light__gary;
+    }
+} 
+.filter-row {
+    .select2-container {
+        .select2-selection.select2-selection--single {
+            height: 50px;
+        }
+    }
+    .btn {
+        min-height: 50px;
+        text-transform: $__uppercase;
+        @include margin-padding(null, 12px);
+    }
+}
+.card-table {
+    .card-header {
+        border-bottom: 1px solid $__light__goose;
+        padding: 15px;
+    }
+    .card-body {
+        padding: 0;
+    }
+    .card-footer {
+        text-align: $__center;
+        a {
+            color: $__gray;
+        }
+    }
+   
+}
+.dropdown-action {
+    .dropdown-toggle{
+        &::after{
+            border: 0;
+        }
+    }
+}
+.action-icon {
+    color: $__dark__battle__gary;
+    font-size: $__font__size__18;
+    display: $__inline__block;
+}
+.table-inbox {
+    td{
+        padding: 0.5rem ;
+    }
+    .starred{
+        &.fa-star {
+            color: $__yellow;
+        }
+    }
+}
+.unread{
+    .name,.subject,.maildate{
+        color: $__black;
+        font-weight: $__semibold;
+    }
+} 
+.table-striped{
+    tbody{
+        tr{
+            &:nth-of-type(2n+1) {
+                background-color: $__dark__light;
+            }
+        }
+    }
+}
+.custom-table {
+    tr.holiday-completed {
+        color: $__light__battle__gary;
+    }
+    td{
+        @include margin-padding(null, 10px 20px);
+    }
+}
+.leave-table {
+    .l-name {
+        width: 200px;
+    }
+    .l-days {
+        width: 140px;
+    }
+}
+.review-section {
+    @include margin-padding(0 0 30px, null);
+    .review-header {
+        background-color: $__white;
+        border: 1px solid $__blue__angel;
+        text-align: $__center;
+        @include margin-padding(0, 15px);
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+    }
+}
+.form-control-sm{
+    &.form-control {
+        height: 30px;
+        appearance: $__auto;
+        @include rounded(0);
+    }
+}

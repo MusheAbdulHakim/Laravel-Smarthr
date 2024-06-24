@@ -1,0 +1,114 @@
+.comp-section {
+    @include margin-padding(0 0 30px, 30px 0);
+    .section-title {
+        font-size:$__font__size__18;
+        text-decoration: $__underline;
+        text-transform: $__uppercase;
+        @include margin-padding(0 0 20px, null);
+    }
+}
+.progress-example{
+    .progress {
+        margin-bottom: 1.5rem;
+        .progress-lg {
+            height: 18px;
+        }
+    }
+}
+.tab-content {
+    padding-top: 20px;
+}
+.page-title {
+    color: $__plum__black;
+    font-size: $__font__size__26;
+    font-weight: $__medium;
+    margin-bottom: 5px;
+}
+.notification-list {
+    .status-toggle {
+        float: $__right;
+        .check {
+            display: $__block;
+            width: 0;
+            height: 0;
+            visibility: $__hidden;
+            opacity: 0;
+            pointer-events: $__none;
+            position: $__absolute;
+            @include margin-padding(0, 0);
+            &:checked{
+                & + .checktoggle {
+                    background-color: $__successcolor;
+                    &:after {
+                        left: 100%;
+                        @include transform(translate(calc(-100% - 5px), -50%));
+                    }
+                }
+            }
+           
+        }
+        .checktoggle {
+            background-color: $__ferriari__red;
+            cursor: $__pointer;
+            display: $__block;
+            font-size: 0;
+            height: 24px;
+            margin-bottom: 0;
+            position: $__relative;
+            width: 48px;
+            @include rounded(12px);
+            &:after {
+                content: ' ';
+                display: $__block;
+                width: 16px;
+                height: 16px;
+                background-color: $__white;
+                @include position($__absolute,50%,null,null,0);
+                @include rounded(50%);
+                @include transform(translate(5px, -50%));
+                @include transition(all 0.2s ease);
+            }
+        }
+    }
+}
+textarea.form-control {
+    resize: $__vertical;
+}
+.switch {
+    cursor: $__pointer;
+    position: $__relative;
+    input {
+        position: $__absolute;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        &:checked{
+            &+span {
+                background-color: $__successcolor;
+                &:after {
+                    left: 31px;
+                }
+            }
+        }
+    }
+    span{
+        position: $__relative;
+        width: 60px;
+        height: 30px;
+        background-color: $__white;
+        border: 1px solid $__cloud__gray;
+        border-color: rgba(0, 0, 0, 0.1);
+        display: $__inline__block;
+        @include transition(all 0.2s ease);
+        @include rounded(30px);
+        &:after {
+            content: "";
+            background-color: $__white;
+            width: 20px;
+            height: 20px;
+            @include box-shadow(null, 1px, 1px, 3px, null, rgba(0, 0, 0, .25));
+            @include position($__absolute,4px,null,1px,6px);
+            @include rounded(30px);
+            @include transition(all 0.2s ease);
+        }
+    }
+}

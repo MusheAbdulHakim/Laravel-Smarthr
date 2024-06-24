@@ -1,0 +1,166 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.col {
+	width:$__auto;
+	padding-left:$__grid__padding__left;
+	padding-right:$__grid__padding__right;
+	float:$__left;
+	position: $__relative;
+  	min-height: 1px;
+
+	@include respond-above(xs) {
+		&.col-xs-12 {
+			width: $__col__12;
+		}
+		&.col-xs-11 {
+			width: $__col__11;
+		}
+		&.col-xs-10 {
+			width: $__col__10;
+		}
+		&.col-xs-9 {
+			width: $__col__9;
+		}
+		&.col-xs-8 {
+			width: $__col__8;
+		}
+		&.col-xs-7 {
+			width: $__col__7;
+		}
+		&.col-xs-6 {
+			width: $__col__6;
+		}
+		&.col-xs-5 {
+			width: $__col__5;
+		}
+		&.col-xs-4 {
+			width: $__col__4;
+		}
+		&.col-xs-3 {
+			width: $__col__3;
+		}
+		&.col-xs-2 {
+			width: $__col__2;
+		}
+		&.col-xs-1 {
+			width: $__col__1;
+		}
+	}
+	@include respond-above(sm) {
+		&.col-sm-12 {
+			width: $__col__12;
+		}
+		&.col-sm-11 {
+			width: $__col__11;
+		}
+		&.col-sm-10 {
+			width: $__col__10;
+		}
+		&.col-sm-9 {
+			width: $__col__9;
+		}
+		&.col-sm-8 {
+			width: $__col__8;
+		}
+		&.col-sm-7 {
+			width: $__col__7;
+		}
+		&.col-sm-6 {
+			width: $__col__6;
+		}
+		&.col-sm-5 {
+			width: $__col__5;
+		}
+		&.col-sm-4 {
+			width: $__col__4;
+		}
+		&.col-sm-3 {
+			width: $__col__3;
+		}
+		&.col-sm-2 {
+			width: $__col__2;
+		}
+		&.col-sm-1 {
+			width: $__col__1;
+		}
+	}
+
+	@include respond-above(md) {
+		&.col-md-12 {
+			width: $__col__12;
+		}
+		&.col-md-11 {
+			width: $__col__11;
+		}
+		&.col-md-10 {
+			width: $__col__10;
+		}
+		&.col-md-9 {
+			width: $__col__9;
+		}
+		&.col-md-8 {
+			width: $__col__8;
+		}
+		&.col-md-7 {
+			width: $__col__7;
+		}
+		&.col-md-6 {
+			width: $__col__6;
+		}
+		&.col-md-5 {
+			width: $__col__5;
+		}
+		&.col-md-4 {
+			width: $__col__4;
+		}
+		&.col-md-3 {
+			width: $__col__3;
+		}
+		&.col-md-2 {
+			width: $__col__2;
+		}
+		&.col-md-1 {
+			width: $__col__1;
+		}
+	}
+
+	@include respond-above(lg) {
+		&.col-lg-12 {
+			width: $__col__12;
+		}
+		&.col-lg-11 {
+			width: $__col__11;
+		}
+		&.col-lg-10 {
+			width: $__col__10;
+		}
+		&.col-lg-9 {
+			width: $__col__9;
+		}
+		&.col-lg-8 {
+			width: $__col__8;
+		}
+		&.col-lg-7 {
+			width: $__col__7;
+		}
+		&.col-lg-6 {
+			width: $__col__6;
+		}
+		&.col-lg-5 {
+			width: $__col__5;
+		}
+		&.col-lg-4 {
+			width: $__col__4;
+		}
+		&.col-lg-3 {
+			width: $__col__3;
+		}
+		&.col-lg-2 {
+			width: $__col__2;
+		}
+		&.col-lg-1 {
+			width: $__col__1;
+		}
+	}
+}

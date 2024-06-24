@@ -1,0 +1,55 @@
+.activity-box {
+    position: $__relative;
+    .activity-list {
+        list-style: $__none;
+        position: $__relative;
+        @include margin-padding(null, null);
+        &::before {
+            content: "";
+            width: 2px;
+            background: $__light__goose;
+            @include position($__absolute,8px,null,0,23px);
+        }
+        li {
+            background-color: $__white;
+            position: $__relative;
+            border: 1px solid $__light__clouds;
+            @include box-shadow(null, 0, 1px, 1px, 0, rgba(0, 0, 0, .20));
+            @include margin-padding(0 0 10px,10px);
+            &::before {
+                background: $__light__goose;
+                bottom: 0;
+                content: "";
+                width: 2px;
+                @include position($__absolute,12px,null,null,22px);
+            }
+            .activity-user {
+                height: 32px;
+                width: 32px;
+                @include margin-padding(0, 0);
+                @include position($__absolute,12px, null,null,8px);
+                .avatar {
+                    height: 32px;
+                    line-height: 32px;
+                    width: 32px;
+                    @include margin-padding(0,null);
+                }
+            }
+            .activity-content {
+                position: $__relative;
+                @include margin-padding(0 0 0 40px, 0);
+                .timeline-content {
+                    color: $__light__battle__garys;
+                    a {
+                        color: $__taupe__black;
+                    }
+                }
+            }
+            .time {
+                color: $__sandstone;
+                display: $__block;
+                font-size: $__font__size__13;
+            }
+        }
+    }
+}

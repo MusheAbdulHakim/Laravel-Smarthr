@@ -1,0 +1,38 @@
+body{
+	font-family: $__body__font__family;
+	font-size:$__body__font__size;
+	color:$__secondarycolor;
+	background-color: $__mix__gray;
+	overflow-x: $__hidden;
+}
+.container{
+	width:$__full__width;
+	max-width:$__container__width;
+	padding-left:$__grid__padding__left;
+	padding-right:$__grid__padding__right;
+	margin:$__margin__auto;
+}
+img {
+	max-width:$__full__width;
+	height: $__auto;
+	vertical-align: $__middle;
+}
+a{
+	text-decoration: $__none;
+    outline: $__none;
+	color:$__sky__blue;
+	cursor: $__pointer;
+	@include transition(all 0.2s ease);
+	&:hover{
+		@include transition(all 0.2s ease);
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+p{
+	margin-bottom:1rem;
+}
+strong{
+	font-weight: $__bold;
+}

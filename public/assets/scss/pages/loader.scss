@@ -1,0 +1,65 @@
+#loader-wrapper {
+    background-color: $__white;
+    height: $__full__height;
+    width: $__full__width;
+    z-index: 9999;
+    @include position($__fixed,0,0,0,0);
+    #loader {
+        background-position: $__center $__center;
+        background-repeat: no-repeat;
+        height: 200px;
+        margin: -100px 0 0 -100px;
+        width: 200px;
+        @include position($__absolute,50%,null,null,50%);
+        .loader-ellips {
+            font-size: $__font__size__20;
+            position: $__relative;
+            width: 64px;
+            margin: 100px auto 0;
+            .loader-ellips__dot{
+                display: $__block;
+                width: 1em;
+                height: 1em;
+                position: $__absolute;
+                @include rounded(0.5em);
+                animation-duration: 0.5s;
+                animation-timing-function: ease;
+                animation-iteration-count: infinite;
+                &:nth-child(1) { 
+                    background: $__grayback;  
+                    animation-name: reveal;
+                    left: 0;
+                }
+                &:nth-child(2) { 
+                    background: $__primarycolor; 
+                    left: 0;
+                    animation-name: slide; 
+                }
+                &:nth-child(3) { 
+                    background: $__grayback;  
+                    animation-name: slide;
+                    left: 1.5em;
+                }
+                &:nth-child(4) { 
+                    background: $__grayback;  
+                    animation-name: reveal;
+                    animation-direction: reverse;
+                    left: 3em;
+                }
+            }
+        }
+    }
+}
+@keyframes reveal {
+	from { 
+		transform: scale(0.001); 
+	}
+	to { 
+		transform: scale(1); 
+	}
+}
+@keyframes slide {
+	to { 
+		transform: translateX(1.5em) 
+	}
+}

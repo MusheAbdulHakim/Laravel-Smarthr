@@ -1,0 +1,284 @@
+.file-wrap {
+    border: 1px solid $__baby__blue;
+    @extend %display-flex;
+    @extend %flex-wrap;
+    position: $__relative;
+    &.file-sidebar-toggle{
+        .file-sidebar{
+            display: $__none;
+            @include respond-below(custom991) {
+                left: 0;
+                display: $__block;
+            }
+        }
+        .file-cont-wrap{
+            margin: 0;
+        }
+    }
+    .file-sidebar {
+        border-right: 1px solid $__baby__blue;
+        z-index: 5;
+        width: 300px;
+        @include position($__absolute,null,null,null,0);
+        @include transition(all 0.3s ease);
+        @include respond-below(custom991) {
+            @include position($__absolute,null,null,null,-331px);
+        }
+        .file-header {
+            background-color: $__white;
+            border-bottom: 1px solid $__baby__blue;
+            color: $__ligt__carbon;
+            height: 72px;
+            @include margin-padding(null, 0 15px);
+            @extend %align-items-center;
+            @extend %display-flex;
+            @extend %justify-content-between;
+            span {
+                font-size: $__font__size__20;
+                font-weight: $__semibold;
+                text-transform: $__capitalize;
+            }
+            .file-side-close {
+                display: $__none;
+                background-color: $__cloud__gray;
+                border: 1px solid $__metallic-silver;
+                border-radius: 24px;
+                color: $__metalic__gray;
+                font-size: $__font__size__14;
+                line-height: 24px;
+                min-height: 26px;
+                text-align: $__center;
+                width: 26px;
+                @include position($__absolute,null,15px,null,null);
+                @include respond-below(custom991) {
+                    display: $__block; 
+                }
+            }
+        }
+        .file-search {
+            background-color: $__light__blue__gray;
+            border-bottom: 1px solid $__light__cloud;
+            @include margin-padding(null, 10px 15px);
+            width:$__full__width;
+            .input-group {
+                width:$__full__width;
+                .form-control {
+                    background-color: $__white;
+                    @include rounded(50px);
+                    padding-left: 36px;
+                }
+                .input-group-text {
+                    @extend %align-items-center;
+                    color: $__light__smokey-gray;
+                    @extend %display-flex;
+                    pointer-events: $__none;
+                    z-index: 4;
+                    @include position($__absolute,0,null,0,0);
+                    border: 0;
+                    background: $__transparent;
+                }
+            }
+        }
+        .file-pro-list {
+            background-color: $__white;
+            @include margin-padding(null, 15px);
+            .file-scroll {
+                max-height: calc(100vh - 259px);
+                min-height: 497px;
+                overflow-y: $__auto;
+                .file-menu {
+                    display: $__inline__block;
+                    @include margin-padding(0 0 10px, 0);
+                    width:$__full__width;
+                    li {
+                        display: $__inline__block;
+                        width:$__full__width;
+                        &.active,&:hover{
+                            background: rgba(33, 33, 33, 0.05);
+                        }
+                        a {
+                            color: $__gray;
+                            display: $__inline__block;
+                            width:$__full__width;
+                            text-transform: $__capitalize;
+                            @include margin-padding(null, 10px 15px);
+                            @include transition(all 0.2s ease);
+                        }
+                        + li {
+                            margin-top: 2px;
+                        }
+                    }
+                }
+                .show-more {
+                    text-align: $__center;
+                    a {
+                        position: $__relative;
+                        @include margin-padding(null, 0 20px 0 15px);
+                        &:before {
+                            content: '\f107';
+                            font-size: $__font__size__18;
+                            line-height: $__inherit;
+                            font-family: 'FontAwesome';
+                            @include transform(translateY(-50%));
+                            @include position($__absolute,50%,0,null,null);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.file-cont-wrap {
+    @extend %display-flex;
+    margin-left: 300px;
+    @extend %flex-wrap;
+    @include transition(all 0.3s ease);
+    @include respond-below(custom991) {
+        margin:0;
+    }
+    .file-cont-inner {
+        flex: 0 0 100%;
+        max-width:$__full__width;
+        .file-cont-header {
+            @extend %align-items-center;
+            background: $__white;
+            border-bottom: 1px solid $__baby__blue;
+            @extend %display-flex;
+            height: 72px;
+            @extend %justify-content-between;
+            @include margin-padding(null, 0 15px);
+            .file-options {
+                @extend %display-flex;
+                a{
+                    color: $__gray;
+                }
+            }
+            span {
+                color: $__gray;
+                font-size: $__font__size__20;
+                font-weight: $__semibold;
+            }
+            .file-options {
+                @extend %display-flex;
+            }
+            .btn-file{
+                display: $__inline__block;
+                overflow: $__hidden;
+                position: $__relative;
+                vertical-align: $__middle;
+                input {
+                    cursor: $__pointer;
+                    direction: ltr;
+                    filter: alpha(opacity=0);
+                    font-size: $__font__size__23;
+                    height: $__full__height;
+                    margin: 0;
+                    opacity: 0;
+                    @include position($__absolute,0,0,null,null);
+                    width:$__full__width;
+                }
+            }
+        }
+    }
+}
+.file-content {
+    flex: 0 0 100%;
+    max-width:$__full__width;
+    .file-search {
+        background-color: $__light__blue__gray;
+        border-bottom: 1px solid $__light__cloud;
+        width:$__full__width;
+        @include margin-padding(null, 10px 15px);
+        .input-group-text {
+            @extend %align-items-center;
+            bottom: 0;
+            color: $__light__smokey-gray;
+            @extend %display-flex;
+            pointer-events: $__none;
+            z-index: 4;
+            @include position($__absolute,0,null,null,0px);
+            border: 0;
+            background: $__transparent;
+        }
+        .form-control {
+            background-color: $__white;
+            padding-left: 36px;
+            @include rounded(50px);
+        }
+    }
+    .file-body {
+        background-color: $__light__blue__gray;
+        .file-scroll {
+            max-height: calc(100vh - 259px);
+            min-height: 497px;
+            overflow-y: $__auto;
+            .file-content-inner {
+                @include margin-padding(null, 15px);
+                width:$__full__width;
+                .card-file {
+                    @include margin-padding(null, 10px);
+                    position: $__relative;
+                    @include transition(all 0.2s ease);
+                    .card-body {
+                        @include margin-padding(null, 15px 0 0);
+                    }
+                    .dropdown-file {
+                        @include position($__absolute,10px,10px,null,null);
+                        .dropdown-link {
+                            color: $__dark__battle__gary;
+                            width: 24px;
+                            height: 24px;
+                            @extend %inline-flex;
+                            @extend %align-items-center;
+                            @extend %justify-content-center;
+                        }
+                        .dropdown-menu {
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            box-shadow: $__inherit;
+                            background-color: $__white;
+                            font-size: $__font__size__13;
+                            @include transform-origin(left top 0);
+                            @include rounded(3px);
+                        }
+                    }
+                    .card-file-thumb {
+                        background-color: $__dark__light;
+                        color: $__dark__battle__gary;
+                        font-size: $__font__size__48;
+                        height: 120px;
+                        @extend %align-items-center;
+                        @extend %display-flex;
+                        @extend %justify-content-center;
+                    }
+                    h6 {
+                        margin-bottom: 0;
+                        font-size: $__font__size__14;
+                        a {
+                            white-space: $__nowrap;
+                            text-overflow: $__ellipsis;
+                            overflow: $__hidden;
+                            display: $__block;
+                            width:$__full__width;
+                            color: $__gray;
+                        }
+                    }
+                    span {
+                        font-size: $__font__size__12;
+                        color: $__dark__gray;
+                    }
+                }
+                .card-footer {
+                    font-size: $__font__size__11;
+                    color: $__dark__candy;
+                    border-top-width: 0;
+                    background-color: $__transparent;
+                    @include margin-padding(null, 10px 0 0);
+                    span {
+                        font-size: $__font__size__12;
+                        color: $__dark__gray;
+                    }
+                }
+            }
+        }
+    }
+}

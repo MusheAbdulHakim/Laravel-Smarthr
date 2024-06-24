@@ -1,0 +1,109 @@
+.punch-det {
+    background-color: $__platinum;
+    border: 1px solid $__metallic-silver;
+    @include rounded(4px);
+    @include margin-padding(0 0 20px, 10px 15px);
+   
+    h6 {
+        line-height: 20px;
+        @include margin-padding(0,null);
+    }
+    p {
+        color: $__dark__smokeygray;
+        font-size: $__font__size__14;
+        @include margin-padding(0,null);
+    }
+}
+.punch-info {
+    @include margin-padding(0 0 20px,null);
+    .punch-hours {
+        background-color: $__platinum;
+        border: 5px solid $__metallic-silver;
+        font-size: $__font__size__18;
+        height: 120px;
+        width: 120px;
+        @include margin-padding(0 auto,null);
+        @include rounded(50%);
+        @extend %align-items-center;
+        @extend %display-flex;
+        @extend %justify-content-center;
+    }
+}
+.punch-btn-section {
+    text-align: $__center;
+    @include margin-padding(0 0 20px, null);
+    .punch-btn {
+        font-size: $__font__size__18;
+        font-weight: $__semibold;
+        max-width: $__full__width;
+        @include margin-padding(null, 8px 40px);
+        @include rounded(50px);
+    }
+    .stats-box {
+        background-color: $__platinum;
+        border: 1px solid $__metallic-silver;
+        @include margin-padding(0 0 15px, 5px);
+        p {
+            font-size: $__font__size__12;
+            @include margin-padding(0, null);
+        }
+        h6 {
+            @include margin-padding(0, null);
+        }
+    }
+}
+.recent-activity {
+    .res-activity-list {
+        height: 328px;
+        list-style-type: $__none;
+        overflow-y: $__auto;
+        position: $__relative;
+        @include margin-padding(0, 0 0 0 30px);
+        &:after {
+            content: "";
+            border: 1px solid $__light__cloud;
+            @include position($__absolute,0,null,0,4px);
+        }
+        li {
+            @include margin-padding(0 0 15px, null);
+            position: $__relative;
+            &:before {
+                content: "";
+                width: 10px;
+                height: 10px;
+                border: 2px solid $__primarycolor;
+                z-index: 2;
+                background: $__white;
+                @include rounded(100%);
+                @include margin-padding(0 0 0 15px, null);
+                @include position($__absolute,0,null,null,-45px);
+            }
+        }
+    }
+    p {
+        font-size: $__font__size__13;
+        @include margin-padding(0, null);
+    }
+    .res-activity-time {
+        color:$__metalic__gray;
+        font-size: $__font__size__12;
+    }
+}
+.att-statistics{
+    .progress {
+        height: 4px;
+    }
+    .stats-info {
+        background-color: $__white;
+        border: 1px solid $__light__cloud;
+        text-align: $__center;
+        @include rounded(4px);
+        @include margin-padding(0 0 5px, 15px);
+        p {
+            font-size: $__font__size__12;
+            @include margin-padding(0 0 5px, null);
+            @extend %display-flex;
+            @extend %justify-content-between;
+        }
+    }
+}

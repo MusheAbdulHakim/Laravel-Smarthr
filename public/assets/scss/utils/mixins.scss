@@ -1,0 +1,262 @@
+$breakpoints: (
+  xs: 320px,
+  sm: 568px,
+  custom767: 767px,
+  md: 768px,
+  lg: 1024px,
+  custom360: 353px,
+  custom479: 479px,
+  custom575: 575px,
+  custom768: 768px,
+  custom849: 849px,
+  custom991: 991px,
+  custom992: 992px,
+  custom1399: 1399px,
+  custom1199: 1199px,
+  custom1023: 1023px,
+  custom1024: 1024px,
+  custom1280: 1280px,
+  custom1400: 1400px,
+  custom1440: 1440px,
+);
+
+// Respond above.
+@mixin respond-above($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// Respond above.
+@mixin respond-below($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (max-width: $breakpoint-value) {
+      @content;
+    }
+
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+
+
+@mixin transform($property) {
+  transform: $property;
+  -webkit-transform: $property;
+  -ms-transform: $property;
+}
+
+// Define vertical, horizontal, or both position
+@mixin position-alignment($position) {
+  position: $__absolute;
+  
+  @if $position == 'vertical' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  @else if $position == 'horizontal' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  }
+  @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin transition($__property) {
+  -webkit-transition: $__property;
+  -ms-transition: $__property;
+  transition: $__property;
+}
+
+@mixin background-properties($__cover:cover,$__no-repeat:no-repeat,$__center:center){
+  background-size:$__cover;
+  background-repeat:$__no-repeat;
+  background-position:$__center;
+}
+
+@mixin position($__position_value,$__top_value,$__right_value,$__bottom_value,$__left_value){
+  position:$__position_value;
+  top:$__top_value;
+  right:$__right_value;
+  bottom:$__bottom_value;
+  left:$__left_value;
+}
+
+@mixin margin-padding($__margin, $__padding) {
+   margin: $__margin;
+   padding:$__padding;
+}
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder { /* WebKit browsers */
+      color: $color;
+      opacity: 1;
+  }
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: $color;
+      opacity: 1;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: $color;
+      opacity: 1;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10+ */
+      color: $color;
+      opacity: 1;
+  }
+}
+/** Extends **/
+%equal-heights {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+
+%ul_reset{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.css-equal-heights {
+	@extend %equal-heights;
+}
+
+.css-equal-content {
+    @extend %equal-heights;
+    color: red;
+    float: left;
+}
+
+.align-center {
+  @extend %flex-align-center;
+}
+%justify-content-center{  
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+}
+
+%align-items-center{  
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+}
+%justify-content-between {  
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+}
+%flex-align-center {
+  display: flex;
+  display: -webkit-flex;
+  align-items:center;
+  -webkit-align-items:center;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+%justify-content-spacebetween{
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: space-between;
+}
+%clear{
+  content:"";
+  display:table;
+  clear:both;
+}
+
+%ul_reset{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+%full_width_height_div{
+  width:$__full__width;
+  height:$__full__height;
+}
+%inline-flex{  
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+%display-flex{  
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+%jusflex-end {
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+}
+%justify-content-between {  
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+}
+%flex-wrap {  
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+%flex-end {  
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+%flex-column {  
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+@mixin rounded($unit) {
+  border-radius: $unit;
+}
+@mixin transform-origin($property) {
+  transform-origin: $property;
+  -webkit-transform-origin: $property;
+  -ms-transform-origin: $property;
+}
+@mixin box-shadow($__inset:inset,$__horizontaloffset:10px,$__verticaloffset:10px,$blur:10px,$__spread:10px,$__color: #000000) {
+  -webkit-box-shadow: $__inset $__horizontaloffset $__verticaloffset $blur $__spread $__color;
+  -moz-box-shadow: $__inset $__horizontaloffset $__verticaloffset $blur $__spread $__color;
+  box-shadow: $__inset $__horizontaloffset $__verticaloffset $blur $__spread $__color;
+}
+@mixin rounded($unit) {
+  border-radius: $unit;
+}

@@ -1,0 +1,40 @@
+.breadcrumb {
+    background-color: $__transparent;
+    color: $__wolf;
+    font-size: $__font__size__16;
+    font-weight: $__medium;
+    @include margin-padding(0, 0);
+    @include respond-below(custom575) {
+        display: $__none;
+    }
+	&.active {
+		color: $__wolf;
+	}
+    a{
+        color: $__gray;
+    }
+    .breadcrumb-item{
+        a {
+            color: $__gray;
+        }
+        +.breadcrumb-item{
+            &::before {
+                float: $__left;
+                padding-right: 0.5rem;
+                color: $__wolf;
+                content: "/"
+            }
+        }
+    }
+}
+.comp-section{
+    @include margin-padding(0, 10px 0);
+    .btn {
+        @include margin-padding(0 0 5px, null);
+    }
+    .breadcrumb {
+        @include respond-below(custom575) {
+            display: $__flex;
+        }
+    }
+}

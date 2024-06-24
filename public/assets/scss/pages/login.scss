@@ -1,0 +1,130 @@
+.account-page {
+    @extend %display-flex;
+    @extend %align-items-center;
+    .main-wrapper {
+        width: $__full__width;
+        @extend %justify-content-center;
+        @extend %flex-wrap;
+        @extend %display-flex;
+        .account-content {
+            @include margin-padding(null, 20px 0);
+            .account-logo {
+                margin-bottom: 30px;
+                text-align: $__center;
+                img {
+                    width: 100px;
+                    @include respond-below(custom575) {
+                        width: 70px;
+                    }
+                }
+            }
+            .account-box {
+                background-color: $__white;
+                border: 1px solid $__light__clouds;
+                box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
+                margin: 0 $__auto;
+                overflow: $__hidden;
+                width: 480px;
+                @include rounded(4px);
+                @include respond-below(custom991) {
+                    width: $__full__width;
+                    @include margin-padding(0 0 20px, null);
+                }
+                .input-block {
+                    margin-bottom: 25px;
+                }
+                label {
+                    color: $__plum__black;
+                    font-size: $__font__size__16;
+                    font-weight: $__normal;
+                }
+                .form-control {
+                    background-color: $__mix__white;
+                    border: 1px solid $__metallic-silver;
+                    height: 46px;
+                    @include rounded(4px);
+                }
+                #toggle-password {
+                    cursor: $__pointer;
+                    margin-right: 1px;
+                    @include position($__absolute,15px,10px,null,null);
+                }
+                .account-btn {
+                    background: $__primarycolor;
+                    background: linear-gradient(to right, $__primarycolor 0%, $__light__chilli__pepper 100%);
+                    border: 0;
+                    display: $__block;
+                    font-size: $__font__size__22;
+                    width: $__full__width;
+                    @include rounded(4px);
+                    @include margin-padding(null,  10px 26px);
+                }
+                .account-wrapper {
+                    @include margin-padding(null, 30px);
+                    .account-footer {
+                        text-align: $__center;
+                    }
+                    .account-title {
+                        font-size: $__font__size__26;
+                        font-weight: $__medium;
+                        margin-bottom: 5px;
+                        text-align: $__center;
+                    }
+                    .account-subtitle {
+                        color: $__dark__gray;
+                        font-size: $__font__size__18;
+                        text-align: $__center;
+                        @include margin-padding(0 0 30px,null);
+                    }
+                    .account-box {
+                        .input-block {
+                            @include margin-padding(0 0 25px,null);
+                            label {
+                                color: $__plum__black;
+                                font-size: $__font__size__16;
+                                font-weight: $__normal;
+                                margin-bottom: 5px;
+                            }
+                            .form-control {
+                                background-color: $__mix__white;
+                                border: 1px solid $__metallic-silver;
+                                height: 46px;
+                                @include rounded(4px);
+                            }
+                        }
+                    }
+                }
+                .otp-wrap {
+                    margin-bottom: 30px;
+                    text-align: $__center;
+                    .otp-input {
+                        background-color: $__white;
+                        border: 1px solid $__metallic-silver;
+                        display: $__inline__block;
+                        font-size: $__font__size__24;
+                        font-weight: $__medium;
+                        height: 70px;
+                        line-height: 29px;
+                        margin-right: 15px;
+                        text-align: $__center;
+                        width: 70px;
+                        @include rounded(4px);
+                        @include respond-below(custom575) {
+                            height: 50px;
+                            width: 52px;
+                            @include margin-padding(10px, null);
+                        }
+                    }
+                }
+                .lock-user {        
+                    margin-bottom: 20px;
+                    text-align: $__center;
+                    img {
+                        margin-bottom: 15px;
+                        width: 100px;
+                    }
+                }
+            }
+        }
+    }
+}

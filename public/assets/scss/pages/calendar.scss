@@ -1,0 +1,41 @@
+.fc-button {
+    background: $__light__vampire;
+    border: $__none;
+    color: $__granite__gary;
+    text-transform: $__capitalize;
+    box-shadow: $__none ;
+    height: $__auto ;
+    @include rounded(3px);
+    @include margin-padding(0 3px !important, 6px 12px);
+}
+.fc-state-down, 
+.fc-state-active, 
+.fc-state-disabled {
+    background-color: $__primarycolor !important;
+    color: $__white !important;
+    text-shadow: $__none !important;
+}
+.fc-toolbar {
+    h2 {
+        font-size: $__font__size__18;
+        font-weight: $__semibold;
+        line-height: 30px;
+        text-transform: $__uppercase;
+    }
+}
+th.fc-widget-header {
+    background: $__cloud__gray;
+    font-size: $__font__size__14;
+    line-height: 20px;
+    text-transform: $__uppercase;
+    border-color: $__light__water__white;
+    @include margin-padding(null, 10px 0);
+}
+.fc-event {
+    border: $__none;
+    cursor: $__move;
+    font-size: $__font__size__13;
+    text-align: $__center;
+    @include rounded(2px);
+    @include margin-padding(1px 7px, 5px);
+}

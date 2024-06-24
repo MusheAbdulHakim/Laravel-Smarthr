@@ -1,0 +1,26 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Listeners;
+
+use App\Events\AppMenuEvent;
+
+
+class AppMenuListener
+{
+    /**
+     * Create the event listener.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Handle the event.
+     */
+    public function handle(AppMenuEvent $event): void
+    {
+        $menu = $event->menu;
+        $menu->html('<span>$LOWER_NAME$</span>', ['class' => 'menu-title']);
+    }
+}

@@ -1,0 +1,32 @@
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+.settings-icon {
+    z-index: 99999;
+    @include position($__fixed,null,20px,20px,null);
+	@include respond-below(custom991) {
+		display: none;
+	}
+    span {
+    	width: 45px;
+    	height: 45px;
+    	border-radius: 45px;
+    	cursor: $__pointer;
+    	color: $__white;
+    	font-size: $__font__size__24;
+    	background-color: $__primarycolor;
+    	-webkit-animation:spin 4s linear infinite;
+	    -moz-animation:spin 4s linear infinite;
+	    animation:spin 4s linear infinite;
+    	@extend %flex-align-center;
+    }
+}

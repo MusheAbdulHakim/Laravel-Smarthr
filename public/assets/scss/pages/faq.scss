@@ -1,0 +1,41 @@
+.faq-card {
+    .card {
+        border-color: $__light__goose;
+        @include rounded(3px);
+        box-shadow: $__none;
+        margin-bottom: 20px;
+        overflow: $__hidden;
+        .card-header {
+            background-color: $__white;
+            position: $__relative;
+            @include margin-padding(null, 20px);
+            h4 {
+                margin-bottom: 0;
+                a {
+                    color: $__gray__wolf;
+                    display: $__block;
+                    font-size: $__font__size__20;
+                    font-weight: $__regular;
+                    padding-right: 60px;
+                    position: $__relative;
+                    &:after {
+                        font-family: FontAwesome;
+                        font-size: $__font__size__19;
+                        font-weight: $__regular;
+                        @include position($__absolute,null,0,null,null);
+                    }
+                    &.collapsed{
+                        &:after {
+                            content: "\f067";
+                        }
+                    }
+                    &:not(.collapsed){
+                        &:after {
+                            content: "\f068";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,138 @@
+.topnav-dropdown-header{
+    border-bottom: 1px solid $__cloud__gray;
+    text-align: $__center;
+    font-size: $__font__size__12;
+    height: 32px;
+    line-height: 32px;
+    @include margin-padding(null, 0 12px);
+    .notification-title {
+        color: $__gray;
+        display: $__block;
+        float: $__left;
+        font-size: $__font__size__14;
+    }
+    .clear-noti {
+        color: $__fire__red;
+        float: $__right;
+        font-size: $__font__size__11;
+        text-transform: $__uppercase;
+    }
+}
+.notifications {
+    .noti-content {
+        height: 290px;
+        width: 350px;
+        overflow-y: $__auto;
+        position: $__relative;
+    }
+    .notification-list {
+         @extend %ul_reset;
+        li {
+            margin-top: 0;
+            border-bottom: 1px solid $__dark__light;
+            a {
+                display: $__block;
+                @include margin-padding(null, 12px);
+                @include rounded(2px);
+            }
+            .noti-title {
+                color: $__gray;
+            }
+            .noti-details {
+                color: $__frog__blue;
+                @include margin-padding(0, null);
+            }
+            p.noti-time{
+                @include margin-padding(0, null);
+            } 
+            .notification-time {
+                font-size: $__font__size__12;
+                line-height: 1.35;
+                color: $__sandstone;
+            }
+            .list-item {
+                border: 0;
+                padding: 0;
+                position: $__relative;
+                .list-left {
+                    height: 48px;
+                    position: $__absolute;
+                    width: 48px;
+                }
+                .list-body {
+                    @include margin-padding(null, 0 0 0 50px);
+                    .message-author {
+                        color: $__gray;
+                        float: $__left;
+                        font-weight: $__medium;
+                        width: 175px;
+                        display: $__block;
+                        max-width: $__full__width;
+                        overflow: $__hidden;
+                        text-overflow: $__ellipsis;
+                        white-space: $__nowrap;
+                    }
+                    .message-time {
+                        color: $__dark__gray;
+                        float: $__right;
+                        font-size: $__font__size__11;
+                    }
+                    .message-content {
+                        color: $__gray;
+                        font-size: $__font__size__13;
+                        display: $__block;
+                        max-width: $__full__width;
+                        overflow: $__hidden;
+                        text-overflow: $__ellipsis;
+                        white-space: $__nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+.topnav-dropdown-footer {
+    border-top: 1px solid $__cloud__gray;
+    font-size: $__font__size__12;
+    height: 32px;
+    line-height: 32px;
+    @include margin-padding(null, 0 12px);
+    a {
+        display: $__block;
+        text-align: $__center;
+        color: $__gray;
+    }
+}
+.list-left {
+    height: 48px;
+    position: $__absolute;
+    width: 48px;
+}
+.list-body {
+    @include margin-padding(null, 0 0 0 50px);
+    .message-author {
+        color: $__gray;
+        float: $__left;
+        font-weight: $__medium;
+        width: 175px;
+        display: $__block;
+        max-width: $__full__width;
+        overflow: $__hidden;
+        text-overflow: $__ellipsis;
+        white-space: $__nowrap;
+    }
+    .message-time {
+        color: $__dark__gray;
+        float: $__right;
+        font-size: $__font__size__11;
+    }
+    .message-content {
+        color: $__gray;
+        font-size: $__font__size__13;
+        display: $__block;
+        max-width: $__full__width;
+        overflow: $__hidden;
+        text-overflow: $__ellipsis;
+        white-space: $__nowrap;
+    }
+}

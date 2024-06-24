@@ -1,0 +1,270 @@
+.voice-call-avatar {
+    flex: 2;
+    @extend %justify-content-center;
+    @extend %display-flex;
+    @extend %flex-column;
+    @extend %align-items-center;
+    .call-avatar {
+        width: 150px;
+        height: 150px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: $__white;
+        @include margin-padding(3px,3px);
+        @include rounded(100%);
+        .username {
+            font-size: $__font__size__18;
+            text-transform: $__uppercase;
+        }
+        .call-timing-count {
+            @include margin-padding(null, 5px);
+        }
+        @include respond-below(custom768) {
+            width: 120px;
+            height: 120px;
+        }
+    }
+}
+.call-users {
+    z-index: 99;
+    @include position($__absolute,null,20px,20px,null);
+    ul {
+        @extend %ul_reset;
+        li {
+            float: $__left;
+            width: 80px;
+            margin-left: 10px;
+            img {
+                background-color: $__white;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                @include rounded(6px);
+                @include margin-padding(null, 2px);
+            }
+            .call-mute {
+                width: 80px;
+                height: 80px;
+                background-color: rgba(0, 0, 0, 0.5);
+                text-align: $__center;
+                line-height: 80px;
+                font-size: $__font__size__30;
+                color: $__white;
+                display: $__none;
+                border: 3px solid $__transparent;
+                @include rounded(6px);
+                @include position($__absolute,0,null,null,null);
+            }
+            a{
+                &:hover{
+                    .call-mute {
+                        display: $__block;
+                    }
+                }
+            }
+        }
+    }
+}
+.call-icons {
+    text-align: $__center;
+    position: $__relative;
+    .call-items {
+        display: $__inline__block;
+        @extend %ul_reset;
+        @include rounded(5px);
+        .call-item {
+            display: $__inline__block;
+            text-align: $__center;
+            margin-right: 5px;
+            a {
+                color: $__dark__battle__gary;
+                border: 1px solid $__light__goose;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                display: $__inline__block;
+                font-size: $__font__size__20;
+                @include rounded(50px);
+            }
+        }
+    }
+    .end-call {
+        @include position($__absolute,7px,0,null,null);
+        @include respond-below(custom575) {
+            margin-top: 10px;
+            position: $__inherit;
+        }
+        a {
+            background-color: $__cherry__red;
+            color: $__white;
+            display: $__inline__block;
+            line-height: 10px;
+            text-transform: $__uppercase;
+            @include margin-padding(null, 8px 25px);
+            @include rounded(50px);
+        }
+    }
+}
+.chat-sidebar {
+    .chats {
+        @include margin-padding(null,15px 15px 30px);
+    }
+    .chat-left {
+        .chat-avatar {
+            float: $__left;
+            .avatar {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+            }
+        }
+        .chat-body {
+            @include margin-padding(0 0 0 50px, 0);
+        }
+    }
+}
+.user-video {
+    overflow: $__auto;
+    z-index: 10;
+    @include position($__absolute,0,0,0,0);
+    img {
+        width: $__auto;
+        max-width: $__full__width;
+        height: $__auto;
+        max-height: $__full__height;
+        display: $__block;
+        margin: 0 $__auto;
+    }
+}
+.my-video {
+    z-index: 99;
+    @include position($__absolute,null,20px,20px,null);
+    ul {
+        @extend %ul_reset;
+        li {
+            float: $__left;
+            width: 120px;
+            margin-right: 10px;
+            @include respond-below(custom575) {
+                width: 80px;
+            }
+            img {
+                border: 3px solid $__white;
+                @include rounded(6px);
+            }
+        }
+    }
+}
+.call-box {
+    display: $__block;
+    background: $__primarycolor;
+    background: linear-gradient(to $__right, $__primarycolor 0%, $__light__chilli__pepper 100%);
+    position: $__sticky;
+    top: 0;
+    z-index: 99;
+    overflow-y: $__auto;
+    overflow-x: $__hidden;
+    &.incoming-box{
+        .call-end,
+        .call-start{
+            margin: 0 10px !important;
+        }
+    }
+    .call-avatar{
+        height: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        position: $__relative;
+        width: $__full__width;
+        @include rounded(100%);
+    }
+    .call-wrapper {
+        height: calc(100vh - 60px);
+        text-align: $__center;
+        @extend %display-flex;
+        @extend %align-items-center;
+        @extend %justify-content-center;
+        .call-user {
+            margin-bottom: 50px;
+            h4 {
+                color: $__white;
+            }
+            .call-box .call-wrapper .call-user span {
+                display: $__block;
+                color: $__white;
+                font-weight: $__medium;
+                text-align: $__center;
+            }
+        }
+        .call-avatar {
+            cursor: $__pointer;
+            animation: ripple 2s infinite;
+            @include margin-padding(0 0 50px, null);
+            @include rounded(50%);
+        }
+        .call-items {
+            @extend %display-flex;
+            @extend %align-items-center;
+            @extend %justify-content-center;
+            .call-item{
+                background-color: rgba(255, 255, 255, 0.2);
+                border: 1px solid $__transparent;
+                color: $__white;
+                line-height: 0;
+                @include margin-padding(0 5px, 15px);
+                @include rounded(100%);
+                @include respond-below(custom575) {
+                    @include margin-padding(null, 10px);
+                }
+                &.call-start {
+                    background: $__successcolor;
+                    border: 1px solid $__successcolor;
+                    color: $__white;
+                    line-height: 0;
+                    @include margin-padding(30px 20px 0, 20px);
+                    @include rounded(100%);
+                    @include respond-below(custom575) {
+                        @include margin-padding(null, 10px);
+                    }
+                }
+                &:first-child {
+                    margin-top: -30px;
+                }
+                &.call-end {
+                    background: $__cherry__red;
+                    border: 1px solid $__cherry__red;
+                    color: $__white;
+                    line-height: 0;
+                    @include margin-padding(30px 20px 0, 20px);
+                    @include rounded(100%);
+                    @include respond-below(custom575) {
+                        @include margin-padding(0 10px, 10px);
+                    }
+                }
+                &:last-child {
+                    margin-top: -30px;
+                }
+            }
+        }
+    }
+}
+.leave-delete-btn {
+    font-weight: $__medium;
+    min-height: 30px;
+    @include margin-padding(0 0 0 10px, 2px 15px);
+}
+@-webkit-keyframes ripple {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
+    }
+}
+@keyframes ripple {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+100% {
+        -moz-box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
+    }
+}

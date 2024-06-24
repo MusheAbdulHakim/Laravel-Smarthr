@@ -1,0 +1,155 @@
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/MaterialIcons-Regular.eot);
+	src: local('Material Icons'),
+	local('MaterialIcons-Regular'),
+	url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+	url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+	url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Circular Std Book'), url('../fonts/CircularStd-Book.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: italic;
+	font-weight: 400;
+	src: local('Circular Std Book Italic'), url('../fonts/CircularStd-BookItalic.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: normal;
+	font-weight: 500;
+	src: local('Circular Std Medium'), url('../fonts/CircularStd-Medium.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: italic;
+	font-weight: 500;
+	src: local('Circular Std Medium Italic'), url('../fonts/CircularStd-MediumItalic.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: normal;
+	font-weight: 600;
+	src: local('Circular Std Bold'), url('../fonts/CircularStd-Bold.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: italic;
+	font-weight: 600;
+	src: local('Circular Std Bold Italic'), url('../fonts/CircularStd-BoldItalic.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: normal;
+	font-weight: 800;
+	src: local('Circular Std Black'), url('../fonts/CircularStd-Black.woff') format('woff');
+}
+@font-face {
+	font-family: 'CircularStd';
+	font-style: italic;
+	font-weight: 800;
+	src: local('Circular Std Black Italic'), url('../fonts/CircularStd-BlackItalic.woff') format('woff');
+}
+
+$__body__font__family:'CircularStd', sans-serif;
+
+
+$__bold:700;
+$__semibold:600;
+$__medium:500;
+$__regular:400;
+$__light:300;
+
+$__body__font__size:15px;
+$__menu__font__size:16px;
+$__button__font__size:18px;
+$__font__size__10:10px;
+$__font__size__11:11px;
+$__font__size__12:12px;
+$__font__size__13:13px;
+$__font__size__14:14px;
+$__font__size__15:15px;
+$__font__size__16:16px;
+$__font__size__17:17px;
+$__font__size__19:19px;
+$__font__size__18:18px;
+$__font__size__20:20px;
+$__font__size__21:21px;
+$__font__size__22:22px;
+$__font__size__23:23px;
+$__font__size__24:24px;
+$__font__size__25:25px;
+$__font__size__26:26px;
+$__font__size__28:28px;
+$__font__size__30:30px;
+$__font__size__32:32px;
+$__font__size__36:36px;
+$__font__size__40:40px;
+$__font__size__42:42px;
+$__font__size__48:48px;
+$__font__size__50:50px;
+$__font__size__54:54px;
+$__font__size__65:65px;
+$__font__size__70:70px;
+
+h1{
+	font-weight:$__medium;
+	font-size:$__font__size__40;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom767){
+		font-size:$__font__size__26 + 1;
+	}
+}
+h2{
+	font-weight:$__medium;
+	font-size:$__font__size__30;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom767){
+		font-size:$__font__size__22 + 1;
+	}
+}
+h3{
+	font-weight:$__medium;
+	font-size:$__font__size__24;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom1023){
+		font-size:$__font__size__20;
+	}
+	@include respond-below(custom767){
+		font-size:$__font__size__16;
+	}
+}
+h4{
+	font-weight:$__medium;
+	font-size:$__font__size__18;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom1023){
+		font-size:$__font__size__18;
+	}
+	@include respond-below(custom767){
+		font-size:$__font__size__16;
+	}
+}
+h5{
+	font-weight:$__medium;
+	font-size:$__font__size__14;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom1023){
+		font-size:$__font__size__14;
+	}
+}
+h6{
+	font-weight:$__medium;
+	font-size:$__font__size__12;
+	margin-bottom: 0.5rem;
+	@include respond-below(custom1023){
+		font-size:$__font__size__12;
+	}
+}
