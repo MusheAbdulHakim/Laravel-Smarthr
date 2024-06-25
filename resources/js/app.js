@@ -1,5 +1,5 @@
 import "./bootstrap";
-import "jquery-ujs";
+import jqueryUjsInit from "jquery-ujs";
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
 import jszip from 'jszip';
@@ -13,6 +13,7 @@ import 'datatables.net-colreorder-bs5';
 
 
 window.DataTable = DataTable;
+window.jqueryUjsInit = jqueryUjsInit;
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
 
@@ -72,5 +73,11 @@ $(document).on("ajax:success", function (e, data) {
         }
         $("#generalModal .body").html(data);
         $("#generalModal").modal("show");
+    }
+    if ($(".select").length > 0) {
+        $(".select").select2({
+            minimumResultsForSearch: -1,
+            width: "100%",
+        });
     }
 });

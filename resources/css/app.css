@@ -10,6 +10,10 @@
     }
 }
 
+#loader-wrapper {
+    background-color: none !important;
+}
+
 .invalid-feedback {
     display: inherit;
     width: 100%;
