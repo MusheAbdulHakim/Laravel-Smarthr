@@ -46,7 +46,7 @@
 
 
 @push('page-scripts')
-    <!-- Page Js -->
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
     <!-- /Page Js -->
 @endpush

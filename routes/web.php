@@ -7,9 +7,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\EmployeesController;
+use App\Http\Controllers\Admin\DepartmentsController;
+use App\Http\Controllers\Admin\DesignationsController;
 
 include __DIR__ . '/auth.php';
-    
+
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::any('logout', [AuthController::class, 'logout'])->name('logout');
@@ -20,6 +23,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('chat', [ChatController::class, 'index'])->name('app.chat');
     Route::resource('users', UsersController::class);
+    Route::resource('employees', EmployeesController::class);
+    Route::get('employees-list', [EmployeesController::class, 'list'])->name('employees.list');
+    Route::resource('departments', DepartmentsController::class)->except(['show']);
+    Route::resource('designations', DesignationsController::class)->except(['show']);
 
     //settings
     Route::prefix('settings')->group(function () {

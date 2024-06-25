@@ -156,113 +156,43 @@
         <!-- /Notifications -->
 
         <!-- Message Notifications -->
+        @php
+            $unreadMessages = auth()->user()->messengerInbox->where('seen',0);
+        @endphp
         <li class="nav-item dropdown">
-            <a href="{{ url('apps/chatify') }}" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                <i class="fa-regular fa-comment"></i> <span class="badge rounded-pill">8</span>
+            <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                <i class="fa-regular fa-comment"></i> <span class="badge rounded-pill">{{ $unreadMessages->count() ?? 0 }}</span>
             </a>
-            {{-- <div class="dropdown-menu notifications">
-                <div class="topnav-dropdown-header">
-                    <span class="notification-title">Messages</span>
-                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-                </div>
+            <div class="dropdown-menu notifications">
                 <div class="noti-content">
                     <ul class="notification-list">
-                        <li class="notification-message">
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img src="assets/img/profiles/avatar-09.jpg" alt="User Image">
-                                        </span>
+                        @if (!empty($unreadMessages) && ($unreadMessages->count() > 0))
+                            @foreach ($unreadMessages as $message)
+                            <li class="notification-message">
+                                <a href="{{ url('apps/chatify/') }}">
+                                    <div class="list-item">
+                                        <div class="list-left">
+                                            <span class="avatar">
+                                                <img src="{{ !empty($message->sender->avatar) ? asset('storage/users/'.$message->sender->avatar): asset('assets/img/user.jpg') }}" alt="{{ $message->from->username ?? 'Avatar' }}">
+                                            </span>
+                                        </div>
+                                        <div class="list-body">
+                                            <span class="message-author">{{ $message->sender->fullname }} </span>
+                                            <span class="message-time">{{ \Carbon\Carbon::parse($message->created_at)->diffForHumans() }}</span>
+                                            <div class="clearfix"></div>
+                                            <span class="message-content">{{ $message->body }}</span>
+                                        </div>
                                     </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Richard Miles </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img src="assets/img/profiles/avatar-02.jpg" alt="User Image">
-                                        </span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">John Doe</span>
-                                        <span class="message-time">6 Mar</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img src="assets/img/profiles/avatar-03.jpg" alt="User Image">
-                                        </span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Tarah Shropshire </span>
-                                        <span class="message-time">5 Mar</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
-                                        </span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Mike Litorus</span>
-                                        <span class="message-time">3 Mar</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="chat.html">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img src="assets/img/profiles/avatar-08.jpg" alt="User Image">
-                                        </span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Catherine Manseau </span>
-                                        <span class="message-time">27 Feb</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div class="topnav-dropdown-footer">
-                    <a href="chat.html">View all Messages</a>
+                    <a href={{ url('apps/chatify') }}">View all Messages</a>
                 </div>
-            </div> --}}
+            </div>
         </li>
         <!-- /Message Notifications -->
 
