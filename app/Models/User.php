@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -34,6 +35,18 @@ class User extends Authenticatable
         'is_active', 'lang', 'layout', 'color_scheme',
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
+
+    public function messengerInbox(){
+        return $this->hasMany(ChMessage::class,'to_id');
+    }
+
+    public function messengerOutbox(){
+        return $this->hasMany(ChMessage::class,'from_id');
+    }
+
+    public function employeeDetail(){
+        return $this->hasOne(EmployeeDetail::class);
+    }
 
     public function getNameAttribute()
     {

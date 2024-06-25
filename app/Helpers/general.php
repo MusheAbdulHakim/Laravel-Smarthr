@@ -132,7 +132,7 @@ if (!function_exists('LocaleSettings')) {
 }
 
 if (!function_exists('uploadedAsset')) {
-    function uploadedAssed($asset, $directory = '')
+    function uploadedAsset($asset, $directory = '')
     {
         return ($directory !== '') ? asset("storage/$directory/$asset") : asset("storage/$asset");
     }
@@ -149,6 +149,6 @@ if (!function_exists('renderAppSettingsMenu')) {
 }
 
 
-function pad_zeros($number, $total_zeros){
+function pad_zeros($number, $total_zeros = 4){
     return sprintf("%0{$total_zeros}d", $number);
 }

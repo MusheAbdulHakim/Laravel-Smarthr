@@ -333,7 +333,11 @@ class MessagesController extends Controller
         $getRecords = null;
         $input = trim(filter_var($request['input']));
         $records = User::where('id', '!=', Auth::user()->id)
-            ->where('name', 'LIKE', "%{$input}%")
+            ->where('firstname', 'LIKE', "%{$input}%")
+            ->orWhere('middlename', 'LIKE', "%{$input}%")
+            ->orWhere('lastname', 'LIKE', "%{$input}%")
+            ->orWhere('username', 'LIKE', "%{$input}%")
+            ->orWhere('email', 'LIKE', "%{$input}%")
             ->paginate($request->per_page ?? $this->perPage);
         foreach ($records->items() as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [

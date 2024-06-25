@@ -2,24 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\UsersDataTable;
+use App\DataTables\EmployeeDataTable;
 use App\Enums\UserType;
-use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Designation;
+use App\Models\EmployeeDetail;
 use App\Models\User;
+use Chatify\Facades\ChatifyMessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends BaseController
+class EmployeesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        $pageTitle = __('Users');
-        return $dataTable->render('pages.users.index', compact(
-            'pageTitle'
+        $pageTitle = __("Employees");
+        $employees = User::where('type', UserType::EMPLOYEE)->get();
+        return view('pages.employees.index',compact(
+            'pageTitle','employees'
+        ));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function list(EmployeeDataTable $dataTable)
+    {
+        $pageTitle = __("employees");
+        return $dataTable->render('pages.employees.index',compact(
+            'pageTitle',
         ));
     }
 
@@ -28,7 +43,11 @@ class UsersController extends BaseController
      */
     public function create()
     {
-        return view('pages.users.create');
+        $departments = Department::get();
+        $designations = Designation::get();
+        return view('pages.employees.create',compact(
+            'departments','designations'
+        ));
     }
 
     /**
@@ -49,8 +68,8 @@ class UsersController extends BaseController
             $imageName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
-        User::create([
-            'type' => UserType::SUPERADMIN,
+        $user = User::create([
+            'type' => UserType::EMPLOYEE,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
             'lastname' => $request->lastname,
@@ -66,31 +85,49 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status),
             'password' => Hash::make($request->password)
         ]);
-        flash()->success(__('User has been created'));
+        if(!empty($user)){
+            $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
+            $empId = "EMP-".pad_zeros(($totalEmployees+1));
+            EmployeeDetail::create([
+                'emp_id' => $empId,
+                'user_id' => $user->id,
+                'department_id' => $request->department,
+                'designation_id' => $request->designation,
+            ]);
+        }
+        flash()->success(__('Employee has been added'));
         return back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $employee)
     {
+        $user = $employee;
+        $employee = $employee->employeeDetail;
+        $pageTitle = __('Employee Profile');
+        return view('pages.employees.show',compact(
+            'employee','user','pageTitle'
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $employee)
     {
-        return view('pages.users.edit', compact(
-            'user'
+        $departments = Department::get();
+        $designations = Designation::get();
+        return view('pages.employees.edit',compact(
+            'departments','designations','employee'
         ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $employee)
     {
         $request->validate([
             'firstname' => 'required',
@@ -98,6 +135,7 @@ class UsersController extends BaseController
             'password' => 'nullable|string|confirmed',
             'status' => 'required',
         ]);
+        $user = $employee;
         $imageName = $user->avatar;
         if ($request->hasFile('avatar')) {
             $imageName = time() . '.' . $request->avatar->extension();
@@ -118,17 +156,32 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status) ?? $user->is_active,
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
-        flash()->success(__('User has been updated'));
-        return back();
+        if(!empty($user)){
+            $employeeDetails = $user->employeeDetail;
+            if(!empty($employeeDetails) && empty($employeeDetails->emp_id)){
+                $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
+                $empId = "EMP-".pad_zeros(($totalEmployees+1));
+            }
+            EmployeeDetail::updateOrCreate([
+                'user_id' => $user->id,
+            ],[
+                'emp_id' => $empId ?? $employee->emp_id,
+                'user_id' => $user->id,
+                'department_id' => $request->department,
+                'designation_id' => $request->designation,
+            ]);
+        }
+        flash()->success(__("Employee has been updated"));
+        return redirect()->route('employees.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $employee)
     {
-        $user->delete();
-        flash()->success(__('User has been deleted'));
-        return redirect()->route('users.index');
+        $employee->delete();
+        flash()->success(__("Employee has been deleted"));
+        return redirect()->route('employees.index');
     }
 }

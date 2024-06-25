@@ -9,11 +9,12 @@ class ChatController extends Controller
 
     public function index()
     {
-        $pageTitle = 'Chat';
-        $user = auth()->user();
-        return view('apps.chat', compact(
-            'pageTitle',
-            'user'
-        ));
+        return redirect('apps/chatify');
+        // $pageTitle = 'Chat';
+        // $user = auth()->user();
+        // return view('apps.chat', compact(
+        //     'pageTitle',
+        //     'user'
+        // ));
     }
 }

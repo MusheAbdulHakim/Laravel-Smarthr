@@ -39,12 +39,13 @@ class AppMenuListener
                         Link::to('apps/chatify', 'Chat')->addClass(route_is(['apps/chatify']) ? 'active' : '')
                     )->addParentClass('submenu')
             );
-        $activeClass = route_is(['departments.index','designations.index']) ? "active" : "";
+        $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index']) ? "active" : "";
         $menu
             ->submenu(
                 Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
                 Menu::new()
                     ->addParentClass('submenu')
+                    ->add(Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
                     ->add(Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
                     ->add(Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
             );
