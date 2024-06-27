@@ -1,0 +1,11 @@
+{
+    "name": "Whiteboard",
+    "alias": "whiteboard",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Whiteboard\\Providers\\WhiteboardServiceProvider"
+    ],
+    "files": []
+}
