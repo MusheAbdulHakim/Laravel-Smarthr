@@ -6,6 +6,7 @@ use App\Helpers\AppMenu;
 use App\Settings\ThemeSettings;
 use App\Settings\LocalizationSettings;
 use Illuminate\Support\Facades\Route;
+use Nwidart\Modules\Facades\Module;
 use Spatie\Menu\Laravel\Link;
 use Spatie\Menu\Laravel\Menu;
 
@@ -151,4 +152,12 @@ if (!function_exists('renderAppSettingsMenu')) {
 
 function pad_zeros($number, $total_zeros = 4){
     return sprintf("%0{$total_zeros}d", $number);
+}
+
+
+if(!function_exists('module')){
+    function module($name)
+    {
+        return Module::find($name);
+    }
 }
