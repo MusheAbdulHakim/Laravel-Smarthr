@@ -39,6 +39,7 @@ class AppMenuListener
                         Link::to('apps/chatify', 'Chat')->addClass(route_is(['apps/chatify']) ? 'active' : '')
                     )->addParentClass('submenu')
             );
+        $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
         $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index']) ? "active" : "";
         $menu
             ->submenu(
@@ -55,7 +56,6 @@ class AppMenuListener
         $menu->add(
             Link::toRoute('settings.index', '<i class="la la-cog"></i> <span>' . __('Settings') . '</span>')->setActive(route_is('settings.index'))
         );
-        $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
 
     }
 }
