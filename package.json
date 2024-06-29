@@ -8,6 +8,7 @@
     "devDependencies": {
         "axios": "^1.6.4",
         "glob": "^10.4.2",
+        "jquery-ujs": "^1.2.3",
         "laravel-echo": "^1.16.1",
         "laravel-vite-plugin": "^1.0",
         "pusher-js": "^8.4.0-rc2",
@@ -15,13 +16,16 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "datatables.net-bs5": "^2.0.8",
-        "datatables.net-buttons-bs5": "^3.0.2",
-        "datatables.net-colreorder-bs5": "^2.0.3",
+        "@excalidraw/excalidraw": "^0.17.6",
+        "@excalidraw/mermaid-to-excalidraw": "^1.0.0",
+        "@tldraw/tldraw": "^2.3.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "clsx": "^2.1.1",
         "intl-tel-input": "^23.0.12",
-        "jquery-ujs": "^1.2.3",
         "jszip": "^3.10.1",
         "nprogress": "^0.2.0",
-        "pdfmake": "^0.2.10"
+        "pdfmake": "^0.2.10",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
     }
 }
