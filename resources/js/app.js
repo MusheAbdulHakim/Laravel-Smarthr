@@ -1,18 +1,14 @@
 import "./bootstrap";
+import jQuery from "jquery";
 import jqueryUjsInit from "jquery-ujs";
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
 import jszip from 'jszip';
 import pdfmake from 'pdfmake';
-import DataTable from "datatables.net-bs5";
-import 'datatables.net-buttons-bs5';
-import 'datatables.net-buttons/js/buttons.colVis.mjs';
-import 'datatables.net-buttons/js/buttons.html5.mjs';
-import 'datatables.net-buttons/js/buttons.print.mjs';
-import 'datatables.net-colreorder-bs5';
 
 
-window.DataTable = DataTable;
+window.jszip = jszip;
+window.pdfmake = pdfmake;
 window.jqueryUjsInit = jqueryUjsInit;
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
