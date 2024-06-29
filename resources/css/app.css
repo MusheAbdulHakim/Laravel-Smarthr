@@ -10,7 +10,8 @@
     }
 }
 
-#loader-wrapper {
+#loader-wrapper, #loader {
+    background: none !important;
     background-color: none !important;
 }
 

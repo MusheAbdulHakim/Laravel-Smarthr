@@ -17,7 +17,10 @@
 
 <!-- Custom JS -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
-@vite(['resources/js/app.js'])
+@vite([
+    'resources/js/custom.js',
+    'resources/js/app.js'
+])
 
 @livewireScripts
 @stack('page-scripts')

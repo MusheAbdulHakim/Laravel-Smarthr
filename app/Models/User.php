@@ -36,6 +36,10 @@ class User extends Authenticatable
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
 
+    public function family(){
+        return $this->hasMany(UserFamilyInfo::class,'user_id');
+    }
+
     public function messengerInbox(){
         return $this->hasMany(ChMessage::class,'to_id');
     }

@@ -10,10 +10,13 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
+use App\Http\Controllers\Admin\EmployeeDetailsController;
+use App\Http\Controllers\Admin\FamilyInfoController;
 
 include __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -22,11 +25,24 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profile', [UserProfileController::class, 'update']);
 
     Route::get('chat', [ChatController::class, 'index'])->name('app.chat');
+    Route::get('video', [ChatController::class, 'video'])->name('app.video');
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);
+    Route::get('employee/personal-info/{employeeDetail}', [EmployeeDetailsController::class, 'personalInfo'])->name('employee.personal-info');
+    Route::post('employee/personal-info/{employeeDetail}', [EmployeeDetailsController::class, 'updatePersonalInfo']);
+    Route::get('employee/emergency-contacts/{employeeDetail}', [EmployeeDetailsController::class, 'emergencyContacts'])->name('employee.emergency-contacts');
+    Route::post('employee/emergency-contacts/{employeeDetail}', [EmployeeDetailsController::class, 'updateEmergencyContacts']);
+    Route::get('employee/experience/{employeeDetail}', [EmployeeDetailsController::class, 'workExperience'])->name('employee.experience');
+    Route::post('employee/experience/{employeeDetail}', [EmployeeDetailsController::class, 'updateWorkExperience']);
+    Route::delete('experience/{experience}', [EmployeeDetailsController::class, 'deleteWorkExperience'])->name('employee.experience.delete');
+
+    Route::get('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'education'])->name('employee.education');
+    Route::post('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'updateEducation']);
+
     Route::get('employees-list', [EmployeesController::class, 'list'])->name('employees.list');
     Route::resource('departments', DepartmentsController::class)->except(['show']);
     Route::resource('designations', DesignationsController::class)->except(['show']);
+    Route::resource('family-information', FamilyInfoController::class);
 
     //settings
     Route::prefix('settings')->group(function () {
@@ -38,10 +54,4 @@ Route::middleware(['auth'])->group(function () {
         Route::get('theme', [SettingsController::class, 'theme'])->name('settings.theme');
         Route::post('theme', [SettingsController::class, 'updateTheme'])->name('settings.theme.update');
     });
-});
-
-
-
-Route::get('', function(){
-    return view('welcome');
 });

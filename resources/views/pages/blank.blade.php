@@ -10,7 +10,7 @@
 
         <!-- Page Header -->
         <x-breadcrumb>
-            <x-slot name="title">Page Title</x-slot>
+            <x-slot name="title">{{ __('Page Title') }}</x-slot>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>

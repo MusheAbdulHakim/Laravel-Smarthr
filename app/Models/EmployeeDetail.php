@@ -23,6 +23,11 @@ class EmployeeDetail extends Model
         'marital_status' => MaritalStatus::class,
     ];
 
+
+    public function workExperience(){
+        return $this->hasMany(EmployeeWorkExperience::class,'employee_detail_id');
+    }
+
     public function designation(){
         return $this->belongsTo(Designation::class);
     }

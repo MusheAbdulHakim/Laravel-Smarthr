@@ -1667,16 +1667,16 @@
         },
         {
             "name": "laravel-lang/locales",
-            "version": "2.8.0",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/locales.git",
-                "reference": "687cdca9ee6465c13cf6c0690b505eb1127d5c3d"
+                "reference": "e7914ccfb91432ebebacf46697b573a330d702c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/locales/zipball/687cdca9ee6465c13cf6c0690b505eb1127d5c3d",
-                "reference": "687cdca9ee6465c13cf6c0690b505eb1127d5c3d",
+                "url": "https://api.github.com/repos/Laravel-Lang/locales/zipball/e7914ccfb91432ebebacf46697b573a330d702c7",
+                "reference": "e7914ccfb91432ebebacf46697b573a330d702c7",
                 "shasum": ""
             },
             "require": {
@@ -1736,7 +1736,7 @@
                 "issues": "https://github.com/Laravel-Lang/locales/issues",
                 "source": "https://github.com/Laravel-Lang/locales"
             },
-            "time": "2024-06-01T23:45:12+00:00"
+            "time": "2024-06-24T09:56:41+00:00"
         },
         {
             "name": "laravel-lang/native-country-names",
@@ -10725,16 +10725,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.5.1",
+            "version": "15.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "8195a64e5b878d40409068283d4f110434dd456f"
+                "reference": "7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8195a64e5b878d40409068283d4f110434dd456f",
-                "reference": "8195a64e5b878d40409068283d4f110434dd456f",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae",
+                "reference": "7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae",
                 "shasum": ""
             },
             "require": {
@@ -10784,7 +10784,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-06-04T09:27:54+00:00"
+            "time": "2024-06-26T10:15:40+00:00"
         },
         {
             "name": "laravel-lang/publisher",
@@ -10886,16 +10886,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.29.3",
+            "version": "v1.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5"
+                "reference": "e08b594052385ab9891dd86047e52da8a953c827"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5",
-                "reference": "e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e08b594052385ab9891dd86047e52da8a953c827",
+                "reference": "e08b594052385ab9891dd86047e52da8a953c827",
                 "shasum": ""
             },
             "require": {
@@ -10945,7 +10945,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-06-12T16:24:41+00:00"
+            "time": "2024-06-18T17:36:56+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -12784,16 +12784,16 @@
         },
         {
             "name": "spatie/error-solutions",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/error-solutions.git",
-                "reference": "d60d4d2ef4b7701c86134ded959667cac6215233"
+                "reference": "9782ba6e25cb026cc653619e01ca695d428b3f03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/error-solutions/zipball/d60d4d2ef4b7701c86134ded959667cac6215233",
-                "reference": "d60d4d2ef4b7701c86134ded959667cac6215233",
+                "url": "https://api.github.com/repos/spatie/error-solutions/zipball/9782ba6e25cb026cc653619e01ca695d428b3f03",
+                "reference": "9782ba6e25cb026cc653619e01ca695d428b3f03",
                 "shasum": ""
             },
             "require": {
@@ -12846,7 +12846,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/error-solutions/issues",
-                "source": "https://github.com/spatie/error-solutions/tree/1.0.1"
+                "source": "https://github.com/spatie/error-solutions/tree/1.0.2"
             },
             "funding": [
                 {
@@ -12854,7 +12854,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-21T10:09:00+00:00"
+            "time": "2024-06-26T13:09:17+00:00"
         },
         {
             "name": "spatie/flare-client-php",

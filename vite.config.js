@@ -1,14 +1,29 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
+import collectModuleAssetsPaths from './vite-module-loader.js';
 
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: [
-                'resources/css/app.css',
-                'resources/js/app.js'
-            ],
-            refresh: true,
-        }),
-    ],
-});
+async function getConfig() {
+    const paths = [
+        'resources/css/app.css',
+        'resources/js/app.js',
+        'resources/js/custom.js',
+    ];
+    const allPaths = await collectModuleAssetsPaths(paths, 'Modules');
+
+    return defineConfig({
+        plugins: [
+            laravel({
+                input: allPaths,
+                refresh: true,
+            })
+        ],
+        define: {
+            "process.env.IS_PREACT": JSON.stringify("true"),
+        },
+        optimizeDeps: {
+            exclude: ['js-big-decimal']
+        }
+    });
+}
+
+export default getConfig();

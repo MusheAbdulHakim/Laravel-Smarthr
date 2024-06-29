@@ -28,6 +28,7 @@
         <!-- /Page Content -->
     </div>
     <!-- /Page Wrapper -->
+    <!-- Delete Modal -->
     <div class="modal custom-modal fade" id="GeneralDeleteModal" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -57,4 +58,6 @@
             </div>
         </div>
     </div>
+    <!-- /Delete Modal -->
+
 @endsection
