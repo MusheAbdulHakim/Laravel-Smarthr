@@ -11,6 +11,7 @@ use App\Models\EmployeeDetail;
 use App\Models\User;
 use Chatify\Facades\ChatifyMessenger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class EmployeesController extends Controller
@@ -102,10 +103,11 @@ class EmployeesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $employee)
+    public function show(string $employee)
     {
-        $user = $employee;
-        $employee = $employee->employeeDetail;
+        $id = Crypt::decrypt($employee);
+        $user = User::findOrFail($id);
+        $employee = $user->employeeDetail;
         $pageTitle = __('Employee Profile');
         return view('pages.employees.show',compact(
             'employee','user','pageTitle'

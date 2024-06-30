@@ -1,9 +1,8 @@
-(function($) {
-
-    $(document).on('ajax:before', function(){
-        $('#loader-wrapper').addClass('d-block')
+(function ($) {
+    $(document).on("ajax:before", function () {
+        $("#loader-wrapper").addClass("d-block");
         return true;
-    })
+    });
 
     $(document).on("click", ".deleteBtn", function () {
         let title = $(this).data("title");
@@ -20,7 +19,7 @@
     });
 
     $(document).on("ajax:success", function (e, data) {
-        $('#loader-wrapper').removeClass('d-block')
+        $("#loader-wrapper").removeClass("d-block");
         let title = $(e.target).data("title");
         let style = $(e.target).data("style");
         let size = $(e.target).data("size");
@@ -39,8 +38,8 @@
                                         ${
                                             title
                                                 ? '<h5 class="modal-title">' +
-                                                title +
-                                                "</h5>"
+                                                  title +
+                                                  "</h5>"
                                                 : ""
                                         }
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -63,31 +62,32 @@
                 width: "100%",
             });
         }
-        if($('.datepicker').length > 0){
-            $('.datepicker').each(function(){
+        if ($(".datepicker").length > 0) {
+            $(".datepicker").each(function () {
                 $(this).datetimepicker({
-                    format: 'YYYY-MM-DD',
+                    format: "YYYY-MM-DD",
                     icons: {
                         up: "fa fa-angle-up",
                         down: "fa fa-angle-down",
-                        next: 'fa fa-angle-right',
-                        previous: 'fa fa-angle-left'
-                    }
+                        next: "fa fa-angle-right",
+                        previous: "fa fa-angle-left",
+                    },
                 });
-            })
+            });
         }
-        if($('.datetimepicker').length > 0){
-            $('.datetimepicker').each(function(){
+        if ($(".datetimepicker").length > 0) {
+            $(".datetimepicker").each(function () {
                 $(this).datetimepicker({
-                    format: 'YYYY-MM-DD H:i',
+                    format: "YYYY-MM-DD H:i",
                     icons: {
                         up: "fa fa-angle-up",
                         down: "fa fa-angle-down",
-                        next: 'fa fa-angle-right',
-                        previous: 'fa fa-angle-left'
-                    }
+                        next: "fa fa-angle-right",
+                        previous: "fa fa-angle-left",
+                    },
                 });
-            })
+            });
         }
+        return true;
     });
 })(jQuery);

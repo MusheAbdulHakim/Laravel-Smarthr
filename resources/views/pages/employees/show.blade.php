@@ -628,7 +628,7 @@
 
 @push('page-scripts')
     <!-- Page Js -->
-    <!-- Select2 JS -->
+    <script src="{{ asset('assets/plugins/jquery-repeater/jquery.repeater.min.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <!-- /Page Js -->
 @endpush

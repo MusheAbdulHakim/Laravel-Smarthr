@@ -95,8 +95,9 @@ class EmployeeDetailsController extends BaseController
     }
 
     public function deleteWorkExperience(Request $request, EmployeeWorkExperience $experience){
+        $experience->delete();
         flash()->success(__("Work experience has been deleted"));
-        return $experience->delete();
+        return redirect()->back();
     }
 
     public function education(EmployeeDetail $employeeDetail){
