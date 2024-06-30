@@ -59,7 +59,7 @@
                                 </a>
                             </div>
                         </div>
-                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('employees.show', $employee->id) }}">{{ $employee->fullname }}</a></h4>
+                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}">{{ $employee->fullname }}</a></h4>
                         @if (!empty($employee->employeeDetail) && !empty($employee->employeeDetail->designation))
                         <div class="small text-muted">{{ $employee->employeeDetail->designation->name }}</div>
                         @endif
