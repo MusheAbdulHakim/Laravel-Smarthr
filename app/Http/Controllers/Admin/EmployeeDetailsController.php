@@ -7,17 +7,20 @@ use App\Models\EmployeeDetail;
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeWorkExperience;
 use App\Http\Controllers\BaseController;
+use App\Models\EmployeeEducation;
 
 class EmployeeDetailsController extends BaseController
 {
 
-    public function personalInfo(EmployeeDetail $employeeDetail){
-        return view('pages.employees.modals.personal-info',compact(
+    public function personalInfo(EmployeeDetail $employeeDetail)
+    {
+        return view('pages.employees.modals.personal-info', compact(
             'employeeDetail'
         ));
     }
 
-    public function updatePersonalInfo(Request $request, EmployeeDetail $employeeDetail){
+    public function updatePersonalInfo(Request $request, EmployeeDetail $employeeDetail)
+    {
         $employeeDetail->update([
             'passport_no' => $request->passport,
             'passport_expiry_date' => $request->expiry_date,
@@ -33,13 +36,15 @@ class EmployeeDetailsController extends BaseController
         return back();
     }
 
-    public function emergencyContacts(EmployeeDetail $employeeDetail){
-        return view('pages.employees.modals.emergency-contacts',compact(
+    public function emergencyContacts(EmployeeDetail $employeeDetail)
+    {
+        return view('pages.employees.modals.emergency-contacts', compact(
             'employeeDetail'
         ));
     }
 
-    public function updateEmergencyContacts(Request $request, EmployeeDetail $employeeDetail){
+    public function updateEmergencyContacts(Request $request, EmployeeDetail $employeeDetail)
+    {
         $employeeDetail->update([
             'emergency_contacts' => [
                 'primary' => $request->primary,
@@ -51,28 +56,29 @@ class EmployeeDetailsController extends BaseController
     }
 
 
-    public function workExperience(EmployeeDetail $employeeDetail){
+    public function workExperience(EmployeeDetail $employeeDetail)
+    {
         $experiences = $employeeDetail->workExperience;
-        return view('pages.employees.modals.experience',compact(
-            'employeeDetail','experiences'
+        return view('pages.employees.modals.experience', compact(
+            'employeeDetail',
+            'experiences'
         ));
     }
 
-    public function updateWorkExperience(Request $request, EmployeeDetail $employeeDetail){
+    public function updateWorkExperience(Request $request, EmployeeDetail $employeeDetail)
+    {
         $request->validate([
             'experience' => 'required',
         ]);
         $employeename = $employeeDetail->user->fullname;
         $employeeExperiences = $employeeDetail->workExperience;
         $experiences = $request->experience;
-        $experience_ids = $employeeExperiences->pluck('id');
-        // EmployeeWorkExperience::whereNotIn('id',)
-        foreach($experiences as $i => $experience){
+        foreach ($experiences as $i => $experience) {
             $fileName = null;
-            $dir = public_path("storage/employees/".$employeeDetail->emp_id."/work-experience");
+            $dir = public_path("storage/employees/" . $employeeDetail->emp_id . "/work-experience");
             $requestFile = $experience['file'] ?? null;
-            if(!empty($requestFile)){
-                $fileName = random_str(7).'.'.$requestFile->extension();
+            if (!empty($requestFile)) {
+                $fileName = random_str(7) . '.' . $requestFile->extension();
                 $requestFile->move($dir, $fileName);
             }
             EmployeeWorkExperience::updateOrCreate([
@@ -80,7 +86,7 @@ class EmployeeDetailsController extends BaseController
                 'id' => $experience['id'] ?? null,
                 'company' => $experience['company'] ?? '',
                 'location' => $experience['location'] ?? '',
-            ],[
+            ], [
                 'employee_detail_id' => $employeeDetail->id,
                 'company' => $experience['company'] ?? '',
                 'location' => $experience['location'] ?? '',
@@ -94,22 +100,56 @@ class EmployeeDetailsController extends BaseController
         return back();
     }
 
-    public function deleteWorkExperience(Request $request, EmployeeWorkExperience $experience){
+    public function deleteWorkExperience(Request $request, EmployeeWorkExperience $experience)
+    {
         $experience->delete();
         flash()->success(__("Work experience has been deleted"));
-        return redirect()->back();
+        return back();
     }
 
-    public function education(EmployeeDetail $employeeDetail){
-        return view('pages.employees.modals.education',compact(
-            'employeeDetail'
+    public function education(EmployeeDetail $employeeDetail)
+    {
+        $educations = $employeeDetail->education;
+        return view('pages.employees.modals.education', compact(
+            'employeeDetail',
+            'educations'
         ));
     }
 
-    public function updateEducation(Request $request, EmployeeWorkExperience $employeeDetail){
-
+    public function updateEducation(Request $request, EmployeeWorkExperience $employeeDetail)
+    {
+        $educations = $request->education;
+        foreach ($educations as $i => $education) {
+            $fileName = null;
+            $dir = public_path("storage/employees/" . $employeeDetail->emp_id . "/education");
+            $requestFile = $education['file'] ?? null;
+            if (!empty($requestFile)) {
+                $fileName = random_str(7) . '.' . $requestFile->extension();
+                $requestFile->move($dir, $fileName);
+            }
+            EmployeeEducation::updateOrCreate([
+                'employee_detail_id' => $employeeDetail->id,
+                'id' => $education['id'] ?? null,
+            ], [
+                'employee_detail_id' => $employeeDetail->id,
+                'institution' => $education['start_date'] ?? '',
+                'subject' => $education['subject'] ?? '',
+                'course' => $education['course'] ?? '',
+                'grade' => $education['grade'] ?? '',
+                'start_date' => $education['start_date'] ?? '',
+                'end_date' => $education['end_date'] ?? '',
+                'file' => $fileName,
+            ]);
+        }
         flash()->success(__("Employee education has been added"));
         return back();
     }
 
+    public function deleteEducation(Request $request)
+    {
+        $education = EmployeeEducation::findOrFail($request->education);
+        $education->delete();
+        flash()->success(__('Employee Education has beel deleted'));
+        return back();
+    }
 }

@@ -23,8 +23,9 @@ class EmployeesController extends Controller
     {
         $pageTitle = __("Employees");
         $employees = User::where('type', UserType::EMPLOYEE)->get();
-        return view('pages.employees.index',compact(
-            'pageTitle','employees'
+        return view('pages.employees.index', compact(
+            'pageTitle',
+            'employees'
         ));
     }
 
@@ -34,7 +35,7 @@ class EmployeesController extends Controller
     public function list(EmployeeDataTable $dataTable)
     {
         $pageTitle = __("employees");
-        return $dataTable->render('pages.employees.index',compact(
+        return $dataTable->render('pages.employees.index', compact(
             'pageTitle',
         ));
     }
@@ -46,8 +47,9 @@ class EmployeesController extends Controller
     {
         $departments = Department::get();
         $designations = Designation::get();
-        return view('pages.employees.create',compact(
-            'departments','designations'
+        return view('pages.employees.create', compact(
+            'departments',
+            'designations'
         ));
     }
 
@@ -86,9 +88,9 @@ class EmployeesController extends Controller
             'is_active' => !empty($request->status),
             'password' => Hash::make($request->password)
         ]);
-        if(!empty($user)){
+        if (!empty($user)) {
             $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
-            $empId = "EMP-".pad_zeros(($totalEmployees+1));
+            $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
             EmployeeDetail::create([
                 'emp_id' => $empId,
                 'user_id' => $user->id,
@@ -109,8 +111,10 @@ class EmployeesController extends Controller
         $user = User::findOrFail($id);
         $employee = $user->employeeDetail;
         $pageTitle = __('Employee Profile');
-        return view('pages.employees.show',compact(
-            'employee','user','pageTitle'
+        return view('pages.employees.show', compact(
+            'employee',
+            'user',
+            'pageTitle'
         ));
     }
 
@@ -121,8 +125,10 @@ class EmployeesController extends Controller
     {
         $departments = Department::get();
         $designations = Designation::get();
-        return view('pages.employees.edit',compact(
-            'departments','designations','employee'
+        return view('pages.employees.edit', compact(
+            'departments',
+            'designations',
+            'employee'
         ));
     }
 
@@ -158,15 +164,15 @@ class EmployeesController extends Controller
             'is_active' => !empty($request->status) ?? $user->is_active,
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
-        if(!empty($user)){
+        if (!empty($user)) {
             $employeeDetails = $user->employeeDetail;
-            if(!empty($employeeDetails) && empty($employeeDetails->emp_id)){
+            if (!empty($employeeDetails) && empty($employeeDetails->emp_id)) {
                 $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
-                $empId = "EMP-".pad_zeros(($totalEmployees+1));
+                $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
             }
             EmployeeDetail::updateOrCreate([
                 'user_id' => $user->id,
-            ],[
+            ], [
                 'emp_id' => $empId ?? $employee->emp_id,
                 'user_id' => $user->id,
                 'department_id' => $request->department,
@@ -174,7 +180,7 @@ class EmployeesController extends Controller
             ]);
         }
         flash()->success(__("Employee has been updated"));
-        return redirect()->route('employees.index');
+        return back();
     }
 
     /**

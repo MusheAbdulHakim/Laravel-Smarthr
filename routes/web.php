@@ -34,10 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('employee/emergency-contacts/{employeeDetail}', [EmployeeDetailsController::class, 'updateEmergencyContacts']);
     Route::get('employee/experience/{employeeDetail}', [EmployeeDetailsController::class, 'workExperience'])->name('employee.experience');
     Route::post('employee/experience/{employeeDetail}', [EmployeeDetailsController::class, 'updateWorkExperience']);
-    Route::delete('experience/{experience}', [EmployeeDetailsController::class, 'deleteWorkExperience'])->name('employee.experience.delete');
-
+    Route::delete('delete-experience/{experience}', [EmployeeDetailsController::class, 'deleteWorkExperience'])->name('employee.experience.delete');
     Route::get('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'education'])->name('employee.education');
     Route::post('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'updateEducation']);
+    Route::delete('del-employee-education', [EmployeeDetailsController::class, 'deleteEducation'])->name('employee.education.delete');
 
     Route::get('employees-list', [EmployeesController::class, 'list'])->name('employees.list');
     Route::resource('departments', DepartmentsController::class)->except(['show']);

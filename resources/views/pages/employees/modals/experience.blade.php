@@ -10,7 +10,11 @@
                         <div class="card-body">
                             <h3 class="card-title">
                                 {{ __('Experience') }}
-                                <a href="{{ route('employee.experience.delete', $experience->id) }}" data-url="{{ route('employees.show', ['employee' => \Crypt::encrypt($employeeDetail->id)]) }}" data-remote="true" data-method="delete" data-confirm="{{ __('Are you sure you want to delete') }}" data-repeater-delete type="button" class="delete-icon"><i class="fa-regular fa-trash-can"></i></a>
+                                <a class="delete-icon deleteBtn" data-route="{{ route('employee.experience.delete', $experience->id)  }}" 
+                                    data-title="Delete Work Experience"
+                                    data-question="Are you sure you want to delete?" data-repeater-delete type="button" href="javascript:void(0)">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
                             </h3>
                             <div class="row">
                                 <div class="col-md-6">

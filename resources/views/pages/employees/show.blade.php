@@ -49,7 +49,7 @@
                             @if (!empty($employee->emp_id))
                             <div class="staff-id">{{ __('Employee ID') }} : {{ $employee->emp_id ?? '' }}</div>
                             @endif
-                            @if (!empty($employee->emp_id))
+                            @if (!empty($employee->date_joined))
                             <div class="small doj text-muted">
                               {{ __('Date of Join') }} : {{ format_date($employee->date_joined) }}
                             </div>
@@ -67,34 +67,33 @@
                             @if (!empty($user->phone))
                                 <li>
                                     <div class="title">{{ __('Phone') }}:</div>
-                                    <div class="text"><a href="#">{{ $user->phoneNumber }}</a>
-                                    </div>
+                                    <div class="text"><a href="#">{{ $user->phoneNumber }}</a></div>
                                 </li>
                             @endif
                             @if (!empty($user->email))
                                 <li>
                                     <div class="title">{{ __('Email') }}:</div>
-                                    <div class="text"><a href="">{{ $user->email }}</a></div>
+                                    <div class="text">{{ $user->email }}</div>
                                 </li>
                             @endif
 
                             @if (!empty($user->address))
                                 <li>
                                     <div class="title">{{ __('Address') }}:</div>
-                                    <div class="text"><a href="">{{ $user->address }}</a></div>
+                                    <div class="text">{{ $user->address }}</div>
                                 </li>
                             @endif
                             @if (!empty($employee->dob))
                                 <li>
                                     <div class="title">{{ __('Date Of Birth') }}:</div>
-                                    <div class="text"><a href="">{{ $user->dob }}</a></div>
+                                    <div class="text">{{ format_date($user->dob) }}</div>
                                 </li>
                             @endif
 
                             @if (!empty($user->gender))
                                 <li>
                                     <div class="title">{{ __('Gender') }}:</div>
-                                    <div class="text"><a href="">{{ $user->gender }}</a></div>
+                                    <div class="text">{{ $user->gender }}</div>
                                 </li>
                             @endif
                           </ul>
@@ -102,8 +101,8 @@
                       </div>
                     </div>
                     <div class="pro-edit">
-                      <a data-bs-target="#profile_info" href="#"
-                        ><i class="fa-solid fa-pencil"></i
+                      <a href="{{ route('employees.edit', $user->id) }}" data-ajax-modal="true" data-remote="true"
+                        data-title="Edit Employee" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __('Edit profile') }}"><i class="fa-solid fa-pencil"></i
                       ></a>
                     </div>
                   </div>
@@ -164,7 +163,7 @@
                         @if (!empty($employee->passport_tel))
                         <li>
                           <div class="title">{{ __('Tel') }}</div>
-                          <div class="text"><a href="">{{ $employee->passport_tel }}</a></div>
+                          <div class="text">{{ $employee->passport_tel }}</a></div>
                         </li>
                         @endif
                         @if (!empty($employee->nationality))
@@ -260,33 +259,91 @@
                   </div>
                 </div>
               </div>
+              
               <div class="row">
                 <div class="col-md-6 d-flex">
                   <div class="card profile-box flex-fill">
                     <div class="card-body">
-                      <h3 class="card-title">Bank information</h3>
-                      <ul class="personal-info">
-                        <li>
-                          <div class="title">Bank name</div>
-                          <div class="text">ICICI Bank</div>
-                        </li>
-                        <li>
-                          <div class="title">Bank account No.</div>
-                          <div class="text">159843014641</div>
-                        </li>
-                        <li>
-                          <div class="title">IFSC Code</div>
-                          <div class="text">ICI24504</div>
-                        </li>
-                        <li>
-                          <div class="title">PAN No</div>
-                          <div class="text">TC000Y56</div>
-                        </li>
-                      </ul>
+                      <h3 class="card-title">
+                        {{ __('Education Informations') }}
+                        <a
+                          href="{{ route('employee.education', $employee->id) }}"
+                          class="edit-icon" data-title="{{ __('Education Information') }}"
+                          data-ajax-modal="true" data-size="lg"
+                          data-bs-toggle="tooltip" data-bs-title="Education"
+                          data-remote="true"><i class="fa-solid fa-pencil"></i>
+                        </a>
+                      </h3>
+                      <div class="experience-box">
+                        <ul class="experience-list">
+                          @if(!empty($employee->education) && $employee->education->count() > 0)
+                            @foreach ($employee->education as $education)
+                            <li>
+                              <div class="experience-user">
+                                <div class="before-circle"></div>
+                              </div>
+                              <div class="experience-content">
+                                <div class="timeline-content">
+                                  <a href="#/" class="name"
+                                    >{{$education->institution}}</a
+                                  >
+                                  <div>{{ $education->course }}</div>
+                                  <span class="time">{{ $education->start_date }} - {{ $education->end_date }}</span>
+                                  @if (!empty($education->file))
+                                      <a href="{{ uploadedAsset($education->file,'employees/education') }}" target="_blank" rel="noopener noreferrer">{{ __('View File') }}</a>
+                                  @endif
+                                </div>
+                              </div>
+                            </li>
+                            @endforeach
+                          @endif
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex">
+                  <div class="card profile-box flex-fill">
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        {{ __('Work Experience') }}
+                        <a
+                            href="{{ route('employee.experience', $employee->id) }}"
+                            class="edit-icon" data-title="{{ __('Working Experience Information') }}"
+                            data-ajax-modal="true" data-size="lg"
+                            data-bs-toggle="tooltip" data-bs-title="Working Experience"
+                            data-remote="true"><i class="fa-solid fa-pencil"></i>
+                        </a>
+                      </h3>
+                      <div class="experience-box">
+                        <ul class="experience-list">
+                            @if (!empty($employee->workExperience))
+                                @foreach ($employee->workExperience as $experience)
+                                <li>
+                                  <div class="experience-user">
+                                    <div class="before-circle"></div>
+                                  </div>
+                                  <div class="experience-content">
+                                    <div class="timeline-content">
+                                      <span class="name">{{ $experience->position .__(" At "). $experience->company}}</span>
+                                      <span class="time"
+                                        >{{ format_date($experience->start_date) }} - {{ format_date($experience->end_date) }} ({{ $experience->dateDifference }}) </span>
+                                        @if (!empty($experience->file))
+                                            <a href="{{ uploadedAsset($experience->file,'employees/work-experience') }}" target="_blank" rel="noopener noreferrer">{{ __('View File') }}</a>
+                                        @endif
+                                    </div>
+                                  </div>
+                                </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 d-flex">
                   <div class="card profile-box flex-fill">
                     <div class="card-body">
                       <h3 class="card-title">
@@ -348,279 +405,13 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6 d-flex">
-                  <div class="card profile-box flex-fill">
-                    <div class="card-body">
-                      <h3 class="card-title">
-                        Education Informations
-                        <a
-                          href="#"
-                          class="edit-icon"
-                          data-bs-toggle="modal"
-                          data-bs-target="#education_info"
-                          ><i class="fa-solid fa-pencil"></i
-                        ></a>
-                      </h3>
-                      <div class="experience-box">
-                        <ul class="experience-list">
-                          <li>
-                            <div class="experience-user">
-                              <div class="before-circle"></div>
-                            </div>
-                            <div class="experience-content">
-                              <div class="timeline-content">
-                                <a href="#/" class="name"
-                                  >International College of Arts and Science
-                                  (UG)</a
-                                >
-                                <div>Bsc Computer Science</div>
-                                <span class="time">2000 - 2003</span>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="experience-user">
-                              <div class="before-circle"></div>
-                            </div>
-                            <div class="experience-content">
-                              <div class="timeline-content">
-                                <a href="#/" class="name"
-                                  >International College of Arts and Science
-                                  (PG)</a
-                                >
-                                <div>Msc Computer Science</div>
-                                <span class="time">2000 - 2003</span>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 d-flex">
-                  <div class="card profile-box flex-fill">
-                    <div class="card-body">
-                      <h3 class="card-title">
-                        {{ __('Work Experience') }}
-                        <a
-                            href="{{ route('employee.experience', $employee->id) }}"
-                            class="edit-icon" data-title="{{ __('Working Experience Information') }}"
-                            data-ajax-modal="true" data-size="lg"
-                            data-bs-toggle="tooltip" data-bs-title="Working Experience"
-                            data-remote="true"><i class="fa-solid fa-pencil"></i>
-                        </a>
-                      </h3>
-                      <div class="experience-box">
-                        <ul class="experience-list">
-                            @if (!empty($employee->workExperience))
-                                @foreach ($employee->workExperience as $experience)
-                                <li>
-                                  <div class="experience-user">
-                                    <div class="before-circle"></div>
-                                  </div>
-                                  <div class="experience-content">
-                                    <div class="timeline-content">
-                                      <span class="name">{{ $experience->position .__(" At "). $experience->company}}</span>
-                                      <span class="time"
-                                        >{{ format_date($experience->start_date) }} - {{ format_date($experience->end_date) }} ({{ $experience->dateDifference }}) </span>
-                                        @if (!empty($experience->file))
-                                            <a href="{{ uploadedAsset($experience->file,'employees/work-experience') }}" target="_blank" rel="noopener noreferrer">{{ __('View File') }}</a>
-                                        @endif
-                                    </div>
-                                  </div>
-                                </li>
-                                @endforeach
-                            @endif
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- /Profile Info Tab -->
 
 
-            <!-- /Assets -->
           </div>
 
     </div>
-        <!-- Profile Modal -->
-        <div id="profile_info" class="modal custom-modal fade" role="dialog">
-            <div
-            class="modal-dialog modal-dialog-centered modal-lg"
-            role="document"
-            >
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title">Profile Information</h5>
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <form>
-                    <div class="row">
-                    <div class="col-md-12">
-                        <div class="profile-img-wrap edit-img">
-                        <img
-                            class="inline-block"
-                            src="assets/img/profiles/avatar-02.jpg"
-                            alt="User Image"
-                        />
-                        <div class="fileupload btn">
-                            <span class="btn-text">edit</span>
-                            <input class="upload" type="file" />
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-block mb-3">
-                            <label class="col-form-label">First Name</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                value="John"
-                            />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-block mb-3">
-                            <label class="col-form-label">Last Name</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                value="Doe"
-                            />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-block mb-3">
-                            <label class="col-form-label">Birth Date</label>
-                            <div class="cal-icon">
-                                <input
-                                class="form-control datetimepicker"
-                                type="text"
-                                value="05/06/1985"
-                                />
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-block mb-3">
-                            <label class="col-form-label">Gender</label>
-                            <select class="select form-control">
-                                <option value="male selected">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label">Address</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            value="4487 Snowbird Lane"
-                        />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label">State</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            value="New York"
-                        />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label">Country</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            value="United States"
-                        />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label">Pin Code</label>
-                        <input type="text" class="form-control" value="10523" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label">Phone Number</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            value="631-889-3206"
-                        />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label"
-                            >Department <span class="text-danger">*</span></label
-                        >
-                        <select class="select">
-                            <option>Select Department</option>
-                            <option>Web Development</option>
-                            <option>IT Management</option>
-                            <option>Marketing</option>
-                        </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label"
-                            >Designation <span class="text-danger">*</span></label
-                        >
-                        <select class="select">
-                            <option>Select Designation</option>
-                            <option>Web Designer</option>
-                            <option>Web Developer</option>
-                            <option>Android Developer</option>
-                        </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-block mb-3">
-                        <label class="col-form-label"
-                            >Reports To <span class="text-danger">*</span></label
-                        >
-                        <select class="select">
-                            <option>-</option>
-                            <option>Wilmer Deluna</option>
-                            <option>Lesley Grauer</option>
-                            <option>Jeffery Lalor</option>
-                        </select>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="submit-section">
-                    <button class="btn btn-primary submit-btn">Submit</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-            </div>
-        </div>
-      <!-- /Profile Modal -->
 
 
 @endsection
