@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@push('page-styles')
+@vite(["resources/js/datatables.js"])
+@endpush
 
 @section('page-content')
     <div class="content container-fluid">
@@ -44,8 +47,6 @@
 
 @push('page-scripts')
     <!-- Datatable JS -->
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
     <!-- /Page Js -->
 @endpush
