@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@rollup/plugin-inject": "^5.0.5",
         "axios": "^1.6.4",
         "glob": "^10.4.2",
         "jquery-ujs": "^1.2.3",
@@ -21,6 +22,13 @@
         "@tldraw/tldraw": "^2.3.0",
         "@vitejs/plugin-react": "^4.3.1",
         "clsx": "^2.1.1",
+        "datatables.net-autofill-bs5": "^2.7.0",
+        "datatables.net-bs5": "^2.0.8",
+        "datatables.net-buttons-bs5": "^3.0.2",
+        "datatables.net-colreorder-bs5": "^2.0.3",
+        "datatables.net-responsive-bs5": "^3.0.2",
+        "datatables.net-searchbuilder-bs5": "^1.7.1",
+        "datatables.net-searchpanes-bs5": "^2.3.0",
         "intl-tel-input": "^23.0.12",
         "jszip": "^3.10.1",
         "nprogress": "^0.2.0",

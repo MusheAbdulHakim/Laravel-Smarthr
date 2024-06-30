@@ -17,6 +17,11 @@
 
 <!-- Custom JS -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
+@if (isset($errors)))
+@foreach ($errors as $error)
+{{ flash()->error(__($error)) }}
+@endforeach
+@endif
 @vite([
     'resources/js/custom.js',
     'resources/js/app.js'

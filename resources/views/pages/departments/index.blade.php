@@ -43,6 +43,8 @@
 
 
 @push('page-scripts')
+    <!-- Datatable JS -->
+    @vite(["resources/js/datatables.js"])
     {!! $dataTable->scripts() !!}
     <!-- /Page Js -->
 @endpush

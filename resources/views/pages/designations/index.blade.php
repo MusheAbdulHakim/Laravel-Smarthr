@@ -43,6 +43,9 @@
 
 
 @push('page-scripts')
+    <!-- Datatable JS -->
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
     <!-- /Page Js -->
 @endpush

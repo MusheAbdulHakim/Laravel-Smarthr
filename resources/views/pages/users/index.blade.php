@@ -46,6 +46,7 @@
 
 
 @push('page-scripts')
+    @vite(["resources/js/datatables.js"])
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
     <!-- /Page Js -->
