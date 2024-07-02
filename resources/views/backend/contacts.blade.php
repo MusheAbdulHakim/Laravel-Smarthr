@@ -150,7 +150,7 @@
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-            $('.editbtn').on('click',function(){
+            $('table').on('click','.editbtn', function(){
                 $('#edit_contact').modal('show');
                 var id = $(this).data('id');
                 var name = $(this).data('name');

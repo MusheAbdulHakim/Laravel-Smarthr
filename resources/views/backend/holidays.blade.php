@@ -138,7 +138,7 @@
             $('#.complete_id').val(id);
         })
         // edit holiday 
-        $('.editbtn').on('click',function (){
+        $('table').on('click','.editbtn', function(){
             $('#edit_holiday').modal('show');
             var id = $(this).data('id');
             var name = $(this).data('name');
