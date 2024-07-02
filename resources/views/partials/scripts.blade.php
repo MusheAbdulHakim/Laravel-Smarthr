@@ -17,7 +17,7 @@
 
 <!-- Custom JS -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
-@if (isset($errors)))
+@if (isset($errors))
 @foreach ($errors as $error)
 {{ flash()->error(__($error)) }}
 @endforeach
