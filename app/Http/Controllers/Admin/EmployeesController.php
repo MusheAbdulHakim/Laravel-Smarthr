@@ -121,8 +121,11 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $employee)
+    public function edit(string $employee)
     {
+        $userId = Crypt::decrypt($employee);
+        $user = User::findOrFail($userId);
+        $employee = $user->employeeDetail;
         $departments = Department::get();
         $designations = Designation::get();
         return view('pages.employees.edit', compact(

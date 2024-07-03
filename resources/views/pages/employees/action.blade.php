@@ -1,5 +1,5 @@
 <x-table-action>
-    <a class="dropdown-item" href="{{ route('users.edit', $id) }}" data-ajax-modal="true" data-remote="true"
+    <a class="dropdown-item" href="{{ route('users.edit', $id) }}" data-ajax-modal="true"
         data-title="Edit User" data-size="lg"><i class="fa-solid fa-pencil m-r-5"></i>
         {{ __('Edit') }}
     </a>

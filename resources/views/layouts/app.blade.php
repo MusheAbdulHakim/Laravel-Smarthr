@@ -22,7 +22,7 @@
                 <span class="loader-ellips__dot"></span>
               </div>
             </div>
-          </div>
+        </div>
         <!-- Page Content -->
         @yield('page-content')
         <!-- /Page Content -->

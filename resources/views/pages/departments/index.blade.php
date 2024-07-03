@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('page-styles')
+    @vite([
+        'resources/css/datatables.scss'
+    ])
+@endpush
 
 @section('page-content')
     <div class="content container-fluid">
@@ -17,8 +22,8 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
-                    <a href="{{ route('departments.create') }}" class="btn add-btn"
-                        data-ajax-modal="true" data-remote="true"
+                    <a data-url="{{ route('departments.create') }}" href="javascript:void(0)" class="btn add-btn"
+                        data-ajax-modal="true"
                         data-size="md" data-title="Add Department">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Department') }}
                     </a>
@@ -28,7 +33,6 @@
         <!-- /Page Header -->
 
         <!-- Search Filter -->
-
         <!-- /Search Filter -->
 
         <div class="row">
@@ -43,8 +47,10 @@
 
 
 @push('page-scripts')
-    <!-- Datatable JS -->
-    @vite(["resources/js/datatables.js"])
-    {!! $dataTable->scripts() !!}
-    <!-- /Page Js -->
+@vite([
+    'resources/assets/js/jquery.dataTables.min.js',
+    'resources/assets/js/dataTables.bootstrap4.min.js'
+])
+{!! $dataTable->scripts(attributes: ['type' => 'module', 'defer' => true]) !!}
 @endpush
+

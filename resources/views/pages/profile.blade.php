@@ -80,8 +80,8 @@
                                 </div>
                             </div>
                             <div class="pro-edit">
-                                <a data-ajax-modal="true" data-remote="true" data-title="Profile Information" data-size="lg"
-                                    class="edit-icon" href="{{ route('profile.edit') }}"><i class="fa-solid fa-pencil"></i>
+                                <a data-ajax-modal="true" data-title="Profile Information" data-size="lg"
+                                    class="edit-icon" href="javascript:void(0)" data-url="{{ route('profile.edit') }}"><i class="fa-solid fa-pencil"></i>
                                 </a>
                             </div>
                         </div>

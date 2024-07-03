@@ -14,6 +14,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Vite;
 
 class UsersDataTable extends DataTable
 {
@@ -38,10 +39,9 @@ class UsersDataTable extends DataTable
                 }
             })
 
-            ->setRowId('id')
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('assets/img/user.jpg');
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): Vite::asset('resources/assets/img/user.jpg');
                 return Html::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
@@ -57,7 +57,7 @@ class UsersDataTable extends DataTable
                 return view('pages.users.action', compact(
                     'id'
                 ));
-            })->rawColumns(['fullname']);
+            })->rawColumns(['fullname','action']);
     }
 
     /**
@@ -80,7 +80,6 @@ class UsersDataTable extends DataTable
                 'dom'          => 'Bftip',
             ])
             ->minifiedAjax()
-            ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
@@ -97,7 +96,6 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#'),
             Column::make('fullname'),
             Column::make('username')->searchable(),
             Column::make('email')->searchable(),

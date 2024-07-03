@@ -101,7 +101,7 @@
                       </div>
                     </div>
                     <div class="pro-edit">
-                      <a href="{{ route('employees.edit', $user->id) }}" data-ajax-modal="true" data-remote="true"
+                      <a href="javascript:void(0)" data-url="{{ route('employees.edit', $user->id) }}" data-ajax-modal="true" 
                         data-title="Edit Employee" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __('Edit profile') }}"><i class="fa-solid fa-pencil"></i
                       ></a>
                     </div>
@@ -140,10 +140,10 @@
                     <div class="card-body">
                       <h3 class="card-title">
                         {{ __('Personal Informations') }}
-                        <a href="{{ route('employee.personal-info', $employee->id) }}"
+                        <a href="javascript:void(0)" data-url="{{ route('employee.personal-info', $employee->id) }}"
                           class="edit-icon" data-title="{{ __('Personal Information') }}"
                           data-ajax-modal="true" data-size="lg"
-                          data-remote="true">
+                          >
                           <i class="fa-solid fa-pencil"></i>
                         </a>
                       </h3>
@@ -205,10 +205,10 @@
                     <div class="card-body">
                       <h3 class="card-title">
                         {{ __('Emergency Contact') }}
-                        <a href="{{ route('employee.emergency-contacts', $employee->id) }}"
+                        <a href="javascript:void(0)" data-url="{{ route('employee.emergency-contacts', $employee->id) }}"
                             class="edit-icon" data-title="{{ __('Emergency Contacts') }}"
                             data-ajax-modal="true" data-size="lg"
-                            data-remote="true">
+                            >
                             <i class="fa-solid fa-pencil"></i>
                         </a>
                       </h3>
@@ -267,11 +267,11 @@
                       <h3 class="card-title">
                         {{ __('Education Informations') }}
                         <a
-                          href="{{ route('employee.education', $employee->id) }}"
+                        href="javascript:void(0)" data-url="{{ route('employee.education', $employee->id) }}"
                           class="edit-icon" data-title="{{ __('Education Information') }}"
                           data-ajax-modal="true" data-size="lg"
                           data-bs-toggle="tooltip" data-bs-title="Education"
-                          data-remote="true"><i class="fa-solid fa-pencil"></i>
+                          ><i class="fa-solid fa-pencil"></i>
                         </a>
                       </h3>
                       <div class="experience-box">
@@ -308,11 +308,11 @@
                       <h3 class="card-title">
                         {{ __('Work Experience') }}
                         <a
-                            href="{{ route('employee.experience', $employee->id) }}"
+                        href="javascript:void(0)" data-url="{{ route('employee.experience', $employee->id) }}"
                             class="edit-icon" data-title="{{ __('Working Experience Information') }}"
                             data-ajax-modal="true" data-size="lg"
                             data-bs-toggle="tooltip" data-bs-title="Working Experience"
-                            data-remote="true"><i class="fa-solid fa-pencil"></i>
+                            ><i class="fa-solid fa-pencil"></i>
                         </a>
                       </h3>
                       <div class="experience-box">
@@ -348,11 +348,11 @@
                     <div class="card-body">
                       <h3 class="card-title">
                         {{ __('Family Informations') }}
-                        <a href="{{ route('family-information.create', ['user' => $user->id]) }}"
+                        <a href="javascript:void(0)" data-url="{{ route('family-information.create', ['user' => $user->id]) }}"
                             class="edit-icon" data-title="{{ __('Add Family Information') }}"
                             data-ajax-modal="true" data-size="lg"
                             data-bs-toggle="tooltip" data-bs-title="Add Family Member"
-                            data-remote="true">
+                            >
                             <i class="fa-solid fa-plus"></i>
                         </a>
                       </h3>
@@ -382,7 +382,7 @@
                                     <td>{{ format_date($member->dob) }}</td>
                                     <td>{{ $member->phone }}</td>
                                     <x-table-action>
-                                        <a class="dropdown-item" href="{{ route('family-information.edit', $member->id) }}" data-ajax-modal="true" data-remote="true"
+                                        <a class="dropdown-item" href="javascript:void(0)" data-url="javascript:void(0)" data-url="{{ route('family-information.edit', $member->id) }}" data-ajax-modal="true" 
                                             data-title="{{ __('Edit Family Member') }}" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __("Edit Family Member Information") }}">
                                             <i class="fa-solid fa-pencil m-r-5"></i>
                                             {{ __('Edit') }}

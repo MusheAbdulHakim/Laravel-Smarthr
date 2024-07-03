@@ -14,6 +14,7 @@
         {{ $message }}
     </div>
 @enderror
+@pushOnce('page-scripts')
 <script>
     $(document).ready(function() {
         let input = document.querySelector("#{{ $inputId }}")
@@ -35,3 +36,4 @@
         });
     })
 </script>
+@endPushOnce

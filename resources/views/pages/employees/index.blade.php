@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('page-style')
-    <!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    
 @endpush
 
 @section('page-content')
@@ -42,12 +41,12 @@
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
-                            <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('assets/img/user.jpg') }}" alt="User Image"></a>
+                            <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): Vite::asset('resources/assets/img/user.jpg') }}" alt="User Image"></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ route('employees.edit', $employee->id) }}" data-ajax-modal="true" data-remote="true"
+                                <a class="dropdown-item" href="{{ route('employees.edit', ['employee' => \Crypt::encrypt($employee->id)]) }}" data-ajax-modal="true" data-remote="true"
                                     data-title="Edit Employee" data-size="lg">
                                     <i class="fa-solid fa-pencil m-r-5"></i>
                                     {{ __('Edit') }}

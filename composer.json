@@ -28,7 +28,6 @@
         "yajra/laravel-datatables-buttons": "11.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
         "laravel-lang/common": "^6.3",
         "laravel-lang/http-statuses": "^3.8",
