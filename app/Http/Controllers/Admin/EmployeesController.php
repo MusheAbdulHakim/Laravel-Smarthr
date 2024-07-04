@@ -124,8 +124,7 @@ class EmployeesController extends Controller
     public function edit(string $employee)
     {
         $userId = Crypt::decrypt($employee);
-        $user = User::findOrFail($userId);
-        $employee = $user->employeeDetail;
+        $employee = User::findOrFail($userId);
         $departments = Department::get();
         $designations = Designation::get();
         return view('pages.employees.edit', compact(

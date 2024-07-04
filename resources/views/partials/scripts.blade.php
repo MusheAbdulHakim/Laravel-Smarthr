@@ -10,9 +10,9 @@
     'resources/js/app.js',
 ])
 @if (isset($errors))
-@foreach ($errors as $error)
-{{ flash()->error(__($error)) }}
-@endforeach
+    @foreach ($errors as $error)
+    {{ flash()->error(__($error)) }}
+    @endforeach
 @endif
 <!-- Vendor JS -->
 @livewireScripts

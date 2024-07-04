@@ -20,8 +20,8 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
-                    <a href="{{ route('employees.create') }}" class="btn add-btn"
-                        data-ajax-modal="true" data-remote="true"
+                    <a href="javascript:void(0)" data-url="{{ route('employees.create') }}" class="btn add-btn"
+                        data-ajax-modal="true"
                         data-size="lg" data-title="Add Employee">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Employee') }}
                     </a>
@@ -46,7 +46,7 @@
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ route('employees.edit', ['employee' => \Crypt::encrypt($employee->id)]) }}" data-ajax-modal="true" data-remote="true"
+                                <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('employees.edit', ['employee' => \Crypt::encrypt($employee->id)]) }}" data-ajax-modal="true"
                                     data-title="Edit Employee" data-size="lg">
                                     <i class="fa-solid fa-pencil m-r-5"></i>
                                     {{ __('Edit') }}
@@ -71,7 +71,3 @@
 @endsection
 
 
-@push('page-scripts')
-
-
-@endpush

@@ -1,5 +1,10 @@
 import jQuery from "jquery";
 import moment from 'moment';
+import intlTelInput from "intl-tel-input";
+import nProgress from "nprogress";
+
+window.intlTelInput = intlTelInput;
+window.NProgress = nProgress;
 
 import $ from 'jquery'
 window.$ = jQuery
