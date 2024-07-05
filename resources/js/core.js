@@ -9,13 +9,14 @@ window.NProgress = nProgress;
 window.$ = jQuery
 window.jQuery = jQuery
 window.moment = moment
-import.meta.glob([
+const AppAssets = import.meta.glob([
     '../assets/css/**',
     '../assets/fonts/**',
     '../assets/img/**/**',
     '../assets/js/**',
     '../assets/plugins/**/**',
 ])
+console.log(AppAssets);
 $(document).on("click", ".deleteBtn", function () {
     let title = $(this).data("title");
     let url = $(this).data("route");
