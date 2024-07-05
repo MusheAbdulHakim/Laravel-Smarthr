@@ -31,7 +31,7 @@ class EmployeeAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'checkin' => 'required',
         ]);
@@ -69,7 +69,7 @@ class EmployeeAttendanceController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'checkin' => 'required',
         ]);

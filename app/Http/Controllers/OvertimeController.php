@@ -29,7 +29,7 @@ class OvertimeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'hours' => 'required',
             'date' => 'required',
@@ -56,7 +56,7 @@ class OvertimeController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'hours' => 'required',
             'date' => 'required',

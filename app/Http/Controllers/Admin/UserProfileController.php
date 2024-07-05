@@ -15,7 +15,7 @@ class UserProfileController extends Controller
     }
 
     public function update(Request $request){
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required|max:150|min:5',
             'username' => 'required|max:20|min:3',
             'email' => 'required|email',

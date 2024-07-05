@@ -129,8 +129,7 @@
 <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
 	$(document).ready(function (){
-		
-		$('.editbtn').on('click',function (){
+		$('table').on('click','.editbtn', function(){
 			$('#edit_leavetype').modal('show');
 			var id = $(this).data('id');
 			var type = $(this).data('type');

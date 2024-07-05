@@ -81,7 +81,7 @@
 <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
 	$(document).ready(function(){
-		$('.editbtn').click(function(){
+		$('table').on('click','.editbtn', function(){
 			var id = $(this).data('id');
 			var checkin = $(this).data('checkin');
 			var checkout = $(this).data('checkout');
@@ -91,7 +91,7 @@
 			$('#edit_employee').val(employee).trigger('change');
 			$('#edit_checkin').val(checkin);
 			$('#edit_checkout').val(checkout);
-		});
+		})
 	});
 	</script>
 @endsection

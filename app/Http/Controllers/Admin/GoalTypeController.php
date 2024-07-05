@@ -32,7 +32,7 @@ class GoalTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'type' => 'required|max:100',
             'description' => 'nullable|max:255'
         ]);
@@ -74,7 +74,7 @@ class GoalTypeController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'type' => 'required|max:100',
             'description' => 'nullable|max:255'
         ]);

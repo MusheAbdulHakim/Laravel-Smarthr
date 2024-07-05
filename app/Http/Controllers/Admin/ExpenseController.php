@@ -30,7 +30,7 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required',
             'user' => 'required',
             'seller' => 'required',
@@ -70,7 +70,7 @@ class ExpenseController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required',
             'user' => 'required',
             'seller' => 'required',

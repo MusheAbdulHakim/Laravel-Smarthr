@@ -245,7 +245,7 @@
 <script src="{{asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
 	$(document).ready(function(){
-		$('.editbtn').click(function(){
+		$('table').on('click','.editbtn', function(){
 			var id = $(this).data('id');
 			var employee = $(this).data('employee');
 			var leave_type = $(this).data('leave_type');

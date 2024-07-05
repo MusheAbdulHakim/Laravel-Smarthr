@@ -14,7 +14,7 @@ class ChangePasswordController extends Controller
     }
 
     public function update(Request $request){
-        $this->validate($request,[
+        $request->validate([
             'old_password' => 'required',
             'password' => 'required|confirmed'
         ]);

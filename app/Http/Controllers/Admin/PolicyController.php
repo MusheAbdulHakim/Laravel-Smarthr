@@ -30,7 +30,7 @@ class PolicyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name'=>'required',
             'description'=>'max:255',
             'department'=>'required',

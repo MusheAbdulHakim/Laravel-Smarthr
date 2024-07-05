@@ -234,7 +234,7 @@
 <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
 <script>
 	$(document).ready(function (){
-		$('.editbtn').on('click',function (){
+		$('.profile-widget').on('click','.editbtn', function(){
 			$('#edit_employee').modal('show');
 			var id = $(this).data('id');
 			var firstname = $(this).data('firstname');

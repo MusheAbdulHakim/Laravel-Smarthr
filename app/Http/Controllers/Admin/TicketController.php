@@ -33,7 +33,7 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'subject' => 'required',
             'staff' => 'required',
             "client" => "required",
@@ -96,7 +96,7 @@ class TicketController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'subject' => 'required',
             'ticket_id' => 'required',
             'staff' => 'required',

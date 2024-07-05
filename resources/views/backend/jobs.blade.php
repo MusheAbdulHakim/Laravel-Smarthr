@@ -57,7 +57,7 @@
 								<div class="dropdown-menu dropdown-menu-right">
 									<a  data-id="{{$job->id}}"
                                         data-title="{{$job->title}}"
-                                        data-department="{{$job->department->id}}"
+                                        data-department="{{$job->department_id}}"
                                         data-startdate="{{$job->start_date}}"
                                         data-expirydate="{{$job->expire_date}}"
                                         data-experience="{{$job->experience}}"

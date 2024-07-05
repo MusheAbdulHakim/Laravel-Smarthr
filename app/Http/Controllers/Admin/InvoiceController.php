@@ -45,7 +45,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'client' => 'required',
             'project' => 'required',
             'email' => 'required',
@@ -121,7 +121,7 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        $this->validate($request,[
+        $request->validate([
             'client' => 'required',
             'project' => 'required',
             'email' => 'required',

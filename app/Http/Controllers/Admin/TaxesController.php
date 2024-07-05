@@ -32,7 +32,7 @@ class TaxesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required',
             'percentage' => 'required',
             'status' => 'required'
@@ -58,7 +58,7 @@ class TaxesController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required',
             'percentage' => 'required',
             'status' => 'required'

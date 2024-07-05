@@ -30,7 +30,7 @@ class DesignationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'designation'=>'required|max:200',
             'department'=>'required',
         ]);
@@ -61,7 +61,7 @@ class DesignationController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'designation'=>'required|max:200',
             'department'=>'required',
         ]);

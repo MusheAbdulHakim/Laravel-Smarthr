@@ -28,7 +28,7 @@ class LeaveTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'type'=>'required|max:255',
             'days'=>'required'
         ]);

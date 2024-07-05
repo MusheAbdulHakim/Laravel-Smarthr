@@ -49,7 +49,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'firstname'=>'required',
             'lastname'=>'required',
             'email'=>'required|email',
@@ -99,7 +99,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'firstname'=>'required',
             'lastname'=>'required',
             'email'=>'required|email',

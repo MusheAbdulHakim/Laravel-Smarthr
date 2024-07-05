@@ -20,7 +20,7 @@ class SettingsController extends Controller
     }    
 
     public function updateTheme(Request $request,ThemeSettings $settings){
-        $this->validate($request,[
+        $request->validate([
             'site_name' => 'required',
             'logo' => 'nullable|file|image',
             'favicon' => 'nullable|file|image',
@@ -55,7 +55,7 @@ class SettingsController extends Controller
     }
 
     public function updateInvoice(Request $request, InvoiceSettings $settings){
-        $this->validate($request,[
+        $request->validate([
             'prefix' => 'nullable',
             'logo' => 'nullable|file|image'
         ]);
@@ -79,7 +79,7 @@ class SettingsController extends Controller
     }
 
     public function updateAttendance(Request $request, AttendanceSettings $settings){
-        $this->validate($request,[
+        $request->validate([
             'checkin' => 'required',
             'checkout' => 'required'
         ]);
@@ -98,7 +98,7 @@ class SettingsController extends Controller
     }
 
     public function updateCompany(Request $request, CompanySettings $settings){
-        $this->validate($request,[
+        $request->validate([
             'company_name' => 'required',
             'contact_person' => 'required',
             'address' => 'required',
