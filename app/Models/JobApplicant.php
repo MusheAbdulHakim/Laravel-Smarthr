@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Job;
+use App\Models\JobPost;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,7 +15,7 @@ class JobApplicant extends Model
     ];
 
     public function Job(){
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(JobPost::class);
     }
 
    

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Job;
+
+use App\Models\JobPost;
 use App\Models\Department;
 use App\Models\JobApplicant;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class JobController extends Controller
     public function index()
     {
         $title = "jobs";
-        $jobs = Job::with('department')->get();
+        $jobs = JobPost::with('department')->get();
         $departments = Department::get();
         return view('backend.jobs',compact(
             'title','departments','jobs'
@@ -48,7 +49,7 @@ class JobController extends Controller
             'expire_date'=>'required',
             'description'=>'required',
         ]);
-        Job::create($request->all());
+        JobPost::create($request->all());
         return back()->with('success',"Job has been added Posted!!");
     }
 
@@ -100,7 +101,7 @@ class JobController extends Controller
             'expire_date'=>'required',
             'description'=>'required',
         ]);
-        $job = Job::findOrFail($request->id);
+        $job = JobPost::findOrFail($request->id);
         $job->update([
             'title' => $request->title ?? $job->title,
             'department_id' => $request->department ?? $job->department_id,
@@ -127,7 +128,7 @@ class JobController extends Controller
      */
     public function destroy(Request $request)
     {
-        Job::findOrFail($request->id)->delete();
+        JobPost::findOrFail($request->id)->delete();
         return back()->with('success',"Job has been deleted successfully!!");
     }
 }
