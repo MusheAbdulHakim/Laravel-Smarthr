@@ -31,7 +31,7 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required|max:200',
             'purchase_date' => 'required|date',
             'purchase_from' => 'required',
@@ -83,7 +83,7 @@ class AssetController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required|max:200',
             'purchase_date' => 'required|date',
             'purchase_from' => 'required',
@@ -122,7 +122,7 @@ class AssetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $requst)
+    public function destroy(Request $request)
     {
         $asset = Asset::findOrFail($request->id);
         $asset->delete();

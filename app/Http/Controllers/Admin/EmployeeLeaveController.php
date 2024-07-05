@@ -34,7 +34,7 @@ class EmployeeLeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee'=>'required',
             'leave_type'=>'required',
             'from'=>'required',

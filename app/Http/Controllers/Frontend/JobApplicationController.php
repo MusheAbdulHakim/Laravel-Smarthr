@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class JobApplicationController extends Controller
 {
     public function store(Request $request){
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required|max:200',
             'email' => 'required|email',
             'cv' => 'required|file|mimes:pdf',

@@ -28,7 +28,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['name'=>'required|max:100']);
+        $request->validate(['name'=>'required|max:100']);
         Department::create($request->all());
         return back()->with('success',"Department has been added successfully!!.");
     }
@@ -53,7 +53,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,['name'=>'required|max:100']);
+        $request->validate(['name'=>'required|max:100']);
         $department = Department::find($request->id);
         $department->update([
             'name'=>$request->name,

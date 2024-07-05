@@ -32,7 +32,7 @@ class GoalController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'goal_type' => 'required',
             'subject' => 'required',
             'target' => 'required',
@@ -73,7 +73,7 @@ class GoalController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'goal_type' => 'required',
             'subject' => 'required',
             'target' => 'required',

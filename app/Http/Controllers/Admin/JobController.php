@@ -33,7 +33,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'title'=>'required',
             'department'=>'required',
             'location'=>'required',

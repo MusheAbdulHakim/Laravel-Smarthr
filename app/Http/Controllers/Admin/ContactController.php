@@ -48,7 +48,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name'=>'required|max:200',
             'email'=>'nullable|email',
             'number'=>'required|max:20',
@@ -83,7 +83,7 @@ class ContactController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'name'=>'required|max:200',
             'email'=>'nullable|email',
             'number'=>'required|max:20',

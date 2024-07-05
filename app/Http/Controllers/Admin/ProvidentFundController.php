@@ -30,7 +30,7 @@ class ProvidentFundController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'type' => 'required',
             'emp_amount' => 'required',
@@ -63,7 +63,7 @@ class ProvidentFundController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request,[
+        $request->validate([
             'employee' => 'required',
             'type' => 'required',
             'emp_amount' => 'required',
