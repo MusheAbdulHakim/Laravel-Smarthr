@@ -2,11 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\JobPost;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class JobFactory extends Factory
+class JobPostFactory extends Factory
 {
+    protected $model = JobPost::class;
+
     /**
      * Define the model's default state.
      *
