@@ -11,6 +11,7 @@
         "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "pavel-mironchik/laravel-backup-panel": "dev-mushe",
         "spatie/laravel-settings": "^3.3",
         "yajra/laravel-datatables": "^11.0"
     },
@@ -66,6 +67,12 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": {
+        "local": {
+            "type": "vcs",
+            "url": "https://github.com/MusheAbdulHakim/laravel-backup-panel.git"
+        }
+    }
 }
