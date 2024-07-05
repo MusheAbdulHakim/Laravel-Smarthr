@@ -88,7 +88,7 @@
 @endsection
 
 @push('page-scripts')
-    <script>
+    <script type="module">
         $(document).ready(function() {
             $('#countries').select2({
                 width: "100%",

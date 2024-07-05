@@ -30,7 +30,7 @@
                       <div class="profile-img">
                         <a href="#"
                           ><img
-                          src="{{ !empty($user->avatar) ? asset('storage/users/' . $user->avatar) : asset('assets/img/user.jpg') }}"
+                          src="{{ !empty($user->avatar) ? asset('storage/users/' . $user->avatar) : Vite::asset('resources/assets/img/user.jpg') }}"
                           alt="User Image"
                         /></a>
                       </div>
@@ -373,7 +373,7 @@
                                 <tr>
                                     @if (!empty($member->picture))
                                     <td>
-                                        {!! Spatie\Menu\Laravel\Html::userAvatar($member->name, !empty($member->picture) ? uploadedAsset($member->picture,'family-members'): asset('assets/img/user.jpg')) !!}
+                                        {!! Spatie\Menu\Laravel\Html::userAvatar($member->name, !empty($member->picture) ? uploadedAsset($member->picture,'family-members'): Vite::asset('resources/assets/img/user.jpg')) !!}
                                     </td>
                                     @else
                                     <td>{{ $member->name }}</td>
@@ -417,9 +417,3 @@
 @endsection
 
 
-@push('page-scripts')
-    <!-- Page Js -->
-    <script src="{{ asset('assets/plugins/jquery-repeater/jquery.repeater.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <!-- /Page Js -->
-@endpush

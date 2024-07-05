@@ -6,8 +6,8 @@
     'resources/assets/js/bootstrap-datetimepicker.min.js',
     'resources/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js',
     'resources/assets/js/jquery.slimscroll.min.js',
-    'resources/assets/js/app.js',
     'resources/js/app.js',
+    'resources/assets/js/app.js',
 ])
 @if (isset($errors))
     @foreach ($errors as $error)
