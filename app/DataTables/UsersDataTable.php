@@ -14,7 +14,6 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Vite;
 
 class UsersDataTable extends DataTable
 {
@@ -41,7 +40,7 @@ class UsersDataTable extends DataTable
 
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): Vite::asset('resources/assets/img/user.jpg');
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('assets/img/user.jpg');
                 return Html::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {

@@ -29,7 +29,9 @@ export default defineConfig({
 });
 
 export const paths = [
+    'Modules/Whiteboard/resources/apps/Excalidraw/css/index.scss',
    'Modules/Whiteboard/resources/assets/sass/app.scss',
    'Modules/Whiteboard/resources/assets/js/app.jsx',
+   'Modules/Whiteboard/resources/apps/TlDraw/css/index.css',
    'Modules/Whiteboard/resources/apps/TlDraw/main.tsx',
 ];

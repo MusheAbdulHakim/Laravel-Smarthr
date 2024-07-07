@@ -4,11 +4,9 @@ import collectModuleAssetsPaths from "./vite-module-loader.js";
 
 async function getConfig() {
     const paths = [
-        "resources/css/app.css",
+        "resources/css/app.scss",
         "resources/assets/scss/main.scss",
-        "resources/css/datatables.scss",
         "resources/js/app.js",
-        "resources/js/core.js",
         "resources/js/datatables.js",
     ];
     const allPaths = await collectModuleAssetsPaths(paths, "Modules");
@@ -26,6 +24,7 @@ async function getConfig() {
         optimizeDeps: {
             exclude: ["js-big-decimal"],
         },
+        assetsInlineLimit: 0
     });
 }
 

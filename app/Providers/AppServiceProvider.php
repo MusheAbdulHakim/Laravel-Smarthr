@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use LaravelLang\Routes\Events\LocaleHasBeenSetEvent;
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
             $lang = $event->locale->code;
             Log::info('Locale set to: ' . $lang);
         });
+        Vite::macro('img', fn (string $asset) => $this->asset("resources/assets/img/{$asset}"));
     }
 }

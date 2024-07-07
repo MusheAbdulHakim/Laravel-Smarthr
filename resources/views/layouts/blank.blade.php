@@ -1,3 +1,4 @@
+@use('Illuminate\Support\Facades\Vite')
 <!DOCTYPE html>
 <html lang="{{ !empty(LocaleSettings('lang')) ? LocaleSettings('lang') : 'en' }}"
     data-layout="{{ !empty(Theme('layout')) ? Theme('layout') : 'vertical' }}"

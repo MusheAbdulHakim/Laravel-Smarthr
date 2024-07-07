@@ -45,11 +45,7 @@
 
 @push('page-scripts')
 @vite([
-    'resources/css/datatables.scss',
-    'resources/assets/js/jquery.dataTables.min.js',
-    'resources/assets/js/dataTables.bootstrap4.min.js',    
-    // 'resources/js/datatables.js',
-    'resources/js/buttons.server-side.js',
+    "resources/js/datatables.js"
 ])
 {!! $dataTable->scripts(attributes: ['type' => 'module']) !!}
 @endpush

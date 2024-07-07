@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@push('page-styles')
-
-@endpush
 
 @section('page-content')
     <div class="content container-fluid">
@@ -47,9 +44,7 @@
 
 @push('page-scripts')
 @vite([
-    'resources/css/datatables.scss',
-    'resources/assets/js/jquery.dataTables.min.js',
-    'resources/assets/js/dataTables.bootstrap4.min.js'
+    "resources/js/datatables.js"
 ])
-{!! $dataTable->scripts(attributes: ['type' => 'module', 'defer' => true]) !!}
+{!! $dataTable->scripts(attributes: ['type' => 'module']) !!}
 @endpush

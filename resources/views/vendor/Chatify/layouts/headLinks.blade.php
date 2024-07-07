@@ -9,7 +9,7 @@
 <meta name="url" content="{{ url('').'/'.config('chatify.routes.prefix') }}" data-user="{{ Auth::user()->id }}">
 
 {{-- scripts --}}
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/css/app.scss', 'resources/js/app.js'])
 <script src="{{ asset('assets/js/jquery-3.7.0.min.js') }}"></script>
 <script src="{{ asset('js/chatify/font.awesome.min.js') }}"></script>
 <script src="{{ asset('js/chatify/autosize.js') }}"></script>
