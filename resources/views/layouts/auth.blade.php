@@ -6,7 +6,7 @@
 
             <!-- Account Logo -->
             <div class="account-logo">
-                <a href="{{ url('/') }}"><img src="{{ Vite::asset('resources/assets/img/logo2.png') }}" alt="Dreamguy's Technologies"></a>
+                <a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo2.png') }}" alt="Dreamguy's Technologies"></a>
             </div>
             <!-- /Account Logo -->
 

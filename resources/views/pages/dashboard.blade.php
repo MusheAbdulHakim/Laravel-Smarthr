@@ -2,7 +2,7 @@
 
 @push('page-styles')
     <!-- Chart CSS -->
-    <link rel="stylesheet" href="{{ Vite::asset('resources/assets/plugins/morris/morris.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}">
 @endpush
 
 @section('page-content')
@@ -28,8 +28,8 @@
 
 @push('page-scripts')
     <!-- Chart JS -->
-    @vite([
+    {{-- @vite([
         'resources/assets/plugins/morris/morris.min.js',
         'resources/assets/plugins/raphael/raphael.min.js'
-    ])
+    ]) --}}
 @endpush
