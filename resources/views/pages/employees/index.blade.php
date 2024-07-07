@@ -41,7 +41,7 @@
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
-                            <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('assets/img/user.jpg') }}" alt="User Image"></a>
+                            <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('images/user.jpg') }}" alt="User Image"></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
