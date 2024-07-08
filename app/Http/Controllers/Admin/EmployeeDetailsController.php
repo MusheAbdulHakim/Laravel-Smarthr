@@ -31,6 +31,8 @@ class EmployeeDetailsController extends BaseController
             'marital_status' => $request->marital_status,
             'spouse_occupation' => $request->spouse_occupation,
             'no_of_children' => $request->children,
+            'dob' => $request->dob,
+            'date_joined' => $request->date_joined, 
         ]);
         $notification = notify(__("Personal Information has been updated"));
         return back()->with($notification);

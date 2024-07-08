@@ -101,7 +101,7 @@
                       </div>
                     </div>
                     <div class="pro-edit">
-                      <a href="javascript:void(0)" data-url="{{ route('employees.edit', $user->id) }}" data-ajax-modal="true" 
+                      <a href="javascript:void(0)" data-url="{{ route('employees.edit', ['employee' => \Crypt::encrypt($user->id)]) }}" data-ajax-modal="true" 
                         data-title="Edit Employee" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __('Edit profile') }}"><i class="fa-solid fa-pencil"></i
                       ></a>
                     </div>

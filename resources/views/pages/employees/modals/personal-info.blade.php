@@ -11,7 +11,25 @@
         <div class="col-md-6">
           <x-form.input-block>
                 <x-form.label> {{ __('Passport Expiry Date') }}</x-form.label>
+                <div class="cal-icon">
                 <x-form.input type="text" class="datepicker" name="expiry_date" value="{{ $employeeDetail->passport_expiry_date }}" />
+                </div>
+            </x-form.input-block>
+        </div>
+        <div class="col-md-6">
+          <x-form.input-block>
+                <x-form.label> {{ __('Date Of Birth') }}</x-form.label>
+                <div class="cal-icon">
+                <x-form.input type="text" class="datepicker" name="dob" value="{{ $employeeDetail->dob }}" />
+                </div>
+            </x-form.input-block>
+        </div>
+        <div class="col-md-6">
+          <x-form.input-block>
+                <x-form.label> {{ __('Date Joined') }}</x-form.label>
+                <div class="cal-icon">
+                <x-form.input type="text" class="datepicker" name="date_joined" value="{{ $employeeDetail->date_joined }}" />
+                </div>
             </x-form.input-block>
         </div>
         <div class="col-md-6">
@@ -38,7 +56,7 @@
                 <select class="select form-control" name="marital_status">
                     <option>-</option>
                     @foreach (\App\Enums\MaritalStatus::cases() as $item)
-                        <option value="{{ $item->value }}" {{ ($employeeDetail->marital_status->value == $item->value) ? 'selected': ''}}>{{ $item->name }}</option>
+                        <option value="{{ $item->value }}" {{ (!empty($employeeDetail->marital_status) && ($employeeDetail->marital_status->value == $item->value)) ? 'selected': ''}}>{{ $item->name }}</option>
                     @endforeach
                 </select>
             </x-form.input-block>
