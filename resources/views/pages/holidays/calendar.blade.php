@@ -64,12 +64,13 @@
             plugins: [
                 dayGridPlugin,timeGridPlugin,listPlugin
             ],
+            initialView: 'dayGridMonth',
             handleWindowResize: true,   
             height: $(window).height() - 200,   
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridDay,dayGridWeek,listWeek'
+                right: 'dayGridDay'
             },    
             events: @json($events->all()),
             dateClick: function(info) {

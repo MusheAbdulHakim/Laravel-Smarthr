@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('endDate');
             $table->longText('description')->nullable();
             $table->boolean('is_annual')->nullable()->default(false);
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }
