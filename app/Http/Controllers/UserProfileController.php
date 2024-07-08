@@ -51,7 +51,7 @@ class UserProfileController extends Controller
             'phone' => $request->phone ?? $user->phone,
             'avatar' => $imageName,
         ]);
-        flash()->success(__('Profile has been updated'));
-        return redirect()->route('profile');
+        $notification = notify(__('Profile has been updated'));
+        return redirect()->route('profile')->with($notification);
     }
 }
