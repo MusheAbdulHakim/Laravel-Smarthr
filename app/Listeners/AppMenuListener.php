@@ -25,7 +25,7 @@ class AppMenuListener
     public function handle(AppMenuEvent $event): void
     {
         $menu = $event->menu;
-        $menu->html('<li class="menu-title"><span>Main</span></li>');
+        $menu->html('<span>Main</span>',['class' => 'menu-title']);
 
         $menu->add(
             Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span> ' . __('Dashboard') . '</span>')->setActive(route_is('dashboard'))
