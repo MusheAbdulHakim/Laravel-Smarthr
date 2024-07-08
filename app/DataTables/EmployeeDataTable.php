@@ -8,6 +8,7 @@ use Spatie\Menu\Laravel\Html;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -27,7 +28,8 @@ class EmployeeDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('fullname', function ($row) {
                 $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
-                return Html::userAvatar($row->fullname, $img);
+                $link = route('employees.show', ['employee' => Crypt::encrypt($row->id)]);
+                return Html::userAvatar($row->fullname, $img, $link);
             })
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
