@@ -17,6 +17,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@eonasdan/tempus-dominus": "^6.9.9",
         "@excalidraw/excalidraw": "^0.17.6",
         "@excalidraw/mermaid-to-excalidraw": "^1.0.0",
         "@tldraw/tldraw": "^2.3.0",

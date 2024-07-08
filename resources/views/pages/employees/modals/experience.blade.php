@@ -129,12 +129,8 @@
         </div>
     </form>
 </div>
-@vite([
-    'resources/assets/js/select2.min.js',
-    'resources/assets/js/bootstrap-datetimepicker.min.js',
-    'resources/assets/plugins/jquery-repeater/jquery.repeater.min.js',
-])
-<script type="module">
+
+<script type="module" defer>
     $(document).ready(function(){
         $('.repeater').repeater({
             show: function () {
