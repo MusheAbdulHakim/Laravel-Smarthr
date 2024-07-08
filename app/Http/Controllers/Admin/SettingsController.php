@@ -39,8 +39,8 @@ class SettingsController extends Controller
         $settings->fax = $request->fax ?? $settings->fax;
         $settings->website_url = $request->website_url ?? $settings->website_url;
         $settings->save();
-        flash()->success(__("Company Settings has been updated"));
-        return redirect()->route('settings.index');
+        $notification = notify(__("Company Settings has been updated"));
+        return redirect()->route('settings.index')->with($notification);
     }
 
     public function locale(LocalizationSettings $settings)
@@ -78,8 +78,8 @@ class SettingsController extends Controller
             LocaleHasBeenSetEvent::dispatch($locale);
         }
         $settings->save();
-        flash()->success(__("Locale Settings has been updated"));
-        return redirect()->route('settings.locale');
+        $notification = notify(__("Locale Settings has been updated"));
+        return redirect()->route('settings.locale')->with($notification);
     }
 
 
@@ -129,7 +129,7 @@ class SettingsController extends Controller
         $settings->sidebar_img = $side_img;
         $settings->sidebar_color  = $request->sidebar_color ?? $settings->sidebar_color;
         $settings->save();
-        flash()->success(__("Theme Settings has been updated"));
-        return redirect()->route('settings.theme');
+        $notification = notify(__("Theme Settings has been updated"));
+        return redirect()->route('settings.theme')->with($notification);
     }
 }

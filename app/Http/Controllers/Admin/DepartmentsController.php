@@ -42,8 +42,8 @@ class DepartmentsController extends BaseController
             'location' => $request->location,
             'description' => $request->description
         ]);
-        flash()->success('Department has been added');
-        return redirect()->route('departments.index');
+        $notification = notify('Department has been added');
+        return redirect()->route('departments.index')->with($notification);
     }
 
     /**
@@ -71,8 +71,8 @@ class DepartmentsController extends BaseController
             'location' => $request->location,
             'description' => $request->description,
         ]);
-        flash()->success(__("Department has been updated"));
-        return redirect()->route('departments.index');
+        $notification = notify(__("Department has been updated"));
+        return redirect()->route('departments.index')->with($notification);
     }
 
     /**
@@ -81,7 +81,7 @@ class DepartmentsController extends BaseController
     public function destroy(Department $department)
     {
         $department->delete();
-        flash()->success(__('Department has been deleted'));
-        return redirect()->route('departments.index');
+        $notification = notify(__('Department has been deleted'));
+        return redirect()->route('departments.index')->with($notification);
     }
 }

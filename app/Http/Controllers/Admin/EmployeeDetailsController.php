@@ -32,8 +32,8 @@ class EmployeeDetailsController extends BaseController
             'spouse_occupation' => $request->spouse_occupation,
             'no_of_children' => $request->children,
         ]);
-        flash()->success(__("Personal Information has been updated"));
-        return back();
+        $notification = notify(__("Personal Information has been updated"));
+        return back()->with($notification);
     }
 
     public function emergencyContacts(EmployeeDetail $employeeDetail)
@@ -51,8 +51,8 @@ class EmployeeDetailsController extends BaseController
                 'secondary' => $request->secondary,
             ]
         ]);
-        flash()->success(__("Emergency contacts has been updated"));
-        return back();
+        $notification = notify(__("Emergency contacts has been updated"));
+        return back()->with($notification);
     }
 
 
@@ -96,15 +96,15 @@ class EmployeeDetailsController extends BaseController
                 'file' => $fileName,
             ]);
         }
-        flash()->success(__("Exployee Working experience has been updated"));
-        return back();
+        $notification = notify(__("Exployee Working experience has been updated"));
+        return back()->with($notification);
     }
 
     public function deleteWorkExperience(Request $request, EmployeeWorkExperience $experience)
     {
         $experience->delete();
-        flash()->success(__("Work experience has been deleted"));
-        return back();
+        $notification = notify(__("Work experience has been deleted"));
+        return back()->with($notification);
     }
 
     public function education(EmployeeDetail $employeeDetail)
@@ -141,15 +141,15 @@ class EmployeeDetailsController extends BaseController
                 'file' => $fileName,
             ]);
         }
-        flash()->success(__("Employee education has been added"));
-        return back();
+        $notification = notify(__("Employee education has been added"));
+        return back()->with($notification);
     }
 
     public function deleteEducation(Request $request)
     {
         $education = EmployeeEducation::findOrFail($request->education);
         $education->delete();
-        flash()->success(__('Employee Education has beel deleted'));
-        return back();
+        $notification = notify(__('Employee Education has beel deleted'));
+        return back()->with($notification);
     }
 }

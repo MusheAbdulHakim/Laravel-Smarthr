@@ -21,8 +21,7 @@
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
                     <a href="javascript:void(0)" data-url="{{ route('employees.create') }}" class="btn add-btn"
-                        data-ajax-modal="true"
-                        data-size="lg" data-title="Add Employee">
+                        data-ajax-modal="true" data-size="lg" data-title="Add Employee">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Employee') }}
                     </a>
                     <div class="view-icons">

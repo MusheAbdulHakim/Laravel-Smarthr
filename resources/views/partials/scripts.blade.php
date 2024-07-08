@@ -15,4 +15,54 @@
 @livewireScripts
 @yield('vendor-scripts')
 @stack('page-scripts')
-
+<script type="module">
+    @if(count($errors) > 0)
+        @foreach($errors->all() as $error)
+            Toastify({
+                text: "{{ $error }}",
+                className: "danger",
+            }).showToast();
+            break;
+        @endforeach
+    @endif
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type', '') }}";
+        switch (type) {
+            case 'info':
+                Toastify({
+                    text: "{{ Session::get('message') }}",
+                    className: "info",
+                }).showToast();
+                break;
+            
+            case 'success':
+                Toastify({
+                    text: "{{ Session::get('message') }}",
+                    className: "success",
+                }).showToast();
+                break;
+            
+            case 'warning':
+                Toastify({
+                    text: "{{ Session::get('message') }}",
+                    className: "warning",
+                }).showToast();
+                break;
+            
+            case 'error':
+                Toastify({
+                    text: "{{ Session::get('message') }}",
+                    className: "danger",
+                }).showToast();
+                break;
+            
+            case 'danger':
+                Toastify({
+                    text: "{{ Session::get('message') }}",
+                    className: "danger",
+                }).showToast();
+                break;
+            
+        }
+    @endif
+</script>

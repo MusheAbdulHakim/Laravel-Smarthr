@@ -2,15 +2,16 @@ import "./bootstrap";
 import $ from 'jquery';
 window.jQuery = window.$ = $
 
-import "nprogress";
 import Select2 from 'select2';
 import moment from 'moment';
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
+import Toastify from 'toastify-js'
 
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
 window.moment = moment;
+window.Toastify = Toastify;
 Select2();
 const AppAssets = import.meta.glob([
     '../assets/fonts/**',

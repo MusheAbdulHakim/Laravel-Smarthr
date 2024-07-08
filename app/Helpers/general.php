@@ -84,7 +84,7 @@ if (!function_exists('format_date')) {
     function format_date($date, $format = '')
     {
         if($format === ''){
-            $format = LocaleSettings('date_format') ?? 'Y-m-d';
+            $format = !empty(LocaleSettings('date_format')) ? LocaleSettings('date_format'): 'Y-m-d';
         }
         return date_format(date_create($date), $format);
     }
@@ -159,5 +159,14 @@ if(!function_exists('module')){
     function module($name)
     {
         return Module::find($name);
+    }
+}
+
+if(!function_exists('notify')){
+    function notify($message , $type='success'){
+        return array(
+            'message'=> $message,
+            'alert-type' => $type,
+        );
     }
 }

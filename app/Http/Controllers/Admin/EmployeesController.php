@@ -35,7 +35,7 @@ class EmployeesController extends Controller
     public function list(EmployeeDataTable $dataTable)
     {
         $pageTitle = __("employees");
-        return $dataTable->render('pages.employees.index', compact(
+        return $dataTable->render('pages.employees.list', compact(
             'pageTitle',
         ));
     }
@@ -98,8 +98,8 @@ class EmployeesController extends Controller
                 'designation_id' => $request->designation,
             ]);
         }
-        flash()->success(__('Employee has been added'));
-        return back();
+        $notification = notify(__('Employee has been added'));
+        return back()->with($notification);
     }
 
     /**
@@ -181,8 +181,8 @@ class EmployeesController extends Controller
                 'designation_id' => $request->designation,
             ]);
         }
-        flash()->success(__("Employee has been updated"));
-        return back();
+        $notification = notify(__("Employee has been updated"));
+        return back()->with($notification);
     }
 
     /**
@@ -191,7 +191,7 @@ class EmployeesController extends Controller
     public function destroy(User $employee)
     {
         $employee->delete();
-        flash()->success(__("Employee has been deleted"));
-        return redirect()->route('employees.index');
+        $notification = notify(__("Employee has been deleted"));
+        return back()->with($notification);
     }
 }

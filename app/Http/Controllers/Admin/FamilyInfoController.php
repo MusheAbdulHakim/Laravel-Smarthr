@@ -53,8 +53,8 @@ class FamilyInfoController extends Controller
             'address' => $request->address,
             'picture' => $imageName,
         ]);
-        flash()->success(__('Family information has been added'));
-        return back();
+        $notification = notify(__('Family information has been added'));
+        return back()->with($notification);
     }
 
     /**
@@ -102,8 +102,8 @@ class FamilyInfoController extends Controller
             'address' => $request->address,
             'picture' => $imageName,
         ]);
-        flash()->success(__('Family information has been updated'));
-        return back();
+        $notification = notify(__('Family information has been updated'));
+        return back()->with($notification);
     }
 
     /**
@@ -112,7 +112,7 @@ class FamilyInfoController extends Controller
     public function destroy(UserFamilyInfo $family_information)
     {
         $family_information->delete();
-        flash()->success(__("Family information has been deleted"));
-        return back();
+        $notification = notify(__("Family information has been deleted"));
+        return back()->with($notification);
     }
 }

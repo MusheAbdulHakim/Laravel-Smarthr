@@ -18,10 +18,13 @@
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
                     <a href="javascript:void(0)" data-url="{{ route('employees.create') }}" class="btn add-btn"
-                        data-ajax-modal="true"
-                        data-size="md" data-title="Add Employee">
+                        data-ajax-modal="true" data-size="lg" data-title="Add Employee">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Employee') }}
                     </a>
+                    <div class="view-icons">
+                        <a href="{{ route('employees.index') }}" class="grid-view btn btn-link"><i class="fa fa-th"></i></a>
+                        <a href="{{ route('employees.list') }}" class="list-view btn btn-link active"><i class="fa-solid fa-bars"></i></a>
+                    </div>
                 </div>
             </x-slot>
         </x-breadcrumb>

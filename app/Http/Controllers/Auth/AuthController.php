@@ -55,7 +55,7 @@ class AuthController extends BaseController
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with(flash()->success(__($status)))
+            ? back()->with(notify(__($status)))
             : back()->withErrors(['email' => __($status)]);
     }
 
@@ -88,7 +88,7 @@ class AuthController extends BaseController
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with(flash()->success(__($status)))
+            ? redirect()->route('login')->with(notify(__($status)))
             : back()->withErrors(['email' => [__($status)]]);
     }
 

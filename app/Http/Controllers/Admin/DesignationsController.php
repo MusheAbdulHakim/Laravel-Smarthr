@@ -40,8 +40,8 @@ class DesignationsController extends Controller
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        flash()->success(__("Designation has been added"));
-        return redirect()->route('designations.index');
+        $notification = notify(__("Designation has been added"));
+        return back()->with($notification);
     }
 
 
@@ -68,8 +68,8 @@ class DesignationsController extends Controller
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        flash()->success(__("Designation has been updated"));
-        return redirect()->route('designations.index');
+        $notification = notify(__("Designation has been updated"));
+        return back()->with($notification);
     }
 
     /**
@@ -78,7 +78,7 @@ class DesignationsController extends Controller
     public function destroy(Designation $designation)
     {
         $designation->delete();
-        flash()->success(__("Designation has been deleted"));
-        return back();
+        $notification = notify(__("Designation has been deleted"));
+        return back()->with($notification);
     }
 }

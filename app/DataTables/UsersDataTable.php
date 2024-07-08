@@ -40,7 +40,7 @@ class UsersDataTable extends DataTable
 
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('assets/img/user.jpg');
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
                 return Html::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
