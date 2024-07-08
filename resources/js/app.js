@@ -7,11 +7,19 @@ import moment from 'moment';
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
 import Toastify from 'toastify-js'
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
 window.moment = moment;
 window.Toastify = Toastify;
+window.Calendar = Calendar
+window.dayGridPlugin = dayGridPlugin
+window.timeGridPlugin = timeGridPlugin
+window.listPlugin = listPlugin
 Select2();
 const AppAssets = import.meta.glob([
     '../assets/fonts/**',

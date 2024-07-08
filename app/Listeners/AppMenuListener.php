@@ -40,7 +40,7 @@ class AppMenuListener
                     )->addParentClass('submenu')
             );
         $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
-        $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index']) ? "active" : "";
+        $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index','holidays.*']) ? "active" : "";
         $menu
             ->submenu(
                 Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
@@ -49,6 +49,7 @@ class AppMenuListener
                     ->add(Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
                     ->add(Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
                     ->add(Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
+                    ->add(Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
             );
         $menu->add(
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))

@@ -61,3 +61,7 @@ textarea.form-control.is-invalid {
 {
     top: 50% !important;
 }
+
+.fc-toolbar-title, .fc-button {
+    text-transform: capitalize !important;
+}

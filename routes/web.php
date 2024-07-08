@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
 use App\Http\Controllers\Admin\EmployeeDetailsController;
 use App\Http\Controllers\Admin\FamilyInfoController;
+use App\Http\Controllers\Admin\HolidaysController;
 
 include __DIR__ . '/auth.php';
 
@@ -42,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('employees-list', [EmployeesController::class, 'list'])->name('employees.list');
     Route::resource('departments', DepartmentsController::class)->except(['show']);
     Route::resource('designations', DesignationsController::class)->except(['show']);
+    Route::resource('holidays', HolidaysController::class);
+    Route::get('holidays-calendar', [HolidaysController::class, 'calendar'])->name('holidays.calendar');
     Route::resource('family-information', FamilyInfoController::class);
 
     //settings

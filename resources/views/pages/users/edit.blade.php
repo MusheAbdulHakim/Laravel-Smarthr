@@ -74,7 +74,7 @@
                 <x-form.input type="file" name="avatar" />
             </div>
             <div class="status-toggle">
-                <x-form.input type="checkbox" id="status" class="check" name="status"
+                <input type="checkbox" id="status" class="form-control check" name="status"
                     checked="{{ !empty($user->is_active) ? 'checked' : '' }}" />
                 <label for="status" class="checktoggle">checkbox</label>
             </div>
