@@ -1,18 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Admin\HolidaysController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
+use App\Http\Controllers\Admin\FamilyInfoController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
 use App\Http\Controllers\Admin\EmployeeDetailsController;
-use App\Http\Controllers\Admin\FamilyInfoController;
-use App\Http\Controllers\Admin\HolidaysController;
 
 include __DIR__ . '/auth.php';
 
@@ -25,8 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
 
-    Route::get('chat', [ChatController::class, 'index'])->name('app.chat');
-    Route::get('video', [ChatController::class, 'video'])->name('app.video');
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);
     Route::get('employee/personal-info/{employeeDetail}', [EmployeeDetailsController::class, 'personalInfo'])->name('employee.personal-info');
