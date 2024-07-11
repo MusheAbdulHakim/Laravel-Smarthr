@@ -10,86 +10,12 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
-
                 <nav class="greedy">
                     <ul class="link-item">
                         <li>
-                            <a href="admin-dashboard.html"><i class="la la-home"></i> <span>Back to Home</span></a>
+                            <a href="{{ route('dashboard') }}"><i class="la la-home"></i> <span>Back to Home</span></a>
                         </li>
-                        <li class="menu-title"><span>Chat Groups</span> <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#add_group"><i class="fa-solid fa-plus"></i></a></li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/user.jpg" alt="User Image">
-                                </span>
-                                <span class="chat-user">#General</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/user.jpg" alt="User Image">
-                                </span>
-                                <span class="chat-user">#Video Responsive Survey</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/user.jpg" alt="User Image">
-                                </span>
-                                <span class="chat-user">#500rs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/user.jpg" alt="User Image">
-                                </span>
-                                <span class="chat-user">#warehouse</span>
-                            </a>
-                        </li>
-                        <li class="menu-title">Direct Chats <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#add_chat_user"><i class="fa-solid fa-plus"></i></a></li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/profiles/avatar-02.jpg"
-                                        alt="User Image"><span class="status online"></span>
-                                </span>
-                                <span class="chat-user">John Doe</span> <span class="badge rounded-pill bg-danger">1</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/profiles/avatar-09.jpg"
-                                        alt="User Image"><span class="status offline"></span>
-                                </span>
-                                <span class="chat-user">Richard Miles</span> <span
-                                    class="badge rounded-pill bg-danger">7</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/profiles/avatar-10.jpg"
-                                        alt="User Image"><span class="status away"></span>
-                                </span>
-                                <span class="chat-user">John Smith</span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="chat.html">
-                                <span class="chat-avatar-sm user-img">
-                                    <img class="rounded-circle" src="assets/img/profiles/avatar-05.jpg"
-                                        alt="User Image"><span class="status online"></span>
-                                </span>
-                                <span class="chat-user">Mike Litorus</span> <span
-                                    class="badge rounded-pill bg-danger">2</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>
@@ -113,7 +39,7 @@
                             <div class="user-details me-auto">
                                 <div class="float-start user-img">
                                     <a class="avatar" href="profile.html" title="Mike Litorus">
-                                        <img src="assets/img/profiles/avatar-05.jpg" alt="User Image"
+                                        <img src="{{ asset('images/user.jpg') }}" alt="User Image"
                                             class="rounded-circle">
                                         <span class="status online"></span>
                                     </a>
@@ -184,7 +110,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -263,7 +189,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -384,7 +310,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -523,7 +449,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -574,7 +500,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -591,21 +517,29 @@
                         </div>
                     </div>
                     <div class="chat-footer">
-                        <div class="message-bar">
-                            <div class="message-inner">
-                                <a class="link attach-icon" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#drag_files"><img src="assets/img/attachment.png"
-                                        alt="Attachment Icon"></a>
-                                <div class="message-area">
-                                    <div class="input-group">
-                                        <textarea class="form-control" placeholder="Type message..."></textarea>
-                                        <button class="btn btn-custom" type="button"><i
-                                                class="fa-solid fa-paper-plane"></i></button>
+                        <form autocomplete="off" id="thread_form">
+                            <div class="message-bar">
+                                <div class="message-inner">
+                                    {{-- <a class="link attach-icon" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#drag_files">
+                                        <img src="images/attachment.png"
+                                            alt="Attachment Icon">
+                                    </a> --}}
+                                    <button id="file_upload_btn" data-bs-toggle="tooltip" data-bs-title="Upload File(s)" data-bs-placement="top" class="link attach-icon p-1 btn btn-sm" onclick="$('#doc_file).trigger('click');" type="button"><i class="fa-solid fa-paperclip"></i></button>
+                                    <button id="record_audio_message_btn" data-toggle="tooltip" title="Record Audio Message" data-placement="top" class="p-1 mx-1 btn btn-sm btn-light" type="button"><i class="fas fa-microphone"></i></button>
+                                    <div class="message-area">
+                                        <div class="input-group">
+                                            <textarea autocomplete="off" spellcheck="true" title="message" name="message_txt_'+Date.now()+'" id="message_text_input" class="form-control" placeholder="Type message..."></textarea>
+                                            <button class="btn btn-custom" type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                                            <button id="add_emoji_btn" data-bs-toggle="tooltip" data-bs-title="Add Emoji" data-bs-placement="top" class="p-1 mx-1 btn btn-sm btn-custom" type="button"><i class="fas fa-grin"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
+                    <input class="NS" multiple type="file" name="doc_file" id="doc_file">
+                    <input class="NS" id="thread_avatar_image_file" type="file" name="group_avatar_image_file" accept="image/*">
                 </div>
             </div>
             <!-- /Chats View -->
@@ -682,7 +616,7 @@
                                         <div class="chat chat-left">
                                             <div class="chat-avatar">
                                                 <a href="profile.html" class="avatar">
-                                                    <img src="assets/img/profiles/avatar-05.jpg" alt="User Image">
+                                                    <img src="{{ asset('images/user.jpg') }}" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="chat-body">
@@ -798,232 +732,58 @@
 
     </div>
     <!-- /Chat Main Row -->
-    <!-- Drogfiles Modal -->
-    <div id="drag_files" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Drag and drop files upload</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="js-upload-form">
-                        <div class="upload-drop-zone" id="drop-zone">
-                            <i class="fa fa-cloud-upload fa-2x"></i> <span class="upload-text">Just drag and drop files
-                                here</span>
-                        </div>
-                        <h4>Uploading</h4>
-                        <ul class="upload-list">
-                            <li class="file-list">
-                                <div class="upload-wrap">
-                                    <div class="file-name">
-                                        <i class="fa fa-photo"></i>
-                                        photo.png
-                                    </div>
-                                    <div class="file-size">1.07 gb</div>
-                                    <button type="button" class="file-close">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                </div>
-                                <div class="progress progress-xs progress-striped">
-                                    <div class="progress-bar bg-success w-65" role="progressbar"></div>
-                                </div>
-                                <div class="upload-process">37% done</div>
-                            </li>
-                            <li class="file-list">
-                                <div class="upload-wrap">
-                                    <div class="file-name">
-                                        <i class="fa fa-file"></i>
-                                        task.doc
-                                    </div>
-                                    <div class="file-size">5.8 kb</div>
-                                    <button type="button" class="file-close">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                </div>
-                                <div class="progress progress-xs progress-striped">
-                                    <div class="progress-bar bg-success w-65" role="progressbar"></div>
-                                </div>
-                                <div class="upload-process">37% done</div>
-                            </li>
-                            <li class="file-list">
-                                <div class="upload-wrap">
-                                    <div class="file-name">
-                                        <i class="fa fa-photo"></i>
-                                        dashboard.png
-                                    </div>
-                                    <div class="file-size">2.1 mb</div>
-                                    <button type="button" class="file-close">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                </div>
-                                <div class="progress progress-xs progress-striped">
-                                    <div class="progress-bar bg-success w-65" role="progressbar"></div>
-                                </div>
-                                <div class="upload-process">Completed</div>
-                            </li>
-                        </ul>
-                    </form>
-                    <div class="submit-section">
-                        <button class="btn btn-primary submit-btn">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Drogfiles Modal -->
-
-    <!-- Add Group Modal -->
-    <div id="add_group" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create a group</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Groups are where your team communicates. They’re best when organized around a topic — #leads, for
-                        example.</p>
-                    <form>
-                        <div class="input-block mb-3">
-                            <label class="col-form-label">Group Name <span class="text-danger">*</span></label>
-                            <input class="form-control" type="text">
-                        </div>
-                        <div class="input-block mb-3">
-                            <label class="col-form-label">Send invites to: <span
-                                    class="text-muted-light">(optional)</span></label>
-                            <input class="form-control" type="text">
-                        </div>
-                        <div class="submit-section">
-                            <button class="btn btn-primary submit-btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Add Group Modal -->
-
-    <!-- Add Chat User Modal -->
-    <div id="add_chat_user" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Direct Chat</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group m-b-30">
-                        <input placeholder="Search to start a chat" class="form-control search-input" type="text">
-                        <button class="btn btn-primary">Search</button>
-                    </div>
-                    <div>
-                        <h5>Recent Conversations</h5>
-                        <ul class="chat-user-list">
-                            <li>
-                                <a href="#">
-                                    <div class="chat-block d-flex">
-                                        <span class="avatar align-self-center flex-shrink-0">
-                                            <img src="assets/img/profiles/avatar-16.jpg" alt="User Image">
-                                        </span>
-                                        <div class="media-body align-self-center text-nowrap flex-grow-1">
-                                            <div class="user-name">Jeffery Lalor</div>
-                                            <span class="designation">Team Leader</span>
-                                        </div>
-                                        <div class="text-nowrap align-self-center">
-                                            <div class="online-date">1 day ago</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="chat-block d-flex">
-                                        <span class="avatar align-self-center flex-shrink-0">
-                                            <img src="assets/img/profiles/avatar-13.jpg" alt="User Image">
-                                        </span>
-                                        <div class="media-body align-self-center text-nowrap flex-grow-1">
-                                            <div class="user-name">Bernardo Galaviz</div>
-                                            <span class="designation">Web Developer</span>
-                                        </div>
-                                        <div class="align-self-center text-nowrap">
-                                            <div class="online-date">3 days ago</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="chat-block d-flex">
-                                        <span class="avatar align-self-center flex-shrink-0">
-                                            <img src="assets/img/profiles/avatar-02.jpg" alt="User Image">
-                                        </span>
-                                        <div class="media-body text-nowrap align-self-center flex-grow-1">
-                                            <div class="user-name">John Doe</div>
-                                            <span class="designation">Web Designer</span>
-                                        </div>
-                                        <div class="align-self-center text-nowrap">
-                                            <div class="online-date">7 months ago</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="submit-section">
-                        <button class="btn btn-primary submit-btn">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Add Chat User Modal -->
-
-    <!-- Share Files Modal -->
-    <div id="share_files" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Share File</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="files-share-list">
-                        <div class="files-cont">
-                            <div class="file-type">
-                                <span class="files-icon"><i class="fa-regular fa-file-pdf"></i></span>
-                            </div>
-                            <div class="files-info">
-                                <span class="file-name text-ellipsis">AHA Selfcare Mobile Application Test-Cases.xls</span>
-                                <span class="file-author"><a href="#">Bernardo Galaviz</a></span> <span
-                                    class="file-date">May 31st at 6:53 PM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-block mb-3">
-                        <label class="col-form-label">Share With</label>
-                        <input class="form-control" type="text">
-                    </div>
-                    <div class="submit-section">
-                        <button class="btn btn-primary submit-btn">Share</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Share Files Modal -->
+    
 @endsection
 
-
-@push('page-scripts')
-    <!-- Page Js -->
-    <!-- /Page Js -->
-@endpush
+@section('vendor-scripts')
+@vite("resources/js/messenger/app.js")
+@if(auth()->check())
+<script src="https://cdn.jsdelivr.net/npm/emoji-toolkit@6.5.1/lib/js/joypixels.min.js"></script>
+@endif
+@stack('special-js')
+<script type="module">
+    $(document).ready(function(){
+        $('html').attr('data-sidebar-size','sm-hover')
+        Messenger.init({
+            load : {
+                NotifyManager : {
+                    notify_sound : {{messenger()->getProviderMessenger()->notify_sound ? 'true' : 'false'}},
+                    message_popups : {{messenger()->getProviderMessenger()->message_popups ? 'true' : 'false'}},
+                    message_sound : {{messenger()->getProviderMessenger()->message_sound ? 'true' : 'false'}},
+                    call_ringtone_sound : {{messenger()->getProviderMessenger()->call_ringtone_sound ? 'true' : 'false'}},
+                },
+                @stack('Messenger-load')
+            },
+            provider : {
+                id : {{messenger()->getProvider()->getKey()}},
+                model : '{{messenger()->getProvider()->getMorphClass()}}',
+                alias : '{{messenger()->getProviderAlias()}}',
+                name : '{{ messenger()->getProvider()->getProviderName()}}',
+                slug : '{{ messenger()->getProvider()->getProviderAvatarRoute('sm')}}',
+                avatar_md : '{{ messenger()->getProvider()->getProviderAvatarRoute('md')}}',
+                avatar_sm : '{{ messenger()->getProvider()->getProviderAvatarRoute('sm')}}',
+            },
+            common : {
+                app_name : '{{config('messenger-ui.site_name')}}',
+                api_endpoint : '{{messenger()->getApiEndpoint()}}',
+                web_endpoint : '{{'/'.config('messenger-ui.routing.prefix')}}',
+                socket_endpoint : '{{config('messenger-ui.websocket.host')}}',
+                socket_auth_endpoint : '{{config('messenger-ui.websocket.auth_endpoint')}}',
+                socket_key : '{{config('messenger-ui.websocket.key')}}',
+                socket_port : {{config('messenger-ui.websocket.port')}},
+                socket_tls : {{config('messenger-ui.websocket.use_tsl') ? 'true' : 'false'}},
+                socket_cluster : '{{config('messenger-ui.websocket.cluster')}}',
+                socket_pusher : {{config('messenger-ui.websocket.pusher') ? 'true' : 'false'}},
+                base_css : '{{ asset(mix('app.css', 'vendor/messenger')) }}',
+                dark_css : '{{ asset(mix('dark.css', 'vendor/messenger')) }}',
+                dark_mode : {{messenger()->getProviderMessenger()->dark_mode ? 'true' :  'false'}},
+                mobile : false,
+            },
+            modules : {
+                @stack('Messenger-modules')
+            },
+            @stack('Messenger-call')
+        }, '{{config('app.env')}}');
+    })
+</script>
+@endsection

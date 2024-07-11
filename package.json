@@ -12,9 +12,10 @@
         "laravel-datatables-vite": "^0.5.2",
         "laravel-echo": "^1.16.1",
         "laravel-vite-plugin": "^1.0",
-        "pusher-js": "^8.4.0-rc2",
+        "pusher-js": "^7.0.3",
         "sass": "^1.77.6",
-        "vite": "^5.0"
+        "vite": "^5.0",
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "@eonasdan/tempus-dominus": "^6.9.9",
@@ -25,13 +26,17 @@
         "@fullcalendar/interaction": "^6.1.14",
         "@fullcalendar/list": "^6.1.14",
         "@fullcalendar/timegrid": "^6.1.14",
+        "@joeattardi/emoji-button": "^4.6.4",
         "@tldraw/tldraw": "^2.3.0",
         "@vitejs/plugin-react": "^4.3.1",
+        "audio-recorder-polyfill": "^0.4.1",
+        "autolinker": "^2.2.2",
         "clsx": "^2.1.1",
         "datatables.net-bs5": "^2.0.8",
         "datatables.net-buttons-bs5": "^3.0.2",
         "datatables.net-colreorder-bs5": "^2.0.3",
         "datatables.net-select-bs5": "^2.0.3",
+        "dayjs": "^1.10.6",
         "intl-tel-input": "^23.1.0",
         "jquery": "^3.7.1",
         "jszip": "^3.10.1",
@@ -41,6 +46,11 @@
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "select2": "^4.1.0-rc.0",
-        "toastify-js": "^1.12.0"
+        "simplebar": "^5.2.1",
+        "toastify-js": "^1.12.0",
+        "toastr": "^2.1.4",
+        "uuid": "^8.3.2",
+        "vanilla-lazyload": "^15.2.0",
+        "webrtc-adapter": "^7.6.3"
     }
 }

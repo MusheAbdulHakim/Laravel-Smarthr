@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\HolidaysController;
@@ -23,6 +24,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
+
+    Route::prefix('messenger')->group(function(){
+        Route::get('', [ChatController::class, 'index'])->name('messenger.index');
+        Route::get('chat', [ChatController::class, 'index'])->name('app.chat');
+        Route::get('join/{invite}', [ChatController::class, 'showJoinWithInvite'])->name('messenger.invites.join');
+        Route::get('{thread}', [ChatController::class, 'showThread'])->name('messenger.show');
+        Route::get('/recipient/{alias}/{id}', [ChatController::class, 'showCreatePrivate'])->name('messenger.private.create');
+        Route::get('threads/{thread}/calls/{call}', [ChatController::class, 'showVideoCall'])->name('messenger.threads.show.call');
+    });
 
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);

@@ -8,6 +8,7 @@ async function getConfig() {
         "resources/assets/scss/main.scss",
         "resources/js/app.js",
         "resources/js/datatables.js",
+        "resources/js/messenger/app.js",
     ];
     const allPaths = await collectModuleAssetsPaths(paths, "Modules");
 

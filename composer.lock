@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93f1acbff40812d8618588f574622890",
+    "content-hash": "4087c3a4ae7ba71d59be36139839c10a",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -377,16 +377,16 @@
         },
         {
             "name": "dflydev/dot-access-data",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-data.git",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549"
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/f41715465d65213d644d3141a6a93081be5d3549",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549",
+                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/a23a2bf4f31d3518f3ecb38660c95715dfead60f",
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f",
                 "shasum": ""
             },
             "require": {
@@ -446,9 +446,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
+                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
-            "time": "2022-10-27T11:44:00+00:00"
+            "time": "2024-07-08T12:26:09+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1704,6 +1704,139 @@
                 "source": "https://github.com/h4cc/wkhtmltopdf-amd64/tree/master"
             },
             "time": "2018-01-15T06:57:33+00:00"
+        },
+        {
+            "name": "intervention/image",
+            "version": "2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/04be355f8d6734c826045d02a1079ad658322dad",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/2.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "joypixels/emoji-toolkit",
+            "version": "6.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joypixels/emoji-toolkit.git",
+                "reference": "99f960c37eef1bdd0a3e30a676f8839c88e48ce3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joypixels/emoji-toolkit/zipball/99f960c37eef1bdd0a3e30a676f8839c88e48ce3",
+                "reference": "99f960c37eef1bdd0a3e30a676f8839c88e48ce3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6 || ~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JoyPixels\\": "lib/php/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(CC-BY-4.0 and MIT)"
+            ],
+            "description": "JoyPixels is a complete set of emoji designed for the web. The emoji-toolkit includes libraries to easily convert unicode characters to shortnames (:smile:) and shortnames to JoyPixels emoji images. PNG formats provided for the emoji images.",
+            "homepage": "http://www.joypixels.com",
+            "keywords": [
+                "JoyPixels",
+                "emoji",
+                "emoji-toolkit",
+                "emojione",
+                "emojis",
+                "emoticons",
+                "smileys",
+                "smilies",
+                "unicode"
+            ],
+            "support": {
+                "issues": "https://github.com/joypixels/emoji-toolkit/issues",
+                "source": "https://github.com/joypixels/emoji-toolkit/tree/6.6.0"
+            },
+            "time": "2021-07-08T22:11:29+00:00"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -3669,68 +3802,6 @@
                 }
             ],
             "time": "2024-06-28T09:40:51+00:00"
-        },
-        {
-            "name": "munafio/chatify",
-            "version": "v1.6.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/munafio/chatify.git",
-                "reference": "559ff515fc83a822ed72cdd03ca8e36c574c5a25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/munafio/chatify/zipball/559ff515fc83a822ed72cdd03ca8e36c574c5a25",
-                "reference": "559ff515fc83a822ed72cdd03ca8e36c574c5a25",
-                "shasum": ""
-            },
-            "require": {
-                "pusher/pusher-php-server": "^6.0|^7.0|^7.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Chatify\\ChatifyServiceProvider"
-                    ],
-                    "aliases": {
-                        "Chatify": "Chatify\\Facades\\ChatifyMessenger"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Chatify\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Munaf A. Mahdi",
-                    "email": "munafaqeelmahdi@gmail.com"
-                }
-            ],
-            "description": "A package for Laravel PHP Framework to add a complete real-time chat system.",
-            "homepage": "https://github.com/munafio/chatify",
-            "keywords": [
-                "Messenger",
-                "chat",
-                "chatify",
-                "conversations",
-                "laravel",
-                "php",
-                "pusher",
-                "real-time",
-                "realtime"
-            ],
-            "support": {
-                "issues": "https://github.com/munafio/chatify/issues",
-                "source": "https://github.com/munafio/chatify/tree/v1.6.3"
-            },
-            "time": "2024-03-17T14:21:38+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -6215,6 +6286,139 @@
                 }
             ],
             "time": "2024-06-11T12:45:25+00:00"
+        },
+        {
+            "name": "rtippin/messenger",
+            "version": "v1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RTippin/messenger.git",
+                "reference": "7e8a495a5aedc52a438ec649fceff0ede8423f03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RTippin/messenger/zipball/7e8a495a5aedc52a438ec649fceff0ede8423f03",
+                "reference": "7e8a495a5aedc52a438ec649fceff0ede8423f03",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "intervention/image": "^2.5",
+                "joypixels/emoji-toolkit": "^6.0",
+                "laravel/framework": "^11.0",
+                "php": "^8.1|^8.2|^8.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^9.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RTippin\\Messenger\\MessengerServiceProvider"
+                    ],
+                    "aliases": {
+                        "Messenger": "RTippin\\Messenger\\Facades\\Messenger"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "RTippin\\Messenger\\": "src/",
+                    "RTippin\\Messenger\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Tippin",
+                    "email": "tippindev@gmail.com",
+                    "homepage": "https://tippindev.com"
+                }
+            ],
+            "description": "Laravel messenger suite.",
+            "homepage": "https://github.com/rtippin/messenger",
+            "keywords": [
+                "Messenger",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/RTippin/messenger/issues",
+                "source": "https://github.com/RTippin/messenger/tree/v1.23.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/RTippin",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-05-23T20:35:18+00:00"
+        },
+        {
+            "name": "rtippin/messenger-ui",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RTippin/messenger-ui.git",
+                "reference": "aacfd10fce3b51cfb2b1dde1d1ee668603acbedd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RTippin/messenger-ui/zipball/aacfd10fce3b51cfb2b1dde1d1ee668603acbedd",
+                "reference": "aacfd10fce3b51cfb2b1dde1d1ee668603acbedd",
+                "shasum": ""
+            },
+            "require": {
+                "rtippin/messenger": "^1.19"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RTippin\\MessengerUi\\MessengerUiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RTippin\\MessengerUi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Tippin",
+                    "email": "tippindev@gmail.com",
+                    "homepage": "https://tippindev.com"
+                }
+            ],
+            "description": "Laravel messenger suite UI.",
+            "homepage": "https://github.com/rtippin/messenger-ui",
+            "keywords": [
+                "Messenger",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/RTippin/messenger-ui/issues",
+                "source": "https://github.com/RTippin/messenger-ui/tree/v2.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/RTippin",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-07-06T01:02:21+00:00"
         },
         {
             "name": "spatie/laravel-menu",
@@ -10745,16 +10949,16 @@
         },
         {
             "name": "laravel-lang/models",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/models.git",
-                "reference": "9dd987a3d1aab156ee04c676e881fb716fa80ae4"
+                "reference": "f689e3bf60ff4e70b4a12aa7130c87d9727b5b83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/models/zipball/9dd987a3d1aab156ee04c676e881fb716fa80ae4",
-                "reference": "9dd987a3d1aab156ee04c676e881fb716fa80ae4",
+                "url": "https://api.github.com/repos/Laravel-Lang/models/zipball/f689e3bf60ff4e70b4a12aa7130c87d9727b5b83",
+                "reference": "f689e3bf60ff4e70b4a12aa7130c87d9727b5b83",
                 "shasum": ""
             },
             "require": {
@@ -10824,7 +11028,7 @@
                 "issues": "https://github.com/Laravel-Lang/models/issues",
                 "source": "https://github.com/Laravel-Lang/models"
             },
-            "time": "2024-06-24T21:30:14+00:00"
+            "time": "2024-07-08T12:53:25+00:00"
         },
         {
             "name": "laravel-lang/publisher",

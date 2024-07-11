@@ -55,7 +55,7 @@
                             </div>
                             @endif
                             <div class="staff-msg">
-                              <a class="btn btn-custom" href="{{ route('app.chat', $user->id) }}"
+                              <a class="btn btn-custom" href="#"
                                 >{{ __('Send Message') }}</a
                               >
                             </div>

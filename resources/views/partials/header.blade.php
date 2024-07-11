@@ -97,7 +97,7 @@
 
         <!-- Message Notifications -->
         @php
-            $unreadMessages = auth()->user()->messengerInbox->where('seen',0);
+            $unreadMessages = collect();
         @endphp
         <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
