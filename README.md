@@ -40,12 +40,18 @@ cd Laravel-Smarthr
 
 ```
 
-3. Install packages with composer
+3. Install dependencies
 
-```
-composer install
+	- Composer
 
-```
+	```
+	composer install
+
+	```
+	- Npm
+	```
+	npm install && npm run build
+	```
 
 
 4. Create your database 
@@ -101,7 +107,8 @@ http://127.0.0.1:8000
  password: admin
 ```
 
-
+### Make sure you setup pusher to use the chatapp
+(Chat App Docs)[https://chatify.munafio.com/]
 
 #screenshots
 
@@ -116,3 +123,6 @@ http://127.0.0.1:8000
 
 ### Checkout a complete version of the application with much more features here
 [Premium Demo](https://hr.musheabdulhakim.dev/)
+->credentials
+	email: super@admin.com
+	password: admin

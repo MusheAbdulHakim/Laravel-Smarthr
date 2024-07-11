@@ -12,7 +12,7 @@
                 <li class="submenu">
                     <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-
+                        <li><a class="{{ route_is('chatify') ? 'active' : '' }}" href="{{route('chatify')}}">Chat</a></li>
                         <li><a class="{{ route_is('contacts') ? 'active' : '' }}" href="{{route('contacts')}}">Contacts</a></li>
                     </ul>
                 </li>
