@@ -42,5 +42,5 @@
     ThreadTemplates : {src : "{{ Vite::asset('resources/js/messenger/templates/ThreadTemplates.js') }}"},
     MessengerSettings : {src : "{{ Vite::asset('resources/js/messenger/modules/MessengerSettings.js') }}"},
     ThreadBots : {src : "{{ Vite::asset('resources/js/messenger/modules/ThreadBots.js') }}"},
-    EmojiPicker : {src : "{{ asset('resources/js/messenger/modules/EmojiPicker.js') }}"},
+    EmojiPicker : {src : "{{ Vite::asset('resources/js/messenger/modules/EmojiPicker.js') }}"},
 @endpush
