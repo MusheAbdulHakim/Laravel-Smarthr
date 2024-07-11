@@ -3157,6 +3157,7 @@ window.ThreadManager = (function () {
             Messenger.xhr().request({
                 route : Messenger.common().API + 'friends',
                 success : function(data){
+                    $('#contactsModal').modal('show')
                     $("#messenger_contacts_ctnr").html(ThreadTemplates.render().contacts(data));
                     if(!noHistory) window.history.pushState({type : 6}, null, Messenger.common().WEB + '?contacts');
                     methods.loadDataTable( $("#contact_list_table"), true)
@@ -3209,6 +3210,7 @@ window.ThreadManager = (function () {
                 route : Messenger.common().API + 'friends',
                 success : function(data){
                     if(opt.thread.type === 4){
+                        $('#createChatGroupModal').modal('show')
                         $("#messages_container_new_group").html(ThreadTemplates.render().new_group_friends(data));
                         methods.loadDataTable($("#add_group_participants"), true)
                     }
