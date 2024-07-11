@@ -58,22 +58,26 @@ window.ThreadTemplates = (function () {
                 '</div>'
         },
         empty_base : function(){
-            return '<div class="container h-100">\n' +
-                '    <div class="row align-items-end h-100">\n' +
-                '        <div class="col-12 text-center mb-5">\n' +
-                '            <button data-bs-toggle="tooltip" title="Search Profiles" data-bs-placement="top" onclick="ThreadManager.load().search()" class="btn btn-outline-dark btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-search fa-3x"></i></button>\n' +
-                '            <button data-bs-toggle="tooltip" title="Create Group" data-bs-placement="top" onclick="ThreadManager.load().createGroup()" class="btn btn-outline-success btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-edit fa-3x"></i></button>\n' +
-                '            <button data-bs-toggle="tooltip" title="Friends" data-bs-placement="top" onclick="ThreadManager.load().contacts()" class="btn btn-outline-info btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-user-friends fa-3x"></i></button>\n' +
-                '            <button data-bs-toggle="tooltip" title="Messenger Settings" data-bs-placement="top" onclick="MessengerSettings.show()" class="btn btn-outline-primary btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-cog fa-3x"></i></button>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>'
+            return `
+            <div class="container h-100">
+                <div class="row align-items-end h-100">
+                    <div class="col-12 text-center mb-5">
+                        <button data-bs-toggle="tooltip" data-bs-title="Search Profiles" data-bs-placement="top" onclick="ThreadManager.load().search()" class="btn btn-outline-dark btn-circle btn-circle-xl mx-4 my-2">
+                            <i class="fas fa-search fa-3x"></i>
+                        </button>
+                        <button data-bs-toggle="tooltip" data-bs-title="Create Group" data-bs-placement="top" onclick="ThreadManager.load().createGroup()" class="btn btn-outline-success btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-edit fa-3x"></i></button>
+                        <button data-bs-toggle="tooltip" title="Friends" data-bs-placement="top" onclick="ThreadManager.load().contacts()" class="btn btn-outline-info btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-user-friends fa-3x"></i></button>
+                        <button data-bs-toggle="tooltip" title="Messenger Settings" data-bs-placement="top" onclick="MessengerSettings.show()" class="btn btn-outline-primary btn-circle btn-circle-xl mx-4 my-2"><i class="fas fa-cog fa-3x"></i></button>
+                    </div>
+                </div>
+            </div>
+            `
         },
         send_msg_btn : function(emoji){
             return `<div id="inline_send_msg_btn">
-                <button class="btn btn-custom" type="button" title="Click to send or press enter" 
-                onclick="${(ThreadManager.state().type === 3 ? 'ThreadManager.newForms().newPrivate(0);' : 'ThreadManager.send();')} return false;"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>`
+                        <button class="btn btn-custom" type="button" title="Click to send or press enter" 
+                        onclick="${(ThreadManager.state().type === 3 ? 'ThreadManager.newForms().newPrivate(0);' : 'ThreadManager.send();')} return false;"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>`
         },
         socket_error : function(){
             return '<div class="my-2 alert alert-danger text-danger socket-error-main text-center"><span class="spinner-grow spinner-grow-sm"></span> Connection error, messages may be delayed</div>';
@@ -81,8 +85,9 @@ window.ThreadTemplates = (function () {
         thread_socket_error : function(group){
             return `
             <span class="thread_error_area NS">
-            <button data-trigger="focus" data-bs-toggle="popover" data-bs-title="Connection Error" data-content="You may be experiencing connection issues. Messenger may be delayed while we attempt to connect" data-bs-placement="bottom"
-            class="${(group ? 'mr-1' : '')} thread_error_btn glowing_warning_btn btn btn-lg btn-warning pt-1 pb-0 px-2"><i class="fas fa-exclamation-triangle"></i></button>
+                <button data-trigger="focus" data-bs-toggle="popover" data-bs-title="Connection Error" data-content="You may be experiencing connection issues. Messenger may be delayed while we attempt to connect" data-bs-placement="bottom"
+                    class="${(group ? 'mr-1' : '')} thread_error_btn glowing_warning_btn btn btn-lg btn-warning pt-1 pb-0 px-2"><i class="fas fa-exclamation-triangle"></i>
+                </button>
             </span>
             `
         },
@@ -330,14 +335,29 @@ window.ThreadTemplates = (function () {
                 '</div></div></div></a></li>'
         },
         group_thread : function(data, selected, special){
-            return '<li title="'+Messenger.format().escapeHtml(data.name)+'" id="thread_list_'+data.id+'" class="thread_list_item '+(selected ? "alert-warning shadow-sm rounded" : "")+' '+templates.thread_highlight(data)+'">' +
-                '<div class="thread-list-status">'+templates.thread_status(data)+'</div> '+
-                '<a '+(special ? '' : 'onclick="ThreadManager.load().initiate_thread({thread_id : \''+data.id+'\'}); return false;"')+' href="'+Messenger.common().WEB+'/'+data.id+'">' +
-                '<div class="media"><div class="media-left media-middle"><img src="'+data.avatar.sm+'" class="show_group_avatar_'+data.id+' media-object rounded-circle thread-list-avatar thread-group-avatar '+(selected ? "avatar-is-online" : "avatar-is-offline")+'" /></div>' +
-                '<div class="media-body thread_body_li"><div class="header d-inline"><small><div class="float-right date"><time class="timeago" datetime="'+data.updated_at+'">'+Messenger.format().makeTimeAgo(data.updated_at)+'</time></div></small>' +
-                '<div class="from fw-bold">'+data.name+'</div></div><div class="description">' +
-                templates.thread_body(data) +
-                '</div></div></div></a></li>'
+            return `<li title="${Messenger.format().escapeHtml(data.name)}" id="thread_list_${data.id}" class="thread_list_item ${(selected ? "alert-warning shadow-sm rounded" : "")} ${templates.thread_highlight(data)}">
+                    <div class="thread-list-status">${templates.thread_status(data)}</div> 
+                    <a ${(special ? '' : 'onclick="ThreadManager.load().initiate_thread({thread_id : '+data.id+'}); return false;"')} href="${Messenger.common().WEB}/${data.id}">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                    <img src="${data.avatar.sm}" class="show_group_avatar_${data.id}' media-object rounded-circle thread-list-avatar thread-group-avatar ${(selected ? "avatar-is-online" : "avatar-is-offline")}" />
+                                    </div>
+                                    <div class="media-body thread_body_li">
+                                        <div class="header d-inline">
+                                        <small>
+                                            <div class="float-right date">
+                                                <time class="timeago" datetime="${data.updated_at}">${Messenger.format().makeTimeAgo(data.updated_at)}</time>
+                                            </div>
+                                        </small>
+                                    <div class="from fw-bold">${data.name}</div>
+                                </div>
+                                <div class="description">
+                                    ${templates.thread_body(data)}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>`
         },
         message_body : function(data, pending, reply, nolink){
             if(pending === true){
@@ -758,69 +778,52 @@ window.ThreadTemplates = (function () {
             }
             return ''
         },
-        thread_group_headerNew: function(data){
-            let knock = `<button onclick="${ThreadManager.calls().sendKnock()}" id="knok_btn" data-bs-toggle="tooltip" title="Knock at ${Messenger.format().escapeHtml(data.name)}" data-bs-placement="bottom" class="btn btn-lg text-secondary btn-light pt-1 pb-0 px-2" type="button"><i class="fas fa-hand-rock fa-2x"></i></button>`,
-            invites = `<a class="dropdown-item" onclick="ThreadManager.group().viewInviteGenerator(); return false;" id="threadOptionLink" href="#"><i class="fas fa-link"></i> Invitations</a>`,
-            admin = `<a class="dropdown-item" onclick="ThreadManager.group().viewSettings(); return false;" id="threadOptionLink" href="#"><i class="fas fa-cog"></i> Settings</a>`,
-            view_participants = `<a class="dropdown-item" onclick="ThreadManager.group().viewParticipants(); return false;" id="viewParticipantLink" href="#"><i class="fas fa-users"></i> Participants</a>`,
-            view_bots = `<a class="dropdown-item" onclick="ThreadBots.viewBots(); return false;" id="viewBotsLink" href="#"><i class="fas fa-robot"></i> Chat Bots</a>`;
+        thread_group_header: function(data){
+            let knock = ` <li class="nav-item"><button onclick="${ThreadManager.calls().sendKnock()}" id="knok_btn" data-bs-toggle="tooltip" title="Knock at ${Messenger.format().escapeHtml(data.name)}" data-bs-placement="bottom" class="btn btn-lg text-secondary btn-light pt-1 pb-0 px-2" type="button">
+                        <i class="fa-solid fa-hand-rock"></i></button>
+                        </li>`,
+            invites = `<li class="nav-item"><a class="dropdown-item" onclick="ThreadManager.group().viewInviteGenerator(); return false;" id="threadOptionLink" href="#"><i class="fas fa-link"></i> Invitations</a></li>`,
+            admin = ` <li class="nav-item"><a class="dropdown-item" onclick="ThreadManager.group().viewSettings(); return false;" id="threadOptionLink" href="#"><i class="fas fa-cog"></i> Settings</a></li>`,
+            view_participants = ` <li class="nav-item"><a class="dropdown-item" onclick="ThreadManager.group().viewParticipants(); return false;" id="viewParticipantLink" href="#"><i class="fas fa-users"></i> Participants</a></li>`,
+            view_bots = ` <li class="nav-item"><a class="dropdown-item" onclick="ThreadBots.viewBots(); return false;" id="viewBotsLink" href="#"><i class="fas fa-robot"></i> Chat Bots</a></li>`;
             return `<div class="fixed-header">
                         <div class="navbar">
+                            <div id="main_bobble_${data.resources.recipient.provider_id}">
+                                ${templates.thread_private_header_bobble(data.resources.recipient)}
+                            </div>
                             <ul class="nav custom-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">${templates.thread_socket_error(true)}</a>
+                                    ${templates.thread_socket_error(true)}
                                 </li>
                                 <li class="nav-item">
-                                    <span id="thread_option_call" class="nav-link">${templates.thread_call_state(data)}</span>
+                                    <span id="thread_option_call">${templates.thread_call_state(data)}</span>
                                 </li>
+                                ${(!data.locked && data.options.knock ? knock : '')}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fa-solid fa-hand-rock"></i></a>
-                                </li>
-                                <li class="nav-item dropdown dropdown-action">
-                                    <a aria-expanded="false" data-bs-toggle="dropdown" class="nav-link dropdown-toggle"
-                                        href=""><i class="fa-solid fa-gear"></i></a>
+                                    <button class="btn btn-lg text-secondary btn-light dropdown-toggle pt-1 pb-0 px-2" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="javascript:void(0)" class="dropdown-item">Delete Conversations</a>
-                                        <a href="javascript:void(0)" class="dropdown-item">Settings</a>
+                                        <div class="dropdown-header py-0 h6 text-dark">
+                                            <img id="group_avatar_${data.id}" alt="Group Image" class="show_group_avatar_${data.id} avatar rounded-circle" src="${data.avatar.sm}"/>
+                                            <span id="group_name_area">${data.name}</span>
+                                        </div>
+                                        ${templates.thread_resource_dropdown()}
+                                        ${view_participants}
+                                        ${
+                                            (!data.locked && data.options.chat_bots ? view_bots : '')
+                                            (!data.locked && data.options.invitations ? invites : '')
+                                            (!data.locked && data.options.admin ? admin : '')
+                                        }
+                                        <hr>
+                                        ${(data.locked ? ''
+                                            : (data.options.muted ? '<a onclick="ThreadManager.mute().unmute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-up"></i> Unmute</a>' : '<a onclick="ThreadManager.mute().mute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-mute"></i> Mute</a>')
+                                        )}
+                                        <a class="dropdown-item" onclick="ThreadManager.group().leaveGroup(); return false;" id="leaveGroupLink" href="#"><i class="fas fa-sign-out-alt"></i> Leave Group</a>
+                                        <a href="#" onclick="ThreadManager.load().closeOpened()"><button title="Close" class="btn btn-lg text-danger" type="button"><i class="fas fa-times"></i></button></a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>`;
-        },
-        thread_group_header : function(data){
-            let knok = '<button onclick="ThreadManager.calls().sendKnock()" id="knok_btn" data-bs-toggle="tooltip" title="Knock at '+Messenger.format().escapeHtml(data.name)+'" ' +
-                'data-bs-placement="bottom" class="btn btn-lg text-secondary btn-light pt-1 pb-0 px-2" type="button"><i class="fas fa-hand-rock fa-2x"></i></button>',
-            invites = '<a class="dropdown-item" onclick="ThreadManager.group().viewInviteGenerator(); return false;" id="threadOptionLink" href="#"><i class="fas fa-link"></i> Invitations</a>\n',
-            admin = '<a class="dropdown-item" onclick="ThreadManager.group().viewSettings(); return false;" id="threadOptionLink" href="#"><i class="fas fa-cog"></i> Settings</a>\n',
-            view_participants = '<a class="dropdown-item" onclick="ThreadManager.group().viewParticipants(); return false;" id="viewParticipantLink" href="#"><i class="fas fa-users"></i> Participants</a>\n',
-            view_bots = '<a class="dropdown-item" onclick="ThreadBots.viewBots(); return false;" id="viewBotsLink" href="#"><i class="fas fa-robot"></i> Chat Bots</a>\n';
-
-            return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
-                    templates.thread_socket_error(true)+
-                    '<span id="thread_option_call">'+templates.thread_call_state(data)+'</span>\n' +
-                    (!data.locked && data.options.knock ? knok : '')+
-                    '    <button class="btn btn-lg text-secondary btn-light dropdown-toggle pt-1 pb-0 px-2" type="button" data-toggle="dropdown"><i class="fas fa-cog fa-2x"></i></button>\n' +
-                    '    <div class="dropdown-menu dropdown-menu-right">\n' +
-                    '        <div class="dropdown-header py-0 h6 text-dark"><img id="group_avatar_'+data.id+'" alt="Group Image" class="show_group_avatar_'+data.id+' rounded-circle small_img" src="'+data.avatar.sm+'"/>' +
-                    '           <span id="group_name_area">'+data.name+'</span></div>\n' +
-                        templates.thread_resource_dropdown() +
-                    view_participants +
-                    (!data.locked && data.options.chat_bots ? view_bots : '')+
-                    (!data.locked && data.options.invitations ? invites : '')+
-                    (!data.locked && data.options.admin ? admin : '')+
-                    '<div class="dropdown-divider"></div>' +
-                (data.locked
-                        ? ''
-                        : (data.options.muted ? '<a onclick="ThreadManager.mute().unmute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-up"></i> Unmute</a>'
-                            : '<a onclick="ThreadManager.mute().mute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-mute"></i> Mute</a>')
-                ) +
-                '<a class="dropdown-item" onclick="ThreadManager.group().leaveGroup(); return false;" id="leaveGroupLink" href="#"><i class="fas fa-sign-out-alt"></i> Leave Group</a>'+
-                    '</div>'+
-                '<button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>'+
-                '</div>'+
-                '<img onclick="ThreadTemplates.render().show_thread_avatar(\''+data.avatar.lg+'\')" data-bs-toggle="tooltip" data-bs-placement="right" title="'+Messenger.format().escapeHtml(data.name)+'" class="ml-1 rounded-circle medium-image main-bobble-online pointer_area" src="'+data.avatar.sm+'" />'+
-                '<div id="thread_error_area"></div></div>'
         },
         thread_resource_dropdown : function(){
             return `
@@ -862,11 +865,16 @@ window.ThreadTemplates = (function () {
             return '';
         },
         thread_private_header: function(data){
-            let base = `<div class="dropdown-divider"></div>
-                ${(data.locked ? '' : (data.options.muted ? '<a onclick="ThreadManager.mute().unmute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-up"></i> Unmute</a>' : '<a onclick="ThreadManager.mute().mute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-mute"></i> Mute</a>')
-                )}<a onclick="ThreadManager.archive().Thread(); return false;" class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete Conversation</a>
-                </div>`;
-
+            console.log(data.locked);
+            let base = `
+                ${(data.locked ? ''
+                        : (data.options.muted ? '<li class="nav-item"><a onclick="ThreadManager.mute().unmute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-up"></i> Unmute</a></li>'
+                            : '<li class="nav-item"><a onclick="ThreadManager.mute().mute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-mute"></i> Mute</a></li>')
+                )}
+                <li class="nav-item">
+                    <a onclick="ThreadManager.archive().Thread(); return false;" class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete Conversation</a>
+                </li>
+                `;
                 return `<div class="fixed-header">
                             <div class="navbar">
                                 <div id="main_bobble_${data.resources.recipient.provider_id}">
@@ -878,6 +886,14 @@ window.ThreadTemplates = (function () {
                                     </li>
                                     <li class="nav-item">
                                         ${templates.private_pending_state(data)}
+                                    </li>
+                                    <li class="nav-item">
+                                    <span id="thread_option_call">
+                                        ${(!data.options.call && !data.has_call ? '' : templates.thread_call_state(data))}
+                                    </span>
+                                        ${(!data.locked && data.options.knock ?
+                                        '<button onclick="ThreadManager.calls().sendKnock()" id="knok_btn" data-bs-toggle="tooltip" title="Knock at '+Messenger.format().escapeHtml(data.name)+'" data-bs-placement="bottom" class="btn btn-lg text-secondary btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fa-solid fa-hand-rock"></i></button>'
+                                        : '')}
                                     </li>
                                     <li class="nav-item">
                                         <span id="thread_option_call">${(!data.options.call && !data.has_call ? '' : templates.thread_call_state(data))}</span>
@@ -894,7 +910,8 @@ window.ThreadTemplates = (function () {
                                     </li>
                                     <li class="nav-item dropdown dropdown-action">
                                         <a aria-expanded="false" data-bs-toggle="dropdown" class="nav-link dropdown-toggle"
-                                            href=""><i class="fa-solid fa-gear"></i></a>
+                                            href=""><i class="fa-solid fa-gear"></i>
+                                        </a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                         <div ${(data.resources.recipient.route) ? 'onclick=window.open("'+data.resources.recipient.route+'")' : ''} class="pointer_area dropdown-header py-0">
                                             <img alt="Profile Image" class="rounded-circle small_img" src="${data.resources.recipient.avatar.sm}"/>${data.name}</div>                                        
@@ -903,51 +920,27 @@ window.ThreadTemplates = (function () {
                                             ${(data.pending && data.options.awaiting_my_approval
                                                 ? '</div>'
                                                 : base )}
+                                            <button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>
+                                            <div id="main_bobble_${data.resources.recipient.provider_id}">${templates.thread_private_header_bobble(data.resources.recipient)}
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>`;
         },
-        thread_private_headerOld : function(data){
-            let base = '<div class="dropdown-divider"></div>' +
-                (data.locked
-                        ? ''
-                        : (data.options.muted ? '<a onclick="ThreadManager.mute().unmute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-up"></i> Unmute</a>'
-                            : '<a onclick="ThreadManager.mute().mute(); return false;" class="dropdown-item" href="#"><i class="fas fa-volume-mute"></i> Mute</a>')
-                ) +
-                '<a onclick="ThreadManager.archive().Thread(); return false;" class="dropdown-item" href="#"><i class="fas fa-trash"></i> Delete Conversation</a>' +
-                '</div>';
-
-            return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
-                templates.thread_socket_error()+
-                templates.private_pending_state(data)+
-                '    <span id="thread_option_call">'+(!data.options.call && !data.has_call ? '' : templates.thread_call_state(data))+'</span>\n' +
-                (!data.locked && data.options.knock ?
-                    '<button onclick="ThreadManager.calls().sendKnock()" id="knok_btn" data-bs-toggle="tooltip" title="Knock at '+Messenger.format().escapeHtml(data.name)+'" data-bs-placement="bottom" class="btn btn-lg text-secondary btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-hand-rock fa-2x"></i></button>'
-                    : '')+
-                '<button class="btn btn-lg text-secondary btn-light dropdown-toggle pt-1 pb-0 px-2" type="button" data-toggle="dropdown"><i class="fas fa-cog fa-2x"></i></button>\n' +
-                '<div class="dropdown-menu dropdown-menu-right">\n' +
-                '    <div '+(data.resources.recipient.route ? 'onclick="window.open(\''+data.resources.recipient.route+'\')"' : '')+' class="pointer_area dropdown-header py-0 h6 text-dark"><img alt="Profile Image" class="rounded-circle small_img" src="'+data.resources.recipient.avatar.sm+'"/> '+data.name+'</div>\n' +
-                templates.thread_resource_dropdown() +
-                '    <div id="network_for_'+data.resources.recipient.provider_id+'" class="profile_network_options">'+templates.thread_network_opt(data.resources.recipient)+'</div>'+
-                (data.pending && data.options.awaiting_my_approval
-                    ? '</div>'
-                    : base ) +
-                '<button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>'+
-                '</div><div id="main_bobble_'+data.resources.recipient.provider_id+'">'+templates.thread_private_header_bobble(data.resources.recipient)+'</div></div>'
-        },
         thread_new_header : function(party){
-            return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
-                '<button class="btn btn-lg text-secondary btn-light dropdown-toggle pt-1 pb-0 px-2" type="button" data-toggle="dropdown"><i class="fas fa-cog fa-2x"></i></button>\n' +
-                '<div class="dropdown-menu dropdown-menu-right">\n' +
-                '    <div '+(party.route ? 'onclick="window.open(\''+party.route+'\')"' : '')+' class="pointer_area dropdown-header py-0 h6 text-dark"><img alt="Profile Image" class="rounded-circle small_img" src="'+party.avatar.sm+'"/> '+party.name+'</div>\n' +
-                '    <div class="dropdown-divider"></div>\n' +
-                '    <div id="network_for_'+party.provider_id+'" class="profile_network_options">'+templates.thread_network_opt(party)+'</div>'+
-                '</div>'+
-                '<button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>'+
-                '</div><div id="main_bobble_'+party.provider_id+'">'+templates.thread_private_header_bobble(party)+'</div>'+
-                '</div>'
+            return `<div id="thread_header_area"><div class="dropdown float-right">
+                <button class="btn btn-lg text-secondary btn-light dropdown-toggle pt-1 pb-0 px-2" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div ${(party.route ? 'onclick="window.open('+party.route+')"' : '')} class="pointer_area dropdown-header py-0 h6 text-dark">
+                        <img alt="Profile Image" class="avatar" src="${party.avatar.sm}"/> ${party.name}</div>
+                        <div class="dropdown-divider"></div>
+                        <div id="network_for_${party.provider_id}" class="profile_network_options">${templates.thread_network_opt(party)}</div>
+                    </div>
+                    <button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="main_bobble_${party.provider_id}">${templates.thread_private_header_bobble(party)}</div>
+            </div>`
         },
         thread_new_fill : function(data){
             if(data.options.can_message_first){
@@ -962,9 +955,9 @@ window.ThreadTemplates = (function () {
         thread_empty_search : function(more, none){
             let msg = 'Search above for other profiles on '+Messenger.common().APP_NAME+'!';
             if(more) msg = none ? 'No matching profiles were found' : 'Use at least 3 characters in your query';
-            return '<div class="col-12 text-center text-info fw-bold h4 mt-5">\n' +
-                '<i class="fas fa-search"></i> '+msg+
-                '</div>'
+            return `<div class="col-12 text-center text-info fw-bold h4 mt-5">
+                <i class="fas fa-search"></i> ${msg}
+                </div>`
         },
         thread_private_header_bobble : function(data, demo){
             let nameTitle = Messenger.format().escapeHtml(data.name);
@@ -998,7 +991,7 @@ window.ThreadTemplates = (function () {
             return `<div class="user-details me-auto">
                         <div class="float-start user-img">
                             <a class="avatar" href="#" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="${nameTitle} ${status}">
-                                <img src="${data.avatar.sm ?? '/images/user.jpg'}" onclick="${ThreadTemplates.render().show_thread_avatar(data.avatar.lg)}" alt="User Image"
+                                <img src="${data.avatar.sm ?? '/images/user.jpg'}" onclick="ThreadTemplates.render().show_thread_avatar('data.avatar.lg')" alt="User Image"
                                     class="rounded-circle">
                             </a>
                             <span class="status ${(data.options.online_status === 1 ? 'online' : (data.options.online_status === 2 ? 'away' : 'offline'))}"></span>
@@ -1227,24 +1220,26 @@ window.ThreadTemplates = (function () {
                 '</div>'
         },
         friends_fill : function(friend){
-            return '<tr>\n' +
-                '<td class="pointer_area" onclick="$(this).parent().children().find(\'.switch_input\').click()">\n' +
-                '    <div class="nowrap">\n' +
-                '        <img class="lazy rounded-circle group-image avatar-is-'+(friend.party.options.online_status === 1
-                    ? "online" : friend.party.options.online_status === 2 ? "away" : "offline")+'" data-src="'+friend.party.avatar.sm+'"/>\n' +
-                '        <span class="h5"><span class="badge badge-light">'+friend.party.name+'</span></span>\n' +
-                '    </div>\n' +
-                '</td>\n' +
-                '<td>\n' +
-                '    <div class="mt-1 float-right">\n' +
-                '        <span class="switch switch-sm mt-1">\n' +
-                '            <input data-provider-alias="'+friend.party.provider_alias+'" data-provider-id="'+friend.party_id+'" onchange="ThreadManager.switchToggle()" ' +
-                '               class="switch switch_input" id="recipients_'+friend.party_id+'" name="recipients[]" value="'+friend.party_id+'" type="checkbox" />\n' +
-                '            <label for="recipients_'+friend.party_id+'" class=""></label>\n' +
-                '        </span>\n' +
-                '    </div>\n' +
-                '</td>\n' +
-                '</tr>'
+            return `
+                <tr>
+                    <td class="pointer_area" onclick="$(this).parent().children().find('.switch_input').click()">
+                        <h2 class="table-avatar">
+                            <div class="avatar">
+                                <img class="lazy avatar avatar-is-${(friend.party.options.online_status === 1 ? "online" : friend.party.options.online_status === 2 ? "away" : "offline")}" data-src="${friend.party.avatar.sm}">
+                            </div>
+                            <span>${friend.party.name}</span>
+                        </h2>
+                    </td>
+                    <td class="text-end">
+                        <span class="switch switch-sm mt-1">
+                        <input data-provider-alias="${friend.party.provider_alias}" data-provider-id="${friend.party_id}" onchange="ThreadManager.switchToggle()"
+                            class="switch switch_input" id="recipients_${friend.party_id}" name="recipients[]" value="${friend.party_id}" type="checkbox" />
+                            <label for="recipients_${friend.party_id}"></label>
+                        </span>
+                    </td>
+                </tr>
+
+            `
         },
         new_group_friends : function(friends){
             let top = '<div class="col-12">', bot = '</div>',
@@ -1253,7 +1248,7 @@ window.ThreadTemplates = (function () {
                     '<div class="row">\n' +
                     '    <div class="col-12">\n' +
                     '        <div class="table-responsive-sm">\n' +
-                    '            <table id="add_group_participants" class="table table-sm table-hover">\n' +
+                    '            <table id="add_group_participants" class="table table-sm table-hover w-100">\n' +
                     '                <thead>\n' +
                     '                <tr>\n' +
                     '                    <th>Name</th>\n' +
@@ -1350,7 +1345,7 @@ window.ThreadTemplates = (function () {
             let table_top = '<div class="row">\n' +
                 '    <div class="col-12">\n' +
                 '        <div class="table-responsive-sm">\n' +
-                '            <table id="add_group_participants" class="table table-sm table-hover">\n' +
+                '            <table id="add_group_participants" class="table table-sm table-hover w-100">\n' +
                 '                <thead>\n' +
                 '                <tr>\n' +
                 '                    <th>Name</th>\n' +
@@ -1375,7 +1370,7 @@ window.ThreadTemplates = (function () {
                 '    </div>\n' +
                 '</div>' +
                 '</div><hr>'+
-                '<table class="table mb-0 table-sm table-hover"><tbody>\n' +
+                '<table class="table mb-0 table-sm table-hover w-100"><tbody>\n' +
                 '<tr class="'+(participant.send_messages ? 'bg-light' : '')+'">\n' +
                 '<td class="pointer_area" onclick="$(\'#p_send_messages\').click()"><div class="h4 mt-1"><i class="fas fa-caret-right"></i> <span class="h5">Send Messages</span></div></td>\n' +
                 '<td><div class="mt-1 float-right"><span class="switch switch-sm mt-1"><input class="switch switch_input m_setting_toggle" id="p_send_messages" name="p_send_messages" type="checkbox" '+(participant.send_messages ? 'checked' : '')+'/><label for="p_send_messages"></label></span></div></td>\n' +
@@ -1403,37 +1398,33 @@ window.ThreadTemplates = (function () {
                 '</tbody></table>\n'
         },
         new_group_base : function(){
-            return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
-                '<button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>'+
-                '</div><div class="h3 fw-bold"><div class="d-inline-block mt-2 ml-2"><i class="fas fa-edit"></i> Create a group</div></div>'+
-                '</div>'+
-                '<div class="card messages-panel mt-1">\n' +
-                '    <div class="message-body" id="thread_new_group">\n' +
-                '        <div class="message-chat">\n' +
-                '            <div id="msg_thread_new_group" class="chat-body pb-0 mb-0">\n'+
-                '               <div id="messages_container_new_group">'+templates.loader()+'</div>\n'+
-                '            </div>\n' +
-                '            <div class="chat-footer">\n' +
-                '                <div class="card bg-light mb-0 border-0">\n' +
-                '                    <div class="col-12 mt-3 px-0">\n' +
-                '                        <form class="form-inline w-100 needs-validation" action="javascript:ThreadManager.newForms().newGroup()" id="new_group_form" novalidate>\n' +
-                '                            <div class="col-12">\n' +
-                '                            <div class="input-group">\n' +
-                '                                <input minlength="3" maxlength="50" class="form-control" id="subject" placeholder="Name the group conversation" name="subject-'+Date.now()+'" autocomplete="off" required>\n' +
-                '                                <div class="input-group-append">\n' +
-                '                                    <button id="make_thread_btn" class="btn btn-primary"><i class="fas fa-edit"></i> Create</button>\n' +
-                '                                </div>\n' +
-                '                                <div class="invalid-feedback mb-n4">Required / 3 - 50 characters</div>'+
-                '                            </div>'+
-                '                            </div>\n' +
-                '                            <div class="col-12 my-3"></div>\n' +
-                '                        </form>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>'
+            return `<div id="createChatGroupModal" data-bs-backdrop="static" class="modal custom-modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Chat Group</h5>
+                            <button onclick="ThreadManager.load().closeOpened()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="messages_container_new_group">${templates.loader()}</div>
+                            <div>
+                                <form class="form-inline w-100 needs-validation" action="javascript:ThreadManager.newForms().newGroup()" id="new_group_form" novalidate>
+                                    <div class="input-group">
+                                        <input minlength="3" maxlength="50" class="form-control" id="subject" placeholder="Name the group conversation" name="subject-${Date.now()}" autocomplete="off" required>
+                                        <div class="input-group-text bg-none broder-none">
+                                            <button id="make_thread_btn" class="btn btn-primary"><i class="fas fa-edit"></i> Create</button>
+                                        </div>
+                                        <div class="invalid-feedback mb-4">Required / 3 - 50 characters</div>
+                                    </div>
+                                    <div class="col-12 my-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
         },
         search_base : function(){
             return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
@@ -1458,36 +1449,40 @@ window.ThreadTemplates = (function () {
         contacts : function(friends){
             let top = '<div class="'+(Messenger.common().mobile ? '' : 'px-3')+' mt-2">', bot = '</div>',
                 none = '<h4 class="text-center mt-4"><span class="badge badge-pill badge-secondary"><i class="fas fa-user-friends"></i> No friends to show</span></h4>',
-                table_top = '<div class="table-responsive-sm">\n' +
-                    '            <table id="contact_list_table" class="table table-sm table-hover table-striped">\n' +
-                    '                <thead class="bg-gradient-dark text-light">\n' +
-                    '                <tr>\n' +
-                    '                    <th>Name</th>\n' +
-                    '                    <th><span class="float-right">Friends since</span></th>\n' +
-                    '                </tr>\n' +
-                    '                </thead>\n' +
-                    '                <tbody>',
+                table_top = `<div class="table-responsive-sm">
+                                <table id="contact_list_table" class="table table-sm table-hover table-striped w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th><span class="text-end">Friends since</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`,
                 table_bot = '</tbody></table></div>',
                 table_fill = '';
             if(!friends || !friends.length){
                 return top+none+bot;
             }
             let friend_fill = (friend) => {
-                return '<tr onclick="ThreadManager.load().createPrivate({id : \''+friend.party.provider_id+'\', alias : \''+friend.party.provider_alias+'\'})" class="pointer_area">\n' +
-                    '<td>\n' +
-                    '    <div class="table_links">\n' +
-                    '        <div class="nowrap">\n' +
-                    '            <img class="lazy rounded-circle group-image avatar-is-'+(friend.party.options.online_status === 1 ? "online" : friend.party.options.online_status === 2 ? "away" : "offline")+'" data-src="'+friend.party.avatar.sm+'"/>\n' +
-                    '            <span class="h5"><span class="badge badge-light">'+friend.party.name+'</span></span>\n' +
-                    '         </div>\n' +
-                    '     </div>\n' +
-                    '</td>\n' +
-                    '<td>\n' +
-                    '    <div class="float-right nowrap">\n' +
-                    '        <span class="mt-2 shadow-sm badge badge-pill badge-secondary"><i class="far fa-calendar-alt"></i> '+(Messenger.format().makeHumanTime(friend.created_at))+'</span>\n' +
-                    '    </div>\n' +
-                    '</td>\n' +
-                    '</tr>'
+                return `
+                <tr onclick="ThreadManager.load().createPrivate({id : '${friend.party.provider_id}', alias : '${friend.party.provider_alias}'})" class="pointer_area">
+                    <td>
+                        <div class="table_links">
+                            <h2 class="table-avatar">
+                                <div class="avatar">
+                                    <img class="lazy avatar avatar-is-${(friend.party.options.online_status === 1 ? "online" : friend.party.options.online_status === 2 ? "away" : "offline")}" data-src="${friend.party.avatar.sm}">
+                                </div>
+                                <span>${friend.party.name}</span>
+                            </h2>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-nowrap">
+                            <span class="mt-2"><i class="far fa-calendar-alt"></i> ${(Messenger.format().makeHumanTime(friend.created_at))} </span>
+                        </div>
+                    </td>
+                </tr>
+                `
             };
             friends.forEach((friend) => {
                 table_fill += friend_fill(friend)
@@ -1495,30 +1490,34 @@ window.ThreadTemplates = (function () {
             return top+table_top+table_fill+table_bot+bot
         },
         contacts_base : function(){
-            return '<div id="thread_header_area"><div class="dropdown float-right">\n' +
-                '<button onclick="ThreadManager.load().closeOpened()" title="Close" class="btn btn-lg text-danger btn-light pt-1 pb-0 px-2 mr-1" type="button"><i class="fas fa-times fa-2x"></i></button>'+
-                '</div><div class="h3 fw-bold">' +
-                '<div class="d-inline-block mt-2 ml-2"><i class="fas fa-user-friends"></i> Friends</div>' +
-                '</div></div>'+
-                '<div class="card messages-panel mt-1">\n' +
-                '    <div class="message-body" id="thread_new_group">\n' +
-                '        <div class="message-chat mb-1">\n' +
-                '            <div id="loading_thread" class="chat-body chat-special pb-0 mb-0">\n'+
-                '               <div id="messenger_contacts_ctnr">'+templates.loader()+'</div>\n'+
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>'
+            return `
+            <div id="contactsModal" data-bs-backdrop="static" class="modal custom-modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Friends</h5>
+                            <button onclick="ThreadManager.load().closeOpened()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="messenger_contacts_ctnr">${templates.loader()}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            
         },
         edit_message : function(body){
-            return '<form id="edit_message_form" action="javascript:void(0)">\n' +
-                '<div class="form-row mx-n2 rounded bg-light text-dark py-3 px-2 shadow-sm">\n' +
-                '    <div class="col-12 mb-0">\n' +
-                '         <textarea id="edit_message_textarea" style="resize: none;" rows="6" class="form-control fw-bold shadow-sm">'+body+'</textarea>' +
-                '     </div>\n' +
-                '</div>' +
-                '<button onclick="EmojiPicker.editMessage()" style="font-size: 18px; line-height: 0;" data-bs-toggle="tooltip" title="Add emoji" data-bs-placement="top" id="edit_message_emoji_btn" type="button" class="float-right mr-n2 mt-1 p-1 btn btn-sm btn-light"><i class="fas fa-grin"></i></button>'+
-                '</form>'
+            return `<form id="edit_message_form" action="javascript:void(0)">
+                    <div class="form-row mx-n2 rounded text-dark py-3 px-2 shadow-sm">
+                        <div class="col-12 mb-0">
+                            <textarea id="edit_message_textarea" style="resize: none;" rows="6" class="form-control fw-bold shadow-sm">${body}</textarea>
+                        </div>
+                    </div>
+                    <button onclick="EmojiPicker.editMessage()" style="font-size: 18px; line-height: 0;" data-bs-toggle="tooltip" data-bs-title="Add emoji" data-bs-placement="top" id="edit_message_emoji_btn" type="button" class="float-right mr-n2 mt-1 p-1 btn btn-sm btn-light"><i class="fas fa-grin"></i></button>
+                </form>`
         },
        
         thread_base: function(data, creating){
