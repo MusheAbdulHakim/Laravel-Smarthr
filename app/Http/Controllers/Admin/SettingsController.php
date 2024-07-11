@@ -59,7 +59,7 @@ class SettingsController extends Controller
             'prefix' => 'nullable',
             'logo' => 'nullable|file|image'
         ]);
-        $logo = $request->logo;
+        $logo = $settings->logo;
         if($request->hasFile('logo')){
             $logo = time().'.'.$request->logo->extension();
             $request->logo->move(public_path('storage/settings/invoice'), $logo);
