@@ -10,6 +10,7 @@
         "doctrine/dbal": "^4.0",
         "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^11.9",
+        "laravel/reverb": "@beta",
         "laravel/tinker": "^2.9",
         "pavel-mironchik/laravel-backup-panel": "dev-mushe",
         "spatie/laravel-settings": "^3.3",
