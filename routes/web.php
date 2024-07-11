@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Admin\ChatAppController;
 use App\Http\Controllers\Admin\HolidaysController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
@@ -25,9 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
 
+    Route::get('apps/chat', [ChatAppController::class, 'index'])->name('app.chat');
     Route::prefix('messenger')->group(function(){
-        Route::get('', [ChatController::class, 'index'])->name('messenger.index');
-        Route::get('chat', [ChatController::class, 'index'])->name('app.chat');
+        Route::get('', [ChatController::class, 'messenger'])->name('messenger.index');
         Route::get('join/{invite}', [ChatController::class, 'showJoinWithInvite'])->name('messenger.invites.join');
         Route::get('{thread}', [ChatController::class, 'showThread'])->name('messenger.show');
         Route::get('/recipient/{alias}/{id}', [ChatController::class, 'showCreatePrivate'])->name('messenger.private.create');

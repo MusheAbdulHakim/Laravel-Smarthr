@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4087c3a4ae7ba71d59be36139839c10a",
+    "content-hash": "815fbc677ad77a52c693f3431f7ab664",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -6288,6 +6288,73 @@
             "time": "2024-06-11T12:45:25+00:00"
         },
         {
+            "name": "rtippin/janus-client",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RTippin/janus-client.git",
+                "reference": "9a3c2f93f4a9a6e6d4211e230af1ff083424c9e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RTippin/janus-client/zipball/9a3c2f93f4a9a6e6d4211e230af1ff083424c9e8",
+                "reference": "9a3c2f93f4a9a6e6d4211e230af1ff083424c9e8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.3",
+                "illuminate/support": "^11.0",
+                "php": "^8.2|^8.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7|^8.0|^9.0",
+                "phpunit/phpunit": "~9.0|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RTippin\\Janus\\JanusServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RTippin\\Janus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Tippin",
+                    "email": "tippindev@gmail.com",
+                    "homepage": "https://tippindev.com"
+                }
+            ],
+            "description": "Janus Gateway Client",
+            "homepage": "https://github.com/rtippin/janus-client",
+            "keywords": [
+                "Janus",
+                "client",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/RTippin/janus-client/issues",
+                "source": "https://github.com/RTippin/janus-client/tree/v1.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/RTippin",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-05-23T21:03:53+00:00"
+        },
+        {
             "name": "rtippin/messenger",
             "version": "v1.23.0",
             "source": {
@@ -6360,65 +6427,6 @@
                 }
             ],
             "time": "2024-05-23T20:35:18+00:00"
-        },
-        {
-            "name": "rtippin/messenger-ui",
-            "version": "v2.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RTippin/messenger-ui.git",
-                "reference": "aacfd10fce3b51cfb2b1dde1d1ee668603acbedd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RTippin/messenger-ui/zipball/aacfd10fce3b51cfb2b1dde1d1ee668603acbedd",
-                "reference": "aacfd10fce3b51cfb2b1dde1d1ee668603acbedd",
-                "shasum": ""
-            },
-            "require": {
-                "rtippin/messenger": "^1.19"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "RTippin\\MessengerUi\\MessengerUiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RTippin\\MessengerUi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Richard Tippin",
-                    "email": "tippindev@gmail.com",
-                    "homepage": "https://tippindev.com"
-                }
-            ],
-            "description": "Laravel messenger suite UI.",
-            "homepage": "https://github.com/rtippin/messenger-ui",
-            "keywords": [
-                "Messenger",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/RTippin/messenger-ui/issues",
-                "source": "https://github.com/RTippin/messenger-ui/tree/v2.7.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/RTippin",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-07-06T01:02:21+00:00"
         },
         {
             "name": "spatie/laravel-menu",

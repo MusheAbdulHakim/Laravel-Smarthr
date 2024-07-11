@@ -43,6 +43,12 @@ $(document).on("click", ".deleteBtn", function () {
     }
 });
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true"], div[data-ajax-modal="true"]', function () {
     let title = $(this).data("title");
     let style = $(this).data("style");

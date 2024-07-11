@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Listeners\BroadcastError;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use RTippin\Messenger\Facades\Messenger;
 use RTippin\Messenger\Facades\MessengerBots;
+use RTippin\Messenger\Events\BroadcastFailedEvent;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * Laravel Messenger System, Created by: Richard Tippin.
@@ -23,6 +27,10 @@ class MessengerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Relation::morphMap([
+            'users' => User::class,
+        ]);
+        
         // Register all provider models you wish to use in messenger.
         Messenger::registerProviders([
             User::class,
@@ -39,5 +47,10 @@ class MessengerServiceProvider extends ServiceProvider
         MessengerBots::registerPackagedBots([
             //
         ]);
+
+        Event::listen(
+            BroadcastFailedEvent::class,
+            BroadcastError::class,
+        );        
     }
 }
