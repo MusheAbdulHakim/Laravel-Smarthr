@@ -22,7 +22,6 @@ class AppMenuListener
     public function handle(AppMenuEvent $event): void
     {
         $menu = $event->menu;
-        $menu->html('<span>Roles</span>', ['class' => 'menu-title']);
-        $menu->add(Link::toRoute('roles.index', '<i class="la la-key"></i> <span>'.__('Roles & Permissions'). '</span>')->setActive(route_is('roles.*') ? 'active' : ''));
+        $menu->addIfCan('view-roles',Link::toRoute('roles.index', '<i class="la la-key"></i> <span>'.__('Roles & Permissions'). '</span>')->setActive(route_is('roles.*') ? 'active' : ''));
     }
 }

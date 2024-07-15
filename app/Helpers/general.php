@@ -170,3 +170,16 @@ if(!function_exists('notify')){
         );
     }
 }
+
+
+/**
+ * return if auth user has a permission
+ *
+ * @param string $permission
+ * @return bool
+ */
+if(!function_exists('can')){
+    function can($permission){
+        return auth('web')->user()->hasPermissionTo($permission);
+    }
+}

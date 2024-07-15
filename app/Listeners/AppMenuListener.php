@@ -42,19 +42,23 @@ class AppMenuListener
         $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
         $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index','holidays.*']) ? "active" : "";
         $menu
-            ->submenu(
+            ->submenuIf(auth()->user()->can([
+                    'view-employees','view-departments','view-designations','view-holidays'
+                ]),
                 Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
                 Menu::new()
                     ->addParentClass('submenu')
-                    ->add(Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
-                    ->add(Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
-                    ->add(Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
-                    ->add(Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
+                    ->addIfCan('view-employees',Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
+                    ->addIfCan('view-departments',Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
+                    ->addIfCan('view-designations',Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
+                    ->addIfCan('view-holidays',Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
             );
-        $menu->add(
+        $menu->addIfCan(
+            'view-users',
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))
         );
-        $menu->add(
+        $menu->addIfCan(
+            'view-settings',
             Link::toRoute('settings.index', '<i class="la la-cog"></i> <span>' . __('Settings') . '</span>')->setActive(route_is('settings.index'))
         );
 
