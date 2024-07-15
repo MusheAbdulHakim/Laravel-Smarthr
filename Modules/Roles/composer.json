@@ -1,0 +1,30 @@
+{
+    "name": "musheabdulhakim/roles",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mushe Abdul-Hakim",
+            "email": "musheabdulhakim99@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Roles\\": "app/",
+            "Modules\\Roles\\Database\\Factories\\": "database/factories/",
+            "Modules\\Roles\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Roles\\Tests\\": "tests/"
+        }
+    }
+}
