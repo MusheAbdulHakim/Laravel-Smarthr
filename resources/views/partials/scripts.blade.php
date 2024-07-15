@@ -6,11 +6,6 @@
     'resources/assets/plugins/jquery-repeater/jquery.repeater.min.js',
     'resources/assets/js/app.js',
 ])
-@if (isset($errors))
-    @foreach ($errors as $error)
-    {{ flash()->error(__($error)) }}
-    @endforeach
-@endif
 <!-- Vendor JS -->
 @livewireScripts
 @yield('vendor-scripts')
@@ -22,7 +17,6 @@
                 text: "{{ $error }}",
                 className: "danger",
             }).showToast();
-            break;
         @endforeach
     @endif
     @if(Session::has('message'))

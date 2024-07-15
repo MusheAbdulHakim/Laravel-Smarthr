@@ -49,7 +49,7 @@ $.ajaxSetup({
     }
 });
 
-$(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true"], div[data-ajax-modal="true"]', function () {
+$(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true"], div[data-ajax-modal="true"], span[data-ajax-modal="true"]', function () {
     let title = $(this).data("title");
     let style = $(this).data("style");
     let size = $(this).data("size");
