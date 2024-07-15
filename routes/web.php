@@ -54,7 +54,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('holidays', HolidaysController::class);
     Route::get('holidays-calendar', [HolidaysController::class, 'calendar'])->name('holidays.calendar');
     Route::resource('family-information', FamilyInfoController::class);
-
+    Route::get('backups', fn() => view('pages.backups',[
+        'pageTitle' => __('Backups')
+    ]));
     //settings
     Route::prefix('settings')->group(function () {
         Route::get('company', [SettingsController::class, 'index'])->name('settings.index');
