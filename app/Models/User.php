@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class User extends Authenticatable implements MessengerProvider
 {
     use HasFactory, Notifiable, Messageable;
+    use \Spatie\Permission\Traits\HasRoles;
 
     /**
      * The attributes that are mass assignable.
