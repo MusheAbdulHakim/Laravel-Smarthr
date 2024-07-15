@@ -19,6 +19,7 @@
         "laravel/reverb": "@beta",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "pavel-mironchik/laravel-backup-panel": "^2.6",
         "mhmiton/laravel-modules-livewire": "^3.0",
         "nnjeim/world": "^1.1",
         "nwidart/laravel-modules": "^11.0",
@@ -95,6 +96,6 @@
             "wikimedia/composer-merge-plugin": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

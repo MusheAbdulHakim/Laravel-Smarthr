@@ -1,5 +1,6 @@
 {
     "Whiteboard": true,
     "Paintboard": true,
-    "Revezone": true
+    "Revezone": true,
+    "Roles": true
 }
