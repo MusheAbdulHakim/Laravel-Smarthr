@@ -29,7 +29,7 @@
                             <div class="profile-img-wrap">
                                 <div class="profile-img">
                                     <a href="#"><img
-                                            src="{{ !empty($user->avatar) ? asset('storage/users/' . $user->avatar) : asset('assets/img/user.jpg') }}"
+                                            src="{{ !empty($user->avatar) ? asset('storage/users/' . $user->avatar) : asset('images/user.jpg') }}"
                                             alt="User Image"></a>
                                 </div>
                             </div>
