@@ -74,6 +74,10 @@ class User extends Authenticatable implements MessengerProvider
             }
         })->orWhere('email', '=', $search);
     }
+    public function assets()
+    {
+        return $this->hasMany(Asset::class, 'user_id');
+    }
 
     public function family(){
         return $this->hasMany(UserFamilyInfo::class,'user_id');

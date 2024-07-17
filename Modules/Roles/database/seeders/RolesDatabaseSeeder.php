@@ -43,6 +43,9 @@ class RolesDatabaseSeeder extends Seeder
             'employees' => [
                 'view-employees','create-employee','edit-employee','show-Employeeprofile','delete-employee'
             ],
+            'assets' => [
+                'view-assets','create-asset','edit-asset','show-asset','delete-asset'
+            ],
             'departments' => ['view-departments','create-department','edit-department','delete-department'],
             'designations' => ['view-designations','create-designation','edit-designation','delete-designation'],
             'holidays' => ['view-holidays','create-holiday','edit-holiday','delete-holiday'],

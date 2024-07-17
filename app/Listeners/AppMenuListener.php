@@ -61,6 +61,9 @@ class AppMenuListener
             'view-settings',
             Link::toRoute('settings.index', '<i class="la la-cog"></i> <span>' . __('Settings') . '</span>')->setActive(route_is('settings.index'))
         );
+        $menu->add(
+            Link::toRoute('assets.index', '<i class="la la-object-ungroup"></i> <span>' . __('Assets') . '</span>')->setActive(route_is('assets.index'))
+        );
 
     }
 }

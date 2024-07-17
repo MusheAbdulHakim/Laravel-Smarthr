@@ -120,9 +120,17 @@
                       href="#emp_profile"
                       data-bs-toggle="tab"
                       class="nav-link active"
-                      >{{ __('Profile') }}</a
-                    >
+                      >{{ __('Profile') }}</a>
                   </li>
+                  @if (!empty($user->assets) && ($user->assets->count() > 0))
+                  <li class="nav-item">
+                    <a
+                      href="#emp_assets"
+                      data-bs-toggle="tab"
+                      class="nav-link"
+                      >{{ __('Assets') }}</a>
+                  </li>
+                  @endif
                 </ul>
               </div>
             </div>
@@ -360,11 +368,11 @@
                         <table class="table table-nowrap">
                           <thead>
                             <tr>
-                              <th>Name</th>
-                              <th>Relationship</th>
-                              <th>Date of Birth</th>
-                              <th>Phone</th>
-                              <th>Action</th>
+                              <th>{{ __('Name') }}</th>
+                              <th>{{ __('Relationship') }}</th>
+                              <th>{{ __('Date of Birth') }}</th>
+                              <th>{{ __('Phone') }}</th>
+                              <th>{{ __('Action') }}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -407,7 +415,11 @@
               </div>
             </div>
             <!-- /Profile Info Tab -->
-
+            <!-- Assets -->
+            <div class="tab-pane fade" id="emp_assets">
+                <livewire:employee-asset :user="$user"/>
+            </div>
+            <!-- /Assets -->
 
           </div>
 

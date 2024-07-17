@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -54,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('holidays', HolidaysController::class);
     Route::get('holidays-calendar', [HolidaysController::class, 'calendar'])->name('holidays.calendar');
     Route::resource('family-information', FamilyInfoController::class);
+    Route::resource('assets', AssetsController::class);
     Route::get('backups', fn() => view('pages.backups',[
         'pageTitle' => __('Backups')
     ]));
