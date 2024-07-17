@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AssetsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Admin\AssetsController;
 use App\Http\Controllers\Admin\ChatAppController;
+use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\HolidaysController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
@@ -38,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);
+    Route::resource('clients', ClientsController::class);
+    Route::get('client-list', [ClientsController::class, 'list'])->name('clients.list');
     Route::get('employee/personal-info/{employeeDetail}', [EmployeeDetailsController::class, 'personalInfo'])->name('employee.personal-info');
     Route::post('employee/personal-info/{employeeDetail}', [EmployeeDetailsController::class, 'updatePersonalInfo']);
     Route::get('employee/emergency-contacts/{employeeDetail}', [EmployeeDetailsController::class, 'emergencyContacts'])->name('employee.emergency-contacts');
@@ -70,5 +73,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('theme', [SettingsController::class, 'updateTheme'])->name('settings.theme.update');
         Route::get('invoice', [SettingsController::class, 'invoice'])->name('settings.invoice');
         Route::post('invoice', [SettingsController::class, 'updateInvoice'])->name('settings.invoice.update');
+        Route::get('mail', [SettingsController::class, 'email'])->name('settings.mail');
+        Route::post('mail', [SettingsController::class, 'updateEmail'])->name('settings.mail.update');
     });
 });
