@@ -54,6 +54,10 @@ class AppMenuListener
                     ->addIfCan('view-holidays',Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
             );
         $menu->addIfCan(
+            'view-clients',
+            Link::toRoute('clients.index', '<i class="la la-group"></i> <span>' . __('Clients') . '</span>')->setActive(route_is('clients.*'))
+        );
+        $menu->addIfCan(
             'view-users',
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))
         );
