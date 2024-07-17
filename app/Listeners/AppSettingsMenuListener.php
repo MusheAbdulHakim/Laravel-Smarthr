@@ -33,6 +33,9 @@ class AppSettingsMenuListener
                 Link::toRoute('settings.locale', '<i class="la la-clock-o"></i> <span>' . ("Localization") . '</span>')->setActive(route_is('settings.locale'))
             )
             ->add(
+                Link::toRoute('settings.invoice', '<i class="la la-pencil-square"></i> <span>' . ("Invoice Settings") . '</span>')->setActive(route_is('settings.invoice'))
+            )
+            ->add(
                 Link::toRoute('settings.theme', '<i class="la la-photo"></i> <span>' . ("Theme Settings") . '</span>')->setActive(route_is('settings.theme'))
             );
     }

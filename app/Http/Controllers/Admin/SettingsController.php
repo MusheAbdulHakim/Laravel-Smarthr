@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Settings\ThemeSettings;
 use App\Settings\CompanySettings;
 use App\Http\Controllers\Controller;
+use App\Settings\InvoiceSettings;
 use App\Settings\LocalizationSettings;
 use LaravelLang\Locales\Facades\Locales;
 use LaravelLang\Routes\Events\LocaleHasBeenSetEvent;
@@ -131,5 +132,32 @@ class SettingsController extends Controller
         $settings->save();
         $notification = notify(__("Theme Settings has been updated"));
         return redirect()->route('settings.theme')->with($notification);
+    }
+
+
+    public function invoice(InvoiceSettings $settings){
+        $pageTitle = __("Invoice Settings");
+        return view('pages.settings.invoice',compact(
+            'settings','pageTitle'
+        ));
+    }
+
+    public function updateInvoice(Request $request, InvoiceSettings $settings){
+
+        $request->validate([
+            'prefix' => 'required',
+            'logo' => 'nullable|file|image',
+        ]);
+
+        $imageName = $settings->logo;
+        if ($request->hasFile('logo')) {
+            $imageName = random_str(8) . '.' . $request->logo->extension();
+            $request->logo->move(public_path('storage/settings/invoice'), $imageName);
+        }
+        $settings->prefix = $request->prefix ?? $settings->prefix;
+        $settings->logo = $imageName;
+        $settings->save();
+        $notification = notify(__('Invoice settings has been updated'));
+        return back()->with($notification);
     }
 }

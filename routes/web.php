@@ -68,5 +68,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('locale', [SettingsController::class, 'updateLocale'])->name('settings.locale.update');
         Route::get('theme', [SettingsController::class, 'theme'])->name('settings.theme');
         Route::post('theme', [SettingsController::class, 'updateTheme'])->name('settings.theme.update');
+        Route::get('invoice', [SettingsController::class, 'invoice'])->name('settings.invoice');
+        Route::post('invoice', [SettingsController::class, 'updateInvoice'])->name('settings.invoice.update');
     });
 });
