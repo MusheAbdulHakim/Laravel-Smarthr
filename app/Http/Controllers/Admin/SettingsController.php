@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Nnjeim\World\World;
 use Illuminate\Http\Request;
+use App\Settings\EmailSettings;
 use App\Settings\ThemeSettings;
 use App\Settings\CompanySettings;
-use App\Http\Controllers\Controller;
 use App\Settings\InvoiceSettings;
+use App\Http\Controllers\Controller;
 use App\Settings\LocalizationSettings;
 use LaravelLang\Locales\Facades\Locales;
 use LaravelLang\Routes\Events\LocaleHasBeenSetEvent;
@@ -158,6 +159,35 @@ class SettingsController extends Controller
         $settings->logo = $imageName;
         $settings->save();
         $notification = notify(__('Invoice settings has been updated'));
+        return back()->with($notification);
+    }
+
+
+    public function email(EmailSettings $settings){
+        $pageTitle = __('Email Settings');
+        return view('pages.settings.email',compact(
+            'settings','pageTitle'
+        ));
+    }
+
+
+    public function updateEmail(Request $request, EmailSettings $settings){
+        $request->validate([
+            'from_address' => 'required|email',
+            'port' => 'required|numeric',
+            'host' => 'required'
+        ]);
+
+        $settings->mailer = $request->mailer ?? $settings->mailer;
+        $settings->from_address = $request->from_address ?? $settings->from_address;
+        $settings->from_name = $request->from_name ?? $settings->from_name;
+        $settings->host = $request->host ?? $settings->host;
+        $settings->port = $request->port ?? $settings->port;
+        $settings->enc = $request->enc ?? $settings->enc;
+        $settings->domain = $request->domain ?? $settings->domain;
+        $settings->user = $request->username ?? $settings->user;
+        $settings->password = $request->password ?? $settings->password;
+        $notification = notify(__("Mail Client settings has been updated"));
         return back()->with($notification);
     }
 }
