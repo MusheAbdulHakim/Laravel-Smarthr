@@ -87,6 +87,10 @@ class User extends Authenticatable implements MessengerProvider
         return $this->hasOne(EmployeeDetail::class);
     }
 
+    public function clientDetail(){
+        return $this->hasOne(ClientDetail::class);
+    }
+
     public function getNameAttribute()
     {
         return "$this->firstname $this->middlename $this->lastname";
