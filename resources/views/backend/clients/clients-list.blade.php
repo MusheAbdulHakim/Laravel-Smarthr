@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('styles')	
+@section('styles')
 <!-- Datatable CSS -->
 <link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap4.min.css')}}">
 @endsection
@@ -53,7 +53,7 @@
 							<td>{{$client->firstname}} {{$client->lastname}}</td>
 							<td>{{$client->email}}</td>
 							<td>{{$client->phone}}</td>
-							
+
 							<td class="text-right">
 								<div class="dropdown dropdown-action">
 									<a href="javascript:void(0)" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -94,15 +94,15 @@
 														<input class="form-control edit_lastname" name="lastname" type="text">
 													</div>
 												</div>
-												
+
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="col-form-label">Email <span class="text-danger">*</span></label>
 														<input class="form-control floating edit_email" name="email" type="email">
 													</div>
 												</div>
-												
-												<div class="col-md-6">  
+
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="col-form-label">Client Picture<span class="text-danger">*</span></label>
 														<input class="form-control floating edit_avatar" name="avatar" type="file">
@@ -121,7 +121,7 @@
 													</div>
 												</div>
 											</div>
-											
+
 											<div class="submit-section">
 												<button class="btn btn-primary submit-btn">Submit</button>
 											</div>
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 						<!-- /Edit Client Modal -->
-					@endif					
+					@endif
 				</tbody>
 			</table>
 		</div>
@@ -164,15 +164,15 @@
 								<input class="form-control" name="lastname" type="text">
 							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="col-form-label">Email <span class="text-danger">*</span></label>
 								<input class="form-control floating" name="email" type="email">
 							</div>
 						</div>
-						
-						<div class="col-md-6">  
+
+						<div class="col-md-6">
 							<div class="form-group">
 								<label class="col-form-label">Client Picture<span class="text-danger">*</span></label>
 								<input class="form-control floating" name="avatar" type="file">
@@ -191,7 +191,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="submit-section">
 						<button class="btn btn-primary submit-btn">Submit</button>
 					</div>

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Client\ClientStoreRequest;
+use App\Http\Requests\Client\ClientUpdateRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class ClientController extends Controller
 {
@@ -15,9 +18,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $title="clients";
-        $clients=Client::get();
-        return view('backend.clients',compact('title','clients'));
+        $title = "clients";
+        $clients = Client::get();
+        return view('backend.clients.clients', compact('title', 'clients'));
     }
 
     /**
@@ -25,47 +28,39 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function lists(){
-        $title="clients";
-        $clients=Client::get();
-        return view('backend.clients-list',compact('title','clients'));
+    public function lists()
+    {
+        $title = "clients";
+        $clients = Client::get();
+        return view('backend.clients.clients-list', compact('title', 'clients'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientStoreRequest $request)
     {
-        $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required',
-            'email'=>'required|email',
-            'phone'=>'nullable|max:15',
-            'avatar'=>'file|image|mimes:jpg,jpeg,png,gif',
-        ]);
-        $imageName = null;
-        if($request->avatar != null){
-            $imageName = time().'.'.$request->avatar->extension();
+        $validatedData = $request->validated();
+        if ($request->hasFile('avatar')) {
+            $imageName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('storage/clients'), $imageName);
+            $validatedData['avatar'] = $imageName;
+        } else {
+            $validatedData['avatar'] = null;
         }
-        Client::create([
-            'firstname'=>$request->firstname,
-            'lastname'=>$request->lastname,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'company'=>$request->company,
-            'avatar'=>$imageName,
-        ]);
-        return back()->with('success','Client has been added successfully!!!');
+
+        Client::create($validatedData);
+
+        return back()->with('success', 'Client has been added successfully!!!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,49 +68,59 @@ class ClientController extends Controller
         //
     }
 
+    public function edit(Client $client)
+    {
+        return view('backend.clients.clients-edit', compact('client'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ClientUpdateRequest $request, Client $client)
     {
-        $request->validate([
-            'firstname'=>'required',
-            'lastname'=>'required',
-            'email'=>'required|email',
-            'phone'=>'nullable|max:15',
-            'avatar'=>'file|image|mimes:jpg,jpeg,png,gif',
-        ]);
-        $imageName = null;
-        if($request->hasFile('avatar')){
-            $imageName = time().'.'.$request->avatar->extension();
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('avatar')) {
+
+            if ($client->avatar) {
+                $oldAvatarPath = public_path('storage/clients/' . $client->avatar);
+                if (File::exists($oldAvatarPath)) {
+                    File::delete($oldAvatarPath);
+                }
+            }
+
+            $imageName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('storage/clients'), $imageName);
+            $validatedData['avatar'] = $imageName;
         }
-        $client = Client::find($request->id);
-        $client->update([
-            'firstname'=>$request->firstname,
-            'lastname'=>$request->lastname,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'company'=>$request->company,
-            'avatar'=>$imageName,
-        ]);
-        return back()->with('success','Client has been updated successfully!!!');
+
+        $client->update($validatedData);
+
+        return back()->with('success', 'Client has been updated successfully!!!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        $client=Client::find($request->id);
+        $client = Client::findOrFail($request->id);
+
+        if ($client->avatar) {
+            $avatarPath = public_path('storage/clients/' . $client->avatar);
+            if (File::exists($avatarPath)) {
+                File::delete($avatarPath);
+            }
+        }
+
         $client->delete();
-        return back()->with('success',"Client has been deleted successfully!!");
+        return back()->with('success', "Client has been deleted successfully!!");
     }
 }
