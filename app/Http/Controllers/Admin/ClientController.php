@@ -80,23 +80,17 @@ class ClientController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientUpdateRequest $request, Client $client)
+    public function update(ClientUpdateRequest $request)
     {
         $validatedData = $request->validated();
 
         if ($request->hasFile('avatar')) {
-
-            if ($client->avatar) {
-                $oldAvatarPath = public_path('storage/clients/' . $client->avatar);
-                if (File::exists($oldAvatarPath)) {
-                    File::delete($oldAvatarPath);
-                }
-            }
-
             $imageName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('storage/clients'), $imageName);
             $validatedData['avatar'] = $imageName;
         }
+
+        $client = Client::findOrFail($request->id);
 
         $client->update($validatedData);
 
