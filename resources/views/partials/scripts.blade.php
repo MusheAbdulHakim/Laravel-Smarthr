@@ -7,7 +7,8 @@
     'resources/assets/js/app.js',
 ])
 <!-- Vendor JS -->
-@livewireScripts
+
+@livewireScriptConfig 
 @yield('vendor-scripts')
 @stack('page-scripts')
 <script type="module">

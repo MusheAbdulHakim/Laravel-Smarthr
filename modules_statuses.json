@@ -2,5 +2,6 @@
     "Whiteboard": true,
     "Paintboard": true,
     "Revezone": true,
-    "Roles": true
+    "Roles": true,
+    "Project": true
 }
