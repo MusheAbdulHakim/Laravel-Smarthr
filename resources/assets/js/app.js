@@ -419,13 +419,13 @@ $(document).ready(function() {
 		$('.sidebar-horizantal .list-inline-item .submenu ul').hide(500);
 		$('.sidebar-horizantal .list-inline-item .submenu a').removeClass("subdrop");
 	});
-	if($('.kanban-wrap').length > 0) {
-		$(".kanban-wrap").sortable({
-			connectWith: ".kanban-wrap",
-			handle: ".kanban-box",
-			placeholder: "drag-placeholder"
-		});
-	}
+	// if($('.kanban-wrap').length > 0) {
+	// 	$(".kanban-wrap").sortable({
+	// 		connectWith: ".kanban-wrap",
+	// 		handle: ".kanban-box",
+	// 		placeholder: "drag-placeholder"
+	// 	});
+	// }
 	
 
 	

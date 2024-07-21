@@ -18,6 +18,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@alpinejs/sort": "^3.14.1",
         "@eonasdan/tempus-dominus": "^6.9.9",
         "@excalidraw/excalidraw": "^0.17.6",
         "@excalidraw/mermaid-to-excalidraw": "^1.0.0",
@@ -31,6 +32,7 @@
         "@vitejs/plugin-react": "^4.3.1",
         "audio-recorder-polyfill": "^0.4.1",
         "autolinker": "^2.2.2",
+        "ckeditor5": "^42.0.1",
         "clsx": "^2.1.1",
         "datatables.net-bs5": "^2.0.8",
         "datatables.net-buttons-bs5": "^3.0.2",
@@ -47,6 +49,7 @@
         "react-dom": "^18.3.1",
         "select2": "^4.1.0-rc.0",
         "simplebar": "^5.2.1",
+        "sortablejs": "^1.15.2",
         "toastify-js": "^1.12.0",
         "toastr": "^2.1.4",
         "uuid": "^8.3.2",
