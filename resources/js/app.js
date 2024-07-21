@@ -1,8 +1,15 @@
 import "./bootstrap";
 import $ from 'jquery';
 window.jQuery = window.$ = $
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import sort from '@alpinejs/sort'
+window.Livewire = Livewire 
+window.Alpine = Alpine
+Alpine.plugin(sort)
+Livewire.start()
 
 import Select2 from 'select2';
+import Sortable from "sortablejs";
 import moment from 'moment';
 import intlTelInput from "intl-tel-input";
 import nProgress from "nprogress";
@@ -20,6 +27,7 @@ window.Calendar = Calendar
 window.dayGridPlugin = dayGridPlugin
 window.timeGridPlugin = timeGridPlugin
 window.listPlugin = listPlugin
+window.Sortable = Sortable
 Select2();
 const AppAssets = import.meta.glob([
     '../assets/fonts/**',
