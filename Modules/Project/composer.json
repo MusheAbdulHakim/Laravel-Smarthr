@@ -1,0 +1,30 @@
+{
+    "name": "musheabdulhakim/project",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mushe Abdul-Hakim",
+            "email": "musheabdulhakim99@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Project\\": "app/",
+            "Modules\\Project\\Database\\Factories\\": "database/factories/",
+            "Modules\\Project\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Project\\Tests\\": "tests/"
+        }
+    }
+}
