@@ -68,6 +68,10 @@ class TaxesController extends Controller
     /**
      * Show the specified resource.
      */
+
+     public function show(Tax $tax){
+        return response()->json(['tax' => $tax]);
+     }
     
 
     /**
