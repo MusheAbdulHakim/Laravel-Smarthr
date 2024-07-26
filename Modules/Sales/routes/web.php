@@ -20,6 +20,7 @@ use Modules\Sales\Http\Controllers\EstimatesController;
 Route::group(['prefix' => 'sales'], function () {
     Route::resource('taxes', TaxesController::class);
     Route::resource('estimates', EstimatesController::class);
+    Route::delete('estimate-item/{item}', [EstimatesController::class, 'destroyItem'])->name('estimate-item.destroy');
     Route::any('estimate-pdf/{estimate}', [EstimatesController::class, 'downloadPdf'])->name('estimate.pdf');
     Route::resource('invoices', InvoicesController::class);
 });
