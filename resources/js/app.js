@@ -18,6 +18,8 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { jsPDF } from "jspdf";
+
 
 window.intlTelInput = intlTelInput;
 window.NProgress = nProgress;
@@ -28,6 +30,7 @@ window.dayGridPlugin = dayGridPlugin
 window.timeGridPlugin = timeGridPlugin
 window.listPlugin = listPlugin
 window.Sortable = Sortable
+window.jsPDF = jsPDF;
 Select2();
 const AppAssets = import.meta.glob([
     '../assets/fonts/**',
