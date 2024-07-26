@@ -21,6 +21,22 @@ if (!function_exists('route_is')) {
     }
 }
 
+if(!function_exists('appLogo')){
+    function appLogo(){
+        $logo = asset('images/logo2.png');
+        $theme = app(ThemeSettings::class);
+        if(!empty($theme->color_scheme)){
+            if($theme->color_scheme === 'light'){
+                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+            }
+            if($theme->color_scheme === 'dark'){
+                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+            }
+        }
+        return $logo;
+    }
+}
+
 if (!function_exists('route_is')) {
     function route_is($routes = [])
     {

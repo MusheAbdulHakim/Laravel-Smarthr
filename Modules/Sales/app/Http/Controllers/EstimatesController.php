@@ -48,7 +48,9 @@ class EstimatesController extends Controller
                     }
                 })
                 ->addColumn('grand_total', function($row){
-                    return 'grand total';
+                    if(!empty($row->grand_total)){
+                        return LocaleSettings('currency_symbol').' '.$row->grand_total;
+                    }
                 })
                 ->addColumn('status', function($row){
                     $color = 'success';
@@ -214,6 +216,7 @@ class EstimatesController extends Controller
         if(!empty($items) && count($items) > 0){
             foreach($items as $item){
                 EstimateItem::updateOrCreate([
+                    'id' => $item['id'],
                     'estimate_id' => $estimate->id,
                 ],[
                     'name' => $item['name'],

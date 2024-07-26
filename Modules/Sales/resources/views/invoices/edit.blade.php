@@ -10,7 +10,7 @@
 
         <!-- Page Header -->
         <x-breadcrumb>
-            <x-slot name="title">{{ __('Edit Estimate') }}</x-slot>
+            <x-slot name="title">{{ __('Edit Invoice') }}</x-slot>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
@@ -24,13 +24,13 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <form action="{{ route('estimates.update', $estimate->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
                     <div x-data="{
-                        subtotalVal: {{ $estimate->subtotal ?? 0.00 }},
-                        discount: {{ $estimate->discount ?? 0.00 }}, 
-                        taxPercentage: {{ $estimate->tax->percentage ?? 0.00 }},
+                        subtotalVal: {{ $invoice->subtotal ?? 0.00 }},
+                        discount: {{ $invoice->discount ?? 0.00 }}, 
+                        taxPercentage: {{ $invoice->tax->percentage ?? 0.00 }},
                         setTax: function(e){
                             if(e){
                                 this.taxPercentage = parseFloat(this.subtotalVal * (e/100)).toFixed(2)
@@ -49,7 +49,7 @@
                                 this.subtotalVal -= total
                             }
                         }
-                    }">
+                    }" x-init="console.log('hello')">
                         <div class="row">
                             <div class="col-sm-6 col-md-3">
                                 <div class="input-block mb-3">
@@ -57,7 +57,7 @@
                                     <select class="form-control select" name="client">
                                         <option value="">{{ __('Please Select') }}</option>
                                         @foreach ($clients as $client)
-                                            <option {{ $estimate->client_id == $client->id ? 'selected': '' }} value="{{ $client->id }}">{{ $client->fullname }}</option>
+                                            <option {{ $invoice->client_id == $client->id ? 'selected': '' }} value="{{ $client->id }}">{{ $client->fullname }}</option>
                                         @endforeach                     
                                     </select>
                                 </div>
@@ -68,7 +68,7 @@
                                     <select class="form-control select" name="project">
                                         <option value="">{{ __('Select Project') }}</option>
                                         @foreach ($projects as $project)
-                                            <option {{ $estimate->project_id == $project->id ? 'selected': '' }} value="{{ $project->id }}">{{ $project->name }}</option>
+                                            <option {{ $invoice->project_id == $project->id ? 'selected': '' }} value="{{ $project->id }}">{{ $project->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -79,36 +79,48 @@
                                     <select class="form-control" @change="setTax($el.selectedOptions[0].getAttribute('data-percent'))" name="tax">
                                         <option value="" readonly>{{ __('No Tax') }}</option>
                                         @foreach ($taxes as $tax)
-                                            <option {{ $estimate->taxe_id === $tax->id ? 'selected': '' }} data-percent="{{ $tax->percentage }}" value="{{ $tax->id }}">{{ $tax->name }}</option>
+                                            <option {{ $invoice->taxe_id === $tax->id ? 'selected': '' }} data-percent="{{ $tax->percentage }}" value="{{ $tax->id }}">{{ $tax->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="input-block mb-3">
+                                    <x-form.label class="col-form-label" required>{{ __('Status') }} </x-form.label>
+                                    <select class="form-control" name="status">
+                                        <option value="">{{ __('Select Status') }}</option>           
+                                        <option {{ $invoice->status == '1' ? 'selected': '' }} value="1">{{ __('Sent') }}</option>           
+                                        <option {{ $invoice->status == '2' ? 'selected': '' }} value="2">{{ __('Paid') }}</option>           
+                                        <option {{ $invoice->status == '3' ? 'selected': '' }} value="3">{{ __('Partially Paid') }}</option>           
+                                        <option {{ $invoice->status == '4' ? 'selected': '' }} value="4">{{ __('Declined') }}</option>           
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="input-block mb-3">
                                     <label class="col-form-label">{{ __('Client Address') }}</label>
-                                    <textarea class="form-control" name="client_address" rows="3">{{ old('client_address', $estimate->client_address) }}</textarea>
+                                    <textarea class="form-control" name="client_address" rows="3">{{ old('client_address', $invoice->client_address) }}</textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="input-block mb-3">
                                     <label>{{ __('Billing Address') }}</label>
-                                    <textarea class="form-control" name="billing_address" rows="3">{{ old('billing_address', $estimate->billing_address) }}</textarea>
+                                    <textarea class="form-control" name="billing_address" rows="3">{{ old('billing_address', $invoice->billing_address) }}</textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="input-block mb-3">
-                                    <label>{{ __('Estimate Date') }} </label>
+                                    <label>{{ __('Invoice Date') }} </label>
                                     <div class="cal-icon">
-                                        <input class="form-control datepicker" type="text" name="startDate" value="{{ old('startDate', $estimate->startDate) }}">
+                                        <input class="form-control datepicker" type="text" name="startDate" value="{{ old('startDate', $invoice->startDate) }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="input-block mb-3">
-                                    <label>{{ __('Expiry Date') }} </label>
+                                    <label>{{ __('Due Date') }} </label>
                                     <div class="cal-icon">
-                                        <input class="form-control datepicker" type="text" name="expiryDate" value="{{ old('expiryDate', $estimate->expiryDate) }}">
+                                        <input class="form-control datepicker" type="text" name="expiryDate" value="{{ old('expiryDate', $invoice->expiryDate) }}">
                                     </div>
                                 </div>
                             </div>
@@ -132,8 +144,8 @@
                                             </tr>
                                         </thead>
                                         <tbody class="tbodyone" data-repeater-list="items" @change="calculateTotal()">
-                                            @if (!empty($estimate->items) && $estimate->items->count() > 0)
-                                                @foreach ($estimate->items as $item)
+                                            @if (!empty($invoice->items) && $invoice->items->count() > 0)
+                                                @foreach ($invoice->items as $item)
                                                 <tr data-repeater-item x-data="{quantity: {{ $item->quantity ?? 0 }}, cost: {{ $item->unit_cost ?? 0 }}}">
                                                     <input type="hidden" name="id" value="{{ $item->id }}">
                                                     <td>
@@ -173,7 +185,7 @@
                                                     <input class="form-control" x-model="quantity" name="qty" type="text">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control totalInput"  :value="cost*quantity" name="total" readonly type="text">
+                                                    <input class="form-control totalInput"  :value="parseFloat(cost)*parseFloat(quantity)" name="total" readonly type="text">
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0)" class="text-danger font-18 ms-2" data-bs-toggle="tooltip" title="Delete" data-repeater-delete="hide" @click="calculateTotal((cost*quantity))">
@@ -225,7 +237,7 @@
                                     <div class="col-md-12">
                                         <div class="input-block mb-3">
                                             <label>{{ __('Other Information') }}</label>
-                                            <textarea class="form-control" rows="4" name="note">{{ old('note', $estimate->note) }}</textarea>
+                                            <textarea class="form-control" rows="4" name="note">{{ old('note', $invoice->note) }}</textarea>
                                         </div>
                                     </div>
                                 </div>
