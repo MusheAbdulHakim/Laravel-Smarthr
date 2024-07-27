@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Crypt;
 use Modules\Sales\Models\InvoiceItem;
+use Illuminate\Support\Facades\Notification;
+use Modules\Sales\Notifications\SendInvoiceNotification;
 
 class InvoicesController extends Controller
 {
@@ -138,6 +140,9 @@ class InvoicesController extends Controller
                 ]);
             }
         }   
+        if(!empty($request->has('send'))){
+            Notification::send( $invoice->client, new SendInvoiceNotification($invoice));
+        }
         $notification = notify(__('Invoice has been created'));
         return redirect()->route('invoices.index')->with($notification);
     }

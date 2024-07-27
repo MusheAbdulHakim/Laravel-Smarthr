@@ -216,8 +216,8 @@
                         </div>
                     </div>
                     <div class="submit-section">
-                        <button type="submit" name="send" class="btn btn-primary submit-btn m-r-10">Save & Send</button>
-                        <button type="submit" class="btn btn-primary submit-btn">Save</button>
+                        <button type="submit" name="send" class="btn btn-primary submit-btn m-r-10">{{ __('Save & Send') }}</button>
+                        <button type="submit" class="btn btn-primary submit-btn">{{ __('Save') }}</button>
                     </div>
                 </form>
             </div>
