@@ -51,21 +51,24 @@ class InvoicesController extends Controller
                     }
                 })
                 ->addColumn('status', function($row){
-                    $color = 'Success';
+                    $color = 'success';
                     $name = __('Sent');
-                    switch( $row->status ){
-                        case '1':
-                            $color = 'info';
-                            $name = __('Sent');
-                        case '2':
-                            $color = 'success';
-                            $name = __('Paid');
-                        case '3':
-                            $color = 'warning';
-                            $name = __('Partially Paid');
-                        case '4':
-                            $color = 'danger';
-                            $name = __('Declined');
+                    $status = $row->status;
+                    if($status == 1){
+                        $color = 'info';
+                        $name = __('Sent');
+                    }
+                    if($status == 2){
+                        $color = 'success';
+                        $name = __('Paid');
+                    }
+                    if($status == 3){
+                        $color = 'warning';
+                        $name = __('Partially Paid');
+                    }
+                    if($status == 4){
+                        $color = 'danger';
+                        $name = __('Declined');
                     }
                     return '<span class="badge bg-inverse-'.$color.'">'.ucwords($name).'</span>';
                 })
