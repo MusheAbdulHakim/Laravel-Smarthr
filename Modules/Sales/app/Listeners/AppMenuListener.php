@@ -24,13 +24,16 @@ class AppMenuListener
     public function handle(AppMenuEvent $event): void
     {
         $menu = $event->menu;
-        $activeClass = route_is(["taxes.*","estimates.*","invoices.*"]) ? "active" : "";
+        $activeClass = route_is(["taxes.*","expenses.*","estimates.*","invoices.*"]) ? "active" : "";
         $menu
             ->submenu(
                 Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-files-o"></i><span> ' . __("Sales") . '</span><span class="menu-arrow"></span></a>'),
                 Menu::new()
                     ->add(
                         Link::toRoute('taxes.index', __('Taxes'))->addClass(route_is(['taxes.*']) ? 'active' : ''),
+                    )
+                    ->add(
+                        Link::toRoute('expenses.index', __('Expenses'))->addClass(route_is(['expenses.*']) ? 'active' : ''),
                     )
                     ->add(
                         Link::toRoute('estimates.index', __('Estimates'))->addClass(route_is(['estimates.*']) ? 'active' : ''),
