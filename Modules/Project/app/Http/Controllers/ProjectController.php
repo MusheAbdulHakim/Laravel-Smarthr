@@ -80,7 +80,7 @@ class ProjectController extends Controller
         $projectFiles = $request->projectFiles ?? [];
         if(!empty($projectFiles) && count($projectFiles) > 0){
             foreach($projectFiles as $file){
-                $project->addMedia($file);
+                $project->addMedia($file)->toMediaCollection('project-files');
             }
         }
         // Add Project Team 
