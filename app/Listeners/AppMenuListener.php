@@ -62,6 +62,10 @@ class AppMenuListener
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))
         );
         $menu->addIfCan(
+            'view-backups',
+            Link::toRoute('backups.index', '<i class="la la-cloud-upload"></i> <span>' . __('Backups') . '</span>')->setActive(route_is('backups.index'))
+        );
+        $menu->addIfCan(
             'view-settings',
             Link::toRoute('settings.index', '<i class="la la-cog"></i> <span>' . __('Settings') . '</span>')->setActive(route_is('settings.index'))
         );

@@ -1,8 +1,8 @@
 <div class="container mb-5">
     <div class="d-flex align-items-end pt-4">
-    
+        @can('create-backup')
         <button id="create-backup" class="btn btn-primary btn-sm ms-auto px-3">
-            Create Backup
+            {{ __('Create Backup') }}
         </button>
         <div class="dropdown ms-3">
             <button class="btn btn-primary btn-sm dropdown-toggle px-3" id="dropdownMenuButton"
@@ -21,6 +21,7 @@
                 </a>
             </div>
         </div>
+        @endcan
     </div>
 
     <div class="row mt-4">
@@ -116,16 +117,20 @@
                             <td>{{ $file['date'] }}</td>
                             <td>{{ $file['size'] }}</td>
                             <td class="text-right pr-3">
+                                @can('download-backup')
                                 <a class="action-button mr-2" href="#" target="_blank" wire:click.prevent="downloadFile('{{ $file['path'] }}')">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                         <path class="heroicon-ui" d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/>
                                     </svg>
                                 </a>
+                                @endcan
+                                @can('delete-backup')
                                 <a class="action-button" href="#" target="_blank" wire:click.prevent="showDeleteModal({{ $loop->index }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                         <path class="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/>
                                     </svg>
                                 </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
