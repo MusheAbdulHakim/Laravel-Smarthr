@@ -230,7 +230,11 @@ class BudgetsController extends Controller
             }
         }
         if($request->hasFile('attachment')){
-            $budget->updateMedia($request->attachment,'budget-files');
+            $budgetFile = $budget->getMedia('budget-files')->first();
+            if(!empty($budgetFile)){
+                $budgetFile->delete();
+            }
+            $budget->addMedia($request->attachment)->toMediaCollection('budget-files');
         }
         $notification = notify(__('Budget has been updated'));
         return back()->with($notification);

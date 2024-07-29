@@ -134,6 +134,10 @@ class RevenueBudgetController extends Controller
             'note' => $request->note
         ]);
         if($request->hasFile('attachment')){
+            $budgetFile = $budget_revenue->getMedia('budget-attachments')->first();
+            if(!empty($budgetFile)){
+                $budgetFile->delete();
+            }
             $budget_revenue->updateMedia($request->attachment,'budget-attachments');
         }   
         $notification = notify(__('Revenue budget has been deleted'));

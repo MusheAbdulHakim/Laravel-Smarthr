@@ -135,6 +135,10 @@ class ExpenseBudgetController extends BaseController
             'note' => $request->note
         ]);
         if($request->hasFile('attachment')){
+            $budgetFile = $budget_expense->getMedia('budget-attachments')->first();
+            if(!empty($budgetFile)){
+                $budgetFile->delete();
+            }
             $budget_expense->addMedia($request->attachment)->toMediaCollection('budget-attachments');
         }   
         $notification = notify(__('Expense budget has been deleted'));
