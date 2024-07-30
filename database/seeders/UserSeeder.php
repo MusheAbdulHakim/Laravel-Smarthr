@@ -74,6 +74,5 @@ class UserSeeder extends Seeder
             'date_joined' => now(),
             'dob' => '2023-01-01',
         ]);
-        $superadmin = User::where('email','superadmin@smarthr.com')->first();
     }
 }

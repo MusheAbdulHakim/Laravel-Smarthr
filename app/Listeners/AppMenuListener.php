@@ -30,13 +30,13 @@ class AppMenuListener
         $menu->add(
             Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span> ' . __('Dashboard') . '</span>')->setActive(route_is('dashboard'))
         );
-        $activeClass = route_is(["app.chat"]) ? "active" : "";
+        $activeClass = route_is(["chatify"]) ? "active" : "";
         $menu
             ->submenu(
                 Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-cube"></i><span> ' . __("Apps") . '</span><span class="menu-arrow"></span></a>'),
                 Menu::new()
                     ->add(
-                        Link::toRoute('app.chat', __('Chat'))->addClass(route_is(['app.chat']) ? 'active' : '')
+                        Link::toRoute('chatify', __('Chat'))->addClass(route_is(['chatify']) ? 'active' : '')
                     )->addParentClass('submenu')
             );
         $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
