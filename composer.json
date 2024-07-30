@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mhmiton/laravel-modules-livewire": "^3.0",
+        "munafio/chatify": "^1.6",
         "nnjeim/world": "^1.1",
         "nwidart/laravel-modules": "^11.0",
         "pavel-mironchik/laravel-backup-panel": "^2.6",
