@@ -4,7 +4,7 @@
             @click="$('#add_group').modal('show');$('.modal-backdrop').remove()"><i class="fa-solid fa-plus"></i></a>
     </li>
        
-    <div x-data="{ groups: null}"
+    {{-- <div x-data="{ groups: null}"
         x-init="groups = await (await fetch('{{ $groupsEndpoint }}')).json()">
         <template x-for="group in groups.data">
             <li> 
@@ -16,7 +16,7 @@
                 </a>
             </li>
         </template>
-    </div>
+    </div> --}}
     
     <div id="add_group" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-md" role="document">

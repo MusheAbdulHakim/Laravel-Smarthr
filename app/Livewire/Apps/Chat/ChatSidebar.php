@@ -12,14 +12,8 @@ class ChatSidebar extends Component
 
     public $groupsEndpoint;
     public $groupName;
-    private $helper, $messenger;
 
-    public function __construct(){
-        $this->helper = new MessengerHelper();
-        $this->messenger = ($this->helper->messenger);
-        $this->groupsEndpoint = url($this->messenger->getApiEndpoint().'/groups/');
-        // dd($this->groupsEndpoint);
-    }
+
 
     public function createGroup(){
        $params['subject'] = $this->groupName;

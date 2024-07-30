@@ -5,16 +5,12 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
-use RTippin\Messenger\Traits\Messageable;
-use RTippin\Messenger\Contracts\MessengerProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
-class User extends Authenticatable implements MessengerProvider
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Messageable;
+    use HasFactory, Notifiable;
     use \Spatie\Permission\Traits\HasRoles;
 
     /**
@@ -40,40 +36,9 @@ class User extends Authenticatable implements MessengerProvider
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
 
-    public static function getProviderSettings(): array
-    {
-        return [
-            'alias' => 'user',
-            'searchable' => true,
-            'friendable' => true,
-            'devices' => true,
-            'default_avatar' => public_path('images/user.jpg'),
-            'cant_message_first' => [],
-            'cant_search' => [],
-            'cant_friend' => [],
-        ];
-    }
+   
 
-    public function getProviderAvatarColumn(): string
-    {
-        return 'avatar';
-    }
-
-    public function getProviderName(): string
-    {
-        return strip_tags(ucwords($this->firstname." ".$this->lastname));
-    }
-
-    public static function getProviderSearchableBuilder(Builder $query,string $search,array $searchItems)
-    {
-        $query->where(function (Builder $query) use ($searchItems) {
-            foreach ($searchItems as $item) {
-                $query->orWhere('firstname', 'LIKE', "%{$item}%")
-                    ->orWhere('username','LIKE', "%{$item}%")
-                    ->orWhere('lastname', 'LIKE', "%{$item}%");
-            }
-        })->orWhere('email', '=', $search);
-    }
+   
     public function assets()
     {
         return $this->hasMany(Asset::class, 'user_id');
