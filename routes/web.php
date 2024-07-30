@@ -29,13 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profile', [UserProfileController::class, 'update']);
 
     Route::get('apps/chat', [ChatAppController::class, 'index'])->name('app.chat');
-    Route::prefix('messenger')->group(function(){
-        Route::get('', [ChatController::class, 'messenger'])->name('messenger.index');
-        Route::get('join/{invite}', [ChatController::class, 'showJoinWithInvite'])->name('messenger.invites.join');
-        Route::get('{thread}', [ChatController::class, 'showThread'])->name('messenger.show');
-        Route::get('/recipient/{alias}/{id}', [ChatController::class, 'showCreatePrivate'])->name('messenger.private.create');
-        Route::get('threads/{thread}/calls/{call}', [ChatController::class, 'showVideoCall'])->name('messenger.threads.show.call');
-    });
 
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);
