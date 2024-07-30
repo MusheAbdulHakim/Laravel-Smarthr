@@ -74,8 +74,6 @@ class UserSeeder extends Seeder
             'date_joined' => now(),
             'dob' => '2023-01-01',
         ]);
-        $messenger = new \RTippin\Messenger\Models\Messenger();
         $superadmin = User::where('email','superadmin@smarthr.com')->first();
-        $messenger->owner($superadmin)->save();
     }
 }
