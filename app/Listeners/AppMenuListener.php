@@ -39,20 +39,23 @@ class AppMenuListener
                         Link::toRoute('chatify', __('Chat'))->addClass(route_is(['chatify']) ? 'active' : '')
                     )->addParentClass('submenu')
             );
-        $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
-        $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index','holidays.*']) ? "active" : "";
-        $menu
-            ->submenuIf(auth()->user()->can([
-                    'view-employees','view-departments','view-designations','view-holidays'
-                ]),
-                Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
-                Menu::new()
-                    ->addParentClass('submenu')
-                    ->addIfCan('view-employees',Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
-                    ->addIfCan('view-departments',Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
-                    ->addIfCan('view-designations',Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
-                    ->addIfCan('view-holidays',Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
-            );
+       
+        if(auth()->user()->can([
+            'view-employees','view-departments','view-designations','view-holidays'
+        ])){
+            $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
+            $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index','holidays.*']) ? "active" : "";
+            $menu
+                ->submenu(
+                    Html::raw('<a href="#" class="' . $activeClass . '" class="noti-dot"><i class="la la-user"></i> <span> ' . __('Employees') . '</span><span class="menu-arrow"></span></a>'),
+                    Menu::new()
+                        ->addParentClass('submenu')
+                        ->addIfCan('view-employees',Link::toRoute('employees.index', __('Employees'))->addClass(route_is(['employees.index','employees.list']) ? 'active' : ''))
+                        ->addIfCan('view-departments',Link::toRoute('departments.index', __('Departments'))->addClass(route_is('departments.index') ? 'active' : ''))
+                        ->addIfCan('view-designations',Link::toRoute('designations.index', __('Designations'))->addClass(route_is('designations.index') ? 'active' : ''))
+                        ->addIfCan('view-holidays',Link::toRoute('holidays.index', __('Holidays'))->addClass(route_is('holidays.*') ? 'active' : ''))
+                );
+        }
         $menu->addIfCan(
             'view-clients',
             Link::toRoute('clients.index', '<i class="la la-group"></i> <span>' . __('Clients') . '</span>')->setActive(route_is('clients.*'))
