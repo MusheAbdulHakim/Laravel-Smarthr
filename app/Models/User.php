@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
+use App\Models\AttendanceTimestamp;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,6 +51,16 @@ class User extends Authenticatable
 
     public function employeeDetail(){
         return $this->hasOne(EmployeeDetail::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id');
+    }
+
+    public function attendanceTimestamps()
+    {
+        return $this->hasMany(AttendanceTimestamp::class,'user_id');
     }
 
     public function clientDetail(){

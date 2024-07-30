@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\HolidaysController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\FamilyInfoController;
+use App\Http\Controllers\Admin\AttendancesController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
 use App\Http\Controllers\Admin\EmployeeDetailsController;
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('family-information', FamilyInfoController::class);
     Route::resource('assets', AssetsController::class);
     Route::get('backups', fn() => view('pages.backups',[ 'pageTitle' => __('Backups')]))->name('backups.index');
+    Route::get('attendance', [AttendancesController::class, 'index'])->name('attendances.index');
+    Route::get('attendance-details/{attendance}', [AttendancesController::class, 'attendanceDetails'])->name('attendance.details');
     //settings
     Route::prefix('settings')->group(function () {
         Route::get('company', [SettingsController::class, 'index'])->name('settings.index');

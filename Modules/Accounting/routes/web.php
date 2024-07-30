@@ -17,7 +17,7 @@ use Modules\Accounting\Http\Controllers\BudgetCategoriesController;
 |
 */
 
-Route::group(['prefix' => 'accounting'], function () {
+Route::group(['prefix' => 'accounting','middleware' => ['auth']], function () {
     Route::resource('budget-categories', BudgetCategoriesController::class)->except('show')->names('budget.categories');
     Route::resource('budget-expense', ExpenseBudgetController::class)->except('show')->names('budget.expense');
     Route::resource('budget-revenue', RevenueBudgetController::class)->except('show')->names('budget.revenue');
