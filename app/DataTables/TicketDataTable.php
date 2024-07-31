@@ -51,6 +51,7 @@ class TicketDataTable extends DataTable
                     }
                     return Html::userAvatar($row->user->fullname, $img, $link);
                 }
+                return __('Yet to be assigned to user');
             })
             ->addColumn('created_at', function($row){
                 if(!empty($row->created_at)){

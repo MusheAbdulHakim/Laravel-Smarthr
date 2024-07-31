@@ -140,7 +140,6 @@ class TicketsController extends Controller
         ]);
         $creator = auth()->user()->id;
         $ticket->update([
-            'tk_id' => $request->tk_id ?? '#TKT-'.pad_zeros(Ticket::count()+1),
             'subject' => $request->subject,
             'created_by' => $creator,
             'user_id' => $request->user,
