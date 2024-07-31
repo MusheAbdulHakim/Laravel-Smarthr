@@ -9,6 +9,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\AssetsController;
 use App\Http\Controllers\Admin\ChatAppController;
 use App\Http\Controllers\Admin\ClientsController;
+use App\Http\Controllers\Admin\TicketsController;
 use App\Http\Controllers\Admin\HolidaysController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
@@ -56,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('backups', fn() => view('pages.backups',[ 'pageTitle' => __('Backups')]))->name('backups.index');
     Route::get('attendance', [AttendancesController::class, 'index'])->name('attendances.index');
     Route::get('attendance-details/{attendance}', [AttendancesController::class, 'attendanceDetails'])->name('attendance.details');
+    Route::resource('tickets', TicketsController::class);
+    Route::get('assigned-tickets', [TicketsController::class, 'assignedTickets'])->name('assigned-tickets');
+    Route::post('assign-ticket', [TicketsController::class, 'assignUser'])->name('ticket.assign-user');
     //settings
     Route::prefix('settings')->group(function () {
         Route::get('company', [SettingsController::class, 'index'])->name('settings.index');

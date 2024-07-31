@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Enums\UserType;
 use App\Events\AppMenuEvent;
 use Spatie\Menu\Laravel\Link;
 use Spatie\Menu\Laravel\Menu;
@@ -61,6 +62,14 @@ class AppMenuListener
             'view-clients',
             Link::toRoute('clients.index', '<i class="la la-group"></i> <span>' . __('Clients') . '</span>')->setActive(route_is('clients.*'))
         );
+        $menu->add(
+            Link::toRoute('tickets.index', '<i class="la la-ticket"></i> <span>' . __('Tickets') . '</span>')->setActive(route_is('tickets.*'))
+        );
+        if(auth()->user()->type === UserType::EMPLOYEE){
+            $menu->add(
+                Link::toRoute('assigned-tickets', '<i class="la la-ticket"></i> <span>' . __('My Assigned Tickets') . '</span>')->setActive(route_is('assigned-tickets'))
+            );
+        }
         $menu->addIfCan(
             'view-users',
             Link::toRoute('users.index', '<i class="la la-user-plus"></i> <span>' . __('Users') . '</span>')->setActive(route_is('users.index'))

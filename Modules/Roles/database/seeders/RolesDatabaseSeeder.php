@@ -43,8 +43,11 @@ class RolesDatabaseSeeder extends Seeder
             'employees' => [
                 'view-employees','create-employee','edit-employee','show-Employeeprofile','delete-employee'
             ],
-            'attendances' => [
+            'Attendances' => [
                 'view-attendances','create-attendance','edit-attendance','show-attendance','delete-attendance'
+            ],
+            'Tickets' => [
+                'view-tickets','create-ticket','edit-ticket','show-ticket','delete-ticket'
             ],
             'assets' => [
                 'view-assets','create-asset','edit-asset','show-asset','delete-asset'
