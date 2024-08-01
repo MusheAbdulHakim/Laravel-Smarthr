@@ -156,7 +156,7 @@ DB_PASSWORD=
 - Run migrations and seeders
 
 ```
-php artisan migrate:fresh --seed; php artisan module:migrate --seed
+php artisan migrate:fresh --seed; php artisan module:migrate --all seed
 
 ```
 
