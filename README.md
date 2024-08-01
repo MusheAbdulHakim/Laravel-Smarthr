@@ -141,7 +141,7 @@ php artisan key:generate
 
 ```
 
-- Set database connection to your database in the .env file.
+- Set database connection to your database in the .env file. Make sure to set APP_URL to make your domain.
 
 ```
 DB_CONNECTION=mysql
@@ -156,8 +156,20 @@ DB_PASSWORD=
 - Run migrations and seeders
 
 ```
-php artisan migrate --seed; php artisan module:migrate --seed
+php artisan migrate:fresh --seed; php artisan module:migrate --seed
 
+```
+
+- Create Symlink
+```
+php artisan storage:link
+```
+
+### Make sure you give the /storage and /bootstrap/cache folder the permission to read and right 
+
+In linux run
+```
+sudo chmod -R 777 storage bootstrap/cache
 ```
 
 - Visit your application domain/url in the browser or Start the local server with and follow the link 
