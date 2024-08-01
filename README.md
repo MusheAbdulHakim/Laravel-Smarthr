@@ -2,6 +2,8 @@
     <img src="./public/images/main-logo.png"  height="100%" width="40%" alt="logo">
 </div>
 
+<hr>
+
 ![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/laravel-smarthr)
 ![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/laravel-smarthr)
 ![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/laravel-smarthr)
@@ -202,9 +204,12 @@ php artisan serve
 - Star the repository and report any issues/bugs you encounter here in the repository.
 
 
+### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/MusheAbdulHakim/Laravel-Smarthr/issues)
+
+Consider supporting the project if you finds it helpful. Thank you
+
 ## Screenshots
 
-#screenshots
 
 ![TLDRAW](screenshots/tldraw.png?raw=true "TLD RAW")
 ![Login](screenshots/login.png?raw=true "Login page")
