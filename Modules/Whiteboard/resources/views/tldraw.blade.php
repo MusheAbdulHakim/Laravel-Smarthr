@@ -3,7 +3,7 @@
 
 
 @section('page-content')
-    <div class="content container-fluid">
+    <div class="content container-fluid mb-5">
         <div id="TldrawAppElement"></div>
     </div>
 @endsection
