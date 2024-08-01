@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
-use Chatify\Facades\ChatifyMessenger as Chatify;
+use \App\Http\Controllers\Vendor\Chatify\CustomChatify as Chatify;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +27,7 @@ class MessagesController extends Controller
      */
     public function pusherAuth(Request $request)
     {
-        return Chatify::pusherAuth(
+        return (new Chatify())->pusherAuth(
             $request->user(),
             Auth::user(),
             $request['channel_name'],
@@ -45,13 +45,13 @@ class MessagesController extends Controller
     {
         return auth()->user();
         // Favorite
-        $favorite = Chatify::inFavorite($request['id']);
+        $favorite = (new Chatify())->inFavorite($request['id']);
 
         // User data
         if ($request['type'] == 'user') {
             $fetch = User::where('id', $request['id'])->first();
             if($fetch){
-                $userAvatar = Chatify::getUserWithAvatar($fetch)->avatar;
+                $userAvatar = (new Chatify())->getUserWithAvatar($fetch)->avatar;
             }
         }
 
@@ -73,10 +73,10 @@ class MessagesController extends Controller
     public function download($fileName)
     {
         $path = config('chatify.attachments.folder') . '/' . $fileName;
-        if (Chatify::storage()->exists($path)) {
+        if ((new Chatify())->storage()->exists($path)) {
             return response()->json([
                 'file_name' => $fileName,
-                'download_path' => Chatify::storage()->url($path)
+                'download_path' => (new Chatify())->storage()->url($path)
             ], 200);
         } else {
             return response()->json([
@@ -104,13 +104,13 @@ class MessagesController extends Controller
         // if there is attachment [file]
         if ($request->hasFile('file')) {
             // allowed extensions
-            $allowed_images = Chatify::getAllowedImages();
-            $allowed_files  = Chatify::getAllowedFiles();
+            $allowed_images = (new Chatify())->getAllowedImages();
+            $allowed_files  = (new Chatify())->getAllowedFiles();
             $allowed        = array_merge($allowed_images, $allowed_files);
 
             $file = $request->file('file');
             // check file size
-            if ($file->getSize() < Chatify::getMaxUploadSize()) {
+            if ($file->getSize() < (new Chatify())->getMaxUploadSize()) {
                 if (in_array(strtolower($file->extension()), $allowed)) {
                     // get attachment name
                     $attachment_title = $file->getClientOriginalName();
@@ -129,7 +129,7 @@ class MessagesController extends Controller
 
         if (!$error->status) {
             // send to database
-            $message = Chatify::newMessage([
+            $message = (new Chatify())->newMessage([
                 'type' => $request['type'],
                 'from_id' => Auth::user()->id,
                 'to_id' => $request['id'],
@@ -141,11 +141,11 @@ class MessagesController extends Controller
             ]);
 
             // fetch message to send it with the response
-            $messageData = Chatify::parseMessage($message);
+            $messageData = (new Chatify())->parseMessage($message);
 
             // send to user using pusher
             if (Auth::user()->id != $request['id']) {
-                Chatify::push("private-chatify.".$request['id'], 'messaging', [
+                (new Chatify())->push("private-chatify.".$request['id'], 'messaging', [
                     'from_id' => Auth::user()->id,
                     'to_id' => $request['id'],
                     'message' => $messageData
@@ -170,7 +170,7 @@ class MessagesController extends Controller
      */
     public function fetch(Request $request)
     {
-        $query = Chatify::fetchMessagesQuery($request['id'])->latest();
+        $query = (new Chatify())->fetchMessagesQuery($request['id'])->latest();
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
@@ -192,7 +192,7 @@ class MessagesController extends Controller
     public function seen(Request $request)
     {
         // make as seen
-        $seen = Chatify::makeSeen($request['id']);
+        $seen = (new Chatify())->makeSeen($request['id']);
         // send the response
         return Response::json([
             'status' => $seen,
@@ -239,8 +239,8 @@ class MessagesController extends Controller
     {
         $userId = $request['user_id'];
         // check action [star/unstar]
-        $favoriteStatus = Chatify::inFavorite($userId) ? 0 : 1;
-        Chatify::makeInFavorite($userId, $favoriteStatus);
+        $favoriteStatus = (new Chatify())->inFavorite($userId) ? 0 : 1;
+        (new Chatify())->makeInFavorite($userId, $favoriteStatus);
 
         // send the response
         return Response::json([
@@ -280,7 +280,7 @@ class MessagesController extends Controller
                     ->paginate($request->per_page ?? $this->perPage);
 
         foreach ($records->items() as $index => $record) {
-            $records[$index] += Chatify::getUserWithAvatar($record);
+            $records[$index] += (new Chatify())->getUserWithAvatar($record);
         }
 
         return Response::json([
@@ -298,7 +298,7 @@ class MessagesController extends Controller
      */
     public function sharedPhotos(Request $request)
     {
-        $images = Chatify::getSharedPhotos($request['user_id']);
+        $images = (new Chatify())->getSharedPhotos($request['user_id']);
 
         foreach ($images as $image) {
             $image = asset(config('chatify.attachments.folder') . $image);
@@ -318,7 +318,7 @@ class MessagesController extends Controller
     public function deleteConversation(Request $request)
     {
         // delete
-        $delete = Chatify::deleteConversation($request['id']);
+        $delete = (new Chatify())->deleteConversation($request['id']);
 
         // send the response
         return Response::json([
@@ -347,17 +347,17 @@ class MessagesController extends Controller
         // if there is a [file]
         if ($request->hasFile('avatar')) {
             // allowed extensions
-            $allowed_images = Chatify::getAllowedImages();
+            $allowed_images = (new Chatify())->getAllowedImages();
 
             $file = $request->file('avatar');
             // check file size
-            if ($file->getSize() < Chatify::getMaxUploadSize()) {
+            if ($file->getSize() < (new Chatify())->getMaxUploadSize()) {
                 if (in_array(strtolower($file->extension()), $allowed_images)) {
                     // delete the older one
                     if (Auth::user()->avatar != config('chatify.user_avatar.default')) {
-                        $path = Chatify::getUserAvatarUrl(Auth::user()->avatar);
-                        if (Chatify::storage()->exists($path)) {
-                            Chatify::storage()->delete($path);
+                        $path = (new Chatify())->getUserAvatarUrl(Auth::user()->avatar);
+                        if ((new Chatify())->storage()->exists($path)) {
+                            (new Chatify())->storage()->delete($path);
                         }
                     }
                     // upload
