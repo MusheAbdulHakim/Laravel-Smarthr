@@ -207,6 +207,8 @@ php artisan serve
 ### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/MusheAbdulHakim/Laravel-Smarthr/issues)
 
 Consider supporting the project if you finds it helpful. Thank you
+- [Paystack](https://paystack.com/pay/musheabdulhakim)
+- [Paypal](https://www.paypal.com/paypalme/musheabdulhakim)
 
 ## Screenshots
 
