@@ -19,10 +19,7 @@ class AssetFactory extends Factory
     public function definition(): array
     {
         return [
-            'ast_id' => function(array $attributes) {
-                $totalAsset = Asset::count();
-                return "AST-" . pad_zeros(($totalAsset + 1));
-            },
+            'ast_id' => 'null',
             'name' => $this->faker->word(),
             'purchase_date' => $this->faker->date(),
             'purchase_from' => $this->faker->word(),
@@ -36,11 +33,21 @@ class AssetFactory extends Factory
             'cost' => $this->faker->randomNumber(),
             'description' => $this->faker->sentence(),
             'status' => $this->faker->randomElement(['approved','pending','returned']),
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'files' => null,
             'created_by' => 1,
             'brand' => $this->faker->numberBetween()
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function(Asset $asset) {
+            $totalAsset = Asset::count();
+            $asset->update([
+                'ast_id' => "AST-" . pad_zeros(($totalAsset + 1))
+            ]);
+        });
     }
 
 }
