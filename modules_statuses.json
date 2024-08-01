@@ -1,1 +1,9 @@
-{}
+{
+    "Whiteboard": true,
+    "Paintboard": true,
+    "Revezone": true,
+    "Roles": true,
+    "Project": true,
+    "Sales": true,
+    "Accounting": true
+}

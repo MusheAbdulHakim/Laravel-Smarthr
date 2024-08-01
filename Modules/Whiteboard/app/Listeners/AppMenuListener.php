@@ -22,16 +22,20 @@ class AppMenuListener
      */
     public function handle(AppMenuEvent $event): void
     {
-        $menu = $event->menu;
-        $menu->html('<span>'.__('Drawing Apps').'</span>', ['class' => 'menu-title']);
-        $activeClass = route_is(['tldraw.index','excalidraw.index']) ? "active" : "";
-        $menu->submenu(
-            Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-pencil"></i><span> ' . __("Whiteboard") . '</span><span class="menu-arrow"></span></a>'),
-            Menu::new()
-                ->addParentClass('submenu')
-                ->add(Link::toRoute('tldraw.index', __('TlDraw App'))->addClass(route_is('tldraw.index') ? 'active' : ''))
-                ->add(Link::toRoute('excalidraw.index', __('Excalidraw App'))->addClass(route_is('excalidraw.index') ? 'active' : ''))
-        );
+        
+        if(auth()->user()->canAny(['view-excalidraw','view-tldraw'])){
+            $menu = $event->menu;
+            $menu->html('<span>'.__('Drawing Apps').'</span>', ['class' => 'menu-title']);
+            $activeClass = route_is(['tldraw.index','excalidraw.index']) ? "active" : "";
+            $menu->submenu(
+                Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-pencil"></i><span> ' . __("Whiteboard") . '</span><span class="menu-arrow"></span></a>'),
+                Menu::new()
+                    ->addParentClass('submenu')
+                    ->addIfCan('view-tldraw',Link::toRoute('tldraw.index', __('TlDraw App'))->addClass(route_is('tldraw.index') ? 'active' : ''))
+                    ->addIfCan('view-excalidraw',Link::toRoute('excalidraw.index', __('Excalidraw App'))->addClass(route_is('excalidraw.index') ? 'active' : ''))
+            );
+
+        }
 
     }
 }

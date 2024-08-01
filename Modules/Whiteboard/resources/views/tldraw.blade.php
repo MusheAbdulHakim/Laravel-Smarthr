@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
-@push('page-styles')
-    <!-- Page Css -->
-    @vite([
-        'Modules/Whiteboard/resources/apps/TlDraw/css/index.css',
-        'Modules/Whiteboard/resources/apps/TlDraw/main.jsx',
-    ])
-    <!-- /Page Css -->
-@endpush
+
 
 @section('page-content')
     <div class="content container-fluid">
@@ -18,7 +11,11 @@
 
 @push('page-scripts')
     <!-- Page Js -->
-    <script>
+    @vite([
+        'Modules/Whiteboard/resources/apps/TlDraw/css/index.css',
+        'Modules/Whiteboard/resources/apps/TlDraw/main.jsx',
+    ])
+    <script type="module">
         $(document).ready(function(){
             $('html').attr('data-sidebar-size','sm-hover')
         })

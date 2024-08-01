@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Nnjeim\World\World;
 use Illuminate\Http\Request;
+use App\Settings\EmailSettings;
 use App\Settings\ThemeSettings;
 use App\Settings\CompanySettings;
+use App\Settings\InvoiceSettings;
 use App\Http\Controllers\Controller;
 use App\Settings\LocalizationSettings;
 use LaravelLang\Locales\Facades\Locales;
@@ -39,8 +41,8 @@ class SettingsController extends Controller
         $settings->fax = $request->fax ?? $settings->fax;
         $settings->website_url = $request->website_url ?? $settings->website_url;
         $settings->save();
-        flash()->success(__("Company Settings has been updated"));
-        return redirect()->route('settings.index');
+        $notification = notify(__("Company Settings has been updated"));
+        return redirect()->route('settings.index')->with($notification);
     }
 
     public function locale(LocalizationSettings $settings)
@@ -78,8 +80,8 @@ class SettingsController extends Controller
             LocaleHasBeenSetEvent::dispatch($locale);
         }
         $settings->save();
-        flash()->success(__("Locale Settings has been updated"));
-        return redirect()->route('settings.locale');
+        $notification = notify(__("Locale Settings has been updated"));
+        return redirect()->route('settings.locale')->with($notification);
     }
 
 
@@ -129,7 +131,63 @@ class SettingsController extends Controller
         $settings->sidebar_img = $side_img;
         $settings->sidebar_color  = $request->sidebar_color ?? $settings->sidebar_color;
         $settings->save();
-        flash()->success(__("Theme Settings has been updated"));
-        return redirect()->route('settings.theme');
+        $notification = notify(__("Theme Settings has been updated"));
+        return redirect()->route('settings.theme')->with($notification);
+    }
+
+
+    public function invoice(InvoiceSettings $settings){
+        $pageTitle = __("Invoice Settings");
+        return view('pages.settings.invoice',compact(
+            'settings','pageTitle'
+        ));
+    }
+
+    public function updateInvoice(Request $request, InvoiceSettings $settings){
+
+        $request->validate([
+            'prefix' => 'required',
+            'logo' => 'nullable|file|image',
+        ]);
+
+        $imageName = $settings->logo;
+        if ($request->hasFile('logo')) {
+            $imageName = random_str(8) . '.' . $request->logo->extension();
+            $request->logo->move(public_path('storage/settings/invoice'), $imageName);
+        }
+        $settings->prefix = $request->prefix ?? $settings->prefix;
+        $settings->logo = $imageName;
+        $settings->save();
+        $notification = notify(__('Invoice settings has been updated'));
+        return back()->with($notification);
+    }
+
+
+    public function email(EmailSettings $settings){
+        $pageTitle = __('Email Settings');
+        return view('pages.settings.email',compact(
+            'settings','pageTitle'
+        ));
+    }
+
+
+    public function updateEmail(Request $request, EmailSettings $settings){
+        $request->validate([
+            'from_address' => 'required|email',
+            'port' => 'required|numeric',
+            'host' => 'required'
+        ]);
+
+        $settings->mailer = $request->mailer ?? $settings->mailer;
+        $settings->from_address = $request->from_address ?? $settings->from_address;
+        $settings->from_name = $request->from_name ?? $settings->from_name;
+        $settings->host = $request->host ?? $settings->host;
+        $settings->port = $request->port ?? $settings->port;
+        $settings->enc = $request->enc ?? $settings->enc;
+        $settings->domain = $request->domain ?? $settings->domain;
+        $settings->user = $request->username ?? $settings->user;
+        $settings->password = $request->password ?? $settings->password;
+        $notification = notify(__("Mail Client settings has been updated"));
+        return back()->with($notification);
     }
 }

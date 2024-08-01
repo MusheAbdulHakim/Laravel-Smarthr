@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('page-style')
-    <!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    
 @endpush
 
 @section('page-content')
@@ -21,9 +20,8 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
-                    <a href="{{ route('employees.create') }}" class="btn add-btn"
-                        data-ajax-modal="true" data-remote="true"
-                        data-size="lg" data-title="Add Employee">
+                    <a href="javascript:void(0)" data-url="{{ route('employees.create') }}" class="btn add-btn"
+                        data-ajax-modal="true" data-size="lg" data-title="Add Employee">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Employee') }}
                     </a>
                     <div class="view-icons">
@@ -42,12 +40,12 @@
                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
                     <div class="profile-widget">
                         <div class="profile-img">
-                            <a href="{{ route('employees.show', $employee->id) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('assets/img/user.jpg') }}" alt="User Image"></a>
+                            <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('images/user.jpg') }}" alt="User Image"></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{ route('employees.edit', $employee->id) }}" data-ajax-modal="true" data-remote="true"
+                                <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('employees.edit', ['employee' => \Crypt::encrypt($employee->id)]) }}" data-ajax-modal="true"
                                     data-title="Edit Employee" data-size="lg">
                                     <i class="fa-solid fa-pencil m-r-5"></i>
                                     {{ __('Edit') }}
@@ -59,7 +57,7 @@
                                 </a>
                             </div>
                         </div>
-                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('employees.show', $employee->id) }}">{{ $employee->fullname }}</a></h4>
+                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}">{{ $employee->fullname }}</a></h4>
                         @if (!empty($employee->employeeDetail) && !empty($employee->employeeDetail->designation))
                         <div class="small text-muted">{{ $employee->employeeDetail->designation->name }}</div>
                         @endif
@@ -72,7 +70,3 @@
 @endsection
 
 
-@push('page-scripts')
-
-
-@endpush

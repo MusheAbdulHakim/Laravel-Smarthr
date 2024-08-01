@@ -4,14 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\AttendanceTimestamp;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use \Spatie\Permission\Traits\HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -36,16 +37,34 @@ class User extends Authenticatable
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
 
-    public function messengerInbox(){
-        return $this->hasMany(ChMessage::class,'to_id');
+   
+
+   
+    public function assets()
+    {
+        return $this->hasMany(Asset::class, 'user_id');
     }
 
-    public function messengerOutbox(){
-        return $this->hasMany(ChMessage::class,'from_id');
+    public function family(){
+        return $this->hasMany(UserFamilyInfo::class,'user_id');
     }
 
     public function employeeDetail(){
         return $this->hasOne(EmployeeDetail::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id');
+    }
+
+    public function attendanceTimestamps()
+    {
+        return $this->hasMany(AttendanceTimestamp::class,'user_id');
+    }
+
+    public function clientDetail(){
+        return $this->hasOne(ClientDetail::class);
     }
 
     public function getNameAttribute()

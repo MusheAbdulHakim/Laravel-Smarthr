@@ -2,15 +2,19 @@
 
 namespace App\DataTables;
 
-use App\Models\Employee;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use App\Models\User;
+use App\Enums\UserType;
+use Spatie\Menu\Laravel\Html;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class EmployeeDataTable extends DataTable
 {
@@ -22,16 +26,36 @@ class EmployeeDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'employee.action')
-            ->setRowId('id');
+            ->addColumn('fullname', function ($row) {
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
+                $link = route('employees.show', ['employee' => Crypt::encrypt($row->id)]);
+                return Html::userAvatar($row->fullname, $img, $link);
+            })
+            ->editColumn('phone', function ($row) {
+                return $row->phoneNumber;
+            })
+            ->addColumn('emp_id', function($row){
+                return $row->employeeDetail->emp_id ?? 'NO-ID';
+            })
+            ->editColumn('created_at', function ($row) {
+                if (!empty($row->created_at)) {
+                    return format_date($row->created_at);
+                }
+            })
+            ->addColumn('action', function ($row) {
+                $id = $row->id;
+                return view('pages.employees.action', compact(
+                    'id'
+                ));
+            })->rawColumns(['fullname','action']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Employee $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->newQuery();
+        return User::where('type','=',UserType::EMPLOYEE)->newQuery();
     }
 
     /**
@@ -43,9 +67,7 @@ class EmployeeDataTable extends DataTable
                     ->setTableId('employee-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
                     ->orderBy(1)
-                    ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
@@ -62,15 +84,16 @@ class EmployeeDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('emp_id')->searchable(),
+            Column::make('fullname')->searchable(),
+            Column::make('username')->searchable(),
+            Column::make('email')->searchable(),
+            Column::make('phone')->searchable(),
+            Column::make('created_at')->searchable(),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-end'),
         ];
     }
 

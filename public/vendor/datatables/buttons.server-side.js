@@ -281,4 +281,4 @@
             }
         });
     }
-})(jQuery, jQuery.fn.dataTable);
+})(window.jQuery, jQuery.fn.dataTable);

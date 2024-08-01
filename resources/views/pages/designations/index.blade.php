@@ -17,8 +17,8 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
-                    <a href="{{ route('designations.create') }}" class="btn add-btn"
-                        data-ajax-modal="true" data-remote="true"
+                    <a href="javascript:void(0)" data-url="{{ route('designations.create') }}" class="btn add-btn"
+                        data-ajax-modal="true"
                         data-size="md" data-title="Add Designation">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Designation') }}
                     </a>
@@ -43,6 +43,8 @@
 
 
 @push('page-scripts')
-    {!! $dataTable->scripts() !!}
-    <!-- /Page Js -->
+@vite([
+    "resources/js/datatables.js"
+])
+{!! $dataTable->scripts(attributes: ['type' => 'module']) !!}
 @endpush

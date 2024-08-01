@@ -21,6 +21,22 @@ if (!function_exists('route_is')) {
     }
 }
 
+if(!function_exists('appLogo')){
+    function appLogo(){
+        $logo = asset('images/logo2.png');
+        $theme = app(ThemeSettings::class);
+        if(!empty($theme->color_scheme)){
+            if($theme->color_scheme === 'light'){
+                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+            }
+            if($theme->color_scheme === 'dark'){
+                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+            }
+        }
+        return $logo;
+    }
+}
+
 if (!function_exists('route_is')) {
     function route_is($routes = [])
     {
@@ -84,9 +100,41 @@ if (!function_exists('format_date')) {
     function format_date($date, $format = '')
     {
         if($format === ''){
-            $format = LocaleSettings('date_format') ?? 'Y-m-d';
+            $format = !empty(LocaleSettings('date_format')) ? LocaleSettings('date_format'): 'Y-m-d';
         }
         return date_format(date_create($date), $format);
+    }
+}
+
+if(!function_exists('format_file_size')){
+    function format_file_size($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        elseif ($bytes >= 1048576)
+        {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        }
+        elseif ($bytes >= 1024)
+        {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        }
+        elseif ($bytes > 1)
+        {
+            $bytes = $bytes . ' bytes';
+        }
+        elseif ($bytes == 1)
+        {
+            $bytes = $bytes . ' byte';
+        }
+        else
+        {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
     }
 }
 
@@ -159,5 +207,27 @@ if(!function_exists('module')){
     function module($name)
     {
         return Module::find($name);
+    }
+}
+
+if(!function_exists('notify')){
+    function notify($message , $type='success'){
+        return array(
+            'message'=> $message,
+            'alert-type' => $type,
+        );
+    }
+}
+
+
+/**
+ * return if auth user has a permission
+ *
+ * @param string $permission
+ * @return bool
+ */
+if(!function_exists('can')){
+    function can($permission){
+        return auth('web')->user()->hasPermissionTo($permission);
     }
 }

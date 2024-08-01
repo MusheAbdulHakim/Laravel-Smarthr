@@ -12,9 +12,9 @@ class EmployeeDetail extends Model
 
 
     protected $fillable = [
-        'emp_id','user_id','department_id','designation_id',
-        'passport_no','passport_expiry_date','passport_tel','nationality','religion','ethnicity',
-        'marital_status','spouse_occupation','no_of_children','emergency_contacts','date_joined','dob',
+        'emp_id', 'user_id', 'department_id', 'designation_id',
+        'passport_no', 'passport_expiry_date', 'passport_tel', 'nationality', 'religion', 'ethnicity',
+        'marital_status', 'spouse_occupation', 'no_of_children', 'emergency_contacts', 'date_joined', 'dob',
     ];
 
     protected $casts = [
@@ -23,15 +23,28 @@ class EmployeeDetail extends Model
         'marital_status' => MaritalStatus::class,
     ];
 
-    public function designation(){
+    public function education()
+    {
+        return $this->hasMany(EmployeeEducation::class);
+    }
+
+    public function workExperience()
+    {
+        return $this->hasMany(EmployeeWorkExperience::class, 'employee_detail_id');
+    }
+
+    public function designation()
+    {
         return $this->belongsTo(Designation::class);
     }
 
-    public function department(){
+    public function department()
+    {
         return $this->belongsTo(Department::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 }

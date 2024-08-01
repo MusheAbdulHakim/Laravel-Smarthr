@@ -38,10 +38,9 @@ class UsersDataTable extends DataTable
                 }
             })
 
-            ->setRowId('id')
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('assets/img/user.jpg');
+                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
                 return Html::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
@@ -57,7 +56,7 @@ class UsersDataTable extends DataTable
                 return view('pages.users.action', compact(
                     'id'
                 ));
-            })->rawColumns(['fullname']);
+            })->rawColumns(['fullname','action']);
     }
 
     /**
@@ -80,7 +79,6 @@ class UsersDataTable extends DataTable
                 'dom'          => 'Bftip',
             ])
             ->minifiedAjax()
-            ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
@@ -97,7 +95,6 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#'),
             Column::make('fullname'),
             Column::make('username')->searchable(),
             Column::make('email')->searchable(),

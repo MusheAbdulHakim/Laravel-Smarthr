@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
-@push('page-styles')
-    <!-- Page Css -->
-    <!-- /Page Css -->
-@endpush
+
 
 @section('page-content')
     <div class="content container-fluid">
@@ -21,7 +18,7 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
-                    <a href="{{ route('users.create') }}" class="btn add-btn" data-ajax-modal="true" data-remote="true"
+                    <a href="javascript:void(0)" data-url="{{ route('users.create') }}" class="btn add-btn" data-ajax-modal="true"
                         data-size="lg" data-title="Add User">
                         <i class="fa-solid fa-plus"></i> {{ __('Add User') }}
                     </a>
@@ -45,8 +42,10 @@
 @endsection
 
 
+
 @push('page-scripts')
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-    {!! $dataTable->scripts() !!}
-    <!-- /Page Js -->
+@vite([
+    "resources/js/datatables.js"
+])
+{!! $dataTable->scripts(attributes: ['type' => 'module']) !!}
 @endpush

@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="img-thumbnail float-end"><img id="logo_light"
-                                src="{{ !empty($settings->logo_light) ? asset('storage/settings/theme/' . $settings->logo_light) : asset('assets/img/logo2.png') }}"
+                                src="{{ !empty($settings->logo_light) ? asset('storage/settings/theme/' . $settings->logo_light) : asset('images/logo2.png') }}"
                                 alt="logo light" width="40" height="40"></div>
                     </div>
                 </x-form.input-block>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="img-thumbnail float-end"><img id="logo_dark"
-                                src="{{ !empty($settings->logo_dark) ? asset('storage/settings/theme/' . $settings->logo_dark) : asset('assets/img/logo2.png') }}"
+                                src="{{ !empty($settings->logo_dark) ? asset('storage/settings/theme/' . $settings->logo_dark) : asset('images/logo2.png') }}"
                                 alt="logo light" width="40" height="40"></div>
                     </div>
                 </x-form.input-block>
@@ -59,7 +59,7 @@
                     <div class="col-lg-2">
                         <div class="img-thumbnail float-end">
                             <img id="favicon"
-                                src="{{ !empty($settings->favicon) ? asset('storage/settings/theme/' . $settings->favicon) : asset('assets/img/logo2.png') }}"
+                                src="{{ !empty($settings->favicon) ? asset('storage/settings/theme/' . $settings->favicon) : asset('images/logo2.png') }}"
                                 alt="Favicon img" width="16" height="16">
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     <div class="col-lg-2">
                         <div class="img-thumbnail float-end">
                             <img id="side_img"
-                                src="{{ !empty($settings->sidebar_img) ? asset('storage/settings/theme/' . $settings->sidebar_img) : asset('assets/img/logo2.png') }}"
+                                src="{{ !empty($settings->sidebar_img) ? asset('storage/settings/theme/' . $settings->sidebar_img) : asset('images/logo2.png') }}"
                                 alt="Sidebar image" width="50" height="50">
                         </div>
                     </div>

@@ -66,8 +66,8 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status),
             'password' => Hash::make($request->password)
         ]);
-        flash()->success(__('User has been created'));
-        return back();
+        $notification = notify(__('User has been created'));
+        return back()->with($notification);
     }
 
     /**
@@ -118,8 +118,8 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status) ?? $user->is_active,
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
-        flash()->success(__('User has been updated'));
-        return back();
+        $notification = notify(__('User has been updated'));
+        return back()->with($notification);
     }
 
     /**
@@ -128,7 +128,7 @@ class UsersController extends BaseController
     public function destroy(User $user)
     {
         $user->delete();
-        flash()->success(__('User has been deleted'));
-        return redirect()->route('users.index');
+        $notification = notify(__('User has been deleted'));
+        return redirect()->route('users.index')->with($notification);
     }
 }
