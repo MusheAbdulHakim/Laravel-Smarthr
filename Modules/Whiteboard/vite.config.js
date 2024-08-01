@@ -3,8 +3,6 @@ import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react'
 
 export const paths = [
-   'Modules/Whiteboard/resources/apps/Excalidraw/css/index.scss',
-   'Modules/Whiteboard/resources/apps/Excalidraw/main.jsx',
    'Modules/Whiteboard/resources/assets/sass/app.scss',
    'Modules/Whiteboard/resources/assets/js/app.jsx',
    'Modules/Whiteboard/resources/apps/TlDraw/css/index.css',

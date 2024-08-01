@@ -23,7 +23,7 @@ class AppMenuListener
     public function handle(AppMenuEvent $event): void
     {
         
-        if(auth()->user()->canAny(['view-excalidraw','view-tldraw'])){
+        if(auth()->user()->canAny(['view-tldraw'])){
             $menu = $event->menu;
             $menu->html('<span>'.__('Drawing Apps').'</span>', ['class' => 'menu-title']);
             $activeClass = route_is(['tldraw.index','excalidraw.index']) ? "active" : "";
@@ -32,7 +32,6 @@ class AppMenuListener
                 Menu::new()
                     ->addParentClass('submenu')
                     ->addIfCan('view-tldraw',Link::toRoute('tldraw.index', __('TlDraw App'))->addClass(route_is('tldraw.index') ? 'active' : ''))
-                    ->addIfCan('view-excalidraw',Link::toRoute('excalidraw.index', __('Excalidraw App'))->addClass(route_is('excalidraw.index') ? 'active' : ''))
             );
 
         }

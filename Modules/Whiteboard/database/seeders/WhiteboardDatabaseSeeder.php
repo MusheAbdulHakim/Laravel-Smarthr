@@ -17,9 +17,6 @@ class WhiteboardDatabaseSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         $permissionsArray = [];
         $module_permissions = [
-            'Excalidraw' => [
-                'view-excalidraw',
-            ],
             'TlDraw' => [
                 'view-tldraw',
             ],
