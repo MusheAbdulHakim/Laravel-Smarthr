@@ -2,11 +2,10 @@
     <img src="./public/images/main-logo.png"  height="100%" width="40%" alt="logo">
 </div>
 
-<p align="center">
 ![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/new-smarthr)
 ![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/new-smarthr)
 ![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/new-smarthr)
-</p>
+
 
 <p>
     Complete Modular HR Managemenet Sytem developed with the laravel framework. 
