@@ -2,9 +2,9 @@
     <img src="./public/images/main-logo.png"  height="100%" width="40%" alt="logo">
 </div>
 
-![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/new-smarthr)
-![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/new-smarthr)
-![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/new-smarthr)
+![Issues](https://img.shields.io/github/issues/MusheAbdulHakim/laravel-smarthr)
+![Forks](https://img.shields.io/github/forks/MusheAbdulHakim/laravel-smarthr)
+![Stars](https://img.shields.io/github/stars/MusheAbdulHakim/laravel-smarthr)
 
 
 <p>
@@ -107,7 +107,7 @@ Follow these steps below to install the application.
 - Clone the repository using your termina or command prompt
 ```php
 
-git clone https://github.com/MusheAbdulHakim/new-smarthr.git smarthr
+git clone https://github.com/MusheAbdulHakim/laravel-smarthr.git smarthr
 ```
 ```
 cd smarthr
