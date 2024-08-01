@@ -200,3 +200,18 @@ php artisan serve
 
 
 - Star the repository and report any issues/bugs you encounter here in the repository.
+
+
+## Screenshots
+
+#screenshots
+
+![TLDRAW](screenshots/tldraw.png?raw=true "TLD RAW")
+![Login](screenshots/login.png?raw=true "Login page")
+![Add Taskboard](screenshots/add-taskboard.png?raw=true "Add Taskboard")
+![Employee Dashboard](screenshots/employee-dashboard.png?raw=true "Employee Dashboard")
+![Attendance Table](screenshots/attendance-table.png?raw=true "Attendance Table")
+![Attendance](screenshots/adminview-attendance-details.png?raw=true "Admin View of Attendance")
+![Projects](screenshots/projects-grid.png?raw=true "Projects Card View")
+![Project Details](screenshots/project-details.png?raw=true "Project Details")
+![Ticket Chat](screenshots/ticket-chat.png?raw=true "Ticket chat")
