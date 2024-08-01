@@ -52,7 +52,12 @@
         <div class="assign-content">
             <h6>{{ $asset->name }}</h6>
         </div>
-        <div class="assign-content">
+        <div class="assign-content" x-data>
+            @php
+                $profileUrl = route('employees.show', 
+            ['employee' => Crypt::encrypt($asset->user->id)]);
+            @endphp
+            <button type="button" class="btn btn-assign me-2" @click="window.location.href='{{ $profileUrl }}'">{{ __('Assets') }}</button>
             <a href="#" class="btn btn-assign" data-bs-toggle="modal" data-bs-target="#raise-issue"><i class="fas fa-hand-paper"></i> Raise Issue  </a>
         </div>
     </div>
@@ -144,12 +149,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="raiseIssue({{ $asset->id }})">
+                    <form wire:submit.prevent="raiseIssue({{ $asset->id }})" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-block mb-3">
                                     <label class="col-form-label">{{ __('Description') }}</label>
-                                    <textarea rows="4" class="form-control" wire:model="description"></textarea>
+                                    <textarea rows="4" class="form-control" wire:model="description" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -162,5 +168,17 @@
         </div>
     </div>
     @endif
-
+    @script
+    <script defer type="module">
+        Livewire.on('IssueRaiseSuccess', (param) => {
+            modalEl = document.getElementById('raise-issue')
+            bootstrap.Modal.getOrCreateInstance(modalEl).hide()
+            console.log(param)
+            Toastify({
+                text: param,
+                className: "success",
+            }).showToast()
+        })
+    </script>
+    @endscript
 </div>

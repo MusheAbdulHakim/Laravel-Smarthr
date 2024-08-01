@@ -6,6 +6,7 @@ use App\Models\Asset;
 use Livewire\Component;
 use App\Models\AssetIssue;
 use Illuminate\Support\Facades\Crypt;
+use Livewire\Attributes\Js;
 
 class EmployeeAsset extends Component
 {
@@ -29,11 +30,8 @@ class EmployeeAsset extends Component
             'description' => $this->description,
             'raised_by' => auth()->user()->id
         ]);
-        $notification = notify("Issue has been submitted for review");
-        return redirect()
-        ->route('employees.show', 
-            ['employee' => Crypt::encrypt($asset->user->employeeDetail->id)])
-            ->with($notification);
+        $this->asset = $asset;
+        $this->dispatch('IssueRaiseSuccess',__('Issue has been submitted for review'));
     }
 
 
