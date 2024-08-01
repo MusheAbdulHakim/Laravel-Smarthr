@@ -1,4 +1,4 @@
-@include('Chatify::layouts.headLinks')
+@include('vendor.Chatify.layouts.headLinks')
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
@@ -33,7 +33,7 @@
                </div>
                {{-- Saved Messages --}}
                <p class="messenger-title"><span>Your Space</span></p>
-               {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+               {!! view('vendor.Chatify.layouts.listItem', ['get' => 'saved']) !!}
                {{-- Contact --}}
                <p class="messenger-title"><span>All Messages</span></p>
                <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
@@ -96,7 +96,7 @@
 
         </div>
         {{-- Send Message Form --}}
-        @include('Chatify::layouts.sendForm')
+        @include('vendor.Chatify.layouts.sendForm')
     </div>
     {{-- ---------------------- Info side ---------------------- --}}
     <div class="messenger-infoView app-scroll">
@@ -105,9 +105,9 @@
             <p>User Details</p>
             <a href="#"><i class="fas fa-times"></i></a>
         </nav>
-        {!! view('Chatify::layouts.info')->render() !!}
+        {!! view('vendor.Chatify.layouts.info')->render() !!}
     </div>
 </div>
 
-@include('Chatify::layouts.modals')
-@include('Chatify::layouts.footerLinks')
+@include('vendor.Chatify.layouts.modals')
+@include('vendor.Chatify.layouts.footerLinks')
