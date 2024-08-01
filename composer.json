@@ -19,6 +19,7 @@
         "laravel/reverb": "@beta",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "maatwebsite/excel": "^3.1",
         "mhmiton/laravel-modules-livewire": "^3.0",
         "munafio/chatify": "^1.6",
         "nnjeim/world": "^1.1",
