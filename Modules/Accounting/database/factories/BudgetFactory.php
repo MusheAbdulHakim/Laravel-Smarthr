@@ -27,7 +27,8 @@ class BudgetFactory extends Factory
             'startDate' => $this->faker->dateTimeBetween("-30 days"),
             'endDate' => $this->faker->dateTimeBetween("-30 days","+30 days"),
             'taxes' => $this->faker->numberBetween(1,10),
-            'note' => $this->faker->paragraph()
+            'note' => $this->faker->paragraph(),
+            'created_at' => $this->faker->date(),
         ];
     }
 
