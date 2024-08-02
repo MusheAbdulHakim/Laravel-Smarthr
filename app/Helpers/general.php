@@ -206,7 +206,10 @@ function pad_zeros($number, $total_zeros = 4){
 if(!function_exists('module')){
     function module($name)
     {
-        return Module::find($name);
+        $module = Module::find($name);
+        if(!empty($module)){
+            return $module;
+        }
     }
 }
 
