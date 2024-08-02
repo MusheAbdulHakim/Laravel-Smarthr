@@ -30,6 +30,14 @@ class MacrosServiceProvider extends ServiceProvider
             return '<?php endif; ?>';
         });
 
+        Blade::directive('superadmin', function () {
+            return "<?php if(auth()->check() && auth()->user()->type === \App\Enums\UserType::SUPERADMIN): ?>";
+        });
+
+        Blade::directive('endsuperadmin', function () {
+            return '<?php endif; ?>';
+        });
+
         Blade::directive('client', function () {
             return "<?php if(auth()->check() && auth()->user()->type === \App\Enums\UserType::CLIENT): ?>";
         });
