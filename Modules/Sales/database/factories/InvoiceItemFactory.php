@@ -4,6 +4,7 @@ namespace Modules\Sales\Database\Factories;
 
 use Modules\Sales\Models\Invoice;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Sales\Models\InvoiceItem;
 
 class InvoiceItemFactory extends Factory
 {
@@ -18,15 +19,21 @@ class InvoiceItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'invoice_id' => Invoice::inRandomOrder()->first()->id,
+            'invoice_id' => Invoice::inRandomOrder()->first()->id ?? Invoice::factory(),
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'unit_cost' => $this->faker->randomFloat(),
             'quantity' => $this->faker->numberBetween(1,10),
-            'total' => $this->state(function(array $attributes){
-                return $attributes['unit_cost'] * $attributes['quantity'];
-            })
         ];
+    }
+
+    public function configure(): static 
+    {
+        return $this->afterCreating(function(InvoiceItem $invoiceItem){
+            $invoiceItem->update([
+                'total' => $invoiceItem->unit_cost * $invoiceItem->quantity
+            ]);
+        });
     }
 }
 

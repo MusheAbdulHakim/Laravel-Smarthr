@@ -39,7 +39,9 @@ class InvoiceFactory extends Factory
     public function configure(): InvoiceFactory
     {
         return $this->afterCreating(function(Invoice $invoice){
-            InvoiceItem::factory();
+            InvoiceItem::factory()->count(5)->create([
+                'invoice_id' => $invoice->id
+            ]);
             $taxes = 0;
             if(!empty($invoice->taxe_id)){
                 $taxes = ($invoice->tax->percentage/100) + InvoiceItem::where('invoice_id', $invoice->id)->sum('total');
