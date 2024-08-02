@@ -21,6 +21,33 @@ class Invoice extends Model
         'expiryDate','tax_amount','discount','grand_total','subtotal','note','status'
     ];
 
+    public function getstatusNameAttribute()
+    {
+        $color = 'success';
+        $name = __('Sent');
+        $status = $this->status;
+        if($status == 1){
+            $color = 'info';
+            $name = __('Sent');
+        }
+        if($status == 2){
+            $color = 'success';
+            $name = __('Paid');
+        }
+        if($status == 3){
+            $color = 'warning';
+            $name = __('Partially Paid');
+        }
+        if($status == 4){
+            $color = 'danger';
+            $name = __('Declined');
+        }
+        return [
+            'name' => $name,
+            'color' => $color
+        ];
+    }
+
     public function client(){
         return $this->belongsTo(User::class, 'client_id');
     }

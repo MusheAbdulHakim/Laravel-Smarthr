@@ -23,7 +23,7 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => User::where('type', UserType::CLIENT)->inRandomOrder()->first()->id,
+            'client_id' => User::where('type', UserType::CLIENT)->inRandomOrder()->first()->id ?? User::factory()->create()->first()->id,
             'project_id' => Project::inRandomOrder()->first()->id ?? Project::factory(),
             'taxe_id' => Tax::inRandomOrder()->first()->id ?? Tax::factory(),
             'client_address' => $this->faker->streetAddress(),
