@@ -100,6 +100,10 @@
     - Crud management of Invoices
         Just like Estimates, you can create, edit, view, print, download pdf and delete it.
         
+13. Payroll
+    Generate and manage payslips for employees.
+    Manage payslip allowances and deductions.
+
 
 
 ## Installation
@@ -222,3 +226,5 @@ Consider supporting the project if you finds it helpful. Thank you
 ![Projects](screenshots/projects-grid.png?raw=true "Projects Card View")
 ![Project Details](screenshots/project-details.png?raw=true "Project Details")
 ![Ticket Chat](screenshots/ticket-chat.png?raw=true "Ticket chat")
+![Payslip](screenshots/payslip.png?raw=true "Payslip")
+![Payslip Items](screenshots/payslip-item.png?raw=true "Payslip Items")
