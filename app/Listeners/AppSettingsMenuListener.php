@@ -36,6 +36,9 @@ class AppSettingsMenuListener
                 Link::toRoute('settings.invoice', '<i class="la la-pencil-square"></i> <span>' . ("Invoice Settings") . '</span>')->setActive(route_is('settings.invoice'))
             )
             ->add(
+                Link::toRoute('settings.salary', '<i class="la la-money"></i> <span>' . ("Salary Settings") . '</span>')->setActive(route_is('settings.salary'))
+            )
+            ->add(
                 Link::toRoute('settings.theme', '<i class="la la-photo"></i> <span>' . ("Theme Settings") . '</span>')->setActive(route_is('settings.theme'))
             )
             ->add(

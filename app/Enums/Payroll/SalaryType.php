@@ -8,5 +8,4 @@ enum SalaryType: string
     case Contract = 'contract';
     case Monthly = 'monthly';
     case Weekly = 'weekly';
-    case Custom = 'custom';
 }

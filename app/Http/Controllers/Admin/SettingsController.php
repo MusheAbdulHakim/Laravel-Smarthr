@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Nnjeim\World\World;
 use Illuminate\Http\Request;
 use App\Settings\EmailSettings;
+use App\Settings\SalarySetting;
 use App\Settings\ThemeSettings;
 use App\Settings\CompanySettings;
 use App\Settings\InvoiceSettings;
@@ -190,4 +191,40 @@ class SettingsController extends Controller
         $notification = notify(__("Mail Client settings has been updated"));
         return back()->with($notification);
     }
+
+    
+    public function salary(SalarySetting $settings){
+        $pageTitle = __('Salary Settings');
+        return view('pages.settings.salary',compact(
+            'settings','pageTitle'
+        ));
+    }
+
+    public function updateSalarySettings(Request $request, SalarySetting $settings)
+    {
+        $request->validate([
+            'enable_pf' => 'nullable|string',
+            'enable_esi' => 'nullable|string',
+            'emp_esi' => 'nullable|numeric',
+            'da_percent' => 'nullable|numeric',
+            'hra_percent' => 'nullable|numeric',
+            'emp_pf' => 'nullable|numeric',
+            'company_pf' => 'nullable|numeric',
+            'company_esi' => 'nullable|numeric',
+        ]);
+
+        $settings->enable_da_hra = !empty($request->enable_da_hra) ?? $settings->enable_da_hra;
+        $settings->enable_provident_fund = !empty($request->enable_pf) ?? $settings->enable_provident_fund;
+        $settings->enable_esi_fund = !empty($request->enable_esi) ?? $settings->enable_esi_fund;
+        $settings->da_percent = $request->da_percent ?? $settings->da_percent;
+        $settings->hra_percent = $request->hra_percent ?? $settings->hra_percent;
+        $settings->emp_pf_percent = $request->emp_pf ?? $request->emp_pf_percent;
+        $settings->company_pf_percentage = $request->company_pf ?? $settings->company_pf_percentage;
+        $settings->emp_esi_percentage = $request->emp_esi ?? $settings->emp_esi_percentage;
+        $settings->company_esi_percentage = $request->company_esi ?? $settings->company_esi_percentage;
+        $settings->save();
+        $notification = notify(__('Salary settings has been updated'));
+        return back()->with($notification);
+    }
+    
 }

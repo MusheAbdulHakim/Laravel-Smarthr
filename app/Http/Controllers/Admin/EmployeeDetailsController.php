@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\EmployeeDetail;
+use App\Enums\Payroll\SalaryType;
+use App\Models\EmployeeEducation;
+use App\Enums\Payroll\PaymentMethod;
 use App\Http\Controllers\Controller;
+use App\Models\EmployeeSalaryDetail;
 use App\Models\EmployeeWorkExperience;
 use App\Http\Controllers\BaseController;
-use App\Models\EmployeeEducation;
 
 class EmployeeDetailsController extends BaseController
 {
@@ -99,6 +102,37 @@ class EmployeeDetailsController extends BaseController
             ]);
         }
         $notification = notify(__("Exployee Working experience has been updated"));
+        return back()->with($notification);
+    }
+
+    public function salarySetting(Request $request, EmployeeDetail $employeeDetail)
+    {
+        $request->validate([
+            'base_salary' => 'required|numeric',
+            'pf_number' => 'nullable|required_if:pf_contribution,1|numeric',
+            'total_pf_rate' => 'nullable|numeric',
+            'esi_number' => 'nullable|required_if:esi_contribution,1',
+            'addtional_esi_rate' => 'nullable|numeric',
+            'total_esi_rate' => 'nullable|numeric',
+        ]);
+        EmployeeSalaryDetail::updateOrCreate([
+            'id' => $request->salary_detail_id,
+            'employee_detail_id' => $employeeDetail->id
+        ],[
+            'employee_detail_id' => $employeeDetail->id,
+            'basis' => $request->basis ?? SalaryType::Monthly,
+            'base_salary' => $request->base_salary,
+            'payment_method' => $request->payment_method ?? PaymentMethod::BankTransfer,
+            'pf_contribution' => $request->pf_contribution ?? 0,
+            'pf_number' => $request->pf_number,
+            'additional_pf' => $request->additional_pf_rate ?? 0.00,
+            'total_pf_rate' => $request->total_pf_rate ?? 0.00,
+            'esi_contribution' => $request->esi_contribution,
+            'esi_number' => $request->esi_number,
+            'additional_esi_rate' => $request->additional_esi_rate ?? 0.00,
+            'total_additional_esi_rate' => $request->total_esi_rate ?? 0.00
+        ]);
+        $notification = notify(__('Salary details has been updated'));
         return back()->with($notification);
     }
 

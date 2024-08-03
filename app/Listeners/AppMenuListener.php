@@ -38,7 +38,11 @@ class AppMenuListener
                 Menu::new()
                     ->add(
                         Link::toRoute('chatify', __('Chat'))->addClass(route_is(['chatify']) ? 'active' : '')
-                    )->addParentClass('submenu')
+                        )
+                    ->add(
+                        Link::toRoute('conference.index', __('Conference'))->addClass(route_is(['conference.*']) ? 'active' : '')
+                    )
+                    ->addParentClass('submenu')
             );
        
         if(auth()->user()->can([
