@@ -227,4 +227,4 @@ Consider supporting the project if you finds it helpful. Thank you
 ![Project Details](screenshots/project-details.png?raw=true "Project Details")
 ![Ticket Chat](screenshots/ticket-chat.png?raw=true "Ticket chat")
 ![Payslip](screenshots/payslip.png?raw=true "Payslip")
-![Payslip Items](screenshots/payslip-item.png?raw=true "Payslip Items")
+![Payslip Items](screenshots/payslip-items.png?raw=true "Payslip Items")
