@@ -64,23 +64,8 @@ class UserFactory extends Factory
                     'department_id' => Department::inRandomOrder()->first()->id ?? Department::factory()->create()->id,
                     'designation_id' => Designation::inRandomOrder()->first()->id ?? Designation::factory()->create()->id,
                 ]);
-                EmployeeSalaryDetail::create([
+                EmployeeSalaryDetail::factory()->count(1)->create([
                     'employee_detail_id' => $details->id,
-                    'basis' => $this->faker->randomElement([SalaryType::cases()]),
-                    'base_salary' => $this->faker->numberBetween(500,1000),
-                    'payment_method' => $this->faker->randomElement([PaymentMethod::cases()]),
-                    'pf_contribution' => $this->faker->randomElement([true, false]),
-                    'pf_number' => $this->faker->randomNumber(),
-                    'additional_pf' => $this->faker->numberBetween(0,10),
-                    'total_pf_rate' => $this->state(function($attributes){
-                        return ($attributes['additional_pf'] ?? 0) + (SalarySettings('emp_pf_percentage') ?? 0);
-                    }),
-                    'esi_contribution' => $this->faker->randomElement([true, false]),
-                    'esi_number' => $this->faker->randomNumber(),
-                    'additional_esi_rate' => $this->faker->numberBetween(0,10),
-                    'total_additional_esi_rate' => $this->state(function($attributes){
-                        return ($attributes['additional_esi_rate'] ?? 0) + (SalarySettings('emp_esi_percentage') ?? 0);
-                    })
                 ]);
             }
         });

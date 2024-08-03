@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Payroll\SalaryType;
 use App\Enums\Payroll\PaymentMethod;
+use Database\Factories\EmployeeSalaryDetailFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -26,4 +27,10 @@ class EmployeeSalaryDetail extends Model
     {
         return $this->belongsTo(EmployeeDetail::class, 'employee_detail_id');
     }
+
+    protected static function newFactory(): EmployeeSalaryDetailFactory
+    {
+        return EmployeeSalaryDetailFactory::new();
+    }
+    
 }
