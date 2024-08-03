@@ -52,4 +52,14 @@ class EmployeeDetail extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function allowances()
+    {
+        return $this->hasMany(EmployeeAllowance::class);
+    }
+
+    public function deductions()
+    {
+        return $this->hasMany(EmployeeDeduction::class);
+    }
 }
