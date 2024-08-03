@@ -39,9 +39,6 @@ class AppMenuListener
                     ->add(
                         Link::toRoute('chatify', __('Chat'))->addClass(route_is(['chatify']) ? 'active' : '')
                         )
-                    ->add(
-                        Link::toRoute('conference.index', __('Conference'))->addClass(route_is(['conference.*']) ? 'active' : '')
-                    )
                     ->addParentClass('submenu')
             );
        
@@ -72,6 +69,23 @@ class AppMenuListener
         if(auth()->user()->type === UserType::EMPLOYEE){
             $menu->add(
                 Link::toRoute('assigned-tickets', '<i class="la la-ticket"></i> <span>' . __('My Assigned Tickets') . '</span>')->setActive(route_is('assigned-tickets'))
+            );
+        }
+        if(auth()->user()->canAny(['view-PayrollAllowances','view-PayrollDeductions','view-payrolls','view-payslips'])){
+            $payrollActive = route_is(['payroll.*','payslips.*','allowances.*','deductions.*']);
+            $menu
+            ->submenu(
+                Html::raw('<a href="#" class="' . $payrollActive . '"><i class="la la-money"></i><span> ' . __("Payroll") . '</span><span class="menu-arrow"></span></a>'),
+                Menu::new()
+                    ->addIf(function(){
+                        return auth()->user()->can(['view-PayrollAllowances','view-PayrollDeductions']);
+                    },
+                        Link::toRoute('payroll.items', __('Payroll Items'))->addClass(route_is(['payroll.items']) ? 'active' : '')
+                    )
+                    ->addIfCan("view-payslips",
+                        Link::toRoute('payslips.index', __('Payslip'))->addClass(route_is(['payslips.*']) ? 'active' : '')
+                    )
+                    ->addParentClass('submenu')
             );
         }
         $menu->addIfCan(

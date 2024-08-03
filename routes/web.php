@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\AllowancesController;
+use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\DeductionsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\AssetsController;
@@ -11,6 +14,7 @@ use App\Http\Controllers\Admin\ChatAppController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\TicketsController;
 use App\Http\Controllers\Admin\HolidaysController;
+use App\Http\Controllers\Admin\PayrollsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\FamilyInfoController;
@@ -46,6 +50,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'education'])->name('employee.education');
     Route::post('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'updateEducation']);
     Route::delete('del-employee-education', [EmployeeDetailsController::class, 'deleteEducation'])->name('employee.education.delete');
+    Route::post('employee-salary-setting/{employeeDetail}', [EmployeeDetailsController::class, 'salarySetting'])->name('employee.salary-setting');
+    Route::group(['prefix' => 'payroll'], function(){
+        Route::get('items',[PayrollsController::class, 'items'])->name('payroll.items'); 
+        Route::resource('allowances', AllowancesController::class)->except(['show']);
+        Route::resource('deductions', DeductionsController::class)->except(['show']);
+        Route::resource('payslips', PayrollsController::class);
+    });
 
     Route::get('employees-list', [EmployeesController::class, 'list'])->name('employees.list');
     Route::resource('departments', DepartmentsController::class)->except(['show']);
@@ -60,6 +71,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tickets', TicketsController::class);
     Route::get('assigned-tickets', [TicketsController::class, 'assignedTickets'])->name('assigned-tickets');
     Route::post('assign-ticket', [TicketsController::class, 'assignUser'])->name('ticket.assign-user');
+
+    
+
+
     //settings
     Route::prefix('settings')->group(function () {
         Route::get('company', [SettingsController::class, 'index'])->name('settings.index');
@@ -71,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('theme', [SettingsController::class, 'updateTheme'])->name('settings.theme.update');
         Route::get('invoice', [SettingsController::class, 'invoice'])->name('settings.invoice');
         Route::post('invoice', [SettingsController::class, 'updateInvoice'])->name('settings.invoice.update');
+        Route::get('salary', [SettingsController::class, 'salary'])->name('settings.salary');
+        Route::post('salary', [SettingsController::class, 'updateSalarySettings'])->name('settings.salary.update');
         Route::get('mail', [SettingsController::class, 'email'])->name('settings.mail');
         Route::post('mail', [SettingsController::class, 'updateEmail'])->name('settings.mail.update');
     });
