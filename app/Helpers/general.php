@@ -180,6 +180,18 @@ if (!function_exists('LocaleSettings')) {
     }
 }
 
+/**
+ * Get App Salary Settings
+ */
+if (!function_exists('SalarySettings')) {
+    function SalarySettings($property = null)
+    {
+        return !empty($property) ? app(\App\Settings\SalarySetting::class)->$property : app(\App\Settings\SalarySetting::class);
+    }
+}
+
+
+
 if (!function_exists('uploadedAsset')) {
     function uploadedAsset($asset, $directory = '')
     {
