@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Number;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
@@ -32,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
             $lang = $event->locale->code;
             Log::info('Locale set to: ' . $lang);
         });
+        Number::useLocale(app(\App\Settings\LocalizationSettings::class)->lang ?? 'en');
     }
 }
