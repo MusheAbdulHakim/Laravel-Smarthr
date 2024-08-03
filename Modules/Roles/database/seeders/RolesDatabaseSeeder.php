@@ -49,6 +49,18 @@ class RolesDatabaseSeeder extends Seeder
             'Tickets' => [
                 'view-tickets','create-ticket','edit-ticket','show-ticket','delete-ticket'
             ],
+            'Payroll' => [
+                'view-payrolls','create-payroll','edit-payroll','show-payroll','delete-payroll'
+            ],
+            'Payslip' => [
+                'view-payslips','create-payslip','edit-payslip','show-payslip','delete-payslip'
+            ],
+            'PayrollAllowances' => [
+                'view-PayrollAllowances','create-PayrollAllowance','edit-PayrollAllowance','delete-PayrollAllowance'
+            ],
+            'PayrollDeductions' => [
+                'view-PayrollDeductions','create-PayrollDeduction','edit-PayrollDeduction','delete-PayrollDeduction'
+            ],
             'assets' => [
                 'view-assets','create-asset','edit-asset','show-asset','delete-asset'
             ],
