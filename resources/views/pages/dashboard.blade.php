@@ -85,7 +85,7 @@
                     <div class="col-md-6 text-center">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title">{{ __('Sales Overview') }}</h3>
+                                <h3 class="card-title">{{ __('Estimates & Invoices Overview') }}</h3>
                                 <div id="line-charts"></div>
                             </div>
                         </div>
@@ -507,7 +507,7 @@
                         ],
                         xkey: 'y',
                         ykeys: ['a', 'b'],
-                        labels: ['Total Sales', 'Total Revenue'],
+                        labels: ['Invoices', 'Estimates'],
                         lineColors: ['#ff9b44','#fc6075'],
                         lineWidth: '3px',
                         resize: true,
