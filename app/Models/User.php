@@ -33,12 +33,15 @@ class User extends Authenticatable
         'dial_code', 'phone',
         'avatar',
         'created_by',
-        'is_active', 'lang', 'layout', 'color_scheme',
+        'is_active','is_online', 'lang', 'layout', 'color_scheme',
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
 
    
-
+    public function chatMessages()
+    {
+        return $this->hasMany(ChatMessage::class, 'user_id');
+    }
    
     public function assets()
     {

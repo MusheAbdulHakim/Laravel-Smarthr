@@ -31,6 +31,9 @@ class AuthController extends BaseController
             if ($user->is_active === 1) {
                 $credentials = $request->only('email', 'password');
                 if (Auth::attempt($credentials)) {
+                    $user->update([
+                        'is_online' => true,
+                    ]);
                     return redirect()->route('dashboard');
                 }
                 return back()->withErrors(['password' => 'Incorrect Password']);
@@ -94,6 +97,9 @@ class AuthController extends BaseController
 
     public function logout(Request $request)
     {
+        auth()->user()->update([
+            'is_online' => true,
+        ]);
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
