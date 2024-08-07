@@ -12,10 +12,9 @@
         "laravel-datatables-vite": "^0.5.2",
         "laravel-echo": "^1.16.1",
         "laravel-vite-plugin": "^1.0",
-        "pusher-js": "^7.0.3",
+        "pusher-js": "^8.4.0-rc2",
         "sass": "^1.77.6",
-        "vite": "^5.0",
-        "vue-template-compiler": "^2.6.11"
+        "vite": "^5.0"
     },
     "dependencies": {
         "@alpinejs/sort": "^3.14.1",
