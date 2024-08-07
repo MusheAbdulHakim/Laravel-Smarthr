@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ChatMessage;
 use Illuminate\Support\Facades\Broadcast;
 
 
