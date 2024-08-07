@@ -75,8 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('assigned-tickets', [TicketsController::class, 'assignedTickets'])->name('assigned-tickets');
     Route::post('assign-ticket', [TicketsController::class, 'assignUser'])->name('ticket.assign-user');
 
-    
-
+    Route::get('app-logs', fn() => redirect()->to('log-viewer'))->name('app.logs');
 
     //settings
     Route::prefix('settings')->group(function () {

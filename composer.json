@@ -23,6 +23,7 @@
         "mhmiton/laravel-modules-livewire": "^3.0",
         "nnjeim/world": "^1.1",
         "nwidart/laravel-modules": "^11.0",
+        "opcodesio/log-viewer": "^3.10",
         "pavel-mironchik/laravel-backup-panel": "^2.6",
         "spatie/laravel-medialibrary": "^11.7",
         "spatie/laravel-menu": "^4.2",

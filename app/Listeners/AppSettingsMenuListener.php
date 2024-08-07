@@ -42,7 +42,7 @@ class AppSettingsMenuListener
                 Link::toRoute('settings.theme', '<i class="la la-photo"></i> <span>' . ("Theme Settings") . '</span>')->setActive(route_is('settings.theme'))
             )
             ->add(
-                Link::toRoute('settings.mail', '<i class="la la-at"></i> <span>' . ("Email Settings") . '</span>')->setActive(route_is('settings.mail'))
+                Link::toRoute('app.logs', '<i class="la la-warning"></i> <span>' . ("App Logs") . '</span>')->setActive(route_is('app.logs'))
             )
             ;
     }
