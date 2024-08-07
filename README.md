@@ -148,6 +148,11 @@ cp .env.example .env
 php artisan key:generate
 
 ```
+- Install Reverb
+```
+php artisan reverb:install
+
+```
 
 - Set database connection to your database in the .env file. Make sure to set APP_URL to make your domain.
 
