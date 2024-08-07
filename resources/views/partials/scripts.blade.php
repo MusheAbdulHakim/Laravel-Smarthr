@@ -4,7 +4,6 @@
     'resources/assets/plugins/fontawesome/js/fontawesome.min.js',
     'resources/assets/plugins/fontawesome/js/all.min.js',
     'resources/assets/js/jquery.slimscroll.min.js',
-    'resources/assets/js/bootstrap-datetimepicker.min.js',
     'resources/assets/plugins/jquery-repeater/jquery.repeater.min.js',
     'resources/assets/js/app.js',
 ])
@@ -13,6 +12,7 @@
 @livewireScriptConfig 
 @yield('vendor-scripts')
 @stack('page-scripts')
+<script defer src="{{ asset('js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="module">
     @if(count($errors) > 0)
         @foreach($errors->all() as $error)
