@@ -110,6 +110,8 @@
 
 Follow these steps below to install the application.
 
+Or Watch the installation process on [Youtube](https://youtu.be/UHkrsyBcMRM)
+
 - Clone the repository using your termina or command prompt
 ```php
 
