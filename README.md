@@ -215,11 +215,15 @@ php artisan serve
 - Star the repository and report any issues/bugs you encounter here in the repository.
 
 
-### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/MusheAbdulHakim/Laravel-Smarthr/issues)
+In order for the chap app to be working with realtime communication, you'll need to setup [Reverb](https://laravel.com/docs/11.x/reverb), Run the reverb server **php artisan reverb:start** and listen for events with **php artisan queue:listen**
+
+
+##### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/MusheAbdulHakim/Laravel-Smarthr/issues)
 
 Consider supporting the project if you finds it helpful. Thank you
 - [Paystack](https://paystack.com/pay/musheabdulhakim)
 - [Paypal](https://www.paypal.com/paypalme/musheabdulhakim)
+- [Patreon](https://www.patreon.com/MusheAbdulHakim)
 
 ## Screenshots
 
@@ -235,3 +239,4 @@ Consider supporting the project if you finds it helpful. Thank you
 ![Ticket Chat](screenshots/ticket-chat.png?raw=true "Ticket chat")
 ![Payslip](screenshots/payslip.png?raw=true "Payslip")
 ![Payslip Items](screenshots/payslip-items.png?raw=true "Payslip Items")
+![Chat App](screenshots/chat-app.png?raw=true "Payslip Items")
