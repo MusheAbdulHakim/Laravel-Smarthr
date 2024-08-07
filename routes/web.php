@@ -34,7 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
 
-    Route::get('apps/chat', [ChatAppController::class, 'index'])->name('app.chat');
+    Route::group(['prefix' => 'apps'], function(){
+        Route::get('chat/{contact?}', [ChatAppController::class, 'index'])->name('app.chat');
+        Route::delete('delete-chat/{receiver}', [ChatAppController::class, 'destroy'])->name('chat.delete-conversation');
+    });
 
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);

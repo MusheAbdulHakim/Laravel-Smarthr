@@ -2,6 +2,7 @@
 
 @push('page-styles')
     <!-- Page Css -->
+    <meta name="url" content="{{ url('').'/'.config('chatify.routes.prefix') }}" data-user="{{ Auth::user()->id }}">
     <!-- /Page Css -->
 @endpush
 
@@ -13,9 +14,9 @@
                 <nav class="greedy">
                     <ul class="link-item">
                         <li>
-                            <a href="{{ route('dashboard') }}"><i class="la la-home"></i> <span>Back to Home</span></a>
+                            <a href="{{ route('dashboard') }}"><i class="la la-dashboard"></i> <span>{{ __('Back To Dashboard') }}</span></a>
                         </li>
-                        <livewire:apps.chat.chat-sidebar lazy />
+                        @livewire('apps.chat.sidebar')
                     </ul>
                 </nav>
             </div>
@@ -29,25 +30,16 @@
     <div class="chat-main-row">
 
         <!-- Chat Main Wrapper -->
-        <div class="chat-main-wrapper">
-
-            <!-- Chats View -->
-            <div class="col-lg-12 message-view task-view">
-                <div class="chat-window">
-                    @livewire('apps.chatbox',['default' => $default])
-                </div>
-            </div>
-            <!-- /Chats View -->
-
-
-        </div>
+        @livewire('apps.chat.box',['userId' => request()->get('contact')])            
         <!-- /Chat Main Wrapper -->
 
     </div>
     <!-- /Chat Main Row -->
-    
 @endsection
 
 @section('vendor-scripts')
-
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+@vite([
+    'resources/js/app/chat/chat-app.js'
+])
 @endsection
