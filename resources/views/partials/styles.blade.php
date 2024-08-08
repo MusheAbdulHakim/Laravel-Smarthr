@@ -3,8 +3,6 @@
 <link rel="stylesheet" href="{{ asset('js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}">
 @vite([
     'resources/assets/css/bootstrap.min.css',
-    'resources/assets/plugins/fontawesome/css/fontawesome.min.css',
-    'resources/assets/plugins/fontawesome/css/all.min.css',
     'resources/assets/css/line-awesome.min.css',
     'resources/assets/css/material.css',
     'resources/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css',

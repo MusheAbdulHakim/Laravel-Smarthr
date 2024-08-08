@@ -1,8 +1,6 @@
 @vite([
     'resources/js/app.js',
     'resources/assets/js/bootstrap.bundle.min.js',
-    'resources/assets/plugins/fontawesome/js/fontawesome.min.js',
-    'resources/assets/plugins/fontawesome/js/all.min.js',
     'resources/assets/js/jquery.slimscroll.min.js',
     'resources/assets/plugins/jquery-repeater/jquery.repeater.min.js',
     'resources/assets/js/app.js',
