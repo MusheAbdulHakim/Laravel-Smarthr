@@ -14,6 +14,3 @@ use Modules\Whiteboard\Http\Controllers\WhiteboardController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('whiteboard', WhiteboardController::class)->names('whiteboard');
-});

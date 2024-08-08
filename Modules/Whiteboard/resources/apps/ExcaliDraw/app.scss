@@ -1,0 +1,18 @@
+.excalidraw .dropdown-menu {
+    display: unset !important;
+    padding: unset !important;
+}
+
+.excalidraw.theme--dark {
+  --color-primary: #d494aa;
+  --color-primary-darker: #d64c7e;
+  --color-primary-darkest: #e86e99;
+  --color-primary-light: #dcbec9;
+}
+
+.excalidraw {
+  --color-primary: #fcc6d9;
+  --color-primary-darker: #f783ac;
+  --color-primary-darkest: #e64980;
+  --color-primary-light: #f2a9c4;
+}

@@ -1,5 +1,0 @@
-
-import '../../apps/TlDraw/main'
-
-
-

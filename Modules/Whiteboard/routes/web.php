@@ -16,6 +16,6 @@ use Modules\Whiteboard\Http\Controllers\WhiteboardController;
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('whiteboard', WhiteboardController::class)->names('whiteboard');
-    Route::resource('tldraw', TlDrawController::class);
+    Route::get('tldraw', [WhiteboardController::class,'tldraw'])->name('tldraw.index');
+    Route::get('excalidraw', [WhiteboardController::class,'excalidraw'])->name('excalidraw.index');
 });

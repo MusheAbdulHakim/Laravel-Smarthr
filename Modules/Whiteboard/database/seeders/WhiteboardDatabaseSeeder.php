@@ -20,6 +20,9 @@ class WhiteboardDatabaseSeeder extends Seeder
             'TlDraw' => [
                 'view-tldraw',
             ],
+            'ExcaliDraw' => [
+                'view-excalidraw',
+            ],
         ];
         foreach ($module_permissions as $module => $permissions) {
             foreach ($permissions as $permission) {
