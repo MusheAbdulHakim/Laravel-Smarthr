@@ -18,9 +18,7 @@
     },
     "dependencies": {
         "@alpinejs/sort": "^3.14.1",
-        "@eonasdan/tempus-dominus": "^6.9.9",
         "@excalidraw/excalidraw": "^0.17.6",
-        "@excalidraw/mermaid-to-excalidraw": "^1.0.0",
         "@fortawesome/fontawesome-free": "^6.6.0",
         "@fullcalendar/core": "^6.1.14",
         "@fullcalendar/daygrid": "^6.1.14",
