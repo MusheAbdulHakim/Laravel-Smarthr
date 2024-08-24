@@ -46,6 +46,11 @@ class UsersDataTable extends DataTable
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
             })
+            ->addColumn('role', function ($row) {
+                if(!empty($row->roles) && $row->roles->count() > 0){
+                    return implode(',', $row->roles->pluck('name')->all());
+                }
+            })
             ->editColumn('created_at', function ($row) {
                 if (!empty($row->created_at)) {
                     return format_date($row->created_at);
@@ -99,6 +104,7 @@ class UsersDataTable extends DataTable
             Column::make('username')->searchable(),
             Column::make('email')->searchable(),
             Column::make('phone')->searchable(),
+            Column::make('role')->searchable(),
             Column::make('created_at')->searchable(),
             Column::computed('action')
                 ->exportable(false)

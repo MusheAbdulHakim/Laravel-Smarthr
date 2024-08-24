@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\UsersDataTable;
-use App\Enums\UserType;
-use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Enums\UserType;
 use Illuminate\Http\Request;
+use App\DataTables\UsersDataTable;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\BaseController;
 
 class UsersController extends BaseController
 {
@@ -28,7 +29,10 @@ class UsersController extends BaseController
      */
     public function create()
     {
-        return view('pages.users.create');
+        $roles = Role::get();
+        return view('pages.users.create',compact(
+            'roles'
+        ));
     }
 
     /**
@@ -49,7 +53,7 @@ class UsersController extends BaseController
             $imageName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
-        User::create([
+        $user = User::create([
             'type' => UserType::SUPERADMIN,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
@@ -66,6 +70,9 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status),
             'password' => Hash::make($request->password)
         ]);
+        if($request->has('role') && !empty($request->input('role'))){
+            $user->assignRole($request->role);
+        }
         $notification = notify(__('User has been created'));
         return back()->with($notification);
     }
@@ -82,8 +89,10 @@ class UsersController extends BaseController
      */
     public function edit(User $user)
     {
+        $roles = Role::get();
+
         return view('pages.users.edit', compact(
-            'user'
+            'user','roles'
         ));
     }
 
@@ -118,6 +127,9 @@ class UsersController extends BaseController
             'is_active' => !empty($request->status) ?? $user->is_active,
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
+        if($request->has('role') && !empty($request->input('role'))){
+            $user->syncRoles($request->role);
+        }
         $notification = notify(__('User has been updated'));
         return back()->with($notification);
     }

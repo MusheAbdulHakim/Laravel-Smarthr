@@ -79,6 +79,7 @@ class ClientsController extends Controller
             'password' => Hash::make($request->password)
         ]);
         if(!empty($user)){
+            $user->assignRole(UserType::CLIENT);
             $totalEmployees = User::where('type', UserType::CLIENT)->where('is_active', true)->count();
             $cltId = "CLT-" . pad_zeros(($totalEmployees + 1));
             ClientDetail::create([
@@ -157,6 +158,9 @@ class ClientsController extends Controller
             'is_active' => !empty($request->status) ?? $user->is_active,
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
+        if(!$user->hasRole(UserType::CLIENT)){
+            $user->assignRole(UserType::CLIENT);
+        }
         $notification = notify(__('Client has been updated'));
         return back()->with($notification);
     }

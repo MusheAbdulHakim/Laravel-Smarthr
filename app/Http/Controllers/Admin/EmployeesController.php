@@ -89,6 +89,7 @@ class EmployeesController extends Controller
             'password' => Hash::make($request->password)
         ]);
         if (!empty($user)) {
+            $user->assignRole(UserType::EMPLOYEE);
             $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
             $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
             EmployeeDetail::create([
@@ -167,6 +168,9 @@ class EmployeesController extends Controller
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
         if (!empty($user)) {
+            if(!$user->hasRole(UserType::EMPLOYEE)){
+                $user->assignRole(UserType::EMPLOYEE);
+            }
             $employeeDetails = $user->employeeDetail;
             if (!empty($employeeDetails) && empty($employeeDetails->emp_id)) {
                 $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
