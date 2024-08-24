@@ -54,13 +54,13 @@ class UserSeeder extends Seeder
         EmployeeDetail::create([
             'emp_id' => 'EMP-0001',
             'user_id' => $employee->id,
-            'department_id' => Department::factory()->create([
+            'department_id' => Department::factory()->count(1)->create([
                 'name' => 'Nuclues',
                 'location' => 'Bay Area',
-            ])->id,
-            'designation_id' => Designation::factory()->make([
+            ])->first()->id,
+            'designation_id' => Designation::factory()->count(1)->create([
                 'name' => 'Software Developer'
-            ])->id,
+            ])->first()->id,
             'passport_no' => '1234567899',
             'passport_expiry_date' => '2024-06-30',
             'passport_tel' => '1234567899',
