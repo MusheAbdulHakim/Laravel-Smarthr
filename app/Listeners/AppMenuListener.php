@@ -42,8 +42,8 @@ class AppMenuListener
                     ->addParentClass('submenu')
             );
        
-        if(auth()->user()->can([
-            'view-employees','view-departments','view-designations','view-holidays'
+        if(auth()->user()->canAny([
+            'view-employees','view-attendances','view-departments','view-designations','view-holidays'
         ])){
             $menu->html('<span>Employees</span>', ['class' => 'menu-title']);
             $activeClass = route_is(['employees.index','employees.list','departments.index','designations.index','holidays.*']) ? "active" : "";
