@@ -14,7 +14,7 @@
         "laravel-vite-plugin": "^1.0",
         "pusher-js": "^8.4.0-rc2",
         "sass": "^1.77.6",
-        "vite": "^5.0"
+        "vite": "^5.4"
     },
     "dependencies": {
         "@alpinejs/sort": "^3.14.1",
