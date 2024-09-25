@@ -30,7 +30,7 @@
         "@vitejs/plugin-react": "^4.3.1",
         "audio-recorder-polyfill": "^0.4.1",
         "autolinker": "^2.2.2",
-        "ckeditor5": "^42.0.1",
+        "ckeditor5": "^43.1.1",
         "clsx": "^2.1.1",
         "datatables.net-bs5": "^2.0.8",
         "datatables.net-buttons-bs5": "^3.0.2",
