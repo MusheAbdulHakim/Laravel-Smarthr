@@ -2,8 +2,14 @@
 <!DOCTYPE html>
 <html lang="{{ !empty(LocaleSettings('lang')) ? LocaleSettings('lang') : 'en' }}"
     data-layout="{{ !empty(Theme('layout')) ? Theme('layout') : 'vertical' }}"
-    data-topbar="{{ !empty(Theme('topbar_color')) ? Theme('topbar_color') : 'default' }}" data-sidebar="{{ !empty(Theme('sidebar_color')) ? Theme('sidebar_color') : 'dark' }}"
-    data-sidebar-size="{{ !empty(Theme('sidebar_size')) ? Theme('sidebar_size'): 'lg' }}" data-sidebar-image="{{ asset('assets/img/laptop.png') }}">
+    data-layout-mode="{{ !empty(Theme('color_scheme')) ? Theme('color_scheme') : 'orange' }}"
+    data-layout-width="{{ !empty(Theme('layout_width')) ? Theme('layout_width') : 'fluid' }}"
+    data-layout-position="{{ !empty(Theme('layout_position')) ? Theme('layout_position') : 'fluid' }}"
+    data-topbar="{{ !empty(Theme('topbar_color')) ? Theme('topbar_color') : 'default' }}" 
+    data-layout-style="{{ !empty(Theme('sidebar_view')) ? Theme('sidebar_view') : 'default' }}"
+    data-sidebar="{{ !empty(Theme('sidebar_color')) ? Theme('sidebar_color') : 'dark' }}"
+    data-sidebar-size="{{ !empty(Theme('sidebar_size')) ? Theme('sidebar_size'): 'lg' }}" 
+    data-sidebar-image="{{ asset('assets/img/laptop.png') }}">
 
 <head>
     <meta charset="UTF-8">

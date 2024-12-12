@@ -123,7 +123,7 @@ class SettingsController extends Controller
         $settings->favicon = $favicon;
         $settings->theme = $request->theme ?? $settings->theme;
         $settings->layout = $request->layout ?? $settings->layout;
-        $settings->color_scheme = $request->color ?? $settings->color_scheme;
+        $settings->color_scheme = $request->color_scheme ?? $settings->color_scheme;
         $settings->layout_width = $request->layout_width ?? $settings->layout_width;
         $settings->layout_position = $request->layout_pos ?? $settings->layout_position;
         $settings->topbar_color = $request->topbar_color ?? $settings->topbar_color;
