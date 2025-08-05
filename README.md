@@ -133,6 +133,10 @@ cd smarthr
 	```
 	npm install && npm run build
 	```
+	- PNPM
+	```
+	pnpm install && pnpm run build
+	```
 
 - Create your database
 
@@ -189,6 +193,10 @@ sudo chmod -R 777 storage bootstrap/cache
 ```
 php artisan serve
 
+```
+## To run the local server, queus, pail and reverb at the same time, run: 
+```base
+composer run dev
 ```
 
 ### Login Credentials
