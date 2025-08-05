@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Ticket;
 use App\Enums\UserType;
 use App\Helpers\AppMenu;
+use App\Http\Controllers\BaseController;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Carbon;
+use LaravelLang\LocaleList\Locale;
+use Modules\Accounting\Models\Budget;
+use Modules\Sales\Models\Estimate;
 use Modules\Sales\Models\Expense;
 use Modules\Sales\Models\Invoice;
-use LaravelLang\LocaleList\Locale;
-use Modules\Sales\Models\Estimate;
-use Modules\Accounting\Models\Budget;
-use App\Http\Controllers\BaseController;
+use Nwidart\Modules\Facades\Module;
 
 class DashboardController extends BaseController
 {
@@ -25,7 +26,8 @@ class DashboardController extends BaseController
             return view('pages.employees.dashboard',$this->data);
         }
         $projects = null;
-        if(!empty(module('Project')) && module('Project')->isEnabled()){
+        $isProjectModuleEnabled = Module::isEnabled('Project');
+        if($isProjectModuleEnabled){
             $projects = \Modules\Project\Models\Project::get();
             $recentProjects = \Modules\Project\Models\Project::whereMonth('created_at', Carbon::today())->get();
         }
@@ -34,7 +36,8 @@ class DashboardController extends BaseController
         $employees = User::where('type', UserType::EMPLOYEE)->get();
         $tickets = Ticket::get();
 
-        if(module('Sales') && module('Sales')->isEnabled()){
+        $isSalesModuleActive = Module::isEnabled('Sales');
+        if($isSalesModuleActive){
 
             $this->data['thisMonthExpenses'] = Expense::whereMonth('created_at', Carbon::now())->sum('amount');
             $this->data['prevMonthExpenses'] = Expense::whereMonth('created_at', Carbon::now()->subMonth())->sum('amount');
@@ -77,8 +80,9 @@ class DashboardController extends BaseController
         }
 
         $budgets = null;
+        $isAccountingModuleActive = Module::isEnabled('Accounting');
 
-        if(module('Accounting') && module('Accounting')->isEnabled()){
+        if($isAccountingModuleActive){
         
             $budgets = Budget::get(); 
         }
@@ -98,6 +102,9 @@ class DashboardController extends BaseController
         $this->data['tickets'] = (!empty($tickets) && $tickets->count() > 0) ? $tickets: null;
         $this->data['projects'] = $projects;
         $this->data['recentProjects'] = $recentProjects;
+        $this->data['isProjectModuleEnabled'] = $isProjectModuleEnabled;
+        $this->data['isSalesModuleActive'] = $isSalesModuleActive;
+        $this->data['isAccountingModuleActive'] = $isAccountingModuleActive;
         return view('pages.dashboard', $this->data);
     }
 }

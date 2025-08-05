@@ -250,7 +250,7 @@
         </div>
         <!-- /Statistics Widget -->
         
-        @if (!empty(module('Sales')) && module('Sales')->isEnabled())
+        @if ($isSalesModuleActive)
         <div class="row">
             <div class="col-md-12 d-flex">
                 <div class="card card-table flex-fill">
@@ -369,7 +369,7 @@
                     @endcan
                 </div>
             </div>
-            @if (module('Project') && module('Project')->isEnabled())
+            @if ($isProjectModuleEnabled)
             <div class="col-md-6 d-flex">
                 <div class="card card-table flex-fill">
                     <div class="card-header">

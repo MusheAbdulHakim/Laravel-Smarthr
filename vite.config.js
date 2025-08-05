@@ -1,5 +1,9 @@
-import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
+import {
+    defineConfig
+} from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+
 import collectModuleAssetsPaths from "./vite-module-loader.js";
 
 async function getConfig() {
@@ -20,6 +24,9 @@ async function getConfig() {
                 refresh: true,
             }),
         ],
+        server: {
+            cors: true,
+        },
         define: {
             "process.env.IS_PREACT": JSON.stringify("true"),
         },
