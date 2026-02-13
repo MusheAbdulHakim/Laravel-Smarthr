@@ -65,6 +65,9 @@ importers:
       datatables.net-colreorder-bs5:
         specifier: ^2.1.2
         version: 2.1.2
+      datatables.net-columncontrol-bs5:
+        specifier: ^1.2.0
+        version: 1.2.0
       datatables.net-select-bs5:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1753,6 +1756,12 @@ packages:
 
   datatables.net-colreorder@2.1.2:
     resolution: {integrity: sha512-lIsUyOt2nBm4sD2cSzDKZcIVrGgrZkh90Z2f03s8p7DYcZSfXMHAhFBrDYf9/eAK6wJnODN8EDMsrtPHfgoSXA==}
+
+  datatables.net-columncontrol-bs5@1.2.0:
+    resolution: {integrity: sha512-HprpEcP0OB4wo9aa/jkuE+tAItnI+yH4H2CZa00ngiZIs/3DsMT1cnV2EQFhdOv1SlXmv8GZose1Fx0Aly7NgA==}
+
+  datatables.net-columncontrol@1.2.0:
+    resolution: {integrity: sha512-GBCof1hUpIwfZK3Nyo5hVd4WaRHSwGX55lCm8q8KEnTlKrmiI2AXoQk32tpdjbRTNRLAGfpygXbBwyCFljUKFA==}
 
   datatables.net-select-bs5@1.7.1:
     resolution: {integrity: sha512-445VC5BtBZLKGYoxW85a0XFIpGkPpw4O/7fav2c989e27NEuO++Ztya1I3dFcCW+lB5CjV7U/oerm6bYkNJ+hQ==}
@@ -4285,6 +4294,15 @@ snapshots:
     dependencies:
       datatables.net: 2.3.7
       jquery: 3.7.1
+
+  datatables.net-columncontrol-bs5@1.2.0:
+    dependencies:
+      datatables.net-bs5: 2.3.7
+      datatables.net-columncontrol: 1.2.0
+
+  datatables.net-columncontrol@1.2.0:
+    dependencies:
+      datatables.net: 2.3.7
 
   datatables.net-select-bs5@1.7.1:
     dependencies:
