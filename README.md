@@ -153,6 +153,8 @@ php artisan key:generate
 
 ```
 - Install Reverb
+
+Refer to the Reverb Documentation on how to setup and run the server. <a href="https://laravel.com/docs/12.x/reverb" target="_blank"> Laravel Reverb </a>
 ```
 php artisan reverb:install
 
@@ -223,6 +225,7 @@ composer run dev
 - Star the repository and report any issues/bugs you encounter here in the repository.
 
 
+## Note
 In order for the chap app to be working with realtime communication, you'll need to setup [Reverb](https://laravel.com/docs/11.x/reverb), Run the reverb server **php artisan reverb:start** and listen for events with **php artisan queue:listen**
 
 
