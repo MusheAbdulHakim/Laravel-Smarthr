@@ -3,7 +3,6 @@
 namespace Modules\Roles\Listeners;
 
 use App\Events\AppMenuEvent;
-use Spatie\Menu\Laravel\Link;
 
 
 class AppMenuListener
@@ -22,6 +21,12 @@ class AppMenuListener
     public function handle(AppMenuEvent $event): void
     {
         $menu = $event->menu;
-        $menu->addIfCan('view-roles',Link::toRoute('roles.index', '<i class="la la-key"></i> <span>'.__('Roles & Permissions'). '</span>')->setActive(route_is('roles.*') ? 'active' : ''));
+        $menu->add([
+            'permission' => 'view-roles',
+            'route' => 'roles.index',
+            'icon' => 'key',
+            'order' => 12,
+            'label' => __('Roles & Permissions')
+        ]);
     }
 }

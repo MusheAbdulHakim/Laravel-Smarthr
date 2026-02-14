@@ -15,15 +15,11 @@ class AppSettingsMenuEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $menu;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(AppMenu $menu)
-    {
-        $this->menu = $menu->getSettingsMenu();
-    }
+    public function __construct(public AppMenu $menu) {}
 
     /**
      * Get the channels the event should broadcast on.

@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\AppSettingsMenuEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Spatie\Menu\Laravel\Link;
 
 class AppSettingsMenuListener
 {
@@ -24,26 +23,47 @@ class AppSettingsMenuListener
     {
         $menu = $event->menu;
         $menu
-            ->add(
-                Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span>' . __("Back to Dashboard") . '</span>')->setActive(route_is('dashboard'))
-            )->add(
-                Link::toRoute('settings.index', '<i class="la la-building"></i> <span>' . ("Company Settings") . '</span>')->setActive(route_is('settings.index'))
-            )
-            ->add(
-                Link::toRoute('settings.locale', '<i class="la la-clock-o"></i> <span>' . ("Localization") . '</span>')->setActive(route_is('settings.locale'))
-            )
-            ->add(
-                Link::toRoute('settings.invoice', '<i class="la la-pencil-square"></i> <span>' . ("Invoice Settings") . '</span>')->setActive(route_is('settings.invoice'))
-            )
-            ->add(
-                Link::toRoute('settings.salary', '<i class="la la-money"></i> <span>' . ("Salary Settings") . '</span>')->setActive(route_is('settings.salary'))
-            )
-            ->add(
-                Link::toRoute('settings.theme', '<i class="la la-photo"></i> <span>' . ("Theme Settings") . '</span>')->setActive(route_is('settings.theme'))
-            )
-            ->add(
-                Link::toRoute('app.logs', '<i class="la la-warning"></i> <span>' . ("App Logs") . '</span>')->setActive(route_is('app.logs'))
-            )
-            ;
+            ->addSettingsMenu(
+                [
+                    'label' => __("Back to Dashboard"),
+                    'icon' => 'dashboard',
+                    'order' => 1,
+                    'route' => 'dashboard'
+                ],
+            )->addSettingsMenu([
+                'label' =>  __("Company Settings"),
+                'icon' => 'building',
+                'order' => 2,
+                'route' => 'settings.index',
+            ])->addSettingsMenu([
+                'label' => __("Localization"),
+                'route' => 'settings.locale',
+                'order' => 3,
+                'icon' => 'clock-o',
+            ])
+            ->addSettingsMenu([
+                'label' => __("Invoice Settings"),
+                'route' => 'settings.invoice',
+                'order' => 4,
+                'icon' => 'pencil-square',
+            ])
+            ->addSettingsMenu([
+                'label' => __("Salary Settings"),
+                'route' => 'settings.salary',
+                'order' => 5,
+                'icon' => 'money',
+            ])
+            ->addSettingsMenu([
+                'label' => __("Theme Settings"),
+                'route' => 'settings.theme',
+                'order' => 6,
+                'icon' => 'photo',
+            ])
+            ->addSettingsMenu([
+                'label' => __("App Logs"),
+                'route' => 'app.logs',
+                'order' => 7,
+                'icon' => 'warning',
+            ]);
     }
 }
