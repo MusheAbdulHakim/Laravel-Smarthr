@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\AppMenuEvent;
 use Illuminate\Support\Facades\Auth;
 
 class MenuService
@@ -52,6 +53,15 @@ class MenuService
 
     public function getMenu()
     {
-        return $this->build(config('menu'));
+        $appMenu = new \App\Helpers\AppMenu();
+        event(new AppMenuEvent($appMenu));
+        return $this->build($appMenu->all());
+    }
+
+    public function renderSettingsMenu()
+    {
+        $appMenu = new \App\Helpers\AppMenu();
+        event(new \App\Events\AppSettingsMenuEvent($appMenu));
+        return $this->build($appMenu->getSettingsMenu());
     }
 }

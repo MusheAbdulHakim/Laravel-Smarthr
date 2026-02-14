@@ -26,7 +26,6 @@
         "opcodesio/log-viewer": "^3.19",
         "pavel-mironchik/laravel-backup-panel": "v2.6.0.x-dev",
         "spatie/laravel-medialibrary": "^11.13",
-        "spatie/laravel-menu": "^4.2",
         "spatie/laravel-permission": "^6.21",
         "spatie/laravel-settings": "^3.4",
         "yajra/laravel-datatables": "^12.0",

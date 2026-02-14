@@ -2,7 +2,15 @@
 
 @section('sidebar')
     <x-custom-sidebar>
-        {!! renderAppSettingsMenu() !!}
+        <ul>
+            @foreach ($menuItems as $item)
+                @if ($item->hasSubmenu())
+                    <x-menu.submenu :item="$item" />
+                @else
+                    <x-menu.item :item="$item" />
+                @endif
+            @endforeach
+        </ul>
     </x-custom-sidebar>
 @endsection
 
