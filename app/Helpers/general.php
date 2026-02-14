@@ -1,14 +1,10 @@
 <?php
 
-use App\Events\AppMenuEvent;
-use App\Events\AppSettingsMenuEvent;
-use App\Helpers\AppMenu;
+
 use App\Settings\ThemeSettings;
 use App\Settings\LocalizationSettings;
 use Illuminate\Support\Facades\Route;
 use Nwidart\Modules\Facades\Module;
-use Spatie\Menu\Laravel\Link;
-use Spatie\Menu\Laravel\Menu;
 
 if (!function_exists('route_is')) {
     function route_is($route = null)
@@ -21,16 +17,17 @@ if (!function_exists('route_is')) {
     }
 }
 
-if(!function_exists('appLogo')){
-    function appLogo(){
+if (!function_exists('appLogo')) {
+    function appLogo()
+    {
         $logo = asset('images/logo2.png');
         $theme = app(ThemeSettings::class);
-        if(!empty($theme->color_scheme)){
-            if($theme->color_scheme === 'light'){
-                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+        if (!empty($theme->color_scheme)) {
+            if ($theme->color_scheme === 'light') {
+                $logo = asset('storage/settings/theme/' . $theme->logo_light);
             }
-            if($theme->color_scheme === 'dark'){
-                $logo = asset('storage/settings/theme/'.$theme->logo_light);
+            if ($theme->color_scheme === 'dark') {
+                $logo = asset('storage/settings/theme/' . $theme->logo_light);
             }
         }
         return $logo;
@@ -99,38 +96,27 @@ if (!function_exists('format_date')) {
      */
     function format_date($date, $format = '')
     {
-        if($format === ''){
-            $format = !empty(LocaleSettings('date_format')) ? LocaleSettings('date_format'): 'Y-m-d';
+        if ($format === '') {
+            $format = !empty(LocaleSettings('date_format')) ? LocaleSettings('date_format') : 'Y-m-d';
         }
         return date_format(date_create($date), $format);
     }
 }
 
-if(!function_exists('format_file_size')){
+if (!function_exists('format_file_size')) {
     function format_file_size($bytes)
     {
-        if ($bytes >= 1073741824)
-        {
+        if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        }
-        elseif ($bytes >= 1048576)
-        {
+        } elseif ($bytes >= 1048576) {
             $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        }
-        elseif ($bytes >= 1024)
-        {
+        } elseif ($bytes >= 1024) {
             $bytes = number_format($bytes / 1024, 2) . ' KB';
-        }
-        elseif ($bytes > 1)
-        {
+        } elseif ($bytes > 1) {
             $bytes = $bytes . ' bytes';
-        }
-        elseif ($bytes == 1)
-        {
+        } elseif ($bytes == 1) {
             $bytes = $bytes . ' byte';
-        }
-        else
-        {
+        } else {
             $bytes = '0 bytes';
         }
 
@@ -139,14 +125,7 @@ if(!function_exists('format_file_size')){
 }
 
 
-if (!function_exists('renderAppMenu')) {
-    function renderAppMenu()
-    {
-        $appMenu = new AppMenu();
-        event(new AppMenuEvent($appMenu));
-        return $appMenu->menu->render();
-    }
-}
+
 
 /**
  * Get App Settings by providing the Settings Class
@@ -200,35 +179,28 @@ if (!function_exists('uploadedAsset')) {
 }
 
 
-if (!function_exists('renderAppSettingsMenu')) {
-    function renderAppSettingsMenu()
-    {
-        $appMenu = new AppMenu();
-        event(new AppSettingsMenuEvent($appMenu));
-        return $appMenu->settingsMenu->render();
-    }
-}
 
-
-function pad_zeros($number, $total_zeros = 4){
+function pad_zeros($number, $total_zeros = 4)
+{
     return sprintf("%0{$total_zeros}d", $number);
 }
 
 
-if(!function_exists('module')){
+if (!function_exists('module')) {
     function module($name)
     {
         $module = Module::find($name);
-        if(!empty($module)){
+        if (!empty($module)) {
             return $module;
         }
     }
 }
 
-if(!function_exists('notify')){
-    function notify($message , $type='success'){
+if (!function_exists('notify')) {
+    function notify($message, $type = 'success')
+    {
         return array(
-            'message'=> $message,
+            'message' => $message,
             'alert-type' => $type,
         );
     }
@@ -241,8 +213,9 @@ if(!function_exists('notify')){
  * @param string $permission
  * @return bool
  */
-if(!function_exists('can')){
-    function can($permission){
+if (!function_exists('can')) {
+    function can($permission)
+    {
         return auth('web')->user()->hasPermissionTo($permission);
     }
 }
