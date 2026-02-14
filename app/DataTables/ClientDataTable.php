@@ -2,19 +2,19 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
-use App\Models\Client;
 use App\Enums\UserType;
-use Spatie\Menu\Laravel\Html;
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Facades\Crypt;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class ClientDataTable extends DataTable
 {
@@ -27,14 +27,14 @@ class ClientDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
+                $img = !empty($row->avatar) ? asset('storage/users/' . $row->avatar) : asset('images/user.jpg');
                 $link = route('clients.show', ['client' => Crypt::encrypt($row->id)]);
-                return Html::userAvatar($row->fullname, $img, $link);
+                return Str::userAvatar($row->fullname, $img, $link);
             })
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
             })
-            ->addColumn('clt_id', function($row){
+            ->addColumn('clt_id', function ($row) {
                 return $row->clientDetail->clt_id ?? 'NO-ID';
             })
             ->editColumn('created_at', function ($row) {
@@ -47,7 +47,7 @@ class ClientDataTable extends DataTable
                 return view('pages.clients.action', compact(
                     'id'
                 ));
-            })->rawColumns(['fullname','action']);
+            })->rawColumns(['fullname', 'action']);
     }
 
     /**
@@ -55,7 +55,7 @@ class ClientDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->where('type',UserType::CLIENT)->newQuery();
+        return $model->where('type', UserType::CLIENT)->newQuery();
     }
 
     /**
@@ -64,18 +64,18 @@ class ClientDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('client-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('client-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**

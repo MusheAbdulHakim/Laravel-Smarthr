@@ -2,18 +2,18 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
 use App\Enums\UserType;
-use Spatie\Menu\Laravel\Html;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\SearchPane;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
+use Yajra\DataTables\Html\SearchPane;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UsersDataTable extends DataTable
 {
@@ -28,7 +28,7 @@ class UsersDataTable extends DataTable
             ->filter(function ($query) {
                 if (request()->has('name')) {
                     $name = request('fullname');
-                    $query->where(['firstname','middlename','lastname'], 'like', "%" . $name . "%");
+                    $query->where(['firstname', 'middlename', 'lastname'], 'like', "%" . $name . "%");
                 }
                 if (request()->has('email')) {
                     $query->where('email', 'like', "%" . request('email') . "%");
@@ -40,14 +40,14 @@ class UsersDataTable extends DataTable
 
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
-                return Html::userAvatar($row->fullname, $img);
+                $img = !empty($row->avatar) ? asset('storage/users/' . $row->avatar) : asset('images/user.jpg');
+                return Str::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
             })
             ->addColumn('role', function ($row) {
-                if(!empty($row->roles) && $row->roles->count() > 0){
+                if (!empty($row->roles) && $row->roles->count() > 0) {
                     return implode(',', $row->roles->pluck('name')->all());
                 }
             })
@@ -61,7 +61,7 @@ class UsersDataTable extends DataTable
                 return view('pages.users.action', compact(
                     'id'
                 ));
-            })->rawColumns(['fullname','action']);
+            })->rawColumns(['fullname', 'action']);
     }
 
     /**
@@ -69,7 +69,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->where('type',UserType::SUPERADMIN)->newQuery();
+        return $model->where('type', UserType::SUPERADMIN)->newQuery();
     }
 
     /**

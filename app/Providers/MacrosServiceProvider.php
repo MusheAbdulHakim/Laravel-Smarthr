@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use Spatie\Menu\Laravel\Html;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class MacrosServiceProvider extends ServiceProvider
 {
@@ -45,16 +45,17 @@ class MacrosServiceProvider extends ServiceProvider
         Blade::directive('endclient', function () {
             return '<?php endif; ?>';
         });
-        
-        Html::macro('userAvatar', function ($name, $src, $link = 'javascript:void(0)', $alt = '') {
-            return Html::raw(
+
+        Str::macro('userAvatar', function ($name, $src, $link = 'javascript:void(0)', $alt = '') {
+            return new HtmlString(
+
                 '<h2 class="table-avatar">
-                    <a href="'.$link.'" class="avatar">
-                        <img src="'.$src.'" alt="'.$alt.'">
-                    </a>
-                    <a href="'.$link.'"><span>'.$name.'</span></a>
-                </h2>'
-            )->render();
+    <a href="' . $link . '" class="avatar">
+        <img src="' . $src . '" alt="' . $alt . '">
+    </a>
+    <a href="' . $link . '"><span>' . htmlspecialchars($name) . '</span></a>
+</h2>'
+            );
         });
     }
 }
