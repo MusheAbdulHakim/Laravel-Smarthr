@@ -22,34 +22,34 @@ jobs:
         with:
           php-version: 8.4
           tools: composer:v2
-          coverage: xdebug
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          package-manager: pnpm
-          cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
           version: 10
+          cache: true
 
-      - name: Install Node Dependencies
-        run: pnpm install
-
-      - name: Add Flux Credentials Loaded From ENV
-        run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          pnpm install
 
       - name: Copy Environment File
         run: cp .env.example .env
 
       - name: Generate Application Key
         run: php artisan key:generate
+
+      - name: Run Migrations
+        run: |
+          php artisan migrate --seed
+          php artisan module:migrate --seed
 
       - name: Build Assets
         run: pnpm run build

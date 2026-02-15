@@ -8,9 +8,6 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -22,19 +19,19 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: 8.4
+          tools: composer:v2
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          package-manager: pnpm
-          cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
           version: 10
+          cache: true
 
       - name: Install Dependencies
         run: |
