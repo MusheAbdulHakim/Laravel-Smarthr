@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Project\Http\Controllers\ProjectController;
-use Modules\Project\Http\Controllers\TaskBoardController;
 use Modules\Project\Http\Controllers\ProjectTaskBoardController;
+use Modules\Project\Http\Controllers\TaskBoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ use Modules\Project\Http\Controllers\ProjectTaskBoardController;
 Route::group([], function () {
     Route::resource('task-boards', TaskBoardController::class);
     Route::resource('projects', ProjectController::class);
-    Route::get('project-list', [ProjectController::class,'list'])->name('projects.list');
+    Route::get('project-list', [ProjectController::class, 'list'])->name('projects.list');
     Route::get('project-taskboard/{id}', [ProjectTaskBoardController::class, 'board'])->name('project.taskboard');
     Route::get('project-tasks/{project}/create', [ProjectTaskBoardController::class, 'create'])->name('project-tasks.create');
     Route::post('project-tasks', [ProjectTaskBoardController::class, 'store'])->name('project-tasks.store');

@@ -2,16 +2,13 @@
 
 namespace Modules\Accounting\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Yajra\DataTables\DataTables;
-use Modules\Project\Models\Project;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Modules\Accounting\Models\Budget;
 use App\Http\Controllers\BaseController;
-use Modules\Accounting\Models\ExpenseBudget;
+use Illuminate\Http\Request;
+use Modules\Accounting\Models\Budget;
 use Modules\Accounting\Models\BudgetCategory;
+use Modules\Accounting\Models\ExpenseBudget;
+use Modules\Project\Models\Project;
+use Yajra\DataTables\DataTables;
 
 class ExpenseBudgetController extends BaseController
 {
@@ -21,41 +18,44 @@ class ExpenseBudgetController extends BaseController
     public function index(Request $request)
     {
         $pageTitle = __('Expense Budgets');
-        if($request->ajax()){
+        if ($request->ajax()) {
             $budgets = ExpenseBudget::get();
+
             return DataTables::of($budgets)
                 ->addIndexColumn()
-                ->addColumn('category', function($row){
+                ->addColumn('category', function ($row) {
                     return $row->category->name ?? '';
                 })
-                ->addColumn('budget', function($row){
+                ->addColumn('budget', function ($row) {
                     return $row->budget->title ?? '';
                 })
-                ->addColumn('amount', function($row){
+                ->addColumn('amount', function ($row) {
                     return LocaleSettings('currency_symbol').$row->amount ?? '';
                 })
-                ->addColumn('startDate', function($row){
+                ->addColumn('startDate', function ($row) {
                     return format_date($row->startDate) ?? '';
                 })
-                ->addColumn('endDate', function($row){
+                ->addColumn('endDate', function ($row) {
                     return format_date($row->endDate) ?? '';
                 })
-                ->addColumn('attachment', function($row){
+                ->addColumn('attachment', function ($row) {
                     $attachment = $row->getMedia('budget-attachments')->first();
-                    if(!empty($attachment)){
-                        return '<a download="'.$attachment->file_name.'" href="'. $attachment->getFullUrl() .'">'.$attachment->file_name.'</a>';
+                    if (! empty($attachment)) {
+                        return '<a download="'.$attachment->file_name.'" href="'.$attachment->getFullUrl().'">'.$attachment->file_name.'</a>';
                     }
                 })
-                ->addColumn('action',function ($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    return view('accounting::expense-budget.actions',compact(
+
+                    return view('accounting::expense-budget.actions', compact(
                         'id'
                     ));
                 })
-                ->rawColumns(['action','attachment'])
+                ->rawColumns(['action', 'attachment'])
                 ->make();
         }
-        return view('accounting::expense-budget.index',compact(
+
+        return view('accounting::expense-budget.index', compact(
             'pageTitle'
         ));
     }
@@ -68,8 +68,9 @@ class ExpenseBudgetController extends BaseController
         $projects = Project::get();
         $categories = BudgetCategory::get();
         $budgets = Budget::get();
-        return view('accounting::expense-budget.create',compact(
-            'projects','categories','budgets'
+
+        return view('accounting::expense-budget.create', compact(
+            'projects', 'categories', 'budgets'
         ));
     }
 
@@ -82,7 +83,7 @@ class ExpenseBudgetController extends BaseController
             'title' => 'required',
             'amount' => 'required',
             'startDate' => 'required|date|before_or_equal:endDate',
-            'endDate' => 'date|after_or_equal:startDate'
+            'endDate' => 'date|after_or_equal:startDate',
         ]);
         $expense = ExpenseBudget::create([
             'title' => $request->title,
@@ -91,12 +92,13 @@ class ExpenseBudgetController extends BaseController
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'amount' => $request->amount,
-            'note' => $request->note
+            'note' => $request->note,
         ]);
-        if($request->hasFile('attachment')){
+        if ($request->hasFile('attachment')) {
             $expense->addMedia($request->attachment)->toMediaCollection('budget-attachments');
         }
         $notification = notify(__('Expense budget has been created'));
+
         return back()->with($notification);
     }
 
@@ -109,8 +111,9 @@ class ExpenseBudgetController extends BaseController
         $categories = BudgetCategory::get();
         $budgets = Budget::get();
         $expense = $budget_expense;
-        return view('accounting::expense-budget.edit',compact(
-            'expense','projects','categories','budgets'
+
+        return view('accounting::expense-budget.edit', compact(
+            'expense', 'projects', 'categories', 'budgets'
         ));
     }
 
@@ -123,7 +126,7 @@ class ExpenseBudgetController extends BaseController
             'title' => 'required',
             'amount' => 'required',
             'startDate' => 'date|before_or_equal:endDate',
-            'endDate' => 'date|after_or_equal:startDate'
+            'endDate' => 'date|after_or_equal:startDate',
         ]);
         $budget_expense->update([
             'title' => $request->title,
@@ -132,16 +135,17 @@ class ExpenseBudgetController extends BaseController
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'amount' => $request->amount,
-            'note' => $request->note
+            'note' => $request->note,
         ]);
-        if($request->hasFile('attachment')){
+        if ($request->hasFile('attachment')) {
             $budgetFile = $budget_expense->getMedia('budget-attachments')->first();
-            if(!empty($budgetFile)){
+            if (! empty($budgetFile)) {
                 $budgetFile->delete();
             }
             $budget_expense->addMedia($request->attachment)->toMediaCollection('budget-attachments');
-        }   
+        }
         $notification = notify(__('Expense budget has been deleted'));
+
         return back()->with($notification);
     }
 
@@ -151,7 +155,8 @@ class ExpenseBudgetController extends BaseController
     public function destroy(ExpenseBudget $budget_expense)
     {
         $budget_expense->delete();
-        $notification = notify(__("Expense budget has been deleted"));
+        $notification = notify(__('Expense budget has been deleted'));
+
         return back()->with($notification);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Enums\UserType;
-use Illuminate\Http\Request;
 use App\Models\EmployeeAllowance;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class AllowancesController extends Controller
 {
@@ -16,8 +16,9 @@ class AllowancesController extends Controller
     {
         $pageTitle = __('Allowances');
         $allowances = EmployeeAllowance::get();
-        return view('pages.payroll.allowances.index',compact(
-            'pageTitle','allowances'
+
+        return view('pages.payroll.allowances.index', compact(
+            'pageTitle', 'allowances'
         ));
     }
 
@@ -29,7 +30,8 @@ class AllowancesController extends Controller
         $employees = User::where('type', UserType::EMPLOYEE)
             ->whereHas('employeeDetail')
             ->where('is_active', true)->get();
-        return view("pages.payroll.allowances.create",compact(
+
+        return view('pages.payroll.allowances.create', compact(
             'employees'
         ));
     }
@@ -45,11 +47,12 @@ class AllowancesController extends Controller
         ]);
 
         EmployeeAllowance::create([
-            'employee_detail_id' => $request->employee, 
+            'employee_detail_id' => $request->employee,
             'name' => $request->name,
-            'amount' => $request->amount, 
+            'amount' => $request->amount,
         ]);
         $notification = notify(__('Allowance has been added'));
+
         return back()->with($notification);
     }
 
@@ -69,8 +72,9 @@ class AllowancesController extends Controller
         $employees = User::where('type', UserType::EMPLOYEE)
             ->whereHas('employeeDetail')
             ->where('is_active', true)->get();
-        return view("pages.payroll.allowances.edit",compact(
-            'employees','allowance'
+
+        return view('pages.payroll.allowances.edit', compact(
+            'employees', 'allowance'
         ));
     }
 
@@ -80,11 +84,12 @@ class AllowancesController extends Controller
     public function update(Request $request, EmployeeAllowance $allowance)
     {
         $allowance->update([
-            'employee_detail_id' => $request->employee ?? $allowance->employee_detail_id, 
+            'employee_detail_id' => $request->employee ?? $allowance->employee_detail_id,
             'name' => $request->name ?? $allowance->name,
-            'amount' => $request->amount ?? $allowance->amount, 
+            'amount' => $request->amount ?? $allowance->amount,
         ]);
         $notification = notify(__('Allowance has been updated'));
+
         return back()->with($notification);
     }
 
@@ -95,6 +100,7 @@ class AllowancesController extends Controller
     {
         $allowance->delete();
         $notification = notify(__('Allowance has been deleted'));
+
         return back()->with($notification);
     }
 }

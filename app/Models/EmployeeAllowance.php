@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeeAllowance extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'employee_detail_id', 'name','amount',
+        'employee_detail_id', 'name', 'amount',
     ];
 
     public function employee()

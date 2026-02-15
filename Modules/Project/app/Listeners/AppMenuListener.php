@@ -4,8 +4,6 @@ namespace Modules\Project\Listeners;
 
 use App\Events\AppMenuEvent;
 
-
-
 class AppMenuListener
 {
     /**
@@ -23,7 +21,7 @@ class AppMenuListener
     {
         if (auth()->user()->canAny(['view-projects', 'view-taskboards'])) {
             $event->menu->add([
-                'label' => __("Projects"),
+                'label' => __('Projects'),
                 'icon' => 'rocket',
                 'permissions' => ['view-projects', 'view-taskboards'],
                 'order' => 13,
@@ -36,9 +34,9 @@ class AppMenuListener
                     [
                         'label' => __('Default TaskBoards'),
                         'route' => 'task-boards.index',
-                        'permission' => 'view-taskboards'
+                        'permission' => 'view-taskboards',
                     ],
-                ]
+                ],
             ]);
         }
     }

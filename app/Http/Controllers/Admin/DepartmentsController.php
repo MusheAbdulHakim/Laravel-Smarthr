@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Department;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\DataTables\DepartmentDataTable;
 use App\Http\Controllers\BaseController;
+use App\Models\Department;
+use Illuminate\Http\Request;
 
 class DepartmentsController extends BaseController
 {
@@ -16,13 +15,14 @@ class DepartmentsController extends BaseController
     public function index(DepartmentDataTable $dataTable)
     {
         $pageTitle = __('Departments');
-        return $dataTable->render('pages.departments.index',compact(
+
+        return $dataTable->render('pages.departments.index', compact(
             'pageTitle'
         ));
     }
 
-
-    public function create(){
+    public function create()
+    {
         return view('pages.departments.create');
     }
 
@@ -33,16 +33,17 @@ class DepartmentsController extends BaseController
     {
         $request->validate([
             'name' => 'required|string',
-            'description' => 'nullable|max: 255'
+            'description' => 'nullable|max: 255',
         ]);
 
         Department::create([
             'name' => $request->name,
             'parent_department_id' => $request->parent,
             'location' => $request->location,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
         $notification = notify('Department has been added');
+
         return redirect()->route('departments.index')->with($notification);
     }
 
@@ -51,7 +52,7 @@ class DepartmentsController extends BaseController
      */
     public function edit(Department $department)
     {
-        return view('pages.departments.edit',compact(
+        return view('pages.departments.edit', compact(
             'department',
         ));
     }
@@ -63,7 +64,7 @@ class DepartmentsController extends BaseController
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'nullable|max:255'
+            'description' => 'nullable|max:255',
         ]);
         $department->update([
             'name' => $request->name,
@@ -71,7 +72,8 @@ class DepartmentsController extends BaseController
             'location' => $request->location,
             'description' => $request->description,
         ]);
-        $notification = notify(__("Department has been updated"));
+        $notification = notify(__('Department has been updated'));
+
         return redirect()->route('departments.index')->with($notification);
     }
 
@@ -82,6 +84,7 @@ class DepartmentsController extends BaseController
     {
         $department->delete();
         $notification = notify(__('Department has been deleted'));
+
         return redirect()->route('departments.index')->with($notification);
     }
 }

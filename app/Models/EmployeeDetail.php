@@ -10,7 +10,6 @@ class EmployeeDetail extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'emp_id', 'user_id', 'department_id', 'designation_id',
         'passport_no', 'passport_expiry_date', 'passport_tel', 'nationality', 'religion', 'ethnicity',

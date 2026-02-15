@@ -2,8 +2,8 @@
 
 namespace Modules\Project\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
 class ProjectDatabaseSeeder extends Seeder
@@ -18,21 +18,21 @@ class ProjectDatabaseSeeder extends Seeder
         $permissionsArray = [];
         $module_permissions = [
             'Projects' => [
-                'view-projects','create-project','edit-project','show-project','delete-project',
+                'view-projects', 'create-project', 'edit-project', 'show-project', 'delete-project',
             ],
             'Project Task' => [
-                'view-tasks','create-task','edit-task', 'show-task','delete-task',
+                'view-tasks', 'create-task', 'edit-task', 'show-task', 'delete-task',
             ],
             'Taskboard' => [
-                'view-taskboards','create-taskboard','edit-taskboard','show-taskboard','delete-taskboard',
+                'view-taskboards', 'create-taskboard', 'edit-taskboard', 'show-taskboard', 'delete-taskboard',
             ],
         ];
         foreach ($module_permissions as $module => $permissions) {
             foreach ($permissions as $permission) {
                 $permissionsArray[] = [
-                    "name" => $permission,
-                    "module" => $module,
-                    "guard_name" => "web"
+                    'name' => $permission,
+                    'module' => $module,
+                    'guard_name' => 'web',
                 ];
             }
         }

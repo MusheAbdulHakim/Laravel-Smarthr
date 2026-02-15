@@ -8,7 +8,6 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\EmployeeDetail;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,7 +58,7 @@ class UserSeeder extends Seeder
                 'location' => 'Bay Area',
             ])->first()->id,
             'designation_id' => Designation::factory()->count(1)->create([
-                'name' => 'Software Developer'
+                'name' => 'Software Developer',
             ])->first()->id,
             'passport_no' => '1234567899',
             'passport_expiry_date' => '2024-06-30',

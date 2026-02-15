@@ -2,15 +2,13 @@
 
 namespace Modules\Accounting\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Yajra\DataTables\DataTables;
-use Modules\Project\Models\Project;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Modules\Accounting\Models\Budget;
-use Modules\Accounting\Models\RevenueBudget;
 use Modules\Accounting\Models\BudgetCategory;
+use Modules\Accounting\Models\RevenueBudget;
+use Modules\Project\Models\Project;
+use Yajra\DataTables\DataTables;
 
 class RevenueBudgetController extends Controller
 {
@@ -20,46 +18,49 @@ class RevenueBudgetController extends Controller
     public function index(Request $request)
     {
         $pageTitle = __('Revenue Budgets');
-        if($request->ajax()){
+        if ($request->ajax()) {
             $budgets = RevenueBudget::get();
+
             return DataTables::of($budgets)
                 ->addIndexColumn()
-                ->addColumn('category', function($row){
+                ->addColumn('category', function ($row) {
                     return $row->category->name ?? '';
                 })
-                ->addColumn('budget', function($row){
+                ->addColumn('budget', function ($row) {
                     return $row->budget->title ?? '';
                 })
-                ->addColumn('amount', function($row){
+                ->addColumn('amount', function ($row) {
                     return LocaleSettings('currency_symbol').$row->amount ?? '';
                 })
-                ->addColumn('startDate', function($row){
+                ->addColumn('startDate', function ($row) {
                     return format_date($row->startDate) ?? '';
                 })
-                ->addColumn('endDate', function($row){
+                ->addColumn('endDate', function ($row) {
                     return format_date($row->endDate) ?? '';
                 })
-                ->addColumn('attachment', function($row){
+                ->addColumn('attachment', function ($row) {
                     $attachment = $row->getMedia('budget-attachments')->first();
-                    if(!empty($attachment)){
-                        return '<a download="'.$attachment->file_name.'" href="'. $attachment->getFullUrl() .'">'.$attachment->file_name.'</a>';
+                    if (! empty($attachment)) {
+                        return '<a download="'.$attachment->file_name.'" href="'.$attachment->getFullUrl().'">'.$attachment->file_name.'</a>';
                     }
                 })
-                ->addColumn('action',function ($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    return view('accounting::revenue-budget.actions',compact(
+
+                    return view('accounting::revenue-budget.actions', compact(
                         'id'
                     ));
                 })
-                ->rawColumns(['action','attachment'])
+                ->rawColumns(['action', 'attachment'])
                 ->make();
         }
-        return view('accounting::revenue-budget.index',compact(
+
+        return view('accounting::revenue-budget.index', compact(
             'pageTitle'
         ));
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -67,8 +68,9 @@ class RevenueBudgetController extends Controller
         $projects = Project::get();
         $categories = BudgetCategory::get();
         $budgets = Budget::get();
-        return view('accounting::revenue-budget.create',compact(
-            'projects','categories','budgets'
+
+        return view('accounting::revenue-budget.create', compact(
+            'projects', 'categories', 'budgets'
         ));
     }
 
@@ -81,7 +83,7 @@ class RevenueBudgetController extends Controller
             'title' => 'required',
             'amount' => 'required',
             'startDate' => 'date|before_or_equal:endDate',
-            'endDate' => 'date|after_or_equal:startDate'
+            'endDate' => 'date|after_or_equal:startDate',
         ]);
         $revenue = RevenueBudget::create([
             'title' => $request->title,
@@ -90,12 +92,13 @@ class RevenueBudgetController extends Controller
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'amount' => $request->amount,
-            'note' => $request->note
+            'note' => $request->note,
         ]);
-        if($request->hasFile('attachment')){
+        if ($request->hasFile('attachment')) {
             $revenue->addMedia($request->attachment)->toMediaCollection('budget-attachments');
         }
         $notification = notify(__('Revenue budget has been created'));
+
         return back()->with($notification);
     }
 
@@ -108,8 +111,9 @@ class RevenueBudgetController extends Controller
         $categories = BudgetCategory::get();
         $budgets = Budget::get();
         $revenue = $budget_revenue;
-        return view('accounting::revenue-budget.edit',compact(
-            'revenue','projects','categories','budgets'
+
+        return view('accounting::revenue-budget.edit', compact(
+            'revenue', 'projects', 'categories', 'budgets'
         ));
     }
 
@@ -122,7 +126,7 @@ class RevenueBudgetController extends Controller
             'title' => 'required',
             'amount' => 'required',
             'startDate' => 'date|before_or_equal:endDate',
-            'endDate' => 'date|after_or_equal:startDate'
+            'endDate' => 'date|after_or_equal:startDate',
         ]);
         $budget_revenue->update([
             'title' => $request->title,
@@ -131,16 +135,17 @@ class RevenueBudgetController extends Controller
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'amount' => $request->amount,
-            'note' => $request->note
+            'note' => $request->note,
         ]);
-        if($request->hasFile('attachment')){
+        if ($request->hasFile('attachment')) {
             $budgetFile = $budget_revenue->getMedia('budget-attachments')->first();
-            if(!empty($budgetFile)){
+            if (! empty($budgetFile)) {
                 $budgetFile->delete();
             }
-            $budget_revenue->updateMedia($request->attachment,'budget-attachments');
-        }   
+            $budget_revenue->updateMedia($request->attachment, 'budget-attachments');
+        }
         $notification = notify(__('Revenue budget has been deleted'));
+
         return back()->with($notification);
     }
 
@@ -150,7 +155,8 @@ class RevenueBudgetController extends Controller
     public function destroy(RevenueBudget $budget_revenue)
     {
         $budget_revenue->delete();
-        $notification = notify(__("Revenue budget has been deleted"));
+        $notification = notify(__('Revenue budget has been deleted'));
+
         return back()->with($notification);
     }
 }

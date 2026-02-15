@@ -2,12 +2,10 @@
 
 namespace Modules\Accounting\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Modules\Accounting\Models\BudgetCategory;
+use Yajra\DataTables\DataTables;
 
 class BudgetCategoriesController extends Controller
 {
@@ -17,20 +15,23 @@ class BudgetCategoriesController extends Controller
     public function index(Request $request)
     {
         $pageTitle = __('Budget Category');
-        if($request->ajax()){
+        if ($request->ajax()) {
             $categories = BudgetCategory::get();
+
             return DataTables::of($categories)
                 ->addIndexColumn()
-                ->addColumn('action',function ($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    return view('accounting::categories.actions',compact(
+
+                    return view('accounting::categories.actions', compact(
                         'id'
                     ));
                 })
                 ->rawColumns(['action'])
                 ->make();
         }
-        return view('accounting::categories.index',compact(
+
+        return view('accounting::categories.index', compact(
             'pageTitle'
         ));
     }
@@ -49,22 +50,22 @@ class BudgetCategoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ]);
         BudgetCategory::create([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
-        $notification = notify(__("Budget category has been created"));
+        $notification = notify(__('Budget category has been created'));
+
         return back()->with($notification);
     }
 
-   
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(BudgetCategory $category)
     {
-        return view('accounting::categories.edit',compact(
+        return view('accounting::categories.edit', compact(
             'category'
         ));
     }
@@ -78,9 +79,10 @@ class BudgetCategoriesController extends Controller
             'name' => 'required',
         ]);
         $category->update([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
         $notification = notify(__('Budget category has been updated'));
+
         return back()->with($notification);
     }
 
@@ -90,7 +92,8 @@ class BudgetCategoriesController extends Controller
     public function destroy(BudgetCategory $category)
     {
         $category->delete();
-        $notification = notify(__("Budget category has been deleted"));
+        $notification = notify(__('Budget category has been deleted'));
+
         return back()->with($notification);
     }
 }

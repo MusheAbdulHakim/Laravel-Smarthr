@@ -12,7 +12,7 @@ class TicketReply extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'ticket_id','reply_id','message','created_by','is_read'
+        'ticket_id', 'reply_id', 'message', 'created_by', 'is_read',
     ];
 
     public function ticket()
@@ -27,8 +27,6 @@ class TicketReply extends Model implements HasMedia
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
-
-    
 }

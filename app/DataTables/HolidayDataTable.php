@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class HolidayDataTable extends DataTable
@@ -16,28 +14,29 @@ class HolidayDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->editColumn('startDate', function($row){
-                if(!empty($row->startDate)){
+            ->editColumn('startDate', function ($row) {
+                if (! empty($row->startDate)) {
                     return format_date($row->startDate);
                 }
             })
-            ->editColumn('endDate', function($row){
-                if(!empty($row->endDate)){
+            ->editColumn('endDate', function ($row) {
+                if (! empty($row->endDate)) {
                     return format_date($row->endDate);
                 }
             })
-            ->editColumn('created_at', function($row){
+            ->editColumn('created_at', function ($row) {
                 return format_date($row->created_at);
             })
-            ->addColumn('action', function($row){
+            ->addColumn('action', function ($row) {
                 $id = $row->id;
-                return view('pages.holidays.actions',compact(
+
+                return view('pages.holidays.actions', compact(
                     'id'
                 ));
             })
@@ -58,11 +57,11 @@ class HolidayDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('holiday-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('frtip')
-                    ->orderBy(1);
+            ->setTableId('holiday-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('frtip')
+            ->orderBy(1);
     }
 
     /**
@@ -78,10 +77,10 @@ class HolidayDataTable extends DataTable
             Column::make('description'),
             Column::make('created_at'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
@@ -90,6 +89,6 @@ class HolidayDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Holiday_' . date('YmdHis');
+        return 'Holiday_'.date('YmdHis');
     }
 }

@@ -2,12 +2,10 @@
 
 namespace Modules\Project\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Modules\Project\Models\TaskBoard;
+use Illuminate\Http\Request;
 use Modules\Project\Models\ProjectTaskBoard;
+use Modules\Project\Models\TaskBoard;
 
 class TaskBoardController extends Controller
 {
@@ -16,10 +14,11 @@ class TaskBoardController extends Controller
      */
     public function index()
     {
-        $boards = TaskBoard::orderBy('priority','desc')->get();
-        $pageTitle = __("Task Boards");
-        return view('project::task-board.index',compact(
-            'pageTitle','boards'
+        $boards = TaskBoard::orderBy('priority', 'desc')->get();
+        $pageTitle = __('Task Boards');
+
+        return view('project::task-board.index', compact(
+            'pageTitle', 'boards'
         ));
     }
 
@@ -29,7 +28,8 @@ class TaskBoardController extends Controller
     public function create(Request $request)
     {
         $project_id = $request->project_id;
-        return view('project::task-board.create',compact(
+
+        return view('project::task-board.create', compact(
             'project_id'
         ));
     }
@@ -43,27 +43,27 @@ class TaskBoardController extends Controller
             'name' => 'required',
             'color' => 'nullable|string',
         ]);
-        if(!empty($request->project_id)){
+        if (! empty($request->project_id)) {
             ProjectTaskBoard::create([
                 'project_id' => $request->project_id,
                 'name' => $request->name,
                 'color' => $request->color,
                 'priority' => $request->priority,
-                'created_by' => auth()->user()->id
+                'created_by' => auth()->user()->id,
             ]);
-        }else{
+        } else {
             TaskBoard::create([
                 'name' => $request->name,
                 'color' => $request->color,
                 'priority' => $request->priority,
-                'created_by' => auth()->user()->id
+                'created_by' => auth()->user()->id,
             ]);
         }
         $notification = notify(__('Task board has been added'));
+
         return back()->with($notification);
     }
 
-   
     /**
      * Show the form for editing the specified resource.
      */
@@ -71,10 +71,11 @@ class TaskBoardController extends Controller
     {
         $project_id = $request->project_id;
         $taskBoard = TaskBoard::find($id);
-        if(!empty($project_id)){
+        if (! empty($project_id)) {
             $taskBoard = ProjectTaskBoard::find($id);
         }
-        return view('project::task-board.edit',compact(
+
+        return view('project::task-board.edit', compact(
             'taskBoard'
         ));
     }
@@ -88,22 +89,23 @@ class TaskBoardController extends Controller
             'name' => 'required',
             'color' => 'required|string',
         ]);
-        if(!empty($request->project_id)){
+        if (! empty($request->project_id)) {
             ProjectTaskBoard::findOrFail($id)->update([
                 'project_id' => $request->project_id,
                 'name' => $request->name,
                 'color' => $request->color,
                 'priority' => $request->priority,
-                'created_by' => auth()->user()->id
+                'created_by' => auth()->user()->id,
             ]);
-        }else{
+        } else {
             TaskBoard::findOrFail($id)->update([
                 'name' => $request->name,
                 'color' => $request->color,
                 'priority' => $request->priority,
             ]);
         }
-        $notification  = notify(__("Taskboard has been updated"));
+        $notification = notify(__('Taskboard has been updated'));
+
         return back()->with($notification);
     }
 
@@ -112,12 +114,13 @@ class TaskBoardController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if($request->project_id){
+        if ($request->project_id) {
             ProjectTaskBoard::findOrFail($id)->delete();
-        }else{
+        } else {
             TaskBoard::findOrFail($id)->delete();
         }
-        $notification = notify(__("Taskboard has been deleted"));
+        $notification = notify(__('Taskboard has been deleted'));
+
         return back()->with($notification);
     }
 }

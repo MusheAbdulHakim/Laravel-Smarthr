@@ -3,17 +3,21 @@
 namespace App\DTO;
 
 use App\Interfaces\MenuItem;
-use Illuminate\Support\Facades\Auth;
 
 readonly class MenuItemDto implements MenuItem
 {
     public string $label;
 
-    public string|null $icon;
-    public string|null $route;
-    public string|null $title;
+    public ?string $icon;
+
+    public ?string $route;
+
+    public ?string $title;
+
     public int $order;
-    public array | null $items;
+
+    public ?array $items;
+
     public bool $visible;
 
     public function __construct(
@@ -39,39 +43,44 @@ readonly class MenuItemDto implements MenuItem
         return $this->label;
     }
 
-    public function getRoute(): string|null
+    public function getRoute(): ?string
     {
-        return ($this->route);
+        return $this->route;
     }
 
-    public function getLink(): string | null
+    public function getLink(): ?string
     {
         return $this->route ? route($this->route) : '#';
     }
-    public function getIcon(): string|null
+
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
-    public function getTitle(): string|null
+
+    public function getTitle(): ?string
     {
         return $this->title;
     }
+
     public function getOrder(): int
     {
         return $this->order;
     }
-    public function getSubMenu(): array | null
+
+    public function getSubMenu(): ?array
     {
         return $this->items;
     }
-    public function getSubItems(): array | null
+
+    public function getSubItems(): ?array
     {
         return $this->items;
     }
 
     public function hasSubmenu(): bool
     {
-        return !empty($this->items);
+        return ! empty($this->items);
     }
 
     public function isVisible(): bool

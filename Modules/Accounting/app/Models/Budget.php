@@ -2,10 +2,10 @@
 
 namespace Modules\Accounting\Models;
 
-use Modules\Project\Models\Project;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Accounting\Database\Factories\BudgetFactory;
+use Modules\Project\Models\Project;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -17,8 +17,8 @@ class Budget extends Model implements HasMedia
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'title','type','startDate','endDate','total_revenue','total_expense',
-        'profit','budget_category_id','project_id','taxes','amount','note'
+        'title', 'type', 'startDate', 'endDate', 'total_revenue', 'total_expense',
+        'profit', 'budget_category_id', 'project_id', 'taxes', 'amount', 'note',
     ];
 
     public function category()
@@ -31,7 +31,8 @@ class Budget extends Model implements HasMedia
         return $this->hasMany(ExpenseBudget::class);
     }
 
-    public function revenue(){
+    public function revenue()
+    {
         return $this->hasMany(RevenueBudget::class);
     }
 

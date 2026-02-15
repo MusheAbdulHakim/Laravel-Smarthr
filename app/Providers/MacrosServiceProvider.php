@@ -50,10 +50,10 @@ class MacrosServiceProvider extends ServiceProvider
             return new HtmlString(
 
                 '<h2 class="table-avatar">
-    <a href="' . $link . '" class="avatar">
-        <img src="' . $src . '" alt="' . $alt . '">
+    <a href="'.$link.'" class="avatar">
+        <img src="'.$src.'" alt="'.$alt.'">
     </a>
-    <a href="' . $link . '"><span>' . htmlspecialchars($name) . '</span></a>
+    <a href="'.$link.'"><span>'.htmlspecialchars($name).'</span></a>
 </h2>'
             );
         });

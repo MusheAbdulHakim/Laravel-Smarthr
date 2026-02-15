@@ -17,37 +17,37 @@ class TaskBoardSeeder extends Seeder
                 'name' => 'Todo',
                 'color' => '#318da0',
                 'priority' => 1,
-                'created_by' => 1
+                'created_by' => 1,
             ],
             [
                 'name' => 'InProgress',
                 'color' => '#318da0',
                 'priority' => 2,
-                'created_by' => 1
+                'created_by' => 1,
             ],
             [
                 'name' => 'Pending',
                 'color' => '#318da0',
                 'priority' => 3,
-                'created_by' => 1
+                'created_by' => 1,
             ],
             [
                 'name' => 'OnHold',
                 'color' => '#318da0',
                 'priority' => 4,
-                'created_by' => 1
+                'created_by' => 1,
             ],
             [
                 'name' => 'Review',
                 'color' => '#318da0',
                 'priority' => 5,
-                'created_by' => 1
+                'created_by' => 1,
             ],
             [
                 'name' => 'Completed',
                 'color' => '#318da0',
                 'priority' => 6,
-                'created_by' => 1
+                'created_by' => 1,
             ],
         ]);
     }

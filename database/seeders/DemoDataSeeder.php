@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Holiday;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\Holiday;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DemoDataSeeder extends Seeder
 {
@@ -17,54 +16,54 @@ class DemoDataSeeder extends Seeder
     {
         Department::insert([
             [
-                'name' => 'Sales', 
+                'name' => 'Sales',
                 'location' => 'Ghana',
-                'description' => null
+                'description' => null,
             ],
             [
-                'name' => 'Marketing', 
+                'name' => 'Marketing',
                 'location' => 'Ghana',
-                'description' => null
+                'description' => null,
             ],
             [
-                'name' => 'AI', 
+                'name' => 'AI',
                 'location' => 'Ghana',
-                'description' => null
+                'description' => null,
             ],
             [
-                'name' => 'Security', 
+                'name' => 'Security',
                 'location' => 'Ghana',
-                'description' => null
+                'description' => null,
             ],
         ]);
         Designation::insert([
             [
                 'name' => 'Web Developer',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'Software Developer',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'UI UX',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'Designer',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'FullStack',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'Laravel Developer',
-                'description' => null
+                'description' => null,
             ],
             [
                 'name' => 'Wordpress Developer',
-                'description' => null
+                'description' => null,
             ],
         ]);
         Holiday::factory(10)->create();

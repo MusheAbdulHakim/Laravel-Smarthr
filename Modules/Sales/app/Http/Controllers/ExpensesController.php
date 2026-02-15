@@ -2,12 +2,10 @@
 
 namespace Modules\Sales\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Yajra\DataTables\DataTables;
-use Modules\Sales\Models\Expense;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Modules\Sales\Models\Expense;
+use Yajra\DataTables\DataTables;
 
 class ExpensesController extends Controller
 {
@@ -17,42 +15,46 @@ class ExpensesController extends Controller
     public function index(Request $request)
     {
         $pageTitle = __('Expenses');
-        if($request->ajax()){
+        if ($request->ajax()) {
             $expenses = Expense::get();
+
             return DataTables::of($expenses)
                 ->addIndexColumn()
-                ->editColumn('purchase_date', function($row){
+                ->editColumn('purchase_date', function ($row) {
                     return format_date($row->purchase_date) ?? '';
-                })  
-                ->editColumn('amount', function($row){
+                })
+                ->editColumn('amount', function ($row) {
                     return LocaleSettings('currency_symbol').$row->amount;
                 })
-                ->addColumn('paid_by', function($row){
+                ->addColumn('paid_by', function ($row) {
                     $method = $row->paid_by;
-                    if($method == '1'){
+                    if ($method == '1') {
                         $name = __('Cash');
                     }
-                    if($method == '2'){
+                    if ($method == '2') {
                         $name = __('Cheque');
                     }
-                    if($method == '3'){
+                    if ($method == '3') {
                         $name = __('Card');
                     }
+
                     return $name;
                 })
-                ->addColumn('status', function($row){
-                    return $row->status == true ? __('Approved'): __('Pending');
+                ->addColumn('status', function ($row) {
+                    return $row->status == true ? __('Approved') : __('Pending');
                 })
-                ->addColumn('action',function ($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    return view('sales::expenses.actions',compact(
+
+                    return view('sales::expenses.actions', compact(
                         'id'
                     ));
                 })
                 ->rawColumns(['action'])
                 ->make();
         }
-        return view('sales::expenses.index',compact(
+
+        return view('sales::expenses.index', compact(
             'pageTitle'
         ));
     }
@@ -84,9 +86,10 @@ class ExpensesController extends Controller
             'amount' => $request->amount,
             'status' => $request->status,
             'paid_by' => $request->paid_by,
-            'created_by' => auth()->user()->id
+            'created_by' => auth()->user()->id,
         ]);
-        $notification = notify(__("Expense has been created"));
+        $notification = notify(__('Expense has been created'));
+
         return back()->with($notification);
     }
 
@@ -95,7 +98,7 @@ class ExpensesController extends Controller
      */
     public function edit(Expense $expense)
     {
-        return view('sales::expenses.edit',compact(
+        return view('sales::expenses.edit', compact(
             'expense'
         ));
     }
@@ -119,9 +122,10 @@ class ExpensesController extends Controller
             'amount' => $request->amount,
             'status' => $request->status,
             'paid_by' => $request->paid_by,
-            'created_by' => auth()->user()->id
+            'created_by' => auth()->user()->id,
         ]);
-        $notification = notify(__("Expense has been updated"));
+        $notification = notify(__('Expense has been updated'));
+
         return back()->with($notification);
     }
 
@@ -132,6 +136,7 @@ class ExpensesController extends Controller
     {
         $expense->delete();
         $notification = notify(__('Expense has been deleted'));
+
         return back()->with($notification);
     }
 }

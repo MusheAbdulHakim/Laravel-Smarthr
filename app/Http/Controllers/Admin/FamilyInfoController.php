@@ -22,7 +22,8 @@ class FamilyInfoController extends Controller
     public function create(Request $request)
     {
         $user_id = $request->user;
-        return view('pages.family-information.create',compact(
+
+        return view('pages.family-information.create', compact(
             'user_id'
         ));
     }
@@ -37,10 +38,10 @@ class FamilyInfoController extends Controller
             'phone' => 'required',
             'relationship' => 'required',
             'user' => 'required',
-            'image' => 'nullable|file|image'
+            'image' => 'nullable|file|image',
         ]);
         $imageName = null;
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imageName = time().'_image.'.$request->image->extension();
             $request->image->move(public_path('storage/family-members'), $imageName);
         }
@@ -54,6 +55,7 @@ class FamilyInfoController extends Controller
             'picture' => $imageName,
         ]);
         $notification = notify(__('Family information has been added'));
+
         return back()->with($notification);
     }
 
@@ -71,7 +73,8 @@ class FamilyInfoController extends Controller
     public function edit(UserFamilyInfo $family_information)
     {
         $member = $family_information;
-        return view('pages.family-information.edit',compact(
+
+        return view('pages.family-information.edit', compact(
             'member'
         ));
     }
@@ -86,10 +89,10 @@ class FamilyInfoController extends Controller
             'phone' => 'required',
             'relationship' => 'required',
             'user' => 'required',
-            'image' => 'nullable|file|image'
+            'image' => 'nullable|file|image',
         ]);
         $imageName = $family_information->image;
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imageName = time().'_image.'.$request->image->extension();
             $request->image->move(public_path('storage/family-members'), $imageName);
         }
@@ -103,6 +106,7 @@ class FamilyInfoController extends Controller
             'picture' => $imageName,
         ]);
         $notification = notify(__('Family information has been updated'));
+
         return back()->with($notification);
     }
 
@@ -112,7 +116,8 @@ class FamilyInfoController extends Controller
     public function destroy(UserFamilyInfo $family_information)
     {
         $family_information->delete();
-        $notification = notify(__("Family information has been deleted"));
+        $notification = notify(__('Family information has been deleted'));
+
         return back()->with($notification);
     }
 }

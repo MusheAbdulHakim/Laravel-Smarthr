@@ -10,15 +10,15 @@ return [
     | This option contains settings for PDF generation.
     |
     | Enabled:
-    |    
+    |
     |    Whether to load PDF / Image generation.
     |
     | Binary:
-    |    
+    |
     |    The file path of the wkhtmltopdf / wkhtmltoimage executable.
     |
     | Timeout:
-    |    
+    |
     |    The amount of time to wait (in seconds) before PDF / Image generation is stopped.
     |    Setting this to false disables the timeout (unlimited processing time).
     |
@@ -32,21 +32,21 @@ return [
     |    The environment variables to set while running the wkhtmltopdf process.
     |
     */
-    
+
     'pdf' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', 'wkhtmltopdf'),
+        'binary' => env('WKHTML_PDF_BINARY', 'wkhtmltopdf'),
         'timeout' => false,
         'options' => [],
-        'env'     => [],
+        'env' => [],
     ],
-    
+
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage-amd64'),
+        'binary' => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage-amd64'),
         'timeout' => false,
         'options' => [],
-        'env'     => [],
+        'env' => [],
     ],
 
 ];

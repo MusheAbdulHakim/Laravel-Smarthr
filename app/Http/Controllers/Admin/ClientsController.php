@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Enums\UserType;
-use App\Models\ClientDetail;
-use Illuminate\Http\Request;
 use App\DataTables\ClientDataTable;
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Models\ClientDetail;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class ClientsController extends Controller
 {
@@ -17,9 +17,10 @@ class ClientsController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {        
-        $pageTitle = __("Clients");
+    {
+        $pageTitle = __('Clients');
         $clients = User::where('type', UserType::CLIENT)->get();
+
         return view('pages.clients.index', compact(
             'pageTitle',
             'clients'
@@ -29,7 +30,8 @@ class ClientsController extends Controller
 
     public function list(ClientDataTable $dataTable)
     {
-        $pageTitle = __("Clients");
+        $pageTitle = __('Clients');
+
         return $dataTable->render('pages.clients.list', compact(
             'pageTitle',
         ));
@@ -58,7 +60,7 @@ class ClientsController extends Controller
         ]);
         $imageName = null;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user = User::create([
@@ -75,19 +77,20 @@ class ClientsController extends Controller
             'phone' => $request->phone,
             'avatar' => $imageName,
             'created_by' => auth()->user()->id,
-            'is_active' => !empty($request->status),
-            'password' => Hash::make($request->password)
+            'is_active' => ! empty($request->status),
+            'password' => Hash::make($request->password),
         ]);
-        if(!empty($user)){
+        if (! empty($user)) {
             $user->assignRole(UserType::CLIENT);
             $totalEmployees = User::where('type', UserType::CLIENT)->where('is_active', true)->count();
-            $cltId = "CLT-" . pad_zeros(($totalEmployees + 1));
+            $cltId = 'CLT-'.pad_zeros(($totalEmployees + 1));
             ClientDetail::create([
                 'clt_id' => $cltId,
                 'user_id' => $user->id,
             ]);
         }
         $notification = notify(__('Client has been created'));
+
         return back()->with($notification);
     }
 
@@ -96,15 +99,16 @@ class ClientsController extends Controller
      */
     public function show(string $client)
     {
-        try{
+        try {
             $user = User::findOrFail(Crypt::decrypt($client));
-            $pageTitle = __("Client Profile");
-            return view('pages.clients.show',compact(
-                'user','pageTitle'
+            $pageTitle = __('Client Profile');
+
+            return view('pages.clients.show', compact(
+                'user', 'pageTitle'
             ));
-        }
-        catch(\Exception $e){
-            $notification = notify(__($e->getMessage()),'error');
+        } catch (\Exception $e) {
+            $notification = notify(__($e->getMessage()), 'error');
+
             return back()->with($notification);
         }
     }
@@ -116,16 +120,17 @@ class ClientsController extends Controller
     {
         try {
             $client = User::findOrFail(Crypt::decrypt($id));
-            return view('pages.clients.edit',compact(
+
+            return view('pages.clients.edit', compact(
                 'client'
             ));
-        }catch(\Exception $e){
-            $notification = notify(__($e->getMessage()),'error');
+        } catch (\Exception $e) {
+            $notification = notify(__($e->getMessage()), 'error');
+
             return back()->with($notification);
         }
     }
 
-   
     /**
      * Update the specified resource in storage.
      */
@@ -140,7 +145,7 @@ class ClientsController extends Controller
         ]);
         $imageName = $user->avatar;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user->update([
@@ -155,13 +160,14 @@ class ClientsController extends Controller
             'dial_code' => $request->dial_code ?? $user->dial_code,
             'phone' => $request->phone ?? $user->phone,
             'avatar' => $imageName,
-            'is_active' => !empty($request->status) ?? $user->is_active,
-            'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
+            'is_active' => ! empty($request->status) ?? $user->is_active,
+            'password' => ! empty($request->password) ? Hash::make($request->password) : $user->password,
         ]);
-        if(!$user->hasRole(UserType::CLIENT)){
+        if (! $user->hasRole(UserType::CLIENT)) {
             $user->assignRole(UserType::CLIENT);
         }
         $notification = notify(__('Client has been updated'));
+
         return back()->with($notification);
     }
 
@@ -172,6 +178,7 @@ class ClientsController extends Controller
     {
         $client->delete();
         $notification = notify(__('Client has been deleted'));
+
         return redirect()->route('clients.index')->with($notification);
     }
 }

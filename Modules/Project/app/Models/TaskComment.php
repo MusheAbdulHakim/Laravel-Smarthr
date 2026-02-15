@@ -3,9 +3,8 @@
 namespace Modules\Project\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Project\Database\Factories\TaskCommentFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class TaskComment extends Model
 {
@@ -15,7 +14,7 @@ class TaskComment extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'user_id','task_id','message'
+        'user_id', 'task_id', 'message',
     ];
 
     public function user()
@@ -23,8 +22,8 @@ class TaskComment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function task(){
+    public function task()
+    {
         return $this->belongsTo(Task::class, 'task_id');
     }
-    
 }

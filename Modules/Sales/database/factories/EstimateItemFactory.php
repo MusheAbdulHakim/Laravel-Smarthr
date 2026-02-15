@@ -2,8 +2,8 @@
 
 namespace Modules\Sales\Database\Factories;
 
-use Modules\Sales\Models\Estimate;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Sales\Models\Estimate;
 
 class EstimateItemFactory extends Factory
 {
@@ -22,11 +22,10 @@ class EstimateItemFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'unit_cost' => $this->faker->randomFloat(),
-            'quantity' => $this->faker->numberBetween(1,10),
-            'total' => $this->state(function(array $attributes){
+            'quantity' => $this->faker->numberBetween(1, 10),
+            'total' => $this->state(function (array $attributes) {
                 return $attributes['unit_cost'] * $attributes['quantity'];
-            })
+            }),
         ];
     }
 }
-

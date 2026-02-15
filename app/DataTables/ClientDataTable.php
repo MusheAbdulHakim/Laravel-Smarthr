@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Enums\UserType;
-use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Crypt;
@@ -12,8 +11,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ClientDataTable extends DataTable
@@ -21,14 +18,15 @@ class ClientDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/' . $row->avatar) : asset('images/user.jpg');
+                $img = ! empty($row->avatar) ? asset('storage/users/'.$row->avatar) : asset('images/user.jpg');
                 $link = route('clients.show', ['client' => Crypt::encrypt($row->id)]);
+
                 return Str::userAvatar($row->fullname, $img, $link);
             })
             ->editColumn('phone', function ($row) {
@@ -38,12 +36,13 @@ class ClientDataTable extends DataTable
                 return $row->clientDetail->clt_id ?? 'NO-ID';
             })
             ->editColumn('created_at', function ($row) {
-                if (!empty($row->created_at)) {
+                if (! empty($row->created_at)) {
                     return format_date($row->created_at);
                 }
             })
             ->addColumn('action', function ($row) {
                 $id = $row->id;
+
                 return view('pages.clients.action', compact(
                     'id'
                 ));
@@ -74,7 +73,7 @@ class ClientDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
             ]);
     }
 
@@ -102,6 +101,6 @@ class ClientDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Client_' . date('YmdHis');
+        return 'Client_'.date('YmdHis');
     }
 }

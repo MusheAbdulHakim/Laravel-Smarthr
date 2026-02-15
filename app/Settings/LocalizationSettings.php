@@ -6,8 +6,17 @@ use Spatie\LaravelSettings\Settings;
 
 class LocalizationSettings extends Settings
 {
+    public $country;
 
-    public $country, $date_format, $timezone, $lang, $currency_symbol, $currency_code;
+    public $date_format;
+
+    public $timezone;
+
+    public $lang;
+
+    public $currency_symbol;
+
+    public $currency_code;
 
     public static function group(): string
     {

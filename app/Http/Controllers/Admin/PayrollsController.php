@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Enums\UserType;
-use App\Models\Payslip;
-use Illuminate\Http\Request;
-use App\Models\EmployeeDetail;
-use Illuminate\Support\Carbon;
+use App\DataTables\PayslipDataTable;
 use App\Enums\Payroll\SalaryType;
+use App\Enums\UserType;
+use App\Http\Controllers\Controller;
+use App\Models\AttendanceTimestamp;
 use App\Models\EmployeeAllowance;
 use App\Models\EmployeeDeduction;
-use App\Models\AttendanceTimestamp;
-use App\DataTables\PayslipDataTable;
-use App\Http\Controllers\Controller;
+use App\Models\EmployeeDetail;
+use App\Models\Payslip;
 use App\Models\PayslipItem;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
 class PayrollsController extends Controller
@@ -25,17 +25,20 @@ class PayrollsController extends Controller
     public function index(PayslipDataTable $dataTable)
     {
         $pageTitle = __('Payslips');
-        return $dataTable->render('pages.payroll.payslips.index',compact(
+
+        return $dataTable->render('pages.payroll.payslips.index', compact(
             'pageTitle',
         ));
     }
 
-    public function items(){
+    public function items()
+    {
         $pageTitle = __('Payroll Items');
         $allowances = EmployeeAllowance::get();
         $deductions = EmployeeDeduction::get();
-        return view('pages.payroll.items',compact(
-            'pageTitle','allowances','deductions'
+
+        return view('pages.payroll.items', compact(
+            'pageTitle', 'allowances', 'deductions'
         ));
     }
 
@@ -45,7 +48,8 @@ class PayrollsController extends Controller
     public function create()
     {
         $employees = User::where('is_active', true)->where('type', UserType::EMPLOYEE)->get();
-        return view('pages.payroll.payslips.create',compact(
+
+        return view('pages.payroll.payslips.create', compact(
             'employees'
         ));
     }
@@ -71,31 +75,31 @@ class PayrollsController extends Controller
         $total_hours = 0;
         $allowancesItems = null;
         $deductionItems = null;
-        if(!empty($request->use_allowance)){
-            $allowancesItems = EmployeeAllowance::where('employee_detail_id',$employee->id)->get();
+        if (! empty($request->use_allowance)) {
+            $allowancesItems = EmployeeAllowance::where('employee_detail_id', $employee->id)->get();
             $allowances = $allowancesItems->sum('amount');
         }
-        if(!empty($request->use_deductions)){
-            $deductionItems = EmployeeDeduction::where('employee_detail_id',$employee->id)->get();
+        if (! empty($request->use_deductions)) {
+            $deductionItems = EmployeeDeduction::where('employee_detail_id', $employee->id)->get();
             $deductions = $deductionItems->sum('amount');
         }
         $net_pay = ($salaryInfo->base_salary + $allowances) - $deductions;
-        if($request->type === SalaryType::Hourly){
-            $total_hours = AttendanceTimestamp::where('user_id',$employee->user_id)->whereBetween('created_at',[Carbon::parse($request->from_date), Carbon::parse($request->to_date)])
-                ->whereNotNull(['attendance_id','startTime','endTime'])->sum('totalHours');
+        if ($request->type === SalaryType::Hourly) {
+            $total_hours = AttendanceTimestamp::where('user_id', $employee->user_id)->whereBetween('created_at', [Carbon::parse($request->from_date), Carbon::parse($request->to_date)])
+                ->whereNotNull(['attendance_id', 'startTime', 'endTime'])->sum('totalHours');
             $hourly_pay = ($total_hours * $salaryInfo->base_salary);
             $net_pay = ($hourly_pay + $allowances) - $deductions;
         }
-        if($request->type === SalaryType::Weekly){
+        if ($request->type === SalaryType::Weekly) {
             $weeks_salary = ($request->weeks * $salaryInfo->base_salary);
             $net_pay = ($weeks_salary + $allowances) - $deductions;
         }
         $payslip = Payslip::create([
-            'ps_id' => pad_zeros(Payslip::count()+1),
+            'ps_id' => pad_zeros(Payslip::count() + 1),
             'title' => $request->title,
             'employee_detail_id' => $employee->id,
-            'use_allowance' => !empty($request->use_allowance),
-            'use_deduction' => !empty($request->use_deductions),
+            'use_allowance' => ! empty($request->use_allowance),
+            'use_deduction' => ! empty($request->use_deductions),
             'payslip_date' => $request->payslip_date,
             'type' => $request->type,
             'startDate' => $request->from_date,
@@ -104,25 +108,26 @@ class PayrollsController extends Controller
             'weeks' => $request->weeks,
             'net_pay' => $net_pay,
         ]);
-        if(!empty($allowancesItems)){
-            PayslipItem::insert($allowancesItems->map(function(EmployeeAllowance $item) use($payslip){
+        if (! empty($allowancesItems)) {
+            PayslipItem::insert($allowancesItems->map(function (EmployeeAllowance $item) use ($payslip) {
                 return [
                     'type' => 'allowance',
                     'payslip_id' => $payslip->id,
-                    'item_id' => $item->id
+                    'item_id' => $item->id,
                 ];
             })->all());
         }
-        if(!empty($deductionItems)){
-            PayslipItem::insert($deductionItems->map(function(EmployeeDeduction $item) use($payslip){
+        if (! empty($deductionItems)) {
+            PayslipItem::insert($deductionItems->map(function (EmployeeDeduction $item) use ($payslip) {
                 return [
                     'type' => 'deduction',
                     'payslip_id' => $payslip->id,
-                    'item_id' => $item->id
+                    'item_id' => $item->id,
                 ];
             })->all());
         }
         $notification = notify(__('Payslip has been created'));
+
         return back()->with($notification);
     }
 
@@ -137,8 +142,9 @@ class PayrollsController extends Controller
         $employee = $payslip->employee;
         $allowances = $payslip->allowances();
         $deductions = $payslip->deductions();
-        return view('pages.payroll.payslips.show',compact(
-            'payslip','pageTitle','currency','employee','allowances','deductions'
+
+        return view('pages.payroll.payslips.show', compact(
+            'payslip', 'pageTitle', 'currency', 'employee', 'allowances', 'deductions'
         ));
     }
 
@@ -148,8 +154,9 @@ class PayrollsController extends Controller
     public function edit(Payslip $payslip)
     {
         $employees = User::where('is_active', true)->where('type', UserType::EMPLOYEE)->get();
-        return view('pages.payroll.payslips.edit',compact(
-            'employees','payslip'
+
+        return view('pages.payroll.payslips.edit', compact(
+            'employees', 'payslip'
         ));
     }
 
@@ -174,30 +181,30 @@ class PayrollsController extends Controller
         $total_hours = 0;
         $allowancesItems = null;
         $deductionItems = null;
-        if(!empty($request->use_allowance)){
-            $allowancesItems = EmployeeAllowance::where('employee_detail_id',$employee->id)->get();
+        if (! empty($request->use_allowance)) {
+            $allowancesItems = EmployeeAllowance::where('employee_detail_id', $employee->id)->get();
             $allowances = $allowancesItems->sum('amount');
         }
-        if(!empty($request->use_deductions)){
-            $deductionItems = EmployeeDeduction::where('employee_detail_id',$employee->id)->get();
+        if (! empty($request->use_deductions)) {
+            $deductionItems = EmployeeDeduction::where('employee_detail_id', $employee->id)->get();
             $deductions = $deductionItems->sum('amount');
         }
         $net_pay = ($salaryInfo->base_salary + $allowances) - $deductions;
-        if($request->type === SalaryType::Hourly){
-            $total_hours = AttendanceTimestamp::where('user_id',$employee->user_id)->whereBetween('created_at',[Carbon::parse($request->from_date), Carbon::parse($request->to_date)])
-                ->whereNotNull(['attendance_id','startTime','endTime'])->sum('totalHours');
+        if ($request->type === SalaryType::Hourly) {
+            $total_hours = AttendanceTimestamp::where('user_id', $employee->user_id)->whereBetween('created_at', [Carbon::parse($request->from_date), Carbon::parse($request->to_date)])
+                ->whereNotNull(['attendance_id', 'startTime', 'endTime'])->sum('totalHours');
             $hourly_pay = ($total_hours * $salaryInfo->base_salary);
             $net_pay = ($hourly_pay + $allowances) - $deductions;
         }
-        if($request->type === SalaryType::Weekly){
+        if ($request->type === SalaryType::Weekly) {
             $weeks_salary = ($request->weeks * $salaryInfo->base_salary);
             $net_pay = ($weeks_salary + $allowances) - $deductions;
         }
         $payslip->update([
             'title' => $request->title,
             'employee_detail_id' => $employee->id,
-            'use_allowance' => !empty($request->use_allowance),
-            'use_deduction' => !empty($request->use_deductions),
+            'use_allowance' => ! empty($request->use_allowance),
+            'use_deduction' => ! empty($request->use_deductions),
             'payslip_date' => $request->payslip_date,
             'type' => $request->type,
             'startDate' => $request->from_date,
@@ -206,25 +213,26 @@ class PayrollsController extends Controller
             'weeks' => $request->weeks,
             'net_pay' => $net_pay,
         ]);
-        if(!empty($allowancesItems)){
-            PayslipItem::insert($allowancesItems->map(function(EmployeeAllowance $item) use($payslip){
+        if (! empty($allowancesItems)) {
+            PayslipItem::insert($allowancesItems->map(function (EmployeeAllowance $item) use ($payslip) {
                 return [
                     'type' => 'allowance',
                     'payslip_id' => $payslip->id,
-                    'item_id' => $item->id
+                    'item_id' => $item->id,
                 ];
             })->all());
         }
-        if(!empty($deductionItems)){
-            PayslipItem::insert($deductionItems->map(function(EmployeeDeduction $item) use($payslip){
+        if (! empty($deductionItems)) {
+            PayslipItem::insert($deductionItems->map(function (EmployeeDeduction $item) use ($payslip) {
                 return [
                     'type' => 'deduction',
                     'payslip_id' => $payslip->id,
-                    'item_id' => $item->id
+                    'item_id' => $item->id,
                 ];
             })->all());
         }
         $notification = notify(__('Payslip has been updated'));
+
         return back()->with($notification);
     }
 
@@ -235,6 +243,7 @@ class PayrollsController extends Controller
     {
         $payslip->delete();
         $notification = notify(__('Payslip has been deleted'));
+
         return back()->with($notification);
     }
 }

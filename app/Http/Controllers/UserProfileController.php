@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-
     public function index()
     {
         $user = auth()->user();
         $pageTitle = __('Profile');
+
         return view('pages.profile', compact(
             'user',
             'pageTitle'
@@ -21,6 +21,7 @@ class UserProfileController extends Controller
     public function edit(Request $request)
     {
         $user = auth()->user();
+
         return view('pages.profile.edit', compact(
             'user'
         ));
@@ -35,7 +36,7 @@ class UserProfileController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         $imageName = $user->avatar;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user->update([
@@ -52,6 +53,7 @@ class UserProfileController extends Controller
             'avatar' => $imageName,
         ]);
         $notification = notify(__('Profile has been updated'));
+
         return redirect()->route('profile')->with($notification);
     }
 }

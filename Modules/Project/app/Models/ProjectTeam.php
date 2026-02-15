@@ -3,9 +3,8 @@
 namespace Modules\Project\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Project\Database\Factories\ProjectTeamFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ProjectTeam extends Model
 {
@@ -15,15 +14,16 @@ class ProjectTeam extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'project_id','user_id',
+        'project_id', 'user_id',
     ];
 
-    public function project(){
-        return $this->belongsTo(Project::class,'project_id');
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

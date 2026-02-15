@@ -11,10 +11,10 @@ class Payslip extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ps_id','title','employee_detail_id',
+        'ps_id', 'title', 'employee_detail_id',
         'use_allowance',
-        'use_deduction','payslip_date','weeks','type',
-        'total_hours','net_pay','startDate','endDate'
+        'use_deduction', 'payslip_date', 'weeks', 'type',
+        'total_hours', 'net_pay', 'startDate', 'endDate',
     ];
 
     protected $casts = [
@@ -24,25 +24,26 @@ class Payslip extends Model
     public function allowances()
     {
         return $this->items()
-            ->where('type','allowance')
+            ->where('type', 'allowance')
             ->get()
-            ->map(function(PayslipItem $model){
+            ->map(function (PayslipItem $model) {
                 return $model->allowances;
             });
     }
+
     public function deductions()
     {
         return $this->items()
-            ->where('type','deduction')
+            ->where('type', 'deduction')
             ->get()
-            ->map(function(PayslipItem $model){
+            ->map(function (PayslipItem $model) {
                 return $model->deductions;
             });
     }
 
     public function items()
     {
-        return $this->hasMany(PayslipItem::class,'payslip_id');
+        return $this->hasMany(PayslipItem::class, 'payslip_id');
     }
 
     public function employee()

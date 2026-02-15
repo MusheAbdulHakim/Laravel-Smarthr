@@ -4,7 +4,6 @@ namespace Modules\Roles\Listeners;
 
 use App\Events\AppMenuEvent;
 
-
 class AppMenuListener
 {
     /**
@@ -26,7 +25,7 @@ class AppMenuListener
             'route' => 'roles.index',
             'icon' => 'key',
             'order' => 12,
-            'label' => __('Roles & Permissions')
+            'label' => __('Roles & Permissions'),
         ]);
     }
 }

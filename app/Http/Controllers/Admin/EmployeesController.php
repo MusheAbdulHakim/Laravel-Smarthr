@@ -9,7 +9,6 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\EmployeeDetail;
 use App\Models\User;
-use Chatify\Facades\ChatifyMessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
@@ -21,8 +20,9 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $pageTitle = __("Employees");
+        $pageTitle = __('Employees');
         $employees = User::where('type', UserType::EMPLOYEE)->get();
+
         return view('pages.employees.index', compact(
             'pageTitle',
             'employees'
@@ -34,7 +34,8 @@ class EmployeesController extends Controller
      */
     public function list(EmployeeDataTable $dataTable)
     {
-        $pageTitle = __("employees");
+        $pageTitle = __('employees');
+
         return $dataTable->render('pages.employees.list', compact(
             'pageTitle',
         ));
@@ -47,6 +48,7 @@ class EmployeesController extends Controller
     {
         $departments = Department::get();
         $designations = Designation::get();
+
         return view('pages.employees.create', compact(
             'departments',
             'designations'
@@ -68,7 +70,7 @@ class EmployeesController extends Controller
         ]);
         $imageName = null;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user = User::create([
@@ -85,13 +87,13 @@ class EmployeesController extends Controller
             'phone' => $request->phone,
             'avatar' => $imageName,
             'created_by' => auth()->user()->id,
-            'is_active' => !empty($request->status),
-            'password' => Hash::make($request->password)
+            'is_active' => ! empty($request->status),
+            'password' => Hash::make($request->password),
         ]);
-        if (!empty($user)) {
+        if (! empty($user)) {
             $user->assignRole(UserType::EMPLOYEE);
             $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
-            $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
+            $empId = 'EMP-'.pad_zeros(($totalEmployees + 1));
             EmployeeDetail::create([
                 'emp_id' => $empId,
                 'user_id' => $user->id,
@@ -100,6 +102,7 @@ class EmployeesController extends Controller
             ]);
         }
         $notification = notify(__('Employee has been added'));
+
         return back()->with($notification);
     }
 
@@ -112,6 +115,7 @@ class EmployeesController extends Controller
         $user = User::findOrFail($id);
         $employee = $user->employeeDetail;
         $pageTitle = __('Employee Profile');
+
         return view('pages.employees.show', compact(
             'employee',
             'user',
@@ -128,6 +132,7 @@ class EmployeesController extends Controller
         $employee = User::findOrFail($userId);
         $departments = Department::get();
         $designations = Designation::get();
+
         return view('pages.employees.edit', compact(
             'departments',
             'designations',
@@ -149,7 +154,7 @@ class EmployeesController extends Controller
         $user = $employee;
         $imageName = $user->avatar;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user->update([
@@ -164,17 +169,17 @@ class EmployeesController extends Controller
             'dial_code' => $request->dial_code ?? $user->dial_code,
             'phone' => $request->phone ?? $user->phone,
             'avatar' => $imageName,
-            'is_active' => !empty($request->status) ?? $user->is_active,
-            'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
+            'is_active' => ! empty($request->status) ?? $user->is_active,
+            'password' => ! empty($request->password) ? Hash::make($request->password) : $user->password,
         ]);
-        if (!empty($user)) {
-            if(!$user->hasRole(UserType::EMPLOYEE)){
+        if (! empty($user)) {
+            if (! $user->hasRole(UserType::EMPLOYEE)) {
                 $user->assignRole(UserType::EMPLOYEE);
             }
             $employeeDetails = $user->employeeDetail;
-            if (!empty($employeeDetails) && empty($employeeDetails->emp_id)) {
+            if (! empty($employeeDetails) && empty($employeeDetails->emp_id)) {
                 $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
-                $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
+                $empId = 'EMP-'.pad_zeros(($totalEmployees + 1));
             }
             EmployeeDetail::updateOrCreate([
                 'user_id' => $user->id,
@@ -185,7 +190,8 @@ class EmployeesController extends Controller
                 'designation_id' => $request->designation,
             ]);
         }
-        $notification = notify(__("Employee has been updated"));
+        $notification = notify(__('Employee has been updated'));
+
         return back()->with($notification);
     }
 
@@ -195,7 +201,8 @@ class EmployeesController extends Controller
     public function destroy(User $employee)
     {
         $employee->delete();
-        $notification = notify(__("Employee has been deleted"));
+        $notification = notify(__('Employee has been deleted'));
+
         return back()->with($notification);
     }
 }

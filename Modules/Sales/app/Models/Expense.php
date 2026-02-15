@@ -3,9 +3,9 @@
 namespace Modules\Sales\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Sales\Database\Factories\ExpenseFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expense extends Model
 {
@@ -15,9 +15,8 @@ class Expense extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'item_name','purchased_from','purchase_date','amount','status','paid_by','created_by'
+        'item_name', 'purchased_from', 'purchase_date', 'amount', 'status', 'paid_by', 'created_by',
     ];
-
 
     public function createdBy()
     {

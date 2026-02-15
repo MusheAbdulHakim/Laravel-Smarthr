@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Enums\UserType;
-use Illuminate\Http\Request;
 use App\Models\EmployeeDeduction;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class DeductionsController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $pageTitle = __('Deductions');
         $deductions = EmployeeDeduction::get();
-        return view('pages.payroll.deductions.index',compact(
-            'pageTitle','deductions'
+
+        return view('pages.payroll.deductions.index', compact(
+            'pageTitle', 'deductions'
         ));
     }
 
@@ -29,7 +30,8 @@ class DeductionsController extends Controller
         $employees = User::where('type', UserType::EMPLOYEE)
             ->whereHas('employeeDetail')
             ->where('is_active', true)->get();
-        return view("pages.payroll.deductions.create",compact(
+
+        return view('pages.payroll.deductions.create', compact(
             'employees'
         ));
     }
@@ -45,15 +47,15 @@ class DeductionsController extends Controller
         ]);
 
         EmployeeDeduction::create([
-            'employee_detail_id' => $request->employee, 
+            'employee_detail_id' => $request->employee,
             'name' => $request->name,
-            'amount' => $request->amount, 
+            'amount' => $request->amount,
         ]);
         $notification = notify(__('Deduction has been added'));
+
         return back()->with($notification);
     }
 
-   
     /**
      * Show the form for editing the specified resource.
      */
@@ -62,8 +64,9 @@ class DeductionsController extends Controller
         $employees = User::where('type', UserType::EMPLOYEE)
             ->whereHas('employeeDetail')
             ->where('is_active', true)->get();
-        return view("pages.payroll.deductions.edit",compact(
-            'employees','deduction'
+
+        return view('pages.payroll.deductions.edit', compact(
+            'employees', 'deduction'
         ));
     }
 
@@ -73,11 +76,12 @@ class DeductionsController extends Controller
     public function update(Request $request, EmployeeDeduction $deduction)
     {
         $deduction->update([
-            'employee_detail_id' => $request->employee ?? $deduction->employee_detail_id, 
+            'employee_detail_id' => $request->employee ?? $deduction->employee_detail_id,
             'name' => $request->name ?? $deduction->name,
-            'amount' => $request->amount ?? $deduction->amount, 
+            'amount' => $request->amount ?? $deduction->amount,
         ]);
         $notification = notify(__('Deduction has been updated'));
+
         return back()->with($notification);
     }
 
@@ -88,6 +92,7 @@ class DeductionsController extends Controller
     {
         $deduction->delete();
         $notification = notify(__('Deduction has been deleted'));
+
         return back()->with($notification);
     }
 }

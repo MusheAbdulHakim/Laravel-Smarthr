@@ -2,8 +2,8 @@
 
 namespace Modules\Accounting\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Accounting\Database\Factories\BudgetCategoryFactory;
 
 class BudgetCategory extends Model

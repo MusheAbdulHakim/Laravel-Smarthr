@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Enums\UserType;
 use App\Events\AppMenuEvent;
 
 class AppMenuListener

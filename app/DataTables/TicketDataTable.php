@@ -11,8 +11,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TicketDataTable extends DataTable
@@ -20,7 +18,7 @@ class TicketDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable($query)
     {
@@ -28,13 +26,14 @@ class TicketDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('last_reply', function ($row) {
                 $reply = $row->replies()->latest()->first();
-                if (!empty($reply)) {
+                if (! empty($reply)) {
                     return $reply->created_at->diffForHumans();
                 }
             })
             ->addColumn('tk_id', function ($row) {
                 $param = ['ticket' => Crypt::encrypt($row->id)];
-                return '<a href="' . route('tickets.show', $param) . '">' . $row->tk_id . '</a>';
+
+                return '<a href="'.route('tickets.show', $param).'">'.$row->tk_id.'</a>';
             })
             ->editColumn('status', function ($row) {
                 return $row->status->name;
@@ -43,23 +42,26 @@ class TicketDataTable extends DataTable
                 return $row->priority->name ?? '';
             })
             ->addColumn('user', function ($row) {
-                if (!empty($row->user_id)) {
-                    $img = !empty($row->avatar) ? asset('storage/users/' . $row->avatar) : asset('images/user.jpg');
+                if (! empty($row->user_id)) {
+                    $img = ! empty($row->avatar) ? asset('storage/users/'.$row->avatar) : asset('images/user.jpg');
                     $link = 'javascript:void(0)';
                     if (can('show-Employeeprofile')) {
                         $link = route('employees.show', ['employee' => Crypt::encrypt($row->id)]);
                     }
+
                     return Str::userAvatar($row->user->fullname, $img, $link);
                 }
+
                 return __('Yet to be assigned to user');
             })
             ->addColumn('created_at', function ($row) {
-                if (!empty($row->created_at)) {
+                if (! empty($row->created_at)) {
                     return format_date($row->created_at);
                 }
             })
             ->addColumn('action', function ($row) {
                 $id = $row->id;
+
                 return view('pages.tickets.action', compact('id'));
             })
             ->rawColumns(['action', 'user', 'tk_id']);
@@ -78,6 +80,7 @@ class TicketDataTable extends DataTable
                 ->where('created_by', '!=', auth()->user()->id)
                 ->newQuery();
         }
+
         return Ticket::where('created_by', auth()->user()->id)->newQuery();
     }
 
@@ -97,7 +100,7 @@ class TicketDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
             ]);
     }
 
@@ -128,6 +131,6 @@ class TicketDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Ticket_' . date('YmdHis');
+        return 'Ticket_'.date('YmdHis');
     }
 }

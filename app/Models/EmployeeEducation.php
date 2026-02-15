@@ -16,6 +16,6 @@ class EmployeeEducation extends Model
 
     public function employee()
     {
-        return $this->belongsTo(EmployeeDetail::class,);
+        return $this->belongsTo(EmployeeDetail::class);
     }
 }

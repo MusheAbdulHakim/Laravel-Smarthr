@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +23,7 @@ class TicketReplyFactory extends Factory
             'reply_id' => null,
             'message' => $this->faker->paragraph(),
             'created_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'is_read' => $this->faker->randomElement([true, false])
+            'is_read' => $this->faker->randomElement([true, false]),
         ];
     }
 }

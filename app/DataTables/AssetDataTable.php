@@ -3,44 +3,43 @@
 namespace App\DataTables;
 
 use App\Models\Asset;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Str;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class AssetDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('user', function($row){
+            ->addColumn('user', function ($row) {
                 return $row->user->name ?? '';
             })
-            ->addColumn('cost', function($row){
+            ->addColumn('cost', function ($row) {
                 return LocaleSettings('currency_symbol').$row->cost;
             })
-            ->addColumn('status', function($row){
+            ->addColumn('status', function ($row) {
                 return ucwords($row->status);
             })
-            ->addColumn('created_at', function($row){
+            ->addColumn('created_at', function ($row) {
                 return format_date($row->created_at);
             })
-            ->addColumn('warranty', function($row){
+            ->addColumn('warranty', function ($row) {
                 return "$row->warranty ".Str::plural(__('Month'), $row->warranty);
             })
-            ->addColumn('action',function($row){
+            ->addColumn('action', function ($row) {
                 $id = $row->id;
-                return view('pages.assets.actions',compact('id'));
+
+                return view('pages.assets.actions', compact('id'));
             })
             ->setRowId('id');
     }
@@ -59,19 +58,19 @@ class AssetDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('asset-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('asset-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+                    // ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -90,9 +89,9 @@ class AssetDataTable extends DataTable
             Column::make('cost'),
             Column::make('created_at'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->addClass('text-end'),
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-end'),
         ];
     }
 
@@ -101,6 +100,6 @@ class AssetDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Asset_' . date('YmdHis');
+        return 'Asset_'.date('YmdHis');
     }
 }

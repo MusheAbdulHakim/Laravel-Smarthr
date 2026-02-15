@@ -19,7 +19,7 @@ class DepartmentFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'location' => $this->faker->streetAddress(),
-            'description' => $this->faker->realText()
+            'description' => $this->faker->realText(),
         ];
     }
 }

@@ -10,8 +10,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class PayslipDataTable extends DataTable
@@ -19,7 +17,7 @@ class PayslipDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -29,38 +27,40 @@ class PayslipDataTable extends DataTable
                 if (auth()->user()->can('show-payslip')) {
                     $link = route('payslips.show', ['payslip' => \Crypt::encrypt($row->id)]);
                 }
-                return '<a href="' . $link . '">' . $row->ps_id . '</a>';
+
+                return '<a href="'.$link.'">'.$row->ps_id.'</a>';
             })
             ->addColumn('employee', function ($row) {
                 $user = $row->employee->user;
-                $img = !empty($user->avatar) ? asset('storage/users/' . $user->avatar) : asset('images/user.jpg');
+                $img = ! empty($user->avatar) ? asset('storage/users/'.$user->avatar) : asset('images/user.jpg');
                 $link = '#';
                 if (auth()->user()->can('show-Employeeprofile')) {
                     $link = route('employees.show', ['employee' => Crypt::encrypt($row->id)]);
                 }
+
                 return Str::userAvatar($user->fullname, $img, $link);
             })
             ->editColumn('type', function ($row) {
                 return $row->type->name;
             })
             ->editColumn('net_pay', function ($row) {
-                if (!empty($row->net_pay)) {
-                    return LocaleSettings('currency_symbol') . ' ' . $row->net_pay;
+                if (! empty($row->net_pay)) {
+                    return LocaleSettings('currency_symbol').' '.$row->net_pay;
                 }
             })
             ->editColumn('created_at', function ($row) {
-                if (!empty($row->created_at)) {
+                if (! empty($row->created_at)) {
                     return format_date($row->created_at);
                 }
             })
             ->addColumn('payslip_date', function ($row) {
-                if (!empty($row->payslip_date)) {
+                if (! empty($row->payslip_date)) {
                     return format_date($row->payslip_date);
                 }
             })
             ->addColumn('action', function ($row) {
                 return view('pages.payroll.payslips.actions', [
-                    'id' => $row->id
+                    'id' => $row->id,
                 ]);
             })
             ->rawColumns(['action', 'ps_id', 'employee']);
@@ -90,7 +90,7 @@ class PayslipDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
             ]);
     }
 
@@ -118,6 +118,6 @@ class PayslipDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Payslip_' . date('YmdHis');
+        return 'Payslip_'.date('YmdHis');
     }
 }

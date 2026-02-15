@@ -10,15 +10,14 @@ class ChatMessage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','from_id','receiver_id','body','type',
+        'user_id', 'from_id', 'receiver_id', 'body', 'type',
         'is_read',
-    ];  
+    ];
 
     public function fromUser()
     {
         return $this->belongsTo(User::class, 'from_id');
     }
-
 
     public function sender()
     {

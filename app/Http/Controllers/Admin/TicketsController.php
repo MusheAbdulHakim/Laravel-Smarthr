@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Ticket;
-use App\Enums\UserType;
-use App\Mail\NewTicket;
-use App\Enums\TicketStatus;
-use Illuminate\Http\Request;
-use App\Enums\GeneralPriority;
 use App\DataTables\TicketDataTable;
+use App\Enums\GeneralPriority;
+use App\Enums\TicketStatus;
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
+use App\Mail\NewTicket;
+use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends Controller
 {
@@ -21,12 +21,12 @@ class TicketsController extends Controller
      */
     public function index(TicketDataTable $dataTable)
     {
-        $pageTitle = __("Tickets");
-        return $dataTable->render('pages.tickets.index',compact(
+        $pageTitle = __('Tickets');
+
+        return $dataTable->render('pages.tickets.index', compact(
             'pageTitle'
         ));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +34,8 @@ class TicketsController extends Controller
     public function create()
     {
         $users = User::where('type', UserType::EMPLOYEE)->whereIsActive(true)->get();
-        return view('pages.tickets.create',compact(
+
+        return view('pages.tickets.create', compact(
             'users'
         ));
     }
@@ -50,28 +51,29 @@ class TicketsController extends Controller
         ]);
         $creator = auth()->user()->id;
         $ticket = Ticket::create([
-            'tk_id' => $request->tk_id ?? '#TKT-'.pad_zeros(Ticket::count()+1),
+            'tk_id' => $request->tk_id ?? '#TKT-'.pad_zeros(Ticket::count() + 1),
             'subject' => $request->subject,
             'created_by' => $creator,
             'user_id' => null,
             'description' => $request->description,
             'status' => $request->status ?? TicketStatus::NEW,
             'priority' => $request->priority ?? GeneralPriority::MEDIUM,
-            'endDate' => $request->endDate
+            'endDate' => $request->endDate,
         ]);
         $ticketFiles = $request->ticketFiles ?? [];
-        if(!empty($ticketFiles) && $request->hasFile('ticketFiles') && count($ticketFiles) > 0){
-            foreach($ticketFiles as $file){
+        if (! empty($ticketFiles) && $request->hasFile('ticketFiles') && count($ticketFiles) > 0) {
+            foreach ($ticketFiles as $file) {
                 $ticket->addMedia($file)->toMediaCollection('ticket-attachments');
             }
         }
-        Mail::to(User::where('type',UserType::SUPERADMIN)->get())
+        Mail::to(User::where('type', UserType::SUPERADMIN)->get())
             ->send(
-            (new NewTicket($ticket))
-                ->subject('You Have A New Ticket :' .$ticket->tk_id)
-                ->from($ticket->createdBy->email, $ticket->createdBy->fullname)
+                (new NewTicket($ticket))
+                    ->subject('You Have A New Ticket :'.$ticket->tk_id)
+                    ->from($ticket->createdBy->email, $ticket->createdBy->fullname)
             );
         $notification = notify(__('Ticket has been added'));
+
         return back()->with($notification);
     }
 
@@ -84,20 +86,23 @@ class TicketsController extends Controller
         $pageTitle = __($ticket->subject);
         $ticketFiles = $ticket->getMedia('ticket-attachments');
         $users = User::where('type', UserType::EMPLOYEE)->whereIsActive(true)->get();
-        return view('pages.tickets.show',compact(
-            'ticket','pageTitle','ticketFiles','users'
+
+        return view('pages.tickets.show', compact(
+            'ticket', 'pageTitle', 'ticketFiles', 'users'
         ));
     }
 
     public function assignedTickets(TicketDataTable $dataTable)
     {
-        $pageTitle = __("My Tickets");
-        return $dataTable->render('pages.tickets.index',compact(
+        $pageTitle = __('My Tickets');
+
+        return $dataTable->render('pages.tickets.index', compact(
             'pageTitle',
         ));
     }
 
-    public function assignUser(Request $request){
+    public function assignUser(Request $request)
+    {
         $request->validate([
             'ticket' => 'required',
             'user' => 'required',
@@ -110,10 +115,11 @@ class TicketsController extends Controller
         Mail::to($user)
             ->send(
                 (new NewTicket($ticket))
-                ->from($ticket->createdBy->email, $ticket->createdBy->fullname)
-                ->subject(__('You Have Been Assigned A Ticket :') .$ticket->tk_id)
+                    ->from($ticket->createdBy->email, $ticket->createdBy->fullname)
+                    ->subject(__('You Have Been Assigned A Ticket :').$ticket->tk_id)
             );
         $notification = notify(__('Ticket has been assigned to user successfully'));
+
         return back()->with($notification);
     }
 
@@ -124,8 +130,9 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         $users = User::where('type', UserType::EMPLOYEE)->whereIsActive(true)->get();
-        return view('pages.tickets.edit',compact(
-            'users','ticket'
+
+        return view('pages.tickets.edit', compact(
+            'users', 'ticket'
         ));
     }
 
@@ -146,16 +153,17 @@ class TicketsController extends Controller
             'description' => $request->description,
             'status' => $request->status ?? TicketStatus::NEW,
             'priority' => $request->priority ?? GeneralPriority::MEDIUM,
-            'endDate' => $request->endDate
+            'endDate' => $request->endDate,
         ]);
         $ticketFiles = $request->ticketFiles ?? [];
-        if(!empty($ticketFiles) && $request->hasFile('ticketFiles') && count($ticketFiles) > 0){
+        if (! empty($ticketFiles) && $request->hasFile('ticketFiles') && count($ticketFiles) > 0) {
             $ticket->getMedia('ticket-attachments')->delete();
-            foreach($ticketFiles as $file){
+            foreach ($ticketFiles as $file) {
                 $ticket->addMedia($file)->toMediaCollection('ticket-attachments');
             }
         }
         $notification = notify(__('Ticket has been updated'));
+
         return back()->with($notification);
     }
 
@@ -166,6 +174,7 @@ class TicketsController extends Controller
     {
         $ticket->delete();
         $notification = notify(__('Ticket has been deleted'));
+
         return back()->with($notification);
     }
 }

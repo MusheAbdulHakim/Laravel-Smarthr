@@ -4,8 +4,6 @@ namespace Modules\Sales\Listeners;
 
 use App\Events\AppMenuEvent;
 
-
-
 class AppMenuListener
 {
     /**
@@ -24,8 +22,8 @@ class AppMenuListener
         $menu = $event->menu;
         if (auth()->user()->canAny(['view-taxes', 'view-expenses', 'view-estimates', 'view-invoices'])) {
             $menu->add([
-                'label' => __("Sales"),
-                'icon' => "files-o",
+                'label' => __('Sales'),
+                'icon' => 'files-o',
                 'order' => 15,
                 'items' => [
                     [
@@ -48,7 +46,7 @@ class AppMenuListener
                         'permission' => 'view-invoices',
                         'route' => 'invoices.index',
                     ],
-                ]
+                ],
             ]);
         }
     }

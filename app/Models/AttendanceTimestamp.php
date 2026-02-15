@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class AttendanceTimestamp extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id','attendance_id','project_id','startTime','endTime','location',
-        'billable','ip','note'
+        'user_id', 'attendance_id', 'project_id', 'startTime', 'endTime', 'location',
+        'billable', 'ip', 'note',
     ];
 
     protected $casts = [
@@ -22,10 +21,11 @@ class AttendanceTimestamp extends Model
 
     public function getTotalHoursAttribute()
     {
-        return !empty($this->endTime) ? $this->endTime->diff($this->startTime)->hour: now()->diff($this->startTime)->hour;
+        return ! empty($this->endTime) ? $this->endTime->diff($this->startTime)->hour : now()->diff($this->startTime)->hour;
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
@@ -34,7 +34,8 @@ class AttendanceTimestamp extends Model
         return $this->belongsTo(Attendance::class, 'attendance_id');
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(\Modules\Project\Models\Project::class, 'project_id');
     }
 }

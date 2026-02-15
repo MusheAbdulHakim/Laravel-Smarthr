@@ -4,7 +4,6 @@ namespace Modules\Whiteboard\Listeners;
 
 use App\Events\AppMenuEvent;
 
-
 class AppMenuListener
 {
     /**
@@ -26,20 +25,20 @@ class AppMenuListener
             $menu->add([
                 'icon' => 'pencil',
                 'title' => __('Drawing Apps'),
-                'label' => __("Whiteboard"),
+                'label' => __('Whiteboard'),
                 'order' => 14,
                 'items' => [
                     [
                         'label' => __('TlDraw App'),
                         'route' => 'tldraw.index',
-                        'permission' => 'view-tldraw'
+                        'permission' => 'view-tldraw',
                     ],
                     [
                         'label' => __('ExcaliDraw'),
                         'route' => 'excalidraw.index',
-                        'permission' => 'view-excalidraw'
+                        'permission' => 'view-excalidraw',
                     ],
-                ]
+                ],
             ]);
         }
     }

@@ -4,7 +4,6 @@ namespace Modules\Accounting\Listeners;
 
 use App\Events\AppMenuEvent;
 
-
 class AppMenuListener
 {
     /**
@@ -22,11 +21,11 @@ class AppMenuListener
     {
         if (auth()->user()->canAny(['view-budgetCategories', 'view-budgets', 'view-budgetExpenses', 'view-budgetRevenues'])) {
             $menu = $event->menu;
-            $activeClass = route_is(["budget.categories.*", "budgets.*", "budget.expenses.*", "budget.revenue.*"]) ? "active" : "";
+            $activeClass = route_is(['budget.categories.*', 'budgets.*', 'budget.expenses.*', 'budget.revenue.*']) ? 'active' : '';
             $menu
                 ->add([
                     'icon' => 'files-o',
-                    'label' => __("Accounting"),
+                    'label' => __('Accounting'),
                     'order' => 17,
                     'items' => [
                         [

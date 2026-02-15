@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use LaravelLang\Routes\Events\LocaleHasBeenSetEvent;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,13 +30,13 @@ class AppServiceProvider extends ServiceProvider
         });
         Event::listen(static function (LocaleHasBeenSetEvent $event) {
             $lang = $event->locale->code;
-            Log::info('Locale set to: ' . $lang);
+            Log::info('Locale set to: '.$lang);
         });
         View::composer('partials.sidebar', function ($view) {
-            $view->with('menuItems', (new MenuService())->getMenu());
+            $view->with('menuItems', (new MenuService)->getMenu());
         });
         View::composer('pages.settings.index', function ($view) {
-            $view->with('menuItems', (new MenuService())->renderSettingsMenu());
+            $view->with('menuItems', (new MenuService)->renderSettingsMenu());
         });
     }
 }
