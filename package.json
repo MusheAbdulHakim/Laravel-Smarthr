@@ -31,7 +31,7 @@
         "audio-recorder-polyfill": "^0.4.1",
         "autolinker": "^2.2.2",
         "bootstrap-icons": "^1.13.1",
-        "ckeditor5": "^42.0.2",
+        "ckeditor5": "^47.5.0",
         "clsx": "^2.1.1",
         "datatables.net-bs5": "^2.3.7",
         "datatables.net-buttons-bs5": "^3.2.6",
