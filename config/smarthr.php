@@ -1,4 +1,5 @@
 <?php
+
 return [
     'template' => 'default',
     'layout' => 'vertical',

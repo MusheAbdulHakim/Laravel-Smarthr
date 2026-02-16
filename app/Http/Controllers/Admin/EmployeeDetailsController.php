@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\EmployeeDetail;
-use App\Enums\Payroll\SalaryType;
-use App\Models\EmployeeEducation;
 use App\Enums\Payroll\PaymentMethod;
-use App\Http\Controllers\Controller;
+use App\Enums\Payroll\SalaryType;
+use App\Http\Controllers\BaseController;
+use App\Models\EmployeeDetail;
+use App\Models\EmployeeEducation;
 use App\Models\EmployeeSalaryDetail;
 use App\Models\EmployeeWorkExperience;
-use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
 
 class EmployeeDetailsController extends BaseController
 {
-
     public function personalInfo(EmployeeDetail $employeeDetail)
     {
         return view('pages.employees.modals.personal-info', compact(
@@ -35,9 +33,10 @@ class EmployeeDetailsController extends BaseController
             'spouse_occupation' => $request->spouse_occupation,
             'no_of_children' => $request->children,
             'dob' => $request->dob,
-            'date_joined' => $request->date_joined, 
+            'date_joined' => $request->date_joined,
         ]);
-        $notification = notify(__("Personal Information has been updated"));
+        $notification = notify(__('Personal Information has been updated'));
+
         return back()->with($notification);
     }
 
@@ -54,16 +53,17 @@ class EmployeeDetailsController extends BaseController
             'emergency_contacts' => [
                 'primary' => $request->primary,
                 'secondary' => $request->secondary,
-            ]
+            ],
         ]);
-        $notification = notify(__("Emergency contacts has been updated"));
+        $notification = notify(__('Emergency contacts has been updated'));
+
         return back()->with($notification);
     }
-
 
     public function workExperience(EmployeeDetail $employeeDetail)
     {
         $experiences = $employeeDetail->workExperience;
+
         return view('pages.employees.modals.experience', compact(
             'employeeDetail',
             'experiences'
@@ -80,10 +80,10 @@ class EmployeeDetailsController extends BaseController
         $experiences = $request->experience;
         foreach ($experiences as $i => $experience) {
             $fileName = null;
-            $dir = public_path("storage/employees/" . $employeeDetail->emp_id . "/work-experience");
+            $dir = public_path('storage/employees/'.$employeeDetail->emp_id.'/work-experience');
             $requestFile = $experience['file'] ?? null;
-            if (!empty($requestFile)) {
-                $fileName = random_str(7) . '.' . $requestFile->extension();
+            if (! empty($requestFile)) {
+                $fileName = random_str(7).'.'.$requestFile->extension();
                 $requestFile->move($dir, $fileName);
             }
             EmployeeWorkExperience::updateOrCreate([
@@ -101,7 +101,8 @@ class EmployeeDetailsController extends BaseController
                 'file' => $fileName,
             ]);
         }
-        $notification = notify(__("Exployee Working experience has been updated"));
+        $notification = notify(__('Exployee Working experience has been updated'));
+
         return back()->with($notification);
     }
 
@@ -117,8 +118,8 @@ class EmployeeDetailsController extends BaseController
         ]);
         EmployeeSalaryDetail::updateOrCreate([
             'id' => $request->salary_detail_id,
-            'employee_detail_id' => $employeeDetail->id
-        ],[
+            'employee_detail_id' => $employeeDetail->id,
+        ], [
             'employee_detail_id' => $employeeDetail->id,
             'basis' => $request->basis ?? SalaryType::Monthly,
             'base_salary' => $request->base_salary,
@@ -130,22 +131,25 @@ class EmployeeDetailsController extends BaseController
             'esi_contribution' => $request->esi_contribution,
             'esi_number' => $request->esi_number,
             'additional_esi_rate' => $request->additional_esi_rate ?? 0.00,
-            'total_additional_esi_rate' => $request->total_esi_rate ?? 0.00
+            'total_additional_esi_rate' => $request->total_esi_rate ?? 0.00,
         ]);
         $notification = notify(__('Salary details has been updated'));
+
         return back()->with($notification);
     }
 
     public function deleteWorkExperience(Request $request, EmployeeWorkExperience $experience)
     {
         $experience->delete();
-        $notification = notify(__("Work experience has been deleted"));
+        $notification = notify(__('Work experience has been deleted'));
+
         return back()->with($notification);
     }
 
     public function education(EmployeeDetail $employeeDetail)
     {
         $educations = $employeeDetail->education;
+
         return view('pages.employees.modals.education', compact(
             'employeeDetail',
             'educations'
@@ -157,10 +161,10 @@ class EmployeeDetailsController extends BaseController
         $educations = $request->education;
         foreach ($educations as $i => $education) {
             $fileName = null;
-            $dir = public_path("storage/employees/" . $employeeDetail->emp_id . "/education");
+            $dir = public_path('storage/employees/'.$employeeDetail->emp_id.'/education');
             $requestFile = $education['file'] ?? null;
-            if (!empty($requestFile)) {
-                $fileName = random_str(7) . '.' . $requestFile->extension();
+            if (! empty($requestFile)) {
+                $fileName = random_str(7).'.'.$requestFile->extension();
                 $requestFile->move($dir, $fileName);
             }
             EmployeeEducation::updateOrCreate([
@@ -177,7 +181,8 @@ class EmployeeDetailsController extends BaseController
                 'file' => $fileName,
             ]);
         }
-        $notification = notify(__("Employee education has been added"));
+        $notification = notify(__('Employee education has been added'));
+
         return back()->with($notification);
     }
 
@@ -186,6 +191,7 @@ class EmployeeDetailsController extends BaseController
         $education = EmployeeEducation::findOrFail($request->education);
         $education->delete();
         $notification = notify(__('Employee Education has beel deleted'));
+
         return back()->with($notification);
     }
 }

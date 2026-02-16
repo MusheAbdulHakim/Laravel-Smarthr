@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Modules\Whiteboard\Http\Controllers\WhiteboardController;
-
 /*
  *--------------------------------------------------------------------------
  * API Routes
@@ -13,4 +10,3 @@ use Modules\Whiteboard\Http\Controllers\WhiteboardController;
  * is assigned the "api" middleware group. Enjoy building your API!
  *
 */
-

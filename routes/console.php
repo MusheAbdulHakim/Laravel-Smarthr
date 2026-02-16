@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+})->purpose('Display an inspiring quote');
 
-
-Schedule::job(new AutoClockoutUnsignedAttendances())->cron("0 */8 * * *");
+Schedule::job(new AutoClockoutUnsignedAttendances)->cron('0 */8 * * *');

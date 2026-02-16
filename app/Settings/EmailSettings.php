@@ -6,8 +6,23 @@ use Spatie\LaravelSettings\Settings;
 
 class EmailSettings extends Settings
 {
+    public $mailer;
 
-    public $mailer, $from_address, $from_name, $host, $port, $enc, $domain, $user, $password;
+    public $from_address;
+
+    public $from_name;
+
+    public $host;
+
+    public $port;
+
+    public $enc;
+
+    public $domain;
+
+    public $user;
+
+    public $password;
 
     public static function group(): string
     {

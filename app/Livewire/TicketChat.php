@@ -2,21 +2,22 @@
 
 namespace App\Livewire;
 
-use App\Models\Ticket;
-use Livewire\Component;
-use App\Models\TicketReply;
-use Livewire\Attributes\On;
 use App\Events\TicketReplied;
-use Livewire\WithFileUploads;
+use App\Models\TicketReply;
 use Illuminate\Support\Facades\Event;
 use Livewire\Attributes\Js;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class TicketChat extends Component
 {
     use WithFileUploads;
 
     public $ticket;
+
     public $replies;
+
     public $message;
 
     public function replyTicket()

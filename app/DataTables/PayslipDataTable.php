@@ -3,67 +3,67 @@
 namespace App\DataTables;
 
 use App\Models\Payslip;
-use Spatie\Menu\Laravel\Html;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Facades\Crypt;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class PayslipDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))  
-            ->editColumn('ps_id', function($row){
+        return (new EloquentDataTable($query))
+            ->editColumn('ps_id', function ($row) {
                 $link = '#';
-                if(auth()->user()->can('show-payslip')){
+                if (auth()->user()->can('show-payslip')) {
                     $link = route('payslips.show', ['payslip' => \Crypt::encrypt($row->id)]);
                 }
+
                 return '<a href="'.$link.'">'.$row->ps_id.'</a>';
             })
-            ->addColumn('employee', function($row){
+            ->addColumn('employee', function ($row) {
                 $user = $row->employee->user;
-                $img = !empty($user->avatar) ? asset('storage/users/'.$user->avatar): asset('images/user.jpg');
+                $img = ! empty($user->avatar) ? asset('storage/users/'.$user->avatar) : asset('images/user.jpg');
                 $link = '#';
-                if(auth()->user()->can('show-Employeeprofile')){
+                if (auth()->user()->can('show-Employeeprofile')) {
                     $link = route('employees.show', ['employee' => Crypt::encrypt($row->id)]);
                 }
-                return Html::userAvatar($user->fullname, $img, $link);
+
+                return Str::userAvatar($user->fullname, $img, $link);
             })
-            ->editColumn('type', function($row){
+            ->editColumn('type', function ($row) {
                 return $row->type->name;
             })
-            ->editColumn('net_pay', function($row){
-                if(!empty($row->net_pay)){
+            ->editColumn('net_pay', function ($row) {
+                if (! empty($row->net_pay)) {
                     return LocaleSettings('currency_symbol').' '.$row->net_pay;
                 }
             })
-            ->editColumn('created_at', function($row){
-                if(!empty($row->created_at)){
+            ->editColumn('created_at', function ($row) {
+                if (! empty($row->created_at)) {
                     return format_date($row->created_at);
                 }
             })
-            ->addColumn('payslip_date', function($row){
-                if(!empty($row->payslip_date)){
+            ->addColumn('payslip_date', function ($row) {
+                if (! empty($row->payslip_date)) {
                     return format_date($row->payslip_date);
                 }
             })
-            ->addColumn('action', function($row){
-                return view('pages.payroll.payslips.actions',[
-                    'id' => $row->id
+            ->addColumn('action', function ($row) {
+                return view('pages.payroll.payslips.actions', [
+                    'id' => $row->id,
                 ]);
             })
-            ->rawColumns(['action','ps_id','employee']);
+            ->rawColumns(['action', 'ps_id', 'employee']);
     }
 
     /**
@@ -80,18 +80,18 @@ class PayslipDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('payslip-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->orderBy(1)
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('payslip-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->orderBy(1)
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -106,10 +106,10 @@ class PayslipDataTable extends DataTable
             Column::make('net_pay'),
             Column::make('created_at'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
@@ -118,6 +118,6 @@ class PayslipDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Payslip_' . date('YmdHis');
+        return 'Payslip_'.date('YmdHis');
     }
 }

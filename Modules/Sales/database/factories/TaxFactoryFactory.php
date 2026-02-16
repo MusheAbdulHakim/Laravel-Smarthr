@@ -18,9 +18,8 @@ class TaxFactoryFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'percentage' => $this->faker->numberBetween(0,100),
-            'active' => $this->faker->randomElement(1, 0)
+            'percentage' => $this->faker->numberBetween(0, 100),
+            'active' => $this->faker->randomElement(1, 0),
         ];
     }
 }
-

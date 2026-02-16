@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\DesignationDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Designation;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class DesignationsController extends Controller
 {
@@ -14,8 +14,9 @@ class DesignationsController extends Controller
      */
     public function index(DesignationDataTable $dataTable)
     {
-        $pageTitle = __("Designations");
-        return $dataTable->render('pages.designations.index',compact(
+        $pageTitle = __('Designations');
+
+        return $dataTable->render('pages.designations.index', compact(
             'pageTitle'
         ));
     }
@@ -34,24 +35,23 @@ class DesignationsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ]);
         Designation::create([
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        $notification = notify(__("Designation has been added"));
+        $notification = notify(__('Designation has been added'));
+
         return back()->with($notification);
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Designation $designation)
     {
-        return view('pages.designations.edit',compact(
+        return view('pages.designations.edit', compact(
             'designation'
         ));
     }
@@ -62,13 +62,14 @@ class DesignationsController extends Controller
     public function update(Request $request, Designation $designation)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ]);
         $designation->update([
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        $notification = notify(__("Designation has been updated"));
+        $notification = notify(__('Designation has been updated'));
+
         return back()->with($notification);
     }
 
@@ -78,7 +79,8 @@ class DesignationsController extends Controller
     public function destroy(Designation $designation)
     {
         $designation->delete();
-        $notification = notify(__("Designation has been deleted"));
+        $notification = notify(__('Designation has been deleted'));
+
         return back()->with($notification);
     }
 }

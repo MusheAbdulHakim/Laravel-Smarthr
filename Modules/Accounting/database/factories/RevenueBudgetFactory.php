@@ -2,9 +2,9 @@
 
 namespace Modules\Accounting\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Accounting\Models\Budget;
 use Modules\Accounting\Models\BudgetCategory;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RevenueBudgetFactory extends Factory
 {
@@ -24,9 +24,8 @@ class RevenueBudgetFactory extends Factory
             'budget_category_id' => BudgetCategory::factory(),
             'startDate' => $this->faker->date(),
             'endDate' => $this->faker->date(),
-            'amount' => $this->faker->numberBetween(10,100),
-            'note' => $this->faker->paragraph()
+            'amount' => $this->faker->numberBetween(10, 100),
+            'note' => $this->faker->paragraph(),
         ];
     }
 }
-

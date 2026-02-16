@@ -13,7 +13,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general_salary.enable_provident_fund', false);
         $this->migrator->add('general_salary.emp_pf_percentage', 0);
         $this->migrator->add('general_salary.company_pf_percentage', 0);
-        
+
         $this->migrator->add('general_salary.enable_esi_fund', false);
         $this->migrator->add('general_salary.emp_esi_percentage', 0);
         $this->migrator->add('general_salary.company_esi_percentage', 0);

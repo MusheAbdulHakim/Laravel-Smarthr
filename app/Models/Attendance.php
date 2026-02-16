@@ -10,15 +10,16 @@ class Attendance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','startDate','endDate',
+        'user_id', 'startDate', 'endDate',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function timestamps(){
+    public function timestamps()
+    {
         return $this->hasMany(AttendanceTimestamp::class);
     }
-
 }

@@ -20,11 +20,10 @@ class ExpenseFactory extends Factory
             'item_name' => $this->faker->word(),
             'purchased_from' => $this->faker->company,
             'purchase_date' => $this->faker->date(),
-            'amount' => $this->faker->numberBetween(10,500),
-            'status' => $this->faker->randomElement([1,0]),
-            'paid_by' => $this->faker->randomElement([1,2,3]),
-            'created_by' => auth()->user()->id
+            'amount' => $this->faker->numberBetween(10, 500),
+            'status' => $this->faker->randomElement([1, 0]),
+            'paid_by' => $this->faker->randomElement([1, 2, 3]),
+            'created_by' => auth()->user()->id,
         ];
     }
 }
-

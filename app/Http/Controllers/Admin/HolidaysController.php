@@ -14,24 +14,27 @@ class HolidaysController extends Controller
      */
     public function index(HolidayDataTable $dataTable)
     {
-        $pageTitle = __("Holidays");
-        return $dataTable->render('pages.holidays.index',compact(
+        $pageTitle = __('Holidays');
+
+        return $dataTable->render('pages.holidays.index', compact(
             'pageTitle',
         ));
     }
 
-    public function calendar(){
-        $pageTitle = __("Holidays Calendar");
-        $events = Holiday::get()->map(function(Holiday $holiday){
+    public function calendar()
+    {
+        $pageTitle = __('Holidays Calendar');
+        $events = Holiday::get()->map(function (Holiday $holiday) {
             return [
                 'title' => $holiday->name,
                 'start' => $holiday->startDate,
                 'end' => $holiday->endDate,
-                'className' => 'bg-'.!empty($holiday->color) ? $holiday->color->value: 'primary',
+                'className' => 'bg-'.! empty($holiday->color) ? $holiday->color->value : 'primary',
             ];
         });
-        return view('pages.holidays.calendar',compact(
-            'pageTitle','events'
+
+        return view('pages.holidays.calendar', compact(
+            'pageTitle', 'events'
         ));
     }
 
@@ -59,10 +62,11 @@ class HolidaysController extends Controller
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'description' => $request->description,
-            'is_annual' => !empty($request->is_annual) ? true: false,
-            'color'  => $request->color
+            'is_annual' => ! empty($request->is_annual) ? true : false,
+            'color' => $request->color,
         ]);
-        $notification = notify(__("Holiday has been created"));
+        $notification = notify(__('Holiday has been created'));
+
         return back()->with($notification);
     }
 
@@ -79,7 +83,7 @@ class HolidaysController extends Controller
      */
     public function edit(Holiday $holiday)
     {
-        return view('pages.holidays.edit',compact(
+        return view('pages.holidays.edit', compact(
             'holiday'
         ));
     }
@@ -100,10 +104,11 @@ class HolidaysController extends Controller
             'startDate' => $request->startDate,
             'endDate' => $request->endDate,
             'description' => $request->description,
-            'is_annual' => !empty($request->is_annual) ? true: false,
-            'color'  => $request->color
+            'is_annual' => ! empty($request->is_annual) ? true : false,
+            'color' => $request->color,
         ]);
-        $notification = notify(__("Holiday has been updated"));
+        $notification = notify(__('Holiday has been updated'));
+
         return back()->with($notification);
     }
 
@@ -113,7 +118,8 @@ class HolidaysController extends Controller
     public function destroy(Holiday $holiday)
     {
         $holiday->delete();
-        $notification = notify(__("Holiday has been deleted"));
+        $notification = notify(__('Holiday has been deleted'));
+
         return back()->with($notification);
     }
 }

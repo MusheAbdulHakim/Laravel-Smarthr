@@ -10,14 +10,15 @@ class UserFamilyInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','name','relationship','dob','phone','address','picture'
+        'user_id', 'name', 'relationship', 'dob', 'phone', 'address', 'picture',
     ];
 
     protected $casts = [
-        'dob' => 'date'
+        'dob' => 'date',
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

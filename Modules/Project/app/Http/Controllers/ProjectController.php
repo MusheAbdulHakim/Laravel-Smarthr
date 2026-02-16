@@ -2,16 +2,14 @@
 
 namespace Modules\Project\Http\Controllers;
 
-use App\Models\User;
 use App\Enums\UserType;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Modules\Project\Models\Project;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Modules\Project\Models\TaskBoard;
+use Modules\Project\Models\Project;
 use Modules\Project\Models\ProjectTaskBoard;
+use Modules\Project\Models\TaskBoard;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProjectController extends Controller
@@ -23,8 +21,9 @@ class ProjectController extends Controller
     {
         $pageTitle = __('Projects');
         $projects = Project::get();
-        return view('project::index',compact(
-            'pageTitle','projects'
+
+        return view('project::index', compact(
+            'pageTitle', 'projects'
         ));
     }
 
@@ -43,8 +42,9 @@ class ProjectController extends Controller
     {
         $clients = User::where('is_active', true)->where('type', UserType::CLIENT)->get();
         $employees = User::where('is_active', true)->where('type', UserType::EMPLOYEE)->get();
-        return view('project::create',compact(
-            'clients','employees'
+
+        return view('project::create', compact(
+            'clients', 'employees'
         ));
     }
 
@@ -75,37 +75,38 @@ class ProjectController extends Controller
             'leader_id' => $request->leader,
             'short_desc' => $request->short_desc,
             'description' => $request->description,
-            'created_by' => auth()->user()->id
+            'created_by' => auth()->user()->id,
         ]);
         $projectFiles = $request->projectFiles ?? [];
-        if(!empty($projectFiles) && count($projectFiles) > 0){
-            foreach($projectFiles as $file){
+        if (! empty($projectFiles) && count($projectFiles) > 0) {
+            foreach ($projectFiles as $file) {
                 $project->addMedia($file)->toMediaCollection('project-files');
             }
         }
-        // Add Project Team 
+        // Add Project Team
         $projectTeam = $request->team ?? [];
-        if(!empty($projectTeam) && count($projectTeam) > 0){
-            foreach($projectTeam as $member){
+        if (! empty($projectTeam) && count($projectTeam) > 0) {
+            foreach ($projectTeam as $member) {
                 $project->team()->create([
-                    'user_id' => $member
+                    'user_id' => $member,
                 ]);
             }
         }
         // Project task Board
-        $defaultBoards = TaskBoard::get()->map(function(TaskBoard $board) use($project){
+        $defaultBoards = TaskBoard::get()->map(function (TaskBoard $board) use ($project) {
             return [
                 'project_id' => $project->id,
                 'name' => $board->name,
                 'color' => $board->color,
                 'priority' => $board->priority,
-                'created_by' => $board->created_by
+                'created_by' => $board->created_by,
             ];
         });
-        if(!empty($defaultBoards) && $defaultBoards->count() > 0){
+        if (! empty($defaultBoards) && $defaultBoards->count() > 0) {
             ProjectTaskBoard::insert($defaultBoards->all());
         }
-        $notification = notify(__("Project has been added"));
+        $notification = notify(__('Project has been added'));
+
         return back()->with($notification);
     }
 
@@ -115,15 +116,17 @@ class ProjectController extends Controller
     public function show($id)
     {
         try {
-            $pageTitle = __("Project Details");
+            $pageTitle = __('Project Details');
             $project = Project::findOrFail(Crypt::decrypt($id));
             $projectFiles = $project->getMedia('project-files');
-            return view('project::show',compact(
-                'project','pageTitle','projectFiles'
+
+            return view('project::show', compact(
+                'project', 'pageTitle', 'projectFiles'
             ));
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             // $notification = notify($e->getMessage(),'error');
             $notification = notify("Something went wrong. Project can't be viewd");
+
             return back()->with($notification);
         }
     }
@@ -135,8 +138,9 @@ class ProjectController extends Controller
     {
         $clients = User::where('is_active', true)->where('type', UserType::CLIENT)->get();
         $employees = User::where('is_active', true)->where('type', UserType::EMPLOYEE)->get();
-        return view('project::edit',compact(
-            'project','clients','employees'
+
+        return view('project::edit', compact(
+            'project', 'clients', 'employees'
         ));
     }
 
@@ -167,24 +171,25 @@ class ProjectController extends Controller
             'leader_id' => $request->leader,
             'short_desc' => $request->short_desc,
             'description' => $request->description,
-            'created_by' => auth()->user()->id
+            'created_by' => auth()->user()->id,
         ]);
         $projectFiles = $request->projectFiles ?? [];
-        if(!empty($projectFiles) && $request->hasFile('projectFiles') && count($projectFiles) > 0){
-            foreach($projectFiles as $file){
+        if (! empty($projectFiles) && $request->hasFile('projectFiles') && count($projectFiles) > 0) {
+            foreach ($projectFiles as $file) {
                 $project->addMedia($file)->toMediaCollection('project-files');
             }
         }
-        // Add Project Team 
+        // Add Project Team
         $projectTeam = $request->team ?? [];
-        if(!empty($projectTeam) && count($projectTeam) > 0){
-            foreach($projectTeam as $member){
+        if (! empty($projectTeam) && count($projectTeam) > 0) {
+            foreach ($projectTeam as $member) {
                 $project->team()->update([
-                    'user_id' => $member
+                    'user_id' => $member,
                 ]);
             }
         }
-        $notification = notify(__("Project has been updated"));
+        $notification = notify(__('Project has been updated'));
+
         return back()->with($notification);
     }
 
@@ -194,13 +199,16 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        $notification = notify(__("Project has been deleted"));
+        $notification = notify(__('Project has been deleted'));
+
         return back()->with($notification);
     }
 
-    public function destroyProjectFile(Media $file){
+    public function destroyProjectFile(Media $file)
+    {
         $file->delete();
         $notification = notify(__('Project file has been deleted'));
+
         return back()->with($notification);
     }
 }

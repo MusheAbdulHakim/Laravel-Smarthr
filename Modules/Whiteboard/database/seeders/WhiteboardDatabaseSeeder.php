@@ -2,8 +2,8 @@
 
 namespace Modules\Whiteboard\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
 class WhiteboardDatabaseSeeder extends Seeder
@@ -27,9 +27,9 @@ class WhiteboardDatabaseSeeder extends Seeder
         foreach ($module_permissions as $module => $permissions) {
             foreach ($permissions as $permission) {
                 $permissionsArray[] = [
-                    "name" => $permission,
-                    "module" => $module,
-                    "guard_name" => "web"
+                    'name' => $permission,
+                    'module' => $module,
+                    'guard_name' => 'web',
                 ];
             }
         }

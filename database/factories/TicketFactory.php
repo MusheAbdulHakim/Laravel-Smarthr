@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Ticket;
-use App\Enums\UserType;
-use App\Enums\TicketStatus;
-use App\Models\TicketReply;
 use App\Enums\GeneralPriority;
+use App\Enums\TicketStatus;
+use App\Enums\UserType;
+use App\Models\Ticket;
+use App\Models\TicketReply;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,18 +30,18 @@ class TicketFactory extends Factory
             'description' => $this->faker->paragraph(5),
             'status' => $this->faker->randomElement(TicketStatus::cases()),
             'priority' => $this->faker->randomElement(GeneralPriority::cases()),
-            'endDate' => $this->faker->dateTimeBetween()
+            'endDate' => $this->faker->dateTimeBetween(),
         ];
     }
 
     public function configure(): static
     {
-        return $this->afterCreating(function(Ticket $ticket){
+        return $this->afterCreating(function (Ticket $ticket) {
             TicketReply::factory()->count(4)->create([
-                'ticket_id' => $ticket->id
+                'ticket_id' => $ticket->id,
             ]);
             $ticket->update([
-                'tk_id' => '#TKT-'.pad_zeros(Ticket::count()+1),
+                'tk_id' => '#TKT-'.pad_zeros(Ticket::count() + 1),
             ]);
         });
     }

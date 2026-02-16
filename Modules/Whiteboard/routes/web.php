@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Whiteboard\Http\Controllers\TlDrawController;
 use Modules\Whiteboard\Http\Controllers\WhiteboardController;
 
 /*
@@ -16,6 +15,6 @@ use Modules\Whiteboard\Http\Controllers\WhiteboardController;
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('tldraw', [WhiteboardController::class,'tldraw'])->name('tldraw.index');
-    Route::get('excalidraw', [WhiteboardController::class,'excalidraw'])->name('excalidraw.index');
+    Route::get('tldraw', [WhiteboardController::class, 'tldraw'])->name('tldraw.index');
+    Route::get('excalidraw', [WhiteboardController::class, 'excalidraw'])->name('excalidraw.index');
 });

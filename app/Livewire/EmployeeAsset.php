@@ -3,19 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\Asset;
-use Livewire\Component;
 use App\Models\AssetIssue;
-use Illuminate\Support\Facades\Crypt;
-use Livewire\Attributes\Js;
+use Livewire\Component;
 
 class EmployeeAsset extends Component
 {
     public $user;
+
     private $asset;
 
     public $showAsset = false;
 
-    public $description, $userId, $assetId;
+    public $description;
+
+    public $userId;
+
+    public $assetId;
 
     public function viewAsset(Asset $asset)
     {
@@ -28,22 +31,21 @@ class EmployeeAsset extends Component
         AssetIssue::create([
             'asset_id' => $asset->id,
             'description' => $this->description,
-            'raised_by' => auth()->user()->id
+            'raised_by' => auth()->user()->id,
         ]);
         $this->asset = $asset;
-        $this->dispatch('IssueRaiseSuccess',__('Issue has been submitted for review'));
+        $this->dispatch('IssueRaiseSuccess', __('Issue has been submitted for review'));
     }
-
 
     public function render()
     {
         $asset = null;
-        if($this->showAsset){
+        if ($this->showAsset) {
             $asset = $this->asset;
         }
-        return view('livewire.employee-asset',compact(
+
+        return view('livewire.employee-asset', compact(
             'asset'
         ));
     }
-
 }

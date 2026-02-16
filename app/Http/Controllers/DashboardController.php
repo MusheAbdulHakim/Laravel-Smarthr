@@ -2,30 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Ticket;
 use App\Enums\UserType;
-use App\Helpers\AppMenu;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Carbon;
+use Modules\Accounting\Models\Budget;
+use Modules\Sales\Models\Estimate;
 use Modules\Sales\Models\Expense;
 use Modules\Sales\Models\Invoice;
-use LaravelLang\LocaleList\Locale;
-use Modules\Sales\Models\Estimate;
-use Modules\Accounting\Models\Budget;
-use App\Http\Controllers\BaseController;
+use Nwidart\Modules\Facades\Module;
 
 class DashboardController extends BaseController
 {
-
     public function index()
     {
         $this->data['pageTitle'] = __('Dashboard');
-        if(auth()->user()->type === UserType::EMPLOYEE)
-        {
-            return view('pages.employees.dashboard',$this->data);
+        if (auth()->user()->type === UserType::EMPLOYEE) {
+            return view('pages.employees.dashboard', $this->data);
         }
         $projects = null;
-        if(!empty(module('Project')) && module('Project')->isEnabled()){
+        $isProjectModuleEnabled = Module::isEnabled('Project');
+        if ($isProjectModuleEnabled) {
             $projects = \Modules\Project\Models\Project::get();
             $recentProjects = \Modules\Project\Models\Project::whereMonth('created_at', Carbon::today())->get();
         }
@@ -34,18 +31,19 @@ class DashboardController extends BaseController
         $employees = User::where('type', UserType::EMPLOYEE)->get();
         $tickets = Ticket::get();
 
-        if(module('Sales') && module('Sales')->isEnabled()){
+        $isSalesModuleActive = Module::isEnabled('Sales');
+        if ($isSalesModuleActive) {
 
             $this->data['thisMonthExpenses'] = Expense::whereMonth('created_at', Carbon::now())->sum('amount');
             $this->data['prevMonthExpenses'] = Expense::whereMonth('created_at', Carbon::now()->subMonth())->sum('amount');
-            
+
             $this->data['thisMonthEstimates'] = Estimate::whereMonth('created_at', Carbon::now())->sum('grand_total');
             $this->data['prevMonthEstimates'] = Estimate::whereMonth('created_at', Carbon::now()->subMonth())->sum('grand_total');
-            
+
             $this->data['thisMonthInvoices'] = Invoice::whereMonth('created_at', Carbon::now())->sum('grand_total');
             $this->data['prevMonthInvoices'] = Invoice::whereMonth('created_at', Carbon::now()->subMonth())->sum('grand_total');
             $this->data['invoices'] = Invoice::get();
-            
+
             $this->data['thisMonthInvoiceList'] = Invoice::whereMonth('created_at', Carbon::now())->get();
             $this->data['thisMonthPaidInvoiceList'] = Invoice::whereMonth('created_at', Carbon::now())->where('status', '2')->get();
 
@@ -54,10 +52,9 @@ class DashboardController extends BaseController
             $budget_collection = collect();
             $invoice_collection = collect();
             $estimates_collection = collect();
-            while ($month <= 12)
-            {
+            while ($month <= 12) {
                 $expense_collection->push(
-                   Expense::whereMonth('created_at', $month)->get()
+                    Expense::whereMonth('created_at', $month)->get()
                 );
                 $budget_collection->push(
                     Budget::whereMonth('created_at', $month)->get()
@@ -77,27 +74,31 @@ class DashboardController extends BaseController
         }
 
         $budgets = null;
+        $isAccountingModuleActive = Module::isEnabled('Accounting');
 
-        if(module('Accounting') && module('Accounting')->isEnabled()){
-        
-            $budgets = Budget::get(); 
+        if ($isAccountingModuleActive) {
+
+            $budgets = Budget::get();
         }
 
-        
-        //attendances
-        $absentees = User::where('type', UserType::EMPLOYEE)->whereDoesntHave('attendances', function($query){
+        // attendances
+        $absentees = User::where('type', UserType::EMPLOYEE)->whereDoesntHave('attendances', function ($query) {
             return $query->whereDay('created_at', Carbon::today())->take(1);
         })->get();
 
         $this->data['absentees'] = $absentees;
         $this->data['thisMonthTotalEmployees'] = User::where('type', UserType::EMPLOYEE)->whereMonth('created_at', Carbon::now())->count() ?? 0;
         $this->data['prevMonthTotalEmployees'] = User::where('type', UserType::EMPLOYEE)->whereMonth('created_at', Carbon::now()->subMonth(1))->count() ?? 0;
-        $this->data['clients'] = (!empty($clients) && $clients->count() > 0) ? $clients: null;
+        $this->data['clients'] = (! empty($clients) && $clients->count() > 0) ? $clients : null;
         $this->data['thisMonthClients'] = $thisMonthClients;
-        $this->data['employees'] = (!empty($employees) && $employees->count() > 0) ? $employees: null;
-        $this->data['tickets'] = (!empty($tickets) && $tickets->count() > 0) ? $tickets: null;
+        $this->data['employees'] = (! empty($employees) && $employees->count() > 0) ? $employees : null;
+        $this->data['tickets'] = (! empty($tickets) && $tickets->count() > 0) ? $tickets : null;
         $this->data['projects'] = $projects;
         $this->data['recentProjects'] = $recentProjects;
+        $this->data['isProjectModuleEnabled'] = $isProjectModuleEnabled;
+        $this->data['isSalesModuleActive'] = $isSalesModuleActive;
+        $this->data['isAccountingModuleActive'] = $isAccountingModuleActive;
+
         return view('pages.dashboard', $this->data);
     }
 }

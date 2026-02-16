@@ -2,10 +2,9 @@
 
 namespace Modules\Roles\Providers;
 
-
+use App\Events\AppMenuEvent;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Roles\Listeners\AppMenuListener;
-use App\Events\AppMenuEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         AppMenuEvent::class => [
             AppMenuListener::class,
-        ]
+        ],
     ];
 
     /**
@@ -26,5 +25,4 @@ class EventServiceProvider extends ServiceProvider
      * @var bool
      */
     protected static $shouldDiscoverEvents = true;
-
 }

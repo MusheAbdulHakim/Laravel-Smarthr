@@ -1,10 +1,10 @@
 <?php
 
-use App\Settings\SalarySetting;
-use App\Settings\ThemeSettings;
 use App\Settings\CompanySettings;
 use App\Settings\InvoiceSettings;
 use App\Settings\LocalizationSettings;
+use App\Settings\SalarySetting;
+use App\Settings\ThemeSettings;
 
 return [
 

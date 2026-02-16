@@ -2,23 +2,47 @@
 
 namespace App\Helpers;
 
-use Spatie\Menu\Laravel\Menu;
-
 final class AppMenu
 {
-    public $menu;
+    public array $settingsMenu = [];
 
-    public $settingsMenu;
+    protected array $items = [];
 
-    public function get()
+    /**
+     * Add Menu item to sidebar
+     */
+    public function add(array $item): void
     {
-        $this->menu = Menu::new()->addClass('sidebar-vertical');
-        return $this->menu;
+        $this->items[] = $item;
     }
 
+    /**
+     * Get Sidebar Menu items
+     */
+    public function all(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * Add Item to Settings Sidebar
+     *
+     * @return static
+     */
+    public function addSettingsMenu(array $item)
+    {
+        $this->settingsMenu[] = $item;
+
+        return $this;
+    }
+
+    /**
+     * Get Settings Sidebar Menu Items
+     *
+     * @return array
+     */
     public function getSettingsMenu()
     {
-        $this->settingsMenu = Menu::new();
         return $this->settingsMenu;
     }
 }

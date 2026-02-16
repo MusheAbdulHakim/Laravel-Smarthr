@@ -3,12 +3,12 @@
 namespace Modules\Project\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Project\Database\Factories\ProjectFactory;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Project\Database\Factories\ProjectFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Project extends Model implements HasMedia
@@ -19,10 +19,9 @@ class Project extends Model implements HasMedia
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name','client_id','short_desc','startDate','endDate','rate','rateType','priority','leader_id','description',
-        'created_by'
+        'name', 'client_id', 'short_desc', 'startDate', 'endDate', 'rate', 'rateType', 'priority', 'leader_id', 'description',
+        'created_by',
     ];
-
 
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -32,9 +31,9 @@ class Project extends Model implements HasMedia
             ->nonQueued();
     }
 
-
     /**
      * Owner of the project / client
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client()
@@ -44,27 +43,32 @@ class Project extends Model implements HasMedia
 
     /**
      * Employee to lead the project (main leader)
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function leader(){
-        return $this->belongsTo(User::class,'leader_id');
+    public function leader()
+    {
+        return $this->belongsTo(User::class, 'leader_id');
     }
 
-    public function createdBy(){
+    public function createdBy()
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 
     /**
      * Employees chosen to lead the project
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lead(){
+    public function lead()
+    {
         return $this->hasMany(ProjectLead::class);
     }
 
     /**
      * Employees chosen to work on the project
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function team()

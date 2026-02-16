@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use App\Enums\Payroll\SalaryType;
 use App\Enums\Payroll\PaymentMethod;
+use App\Enums\Payroll\SalaryType;
 use Database\Factories\EmployeeSalaryDetailFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class EmployeeSalaryDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'employee_detail_id','basis','base_salary','payment_method','pf_contribution',
-        'pf_number','additional_pf','total_pf_rate',
-        'esi_contribution','esi_number','additional_esi_rate','total_additional_esi_rate'
+        'employee_detail_id', 'basis', 'base_salary', 'payment_method', 'pf_contribution',
+        'pf_number', 'additional_pf', 'total_pf_rate',
+        'esi_contribution', 'esi_number', 'additional_esi_rate', 'total_additional_esi_rate',
     ];
 
     protected $casts = [
@@ -32,5 +32,4 @@ class EmployeeSalaryDetail extends Model
     {
         return EmployeeSalaryDetailFactory::new();
     }
-    
 }

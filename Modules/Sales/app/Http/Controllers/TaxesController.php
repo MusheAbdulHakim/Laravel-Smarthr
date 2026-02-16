@@ -2,11 +2,9 @@
 
 namespace Modules\Sales\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Modules\Sales\Models\Tax;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Modules\Sales\Models\Tax;
 use Yajra\DataTables\Facades\DataTables;
 
 class TaxesController extends Controller
@@ -17,23 +15,26 @@ class TaxesController extends Controller
     public function index(Request $request)
     {
         $pageTitle = __('Taxes');
-        if($request->ajax()){
+        if ($request->ajax()) {
             $taxes = Tax::get();
+
             return DataTables::of($taxes)
                 ->addIndexColumn()
-                ->addColumn('status', function($row){
-                    return $row->active == true ? __('Active'): __('InActive');
+                ->addColumn('status', function ($row) {
+                    return $row->active == true ? __('Active') : __('InActive');
                 })
-                ->addColumn('action',function ($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    return view('sales::taxes.actions',compact(
+
+                    return view('sales::taxes.actions', compact(
                         'id'
                     ));
                 })
                 ->rawColumns(['action'])
                 ->make();
         }
-        return view('sales::taxes.index',compact(
+
+        return view('sales::taxes.index', compact(
             'pageTitle'
         ));
     }
@@ -54,32 +55,32 @@ class TaxesController extends Controller
         $request->validate([
             'name' => 'required',
             'percentage' => 'required|numeric',
-            'status' => 'required'
+            'status' => 'required',
         ]);
         Tax::create([
             'name' => $request->name,
             'percentage' => $request->percentage,
-            'active' => $request->status
+            'active' => $request->status,
         ]);
         $notification = notify(__('Tax has been added'));
+
         return back()->with($notification);
     }
 
     /**
      * Show the specified resource.
      */
-
-     public function show(Tax $tax){
+    public function show(Tax $tax)
+    {
         return response()->json(['tax' => $tax]);
-     }
-    
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Tax $tax)
     {
-        return view('sales::taxes.edit',compact(
+        return view('sales::taxes.edit', compact(
             'tax'
         ));
     }
@@ -92,14 +93,15 @@ class TaxesController extends Controller
         $request->validate([
             'name' => 'required',
             'percentage' => 'required|numeric',
-            'status' => 'required'
+            'status' => 'required',
         ]);
         $tax->update([
             'name' => $request->name,
             'percentage' => $request->percentage,
-            'active' => $request->status
+            'active' => $request->status,
         ]);
         $notification = notify(__('Tax has been updated'));
+
         return back()->with($notification);
     }
 
@@ -110,6 +112,7 @@ class TaxesController extends Controller
     {
         $tax->delete();
         $notification = notify(__('Tax has been deleted'));
+
         return back()->with($notification);
     }
 }

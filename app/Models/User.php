@@ -4,10 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
-use App\Models\AttendanceTimestamp;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -33,26 +32,27 @@ class User extends Authenticatable
         'dial_code', 'phone',
         'avatar',
         'created_by',
-        'is_active','is_online', 'lang', 'layout', 'color_scheme',
+        'is_active', 'is_online', 'lang', 'layout', 'color_scheme',
         'layout_width', 'layout_position', 'topbar_color', 'sidebar_size', 'sidebar_view', 'sidebar_color',
     ];
 
-   
     public function chatMessages()
     {
         return $this->hasMany(ChatMessage::class, 'user_id');
     }
-   
+
     public function assets()
     {
         return $this->hasMany(Asset::class, 'user_id');
     }
 
-    public function family(){
-        return $this->hasMany(UserFamilyInfo::class,'user_id');
+    public function family()
+    {
+        return $this->hasMany(UserFamilyInfo::class, 'user_id');
     }
 
-    public function employeeDetail(){
+    public function employeeDetail()
+    {
         return $this->hasOne(EmployeeDetail::class);
     }
 
@@ -63,10 +63,11 @@ class User extends Authenticatable
 
     public function attendanceTimestamps()
     {
-        return $this->hasMany(AttendanceTimestamp::class,'user_id');
+        return $this->hasMany(AttendanceTimestamp::class, 'user_id');
     }
 
-    public function clientDetail(){
+    public function clientDetail()
+    {
         return $this->hasOne(ClientDetail::class);
     }
 
@@ -74,6 +75,7 @@ class User extends Authenticatable
     {
         return "$this->firstname $this->middlename $this->lastname";
     }
+
     public function getFullNameAttribute()
     {
         return $this->getNameAttribute();
@@ -110,6 +112,6 @@ class User extends Authenticatable
 
     public function hasVerifiedPhone()
     {
-        return !empty($this->phone_verified_at);
+        return ! empty($this->phone_verified_at);
     }
 }

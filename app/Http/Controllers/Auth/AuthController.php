@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BaseController;
-use Illuminate\Support\Facades\Password;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class AuthController extends BaseController
 {
-
     public function login()
     {
         $this->data['pageTitle'] = __('Login');
+
         return view('auth.login', $this->data);
     }
 
@@ -24,28 +24,33 @@ class AuthController extends BaseController
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
-        if (!empty($user)) {
+        if (! empty($user)) {
             if ($user->is_active === 1) {
                 $credentials = $request->only('email', 'password');
                 if (Auth::attempt($credentials)) {
                     $user->update([
                         'is_online' => true,
                     ]);
+
                     return redirect()->route('dashboard');
                 }
+
                 return back()->withErrors(['password' => 'Incorrect Password']);
             }
+
             return back()->withErrors(['email' => 'Your account is disabled.']);
         }
+
         return back()->withErrors(['email' => 'Account could not be found.']);
     }
 
     public function forgotPassword()
     {
         $this->data['pageTitle'] = __('Forgot Password');
+
         return view('auth.forgot-password', $this->data);
     }
 
@@ -66,6 +71,7 @@ class AuthController extends BaseController
     {
         $this->data['pageTitle'] = __('Reset Password');
         $this->data['token'] = $token;
+
         return view('auth.password-reset', $this->data);
     }
 
@@ -81,7 +87,7 @@ class AuthController extends BaseController
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user, string $password) {
                 $user->forceFill([
-                    'password' => Hash::make($password)
+                    'password' => Hash::make($password),
                 ])->setRememberToken(Str::random(60));
 
                 $user->save();
@@ -103,6 +109,7 @@ class AuthController extends BaseController
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('login');
     }
 }

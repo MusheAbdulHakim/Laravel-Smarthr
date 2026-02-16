@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Enums\UserType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,12 +23,12 @@ class EmployeeDeductionFactory extends Factory
                 ->where('type', UserType::EMPLOYEE)
                 ->whereHas('employeeDetail')
                 ->first()
-                ->employeeDetail()->id 
+                ->employeeDetail()->id
             ?? User::factory()->create([
                 'type' => UserType::EMPLOYEE,
-            ])->id, 
+            ])->id,
             'name' => $this->faker->word(),
-            'amount' => $this->faker->numberBetween(10,100),
+            'amount' => $this->faker->numberBetween(10, 100),
         ];
     }
 }

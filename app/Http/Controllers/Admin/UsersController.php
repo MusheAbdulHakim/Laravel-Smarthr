@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Enums\UserType;
-use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
-use Spatie\Permission\Models\Role;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Enums\UserType;
 use App\Http\Controllers\BaseController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends BaseController
 {
@@ -19,6 +18,7 @@ class UsersController extends BaseController
     public function index(UsersDataTable $dataTable)
     {
         $pageTitle = __('Users');
+
         return $dataTable->render('pages.users.index', compact(
             'pageTitle'
         ));
@@ -30,7 +30,8 @@ class UsersController extends BaseController
     public function create()
     {
         $roles = Role::get();
-        return view('pages.users.create',compact(
+
+        return view('pages.users.create', compact(
             'roles'
         ));
     }
@@ -50,7 +51,7 @@ class UsersController extends BaseController
         ]);
         $imageName = null;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user = User::create([
@@ -67,22 +68,21 @@ class UsersController extends BaseController
             'phone' => $request->phone,
             'avatar' => $imageName,
             'created_by' => auth()->user()->id,
-            'is_active' => !empty($request->status),
-            'password' => Hash::make($request->password)
+            'is_active' => ! empty($request->status),
+            'password' => Hash::make($request->password),
         ]);
-        if($request->has('role') && !empty($request->input('role'))){
+        if ($request->has('role') && ! empty($request->input('role'))) {
             $user->assignRole($request->role);
         }
         $notification = notify(__('User has been created'));
+
         return back()->with($notification);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -92,7 +92,7 @@ class UsersController extends BaseController
         $roles = Role::get();
 
         return view('pages.users.edit', compact(
-            'user','roles'
+            'user', 'roles'
         ));
     }
 
@@ -109,7 +109,7 @@ class UsersController extends BaseController
         ]);
         $imageName = $user->avatar;
         if ($request->hasFile('avatar')) {
-            $imageName = time() . '.' . $request->avatar->extension();
+            $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user->update([
@@ -124,13 +124,14 @@ class UsersController extends BaseController
             'dial_code' => $request->dial_code ?? $user->dial_code,
             'phone' => $request->phone ?? $user->phone,
             'avatar' => $imageName,
-            'is_active' => !empty($request->status) ?? $user->is_active,
-            'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
+            'is_active' => ! empty($request->status) ?? $user->is_active,
+            'password' => ! empty($request->password) ? Hash::make($request->password) : $user->password,
         ]);
-        if($request->has('role') && !empty($request->input('role'))){
+        if ($request->has('role') && ! empty($request->input('role'))) {
             $user->syncRoles($request->role);
         }
         $notification = notify(__('User has been updated'));
+
         return back()->with($notification);
     }
 
@@ -141,6 +142,7 @@ class UsersController extends BaseController
     {
         $user->delete();
         $notification = notify(__('User has been deleted'));
+
         return redirect()->route('users.index')->with($notification);
     }
 }

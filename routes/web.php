@@ -1,29 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\ChatController;
-use App\Http\Controllers\AllowancesController;
-use App\Http\Controllers\ConferenceController;
-use App\Http\Controllers\DeductionsController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\AssetsController;
+use App\Http\Controllers\Admin\AttendancesController;
 use App\Http\Controllers\Admin\ChatAppController;
 use App\Http\Controllers\Admin\ClientsController;
-use App\Http\Controllers\Admin\TicketsController;
-use App\Http\Controllers\Admin\HolidaysController;
-use App\Http\Controllers\Admin\PayrollsController;
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\EmployeesController;
-use App\Http\Controllers\Admin\FamilyInfoController;
-use App\Http\Controllers\Admin\AttendancesController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
 use App\Http\Controllers\Admin\EmployeeDetailsController;
+use App\Http\Controllers\Admin\EmployeesController;
+use App\Http\Controllers\Admin\FamilyInfoController;
+use App\Http\Controllers\Admin\HolidaysController;
+use App\Http\Controllers\Admin\PayrollsController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\TicketsController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\AllowancesController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeductionsController;
+use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Route;
 
-include __DIR__ . '/auth.php';
+include __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
@@ -34,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
 
-    Route::group(['prefix' => 'apps'], function(){
+    Route::group(['prefix' => 'apps'], function () {
         Route::get('chat/{contact?}', [ChatAppController::class, 'index'])->name('app.chat');
         Route::delete('delete-chat/{receiver}', [ChatAppController::class, 'destroy'])->name('chat.delete-conversation');
     });
@@ -54,8 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('employee/education/{employeeDetail}', [EmployeeDetailsController::class, 'updateEducation']);
     Route::delete('del-employee-education', [EmployeeDetailsController::class, 'deleteEducation'])->name('employee.education.delete');
     Route::post('employee-salary-setting/{employeeDetail}', [EmployeeDetailsController::class, 'salarySetting'])->name('employee.salary-setting');
-    Route::group(['prefix' => 'payroll'], function(){
-        Route::get('items',[PayrollsController::class, 'items'])->name('payroll.items'); 
+    Route::group(['prefix' => 'payroll'], function () {
+        Route::get('items', [PayrollsController::class, 'items'])->name('payroll.items');
         Route::resource('allowances', AllowancesController::class)->except(['show']);
         Route::resource('deductions', DeductionsController::class)->except(['show']);
         Route::resource('payslips', PayrollsController::class);
@@ -68,16 +66,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('holidays-calendar', [HolidaysController::class, 'calendar'])->name('holidays.calendar');
     Route::resource('family-information', FamilyInfoController::class);
     Route::resource('assets', AssetsController::class);
-    Route::get('backups', fn() => view('pages.backups',[ 'pageTitle' => __('Backups')]))->name('backups.index');
+    Route::get('backups', fn () => view('pages.backups', ['pageTitle' => __('Backups')]))->name('backups.index');
     Route::get('attendance', [AttendancesController::class, 'index'])->name('attendances.index');
     Route::get('attendance-details/{attendance}', [AttendancesController::class, 'attendanceDetails'])->name('attendance.details');
     Route::resource('tickets', TicketsController::class);
     Route::get('assigned-tickets', [TicketsController::class, 'assignedTickets'])->name('assigned-tickets');
     Route::post('assign-ticket', [TicketsController::class, 'assignUser'])->name('ticket.assign-user');
 
-    Route::get('app-logs', fn() => redirect()->to('log-viewer'))->name('app.logs');
+    Route::get('app-logs', fn () => redirect()->to('log-viewer'))->name('app.logs');
 
-    //settings
+    // settings
     Route::prefix('settings')->group(function () {
         Route::get('company', [SettingsController::class, 'index'])->name('settings.index');
         Route::post('company', [SettingsController::class, 'updateCompany'])->name('settings.company.update');

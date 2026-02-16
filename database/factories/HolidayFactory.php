@@ -22,7 +22,7 @@ class HolidayFactory extends Factory
             'startDate' => $this->faker->dateTimeThisYear(),
             'endDate' => $this->faker->dateTimeBetween(),
             'description' => $this->faker->sentence(),
-            'is_annual' => $this->faker->randomElement([1,0]),
+            'is_annual' => $this->faker->randomElement([1, 0]),
             'color' => CalendarColors::Primary,
         ];
     }

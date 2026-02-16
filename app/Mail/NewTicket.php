@@ -5,12 +5,11 @@ namespace App\Mail;
 use App\Models\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Crypt;
 
 class NewTicket extends Mailable
 {
@@ -47,7 +46,7 @@ class NewTicket extends Mailable
             markdown: 'pages.tickets.mail.ticket',
             with: [
                 'ticket' => $this->ticket,
-                'url' => route('tickets.show',['ticket' => Crypt::encrypt($this->ticket->id)]),
+                'url' => route('tickets.show', ['ticket' => Crypt::encrypt($this->ticket->id)]),
             ]
         );
     }

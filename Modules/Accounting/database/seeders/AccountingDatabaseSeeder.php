@@ -2,8 +2,8 @@
 
 namespace Modules\Accounting\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
 class AccountingDatabaseSeeder extends Seeder
@@ -18,24 +18,24 @@ class AccountingDatabaseSeeder extends Seeder
         $permissionsArray = [];
         $module_permissions = [
             'BudgetCategory' => [
-                'view-budgetCategories','create-budgetCategory','edit-budgetCategory','delete-budgetCategory',
+                'view-budgetCategories', 'create-budgetCategory', 'edit-budgetCategory', 'delete-budgetCategory',
             ],
             'BudgetExpenses' => [
-                'view-budgetExpenses','create-budgetExpense','edit-budgetExpense','delete-budgetExpense',
+                'view-budgetExpenses', 'create-budgetExpense', 'edit-budgetExpense', 'delete-budgetExpense',
             ],
             'BudgetRevenue' => [
-                'view-budgetRevenues','create-budgetRevenue','edit-budgetRevenue','delete-budgetRevenue',
+                'view-budgetRevenues', 'create-budgetRevenue', 'edit-budgetRevenue', 'delete-budgetRevenue',
             ],
             'Budget' => [
-                'view-budgets','create-budget','edit-budget','delete-budget',
+                'view-budgets', 'create-budget', 'edit-budget', 'delete-budget',
             ],
         ];
         foreach ($module_permissions as $module => $permissions) {
             foreach ($permissions as $permission) {
                 $permissionsArray[] = [
-                    "name" => $permission,
-                    "module" => $module,
-                    "guard_name" => "web"
+                    'name' => $permission,
+                    'module' => $module,
+                    'guard_name' => 'web',
                 ];
             }
         }

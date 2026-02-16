@@ -2,9 +2,9 @@
 
 namespace Modules\Sales\Database\Seeders;
 
-use Modules\Sales\Models\Tax;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+use Modules\Sales\Models\Tax;
 use Spatie\Permission\Models\Permission;
 
 class SalesDatabaseSeeder extends Seeder
@@ -18,12 +18,12 @@ class SalesDatabaseSeeder extends Seeder
             [
                 'name' => 'VAT',
                 'percentage' => 14,
-                'active' => true
+                'active' => true,
             ],
             [
                 'name' => 'GST',
                 'percentage' => 30,
-                'active' => true
+                'active' => true,
             ],
         ]);
         Model::unguard();
@@ -31,24 +31,24 @@ class SalesDatabaseSeeder extends Seeder
         $permissionsArray = [];
         $module_permissions = [
             'Estimate' => [
-                'view-estimates','create-estimate','edit-estimate','show-estimate','delete-estimate',
+                'view-estimates', 'create-estimate', 'edit-estimate', 'show-estimate', 'delete-estimate',
             ],
             'Invoice' => [
-                'view-invoices','create-invoice','edit-invoice','show-invoice','delete-invoice',
+                'view-invoices', 'create-invoice', 'edit-invoice', 'show-invoice', 'delete-invoice',
             ],
             'Expense' => [
-                'view-expenses','create-expense','edit-expense','delete-expense',
+                'view-expenses', 'create-expense', 'edit-expense', 'delete-expense',
             ],
             'Tax' => [
-                'view-taxs','create-tax','edit-tax','delete-tax',
+                'view-taxs', 'create-tax', 'edit-tax', 'delete-tax',
             ],
         ];
         foreach ($module_permissions as $module => $permissions) {
             foreach ($permissions as $permission) {
                 $permissionsArray[] = [
-                    "name" => $permission,
-                    "module" => $module,
-                    "guard_name" => "web"
+                    'name' => $permission,
+                    'module' => $module,
+                    'guard_name' => 'web',
                 ];
             }
         }

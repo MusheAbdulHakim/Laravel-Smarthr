@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Asset;
-use App\Enums\UserType;
-use Illuminate\Http\Request;
 use App\DataTables\AssetDataTable;
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
+use App\Models\Asset;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class AssetsController extends Controller
 {
@@ -16,7 +16,7 @@ class AssetsController extends Controller
      */
     public function index(AssetDataTable $dataTable)
     {
-        return $dataTable->render("pages.assets.index");
+        return $dataTable->render('pages.assets.index');
     }
 
     /**
@@ -24,8 +24,9 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        $users = User::where('type','!=',UserType::SUPERADMIN)->where('is_active',1)->get();
-        return view('pages.assets.create',compact(
+        $users = User::where('type', '!=', UserType::SUPERADMIN)->where('is_active', 1)->get();
+
+        return view('pages.assets.create', compact(
             'users'
         ));
     }
@@ -48,21 +49,21 @@ class AssetsController extends Controller
             'cost' => 'required',
             'status' => 'required',
             'user' => 'required',
-            'description' => 'nullable|max:255'
+            'description' => 'nullable|max:255',
         ]);
-        $dir = public_path("storage/assets");
+        $dir = public_path('storage/assets');
         $fileNames = [];
-        if(!empty($fileNames) && count($fileNames) > 0){
-            foreach($request->astFiles as $key => $requestFile){
-                if (!empty($requestFile)) {
-                    $fileName = random_str(7) . '.' . $requestFile->extension();
+        if (! empty($fileNames) && count($fileNames) > 0) {
+            foreach ($request->astFiles as $key => $requestFile) {
+                if (! empty($requestFile)) {
+                    $fileName = random_str(7).'.'.$requestFile->extension();
                     array_push($fileNames, $fileName);
                     $requestFile->move($dir, $fileName);
                 }
             }
         }
         $totalAsset = Asset::count();
-        $assetId = "AST-" . pad_zeros(($totalAsset + 1));
+        $assetId = 'AST-'.pad_zeros(($totalAsset + 1));
         Asset::create([
             'ast_id' => $request->ast_id ?? $assetId,
             'name' => $request->name,
@@ -81,9 +82,10 @@ class AssetsController extends Controller
             'status' => $request->status,
             'user_id' => $request->user,
             'created_by' => auth()->user()->id,
-            'files' => $fileNames
+            'files' => $fileNames,
         ]);
-        $notification = notify(__("Asset has been added"));
+        $notification = notify(__('Asset has been added'));
+
         return redirect()->route('assets.index')->with($notification);
     }
 
@@ -92,7 +94,7 @@ class AssetsController extends Controller
      */
     public function show(Asset $asset)
     {
-        return view('pages.assets.show',compact(
+        return view('pages.assets.show', compact(
             'asset'
         ));
     }
@@ -102,9 +104,10 @@ class AssetsController extends Controller
      */
     public function edit(Asset $asset)
     {
-        $users = User::where('type','!=',UserType::SUPERADMIN)->where('is_active',1)->get();
-        return view("pages.assets.edit",compact(
-            'asset','users'
+        $users = User::where('type', '!=', UserType::SUPERADMIN)->where('is_active', 1)->get();
+
+        return view('pages.assets.edit', compact(
+            'asset', 'users'
         ));
     }
 
@@ -126,14 +129,14 @@ class AssetsController extends Controller
             'cost' => 'required',
             'status' => 'required',
             'user' => 'required',
-            'description' => 'nullable|max:255'
+            'description' => 'nullable|max:255',
         ]);
-        $dir = public_path("storage/assets");
+        $dir = public_path('storage/assets');
         $fileNames = $asset->files ?? [];
-        if(!empty($fileNames) && count($fileNames) > 0){
-            foreach($request->astFiles as $key => $requestFile){
-                if (!empty($requestFile)) {
-                    $fileName = random_str(7) . '.' . $requestFile->extension();
+        if (! empty($fileNames) && count($fileNames) > 0) {
+            foreach ($request->astFiles as $key => $requestFile) {
+                if (! empty($requestFile)) {
+                    $fileName = random_str(7).'.'.$requestFile->extension();
                     array_push($fileNames, $fileName);
                     $requestFile->move($dir, $fileName);
                 }
@@ -159,7 +162,8 @@ class AssetsController extends Controller
             'created_by' => auth()->user()->id,
             'files' => $fileNames,
         ]);
-        $notification = notify(__("Asset has been updated"));
+        $notification = notify(__('Asset has been updated'));
+
         return redirect()->route('assets.index')->with($notification);
     }
 
@@ -170,6 +174,7 @@ class AssetsController extends Controller
     {
         $asset->delete();
         $notification = notify(__('Asset has been deleted'));
+
         return back()->with($notification);
     }
 }

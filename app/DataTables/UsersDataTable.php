@@ -2,25 +2,22 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
 use App\Enums\UserType;
-use Spatie\Menu\Laravel\Html;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\SearchPane;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UsersDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -28,40 +25,42 @@ class UsersDataTable extends DataTable
             ->filter(function ($query) {
                 if (request()->has('name')) {
                     $name = request('fullname');
-                    $query->where(['firstname','middlename','lastname'], 'like', "%" . $name . "%");
+                    $query->where(['firstname', 'middlename', 'lastname'], 'like', '%'.$name.'%');
                 }
                 if (request()->has('email')) {
-                    $query->where('email', 'like', "%" . request('email') . "%");
+                    $query->where('email', 'like', '%'.request('email').'%');
                 }
                 if (request()->has('username')) {
-                    $query->where('username', 'like', "%" . request('username') . "%");
+                    $query->where('username', 'like', '%'.request('username').'%');
                 }
             })
 
             ->addIndexColumn()
             ->addColumn('fullname', function ($row) {
-                $img = !empty($row->avatar) ? asset('storage/users/'.$row->avatar): asset('images/user.jpg');
-                return Html::userAvatar($row->fullname, $img);
+                $img = ! empty($row->avatar) ? asset('storage/users/'.$row->avatar) : asset('images/user.jpg');
+
+                return Str::userAvatar($row->fullname, $img);
             })
             ->editColumn('phone', function ($row) {
                 return $row->phoneNumber;
             })
             ->addColumn('role', function ($row) {
-                if(!empty($row->roles) && $row->roles->count() > 0){
+                if (! empty($row->roles) && $row->roles->count() > 0) {
                     return implode(',', $row->roles->pluck('name')->all());
                 }
             })
             ->editColumn('created_at', function ($row) {
-                if (!empty($row->created_at)) {
+                if (! empty($row->created_at)) {
                     return format_date($row->created_at);
                 }
             })
             ->addColumn('action', function ($row) {
                 $id = $row->id;
+
                 return view('pages.users.action', compact(
                     'id'
                 ));
-            })->rawColumns(['fullname','action']);
+            })->rawColumns(['fullname', 'action']);
     }
 
     /**
@@ -69,7 +68,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->where('type',UserType::SUPERADMIN)->newQuery();
+        return $model->where('type', UserType::SUPERADMIN)->newQuery();
     }
 
     /**
@@ -81,7 +80,7 @@ class UsersDataTable extends DataTable
             ->setTableId('users-table')
             ->columns($this->getColumns())
             ->parameters([
-                'dom'          => 'Bftip',
+                'dom' => 'Bftip',
             ])
             ->minifiedAjax()
             ->buttons([
@@ -90,7 +89,7 @@ class UsersDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
             ]);
     }
 
@@ -118,6 +117,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Users_'.date('YmdHis');
     }
 }

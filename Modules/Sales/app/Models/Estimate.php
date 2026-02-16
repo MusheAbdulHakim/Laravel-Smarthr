@@ -3,10 +3,10 @@
 namespace Modules\Sales\Models;
 
 use App\Models\User;
-use Modules\Project\Models\Project;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Sales\Database\Factories\EstimateFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Project\Models\Project;
+use Modules\Sales\Database\Factories\EstimateFactory;
 
 class Estimate extends Model
 {
@@ -16,24 +16,28 @@ class Estimate extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'est_id','client_id','project_id',
-        'taxe_id','client_address','billing_address','startDate',
-        'expiryDate','tax_amount','discount','note','grand_total','subtotal','status'
+        'est_id', 'client_id', 'project_id',
+        'taxe_id', 'client_address', 'billing_address', 'startDate',
+        'expiryDate', 'tax_amount', 'discount', 'note', 'grand_total', 'subtotal', 'status',
     ];
 
-    public function client(){
+    public function client()
+    {
         return $this->belongsTo(User::class, 'client_id');
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function tax(){
+    public function tax()
+    {
         return $this->belongsTo(Tax::class, 'taxe_id');
     }
-    
-    public function items(){
+
+    public function items()
+    {
         return $this->hasMany(EstimateItem::class);
     }
 
@@ -41,10 +45,11 @@ class Estimate extends Model
     {
         $subTotal = $this->items()->sum('total');
         $taxes = 0;
-        if(!empty($this->tax_id)){
+        if (! empty($this->tax_id)) {
             $taxes = $this->tax->percentage * $subTotal;
         }
-        return $taxes+$subTotal;
+
+        return $taxes + $subTotal;
     }
 
     protected static function newFactory(): EstimateFactory

@@ -2,10 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use RTippin\Messenger\Events\BroadcastFailedEvent;
-use App\Events\RTippinMessengerEventsBroadcastFailedEvent;
 
 class BroadcastError
 {
