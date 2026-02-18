@@ -70,37 +70,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{ __('Budget') }}</h3>
-                                    <div id="bar-charts"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{ __('Estimates & Invoices Overview') }}</h3>
-                                    <div id="line-charts"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{ __('Expenses') }}</h3>
-                                    <div id="monthly_expense_barchart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             @if (!empty(module('Sales')))
                 <div class="row">
                     <div class="col-md-12">
@@ -179,6 +148,39 @@
                 </div>
             @endif
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ __('Budget') }}</h3>
+                                    <div id="bar-charts"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ __('Estimates & Invoices Overview') }}</h3>
+                                    <div id="line-charts"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ __('Expenses') }}</h3>
+                                    <div id="monthly_expense_barchart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- Statistics Widget -->
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-4 d-flex">
@@ -190,7 +192,8 @@
                                     <div class="stats-info">
                                         <p>{{ __('Declined Invoices') }}
                                             <strong>{{ $invoices->where('status', '4')->count() }} <small>/
-                                                    {{ $invoices->count() }}</small></strong></p>
+                                                    {{ $invoices->count() }}</small></strong>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-danger w-31" role="progressbar" aria-valuenow="31"
                                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -199,7 +202,8 @@
                                     <div class="stats-info">
                                         <p>{{ __('Partially Paid Invoices') }}
                                             <strong>{{ $invoices->where('status', '3')->count() }} <small>/
-                                                    {{ $invoices->count() }}</small></strong></p>
+                                                    {{ $invoices->count() }}</small></strong>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-info w-31" role="progressbar" aria-valuenow="30"
                                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -227,7 +231,8 @@
                                     <div class="stats-info">
                                         <p>{{ __('Open Tickets') }}
                                             <strong>{{ $tickets->where('status', \App\Enums\TicketStatus::NEW)->count() }}
-                                                <small>/ {{ $tickets->count() }}</small></strong></p>
+                                                <small>/ {{ $tickets->count() }}</small></strong>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-danger w-62" role="progressbar" aria-valuenow="62"
                                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -236,7 +241,8 @@
                                     <div class="stats-info">
                                         <p>{{ __('Closed Tickets') }}
                                             <strong>{{ $tickets->where('status', \App\Enums\TicketStatus::CLOSED)->count() }}
-                                                <small>/ {{ $tickets->count() }}</small></strong></p>
+                                                <small>/ {{ $tickets->count() }}</small></strong>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-info w-22" role="progressbar" aria-valuenow="22"
                                                 aria-valuemin="0" aria-valuemax="100"></div>

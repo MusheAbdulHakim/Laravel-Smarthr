@@ -22,6 +22,7 @@ class DashboardController extends BaseController
         }
         $projects = null;
         $isProjectModuleEnabled = Module::isEnabled('Project');
+        $recentProjects = null;
         if ($isProjectModuleEnabled) {
             $projects = \Modules\Project\Models\Project::get();
             $recentProjects = \Modules\Project\Models\Project::whereMonth('created_at', Carbon::today())->get();
