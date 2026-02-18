@@ -3,7 +3,7 @@ import $ from 'jquery';
 window.jQuery = window.$ = $
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import sort from '@alpinejs/sort'
-window.Livewire = Livewire 
+window.Livewire = Livewire
 window.Alpine = Alpine
 Alpine.plugin(sort)
 Livewire.start()
@@ -32,14 +32,13 @@ window.listPlugin = listPlugin
 window.Sortable = Sortable
 window.jsPDF = jsPDF;
 Select2();
-const AppAssets = import.meta.glob([
+import.meta.glob([
     '../assets/fonts/**',
     '../assets/img/**',
     '../assets/css/**',
     '../assets/js/**',
     '../assets/plugins/**/**',
 ])
-console.log(AppAssets);
 $(document).on("click", ".deleteBtn", function () {
     let title = $(this).data("title");
     let url = $(this).data("route");
@@ -74,21 +73,18 @@ $(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true
             if (!$("#generalModalPopup").length) {
                 $("body").append(
                     $(
-                        `<div class="modal custom-modal ${
-                            style ? style : "fade"
+                        `<div class="modal custom-modal ${style ? style : "fade"
                         }" id="generalModalPopup" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered ${
-                                size ? "modal-" + size : ""
-                            }" role="document">
+                            <div class="modal-dialog modal-dialog-centered ${size ? "modal-" + size : ""
+                        }" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        ${
-                                            title
-                                                ? '<h5 class="modal-title">' +
-                                                    title +
-                                                    "</h5>"
-                                                : ""
-                                        }
+                                        ${title
+                            ? '<h5 class="modal-title">' +
+                            title +
+                            "</h5>"
+                            : ""
+                        }
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -108,9 +104,9 @@ $(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true
                     var $this = $(this);
                     $this.wrap('<div class="position-relative"></div>');
                     $this.select2({
-                      dropdownAutoWidth: true,
-                      width: '100%',
-                      dropdownParent: $this.parent()
+                        dropdownAutoWidth: true,
+                        width: '100%',
+                        dropdownParent: $this.parent()
                     });
                 });
             }
@@ -141,7 +137,7 @@ $(document).on('click', 'a[data-ajax-modal="true"], button[data-ajax-modal="true
                 });
             }
         },
-        error: function (xhr) {                
+        error: function (xhr) {
             $(".loader-wrapper").addClass('d-none');
             console.log(xhr);
             alert("something went wrong")
