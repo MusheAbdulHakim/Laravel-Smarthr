@@ -11,10 +11,17 @@ class Holiday extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'startDate', 'endDate', 'description', 'is_annual', 'color',
+        'name',
+        'startDate',
+        'endDate',
+        'description',
+        'is_annual',
+        'color',
     ];
 
     protected $casts = [
         'color' => CalendarColors::class,
+        'startDate' => 'date',
+        'endDate' => 'date',
     ];
 }
