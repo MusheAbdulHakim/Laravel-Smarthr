@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::job(new AutoClockoutUnsignedAttendances)->cron('0 */8 * * *');
+Schedule::command(\App\Console\Commands\CheckUpcomingHolidays::class)->daily();
