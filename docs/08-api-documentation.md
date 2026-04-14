@@ -17,20 +17,57 @@ Authorization: Bearer <your-token>
 
 ### Obtaining a Token
 
-Currently, tokens are issued via the web login interface or can be generated manually by a Super Admin.
-*(Future implementation: `POST /api/login` endpoint)*
+Tokens can be obtained by calling the login endpoint with valid credentials, or generated manually by a Super Admin via the admin panel.
 
 ## Endpoints
+
+### Authentication
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/v1/login` | Authenticate user and get token. |
+| POST | `/api/v1/logout` | Revoke current token (authenticated). |
+| GET | `/api/v1/me` | Get authenticated user profile. |
+| POST | `/api/v1/refresh-token` | Revoke current token and issue new one. |
+
+#### POST /api/v1/login
+
+**Request:**
+```json
+{
+    "email": "user@example.com",
+    "password": "password123"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+    "message": "Login successful",
+    "user": {
+        "id": 1,
+        "name": "John Doe",
+        "email": "user@example.com"
+    },
+    "token": "1|abc123..."
+}
+```
+
+**Error (401 Unauthorized):**
+```json
+{
+    "message": "Invalid credentials"
+}
+```
 
 ### Core Endpoints
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| GET | `/api/user` | Get authenticated user details. |
+| GET | `/api/v1/user` | Get authenticated user details. |
 
 ### Module Endpoints
 
-The generic pattern for module APIs is `/api/v1/{module}/{resource}`.
+API endpoints for modules are available under `/api/v1/`:
 
 #### Projects
 | Method | Endpoint | Description |
@@ -40,11 +77,8 @@ The generic pattern for module APIs is `/api/v1/{module}/{resource}`.
 | GET | `/api/v1/project/{id}` | Get project details. |
 | PUT | `/api/v1/project/{id}` | Update project. |
 | DELETE | `/api/v1/project/{id}` | Delete project. |
-
-#### Sales
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| GET | `/api/v1/sales` | List sales records. |
+| GET | `/api/v1/project/{id}/tasks` | List project tasks. |
+| POST | `/api/v1/project/{id}/tasks` | Create a task in a project. |
 
 ## Responses
 
