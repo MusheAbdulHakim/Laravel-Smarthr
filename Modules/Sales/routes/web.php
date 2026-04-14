@@ -17,7 +17,7 @@ use Modules\Sales\Http\Controllers\TaxesController;
 |
 */
 
-Route::group(['prefix' => 'sales', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'sales', 'middleware' => ['auth', 'role:view-estimates|view-invoices|view-expenses']], function () {
     Route::resource('taxes', TaxesController::class);
     Route::resource('expenses', ExpensesController::class)->except('show');
     Route::resource('estimates', EstimatesController::class);
