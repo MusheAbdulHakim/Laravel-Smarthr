@@ -182,12 +182,16 @@ class EstimatesController extends Controller
     {
         $html = ($request->html);
         if (! empty($html)) {
+            $html = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $html);
+            $html = preg_replace('/\s+on\w+\s*=\s*["\'](?:[^"\'\\\]|\\.)*["\']/i', '', $html);
+            $html = strip_tags($html, '<html><head><body><p><br><strong><b><em><i><u><a><table><tr><td><th><thead><tbody><img><span><div><h1><h2><h3><h4><h5><h6><ul><ol><li><hr>');
+
             $pdf = App::make('snappy.pdf.wrapper');
 
             return $pdf->loadHTML($html)
                 ->setOption('viewport-size', '1366x1024')
-                ->setOption('enable-javascript', true)
-                ->setOption('javascript-delay', 4000)
+                ->setOption('enable-javascript', false)
+                ->setOption('javascript-delay', 0)
                 ->setPaper('letter')
                 ->download("$estimate->est_id.pdf");
         }

@@ -20,10 +20,13 @@ class ChatAppController extends BaseController
 
     public function destroy($receiver)
     {
-        $messages = ChatMessage::where('from_id', auth()->user()->id)
-            ->where('receiver_id', $receiver)
-            ->orWhere('from_id', $receiver)
-            ->where('from_id', auth()->user()->id)
+        $userId = auth()->user()->id;
+        $messages = ChatMessage::where(function ($query) use ($userId, $receiver) {
+            $query->where('from_id', $userId)->where('receiver_id', $receiver);
+        })
+            ->orWhere(function ($query) use ($userId, $receiver) {
+                $query->where('from_id', $receiver)->where('receiver_id', $userId);
+            })
             ->pluck('id')->all();
         ChatMessage::destroy($messages);
         $notification = notify(__('Conversation has been deleted'));

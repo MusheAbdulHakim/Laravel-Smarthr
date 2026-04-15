@@ -14,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
 
 class SendHolidayNotifications implements ShouldQueue
 {
-    use Queueable, Dispatchable, SerializesModels, InteractsWithQueue;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.

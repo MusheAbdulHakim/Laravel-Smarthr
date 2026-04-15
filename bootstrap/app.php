@@ -13,9 +13,9 @@ use LaravelLang\Routes\Middlewares\LocalizationBySession;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        commands: __DIR__ . '/../routes/console.php',
-        channels: __DIR__ . '/../routes/channels.php',
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        channels: __DIR__.'/../routes/channels.php',
         health: '/up',
     )
     ->withSchedule(function (Schedule $schedule) {
@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'localization.cookie' => LocalizationByCookie::class,
             'localization.session' => LocalizationBySession::class,
             'localization.model' => LocalizationByModel::class,
+            'role' => \App\Http\Middleware\CheckPermission::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

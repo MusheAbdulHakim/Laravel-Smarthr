@@ -104,7 +104,7 @@ class AuthController extends BaseController
     public function logout(Request $request)
     {
         auth()->user()->update([
-            'is_online' => true,
+            'is_online' => false,
         ]);
         auth()->logout();
         $request->session()->invalidate();
