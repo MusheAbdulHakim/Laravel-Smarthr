@@ -19,7 +19,7 @@ class Project extends Model implements HasMedia
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name', 'client_id', 'short_desc', 'startDate', 'endDate', 'rate', 'rateType', 'priority', 'leader_id', 'description',
+        'name', 'client_id', 'short_desc', 'startDate', 'endDate', 'rate', 'rateType', 'priority', 'status', 'leader_id', 'description',
         'created_by',
     ];
 
