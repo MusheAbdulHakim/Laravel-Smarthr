@@ -14,7 +14,7 @@ use Modules\Roles\Http\Controllers\RolesController;
 |
 */
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'role:view-roles|view-permissions']], function () {
 
     Route::get('roles/create', [RolesController::class, 'create'])->name('roles.create');
     Route::post('roles/store', [RolesController::class, 'store'])->name('roles.store');

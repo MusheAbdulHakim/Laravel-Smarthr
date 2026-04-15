@@ -31,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'localization.cookie' => LocalizationByCookie::class,
             'localization.session' => LocalizationBySession::class,
             'localization.model' => LocalizationByModel::class,
+            'role' => \App\Http\Middleware\CheckPermission::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

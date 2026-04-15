@@ -48,7 +48,7 @@ class AttendancesController extends Controller
         $totalHours = $attendance->timestamps()->get()->sum('totalHours');
 
         return view('pages.attendances.attendance-details', compact(
-            'attendance','totalHours','attendanceActivity'
+            'attendance', 'totalHours', 'attendanceActivity'
         ));
     }
 }

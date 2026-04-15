@@ -49,7 +49,7 @@ class Sidebar extends Component
         $chats = $this->getChats();
 
         return view('livewire.apps.chat.sidebar', compact(
-            'users','chats'
+            'users', 'chats'
         ));
     }
 }

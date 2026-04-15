@@ -16,7 +16,7 @@ use Modules\Project\Http\Controllers\TaskBoardController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => ['auth', 'role:view-projects|view-taskboards']], function () {
     Route::resource('task-boards', TaskBoardController::class);
     Route::resource('projects', ProjectController::class);
     Route::get('project-list', [ProjectController::class, 'list'])->name('projects.list');

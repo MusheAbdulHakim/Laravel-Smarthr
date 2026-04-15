@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 
 class HolidayNotification extends Notification implements ShouldQueue
 {
-    use Queueable, Dispatchable;
+    use Dispatchable, Queueable;
 
     /**
      * Create a new notification instance.
