@@ -63,32 +63,60 @@ php artisan storage:link
 
 ### 6. Run Migrations and Seeders
 
-Run the database migrations to create the tables:
+Run the database migrations to create the tables and seed the database with default roles, permissions, and an admin user:
+:
 
 ```bash
-php artisan migrate
+php artisan migrate --seed; php artisan module:migrate --all --seed
 ```
 
-Seed the database with default roles, permissions, and an admin user:
-
-```bash
-php artisan db:seed
-```
 
 > **Note:** The `DatabaseSeeder` will call `UserSeeder` and `RolesDatabaseSeeder` to set up the initial Super Admin account and permissions structure.
 
 ### 7. Install Frontend Dependencies & Build
 
 ```bash
-npm install
-npm run build
+pnpm install
+pnpm run build
 ```
 
 For development with hot-reloading:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
+Or 
+## To run the local server, queus, pail and reverb at the same time, run: 
+```base
+composer run dev
+```
+
+### Login Credentials
+
+- Admin
+```
+ email: superadmin@smarthr.com
+ password: password
+```
+
+- Employee
+```
+ email: employee@smarthr.com
+ password: password
+```
+
+- Client
+```
+ email: client@smarthr.com
+ password: password
+```
+
+
+- Star the repository and report any issues/bugs you encounter here in the repository.
+
+
+## Note
+In order for the chap app to be working with realtime communication, you'll need to setup [Reverb](https://laravel.com/docs/12.x/reverb), Run the reverb server **php artisan reverb:start** and listen for events with **php artisan queue:listen**
 
 ### 8. Queue Configuration
 
@@ -118,3 +146,5 @@ For production, add the following Cron entry to your server to handle scheduled 
     composer dump-autoload
     php artisan package:discover
     ```
+
+## Star the repository and report any issues/bugs you encounter here in the repository.
