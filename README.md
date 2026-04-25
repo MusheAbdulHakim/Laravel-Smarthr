@@ -41,9 +41,14 @@ We have comprehensive developer documentation available in the `docs/` directory
 ---
 
 ## 🛠️ Quick Start
-Follow these steps below to install the application.
 
-Or Watch the installation process on [Youtube](https://youtu.be/UHkrsyBcMRM)
+ #### Watch the installation process on [Youtube](https://youtu.be/UHkrsyBcMRM) by clicking on the the thumbnail below
+
+[![Watch the installation process on](https://img.youtube.com/vi/UHkrsyBcMRM/0.jpg)](http://www.youtube.com/watch?v=UHkrsyBcMRM)
+
+ #### Or Follow the steps below.
+
+<hr>
 
 - Clone the repository using your termina or command prompt
 ```bash
