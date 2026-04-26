@@ -7,7 +7,7 @@
     },
     "devDependencies": {
         "@rollup/plugin-inject": "^5.0.5",
-        "axios": "^1.13.5",
+        "axios": "^1.15.0",
         "glob": "^10.5.0",
         "laravel-datatables-vite": "^0.5.3",
         "laravel-echo": "^1.19.0",
